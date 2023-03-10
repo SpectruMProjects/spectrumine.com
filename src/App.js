@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <div className="header">
-      <div><h1 className="headerText">Проект Minecraft серверов</h1></div> <div><h1 className="headerText">SpectruMine.com</h1></div>
+      <h1 className="headerText" style={{fontSize: "20px", alignSelf: "center"}}>Проект Minecraft серверов</h1><h1 className="headerText">SpectruMine.com</h1> 
       </div>
       <div className='linearGrad'/>
       <div className="projects">
