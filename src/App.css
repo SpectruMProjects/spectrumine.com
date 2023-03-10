@@ -2,7 +2,7 @@
   padding: 0 1% 0 1%;
   background: linear-gradient(#313244, #45475A);
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 @font-face {
   font-family: 'Manrope';
