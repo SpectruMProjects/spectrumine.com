@@ -1,0 +1,8 @@
+{
+  "short_name": "SM.COM",
+  "name": "SpectruMine Site",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
