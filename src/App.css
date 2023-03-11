@@ -1,0 +1,15 @@
+h1{
+    color: #ECF0F1;
+}
+.App{
+    background-color: #2C3E50;
+    min-height: 100dvh;
+    font-family: 'Manrope';
+}
+.inner_margin{
+    margin: 5dvb;
+}
+@font-face {
+    font-family: 'Manrope';
+    src: url(./res/Manrope-VariableFont_wght.ttf);
+}

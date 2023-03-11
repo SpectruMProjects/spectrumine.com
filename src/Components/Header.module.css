@@ -1,0 +1,9 @@
+.head{
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(#34495E, #2C3E50);
+}
+.h1{
+    margin: 2dvb 5dvb;
+    text-transform: uppercase;
+}
