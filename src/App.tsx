@@ -15,12 +15,12 @@ function App() {
       <div>
         <BigBabyText size={"4dvw"} margin={"0 10dvw"}>Добро пожаловать на платформу лицензионных игровых серверов Minecraft</BigBabyText>
         <div className='centerbutton'>
-        <Button onClick={func} width={"20dvw"} height={"10dvh"}>Перейти по ссылке</Button>
+        <Button onClick={func} width={"40dvh"} height={"10dvh"}>Перейти по ссылке</Button>
         </div>
       </div>
       </div>
-      <div className='flexitems' style={{height: "100dvh", flexGrow: 4}}>
-
+      <div className='flexitems' style={{height: "100dvh", flexGrow: 4, justifyContent: "flex-start"}}>
+        <p>Соси аыдшларлфыловфыщдлоапирфылво</p>
       </div>
     </div>
   );

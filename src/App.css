@@ -36,3 +36,7 @@ h1 {
     display: flex;
     justify-content: center;
 }
+p{
+    color: #fff;
+    font-size: 2dvw;
+}
