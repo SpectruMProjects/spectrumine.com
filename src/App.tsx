@@ -8,9 +8,7 @@ function App() {
   return (
     <div className="App">
       <Header></Header>
-      <Containter height={"1000px"} width={"1000px"}>
-        <BigBabyText size={"100px"}>Hello</BigBabyText>
-        </Containter>
+        <BigBabyText size={"100px"}>Добро пожаловать на платформу лицензионных игровых серверов Minecraft</BigBabyText>
     </div>
   );
 }
