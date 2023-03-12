@@ -1,15 +1,33 @@
-h1{
+h1 {
     color: #ECF0F1;
 }
-.App{
+
+.App {
     background-color: #2C3E50;
     min-height: 100dvh;
     font-family: 'Manrope';
+    display: flex;
+    flex-direction: column;
 }
-.inner_margin{
+
+.inner_margin {
     margin: 5dvb;
 }
+
+.bgintro {
+    background-image: url("res/bg1.gif");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
 @font-face {
     font-family: 'Manrope';
     src: url(./res/Manrope-VariableFont_wght.ttf);
+}
+
+.flexitems {
+    flex-grow: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

@@ -8,7 +8,14 @@ function App() {
   return (
     <div className="App">
       <Header></Header>
-        <BigBabyText size={"100px"}>Добро пожаловать на платформу лицензионных игровых серверов Minecraft</BigBabyText>
+      <div className='flexitems bgintro' style={{minHeight: "100dvh"}}>
+      <div>
+        <BigBabyText size={"5dvw"} margin={"0 10dvw"}>Добро пожаловать на платформу лицензионных игровых серверов Minecraft</BigBabyText>
+      </div>
+      </div>
+      <div className='flexitems' style={{height: "100dvh", flexGrow: 4}}>
+
+      </div>
     </div>
   );
 }
