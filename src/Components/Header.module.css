@@ -2,6 +2,8 @@
     display: flex;
     justify-content: space-between;
     background: linear-gradient(#34495E, #2C3E50);
+    width: 100dvw;
+    position: fixed;
 }
 .h1{
     margin: 2dvb 5dvb;

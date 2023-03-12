@@ -1,0 +1,14 @@
+.button{
+    background: 0;
+    border: 0.6dvb solid #ffffff;
+    border-radius: 1dvh;
+    font-family: 'Manrope';
+    font-weight: 700;
+    color: #fff;
+    font-size: 3dvh;
+}
+.button:hover{
+    
+    color: #a00;
+    border: 0.6dvb solid #a00;
+}

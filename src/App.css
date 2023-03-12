@@ -31,3 +31,8 @@ h1 {
     flex-direction: column;
     justify-content: center;
 }
+.centerbutton{
+    margin: 5dvh 0;
+    display: flex;
+    justify-content: center;
+}
