@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import BigBabyText from './Components/BigBabyText';
 import Button from './Components/Button';
-import Containter from './Components/Container';
 import Header from './Components/Header';
 
 function App() {
