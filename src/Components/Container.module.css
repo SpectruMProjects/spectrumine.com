@@ -1,0 +1,8 @@
+.container{
+    width: 25dvw;    
+    height: 30dvw;
+    background-color: black;
+    /* background: rgba(0, 0, 0, 0.5); */
+    margin: 0 3dvw;
+    border-radius: 20px;
+}
