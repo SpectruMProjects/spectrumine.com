@@ -17,4 +17,7 @@
     display: flex;
     flex-direction: column;
     flex-grow: 10;
+    background-size: 10dvw;
+    background-repeat: no-repeat;
+    background-position: center;
 }

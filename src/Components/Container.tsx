@@ -8,11 +8,11 @@ const Container = (props: any) => {
         props.onClick(_props);
     }
     return( 
-    <div 
+    <div
         onMouseDown={()=>isScaled[1](true)}
         onMouseUp={()=>isScaled[1](false)}
         onClick={(_props) => {privateOnClick(_props)}}
-        style={{transform: isScaled[0] ? "scale(0.9)" : undefined}} 
+        style={{transform: isScaled[0] ? "scale(0.9)" : undefined, backgroundImage: props.background ? `url("${props.background}")` : undefined}} 
         className={classes.container}>{props.children}</div>)
 }
 export default Container

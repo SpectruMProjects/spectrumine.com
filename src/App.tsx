@@ -5,6 +5,8 @@ import Button from './Components/Button';
 import ServerContainter from './Components/ServerContainer';
 import Header from './Components/Header';
 import Hardcore from "./res/BlocksDisc/hardcore.json";
+import Steam from "./res/BlocksDisc/steam.json";
+import Aur from './res/BlocksDisc/aur.json'
 
 function App() {
   let func = () => {
@@ -25,9 +27,18 @@ function App() {
         <div className="servers">
           <ServerContainter
           additional={Hardcore.additional} 
-          title={Hardcore.title} 
-          description={Hardcore.discription}></ServerContainter>
-          <ServerContainter></ServerContainter>
+          title={Hardcore.title}
+          discription={Hardcore.discription}
+          background={"hcheart.png"}
+          ></ServerContainter>
+          <ServerContainter 
+          title={Steam.title}
+          discription={Steam.discription}
+          additional={Steam.additional}></ServerContainter>
+          <ServerContainter 
+          title={Aur.title}
+          discription={Aur.discription}
+          additional={Aur.additional}></ServerContainter>
         </div>
       </div>
     </div>
