@@ -9,7 +9,7 @@ const Container = (props: any) => {
         props.onClick(_props)
         }
         setInterval(() => {
-            if(isScaled[0]) isScaled[1](false);
+            isScaled[1](false);
         }, 500);
     }
     return(<div onClick={privateOnClick} style={{transform: isScaled[0] ? "scale(0.9)" : undefined}} className={classes.container}>{props.children}</div>)
