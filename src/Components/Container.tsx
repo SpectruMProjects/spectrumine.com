@@ -2,16 +2,17 @@ import React from 'react';
 import classes from "./Container.module.css"
 const Container = (props: any) => {
     let isScaled = React.useState(false);
-    const privateOnClick = (_props : any) =>
+    function privateOnClick(_props: any)
     {
-        isScaled[1](true);
-        if(props.onClick) {
-        props.onClick(_props)
-        }
-        setInterval(() => {
-            isScaled[1](false);
-        }, 500);
+        if(onclick)
+        props.onClick(_props);
     }
-    return(<div onClick={privateOnClick} style={{transform: isScaled[0] ? "scale(0.9)" : undefined}} className={classes.container}>{props.children}</div>)
+    return( 
+    <div 
+        onMouseDown={()=>isScaled[1](true)}
+        onMouseUp={()=>isScaled[1](false)}
+        onClick={(_props) => {privateOnClick(_props)}}
+        style={{transform: isScaled[0] ? "scale(0.9)" : undefined}} 
+        className={classes.container}>{props.children}</div>)
 }
 export default Container

@@ -16,14 +16,14 @@ function App() {
       <div>
         <BigBabyText size={"4dvw"} margin={"0 10dvw"}>Добро пожаловать на платформу лицензионных игровых серверов Minecraft</BigBabyText>
         <div className='centerbutton'>
-        <a href="#servers"><Button onClick={func} width={"40dvh"} height={"10dvh"}>К серверам</Button></a>
+        <a href="#servers"><Button onClick={func} width={"30dvh"} height={"7dvh"}>К серверам</Button></a>
         </div>
       </div>
       </div>
       <div id='servers' className='flexitems' style={{minHeight: "100dvh", flexGrow: 4, justifyContent: "flex-start"}}>
         <div><BigBabyText size={"3dvw"} margin={"100px 0"}>Сервера</BigBabyText></div>
         <div className="servers">
-          <ServerContainter 
+          <ServerContainter
           additional={Hardcore.additional} 
           title={Hardcore.title} 
           description={Hardcore.discription}></ServerContainter>
