@@ -1,0 +1,20 @@
+.additional{
+    color: white;
+    text-align: right;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 0.8dvw;
+    margin: 0.2dvw;
+}
+.additionalup{
+    flex-grow: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-bottom: 1dvw;
+}
+.main{
+    padding: 0 1dvw;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 10;
+}

@@ -4,6 +4,7 @@ import BigBabyText from './Components/BigBabyText';
 import Button from './Components/Button';
 import ServerContainter from './Components/ServerContainer';
 import Header from './Components/Header';
+import Hardcore from "./res/BlocksDisc/hardcore.json";
 
 function App() {
   let func = () => {
@@ -22,7 +23,10 @@ function App() {
       <div id='servers' className='flexitems' style={{minHeight: "100dvh", flexGrow: 4, justifyContent: "flex-start"}}>
         <div><BigBabyText size={"3dvw"} margin={"100px 0"}>Сервера</BigBabyText></div>
         <div className="servers">
-          <ServerContainter></ServerContainter>
+          <ServerContainter 
+          additional={Hardcore.additional} 
+          title={Hardcore.title} 
+          description={Hardcore.discription}></ServerContainter>
           <ServerContainter></ServerContainter>
         </div>
       </div>

@@ -5,4 +5,9 @@
     /* background: rgba(0, 0, 0, 0.5); */
     margin: 0 3dvw;
     border-radius: 20px;
+    display: flex;
+    transition: 0.5s;
+}
+.container:hover{
+    transform: scale(1.05);
 }
