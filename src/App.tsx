@@ -13,9 +13,9 @@ function App() {
   }
   return (
     <div className="App">
-      <Header></Header>
       <div className='flexitems bgintro' style={{minHeight: "100dvh"}}>
       <div>
+        <BigBabyText size={"3dvw"} margin={"5dvw 10dvw"}>SPECTRUMINE.COM</BigBabyText>
         <BigBabyText size={"4dvw"} margin={"0 10dvw"}>Добро пожаловать на платформу лицензионных игровых серверов Minecraft</BigBabyText>
         <div className='centerbutton'>
         <a href="#servers"><Button onClick={func} width={"30dvh"} height={"7dvh"}>К серверам</Button></a>
