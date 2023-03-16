@@ -5,7 +5,12 @@
     width: 100dvw;
     position: fixed;
 }
-.h1{
+.items{
+    max-height: 3dvw;
     margin: 2dvb;
     text-transform: uppercase;
+}
+.navbar{
+    margin: 0 2dvb;
+    max-height: 3dvw;
 }

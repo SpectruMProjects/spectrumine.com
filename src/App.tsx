@@ -25,20 +25,21 @@ function App() {
       <div id='servers' className='flexitems' style={{minHeight: "100dvh", flexGrow: 4, justifyContent: "flex-start"}}>
         <div><BigBabyText size={"3dvw"} margin={"100px 0"}>Сервера</BigBabyText></div>
         <div className="servers">
+          <ServerContainter 
+          title={Steam.title}
+          discription={Steam.discription}
+          additional={Steam.additional}
+          background={"wrench.png"}/>
           <ServerContainter
           additional={Hardcore.additional} 
           title={Hardcore.title}
           discription={Hardcore.discription}
-          background={"hcheart.png"}
-          ></ServerContainter>
-          <ServerContainter 
-          title={Steam.title}
-          discription={Steam.discription}
-          additional={Steam.additional}></ServerContainter>
+          background={"hcheart.png"}/>
           <ServerContainter 
           title={Aur.title}
           discription={Aur.discription}
-          additional={Aur.additional}></ServerContainter>
+          additional={Aur.additional}
+          background={"wrench.png"}/>
         </div>
       </div>
     </div>

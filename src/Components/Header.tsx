@@ -1,6 +1,7 @@
 import classes from "./Header.module.css";
+import NavBar from "./NavBar";
 
 const Header = (props: any) => {
-    return(<div className={classes.head}><h1 className={classes.h1}>SpectruMine.com</h1><h1 className={classes.h1}>Here will be nav</h1></div>);
+    return(<div className={classes.head}><h1 className={classes.items}>SpectruMine.com</h1><div className={classes.navbar}><NavBar/></div></div>);
 }
 export default Header;
