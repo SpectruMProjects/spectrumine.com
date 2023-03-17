@@ -1,0 +1,50 @@
+.main-page-preview {
+  height: calc(100vh - 64px);
+  width: 100%;
+
+  background-size: cover;
+  background-position: center;
+
+  color: white;
+  font-size: 60px;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+  font-size: 4vh;
+  text-transform: uppercase;
+}
+
+.info {
+  padding: 0 10vw;
+
+  height: 3dvh;
+
+  font-size: 5vw;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media screen and (orientation:portrait) {
+  .info {
+    font-size: 4vh;
+  }
+}
+
+.to-servers {
+  color: #ff4d4f !important;
+  border: #ff4d4f solid 4px;
+  background-color: #001529;
+  border-radius: 32px;
+  padding: 12px 30px;
+
+  margin: 50px 0;
+
+  font-size: 4vw;
+
+  cursor: pointer;
+}
