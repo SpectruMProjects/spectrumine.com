@@ -21,10 +21,10 @@
 
 .info {
   padding: 0 10vw;
-
+  text-transform: uppercase;
   height: 3dvh;
 
-  font-size: 5vw;
+  font-size: 4vw;
   font-weight: bold;
   text-align: center;
 }
@@ -38,13 +38,13 @@
 .to-servers {
   color: #ff4d4f !important;
   border: #ff4d4f solid 4px;
-  background-color: #001529;
-  border-radius: 32px;
+  background-color: #001529D0;
+  border-radius: 10vw;
   padding: 12px 30px;
-
+  text-transform: uppercase;
   margin: 50px 0;
 
-  font-size: 4vw;
+  font-size: 3vw;
 
   cursor: pointer;
 }
