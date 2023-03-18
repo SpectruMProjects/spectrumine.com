@@ -5,7 +5,7 @@ export default function MainPagePreview() {
   return (
   <div 
     className={styles['main-page-preview']}
-    style={{ backgroundImage: `url(${bg})` }}
+    // style={{ backgroundImage: `url(${bg})` }}
   >
     <div style={{ flex: 1 }}/>
 

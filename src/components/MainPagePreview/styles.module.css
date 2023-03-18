@@ -2,6 +2,7 @@
   height: calc(100vh - 64px);
   width: 100%;
 
+  background-image: url('/public/images/bg-main.gif');
   background-size: cover;
   background-position: center;
 
@@ -29,12 +30,6 @@
   text-align: center;
 }
 
-@media screen and (orientation:portrait) {
-  .info {
-    font-size: 4vh;
-  }
-}
-
 .to-servers {
   color: #ff4d4f !important;
   border: #ff4d4f solid 4px;
@@ -47,4 +42,14 @@
   font-size: 3vw;
 
   cursor: pointer;
+}
+
+@media screen and (orientation:portrait) {
+  .info {
+    font-size: 4vh;
+  }
+
+  .to-servers {
+    font-size: 3vh;
+  }
 }
