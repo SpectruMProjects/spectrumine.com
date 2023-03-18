@@ -45,6 +45,9 @@
   margin: 150px 0;
 
   font-size: 3vw;
-
+  transition: transform 0.5s;
   cursor: pointer;
+}
+.to-servers:hover{
+  transform: scale(1.05);
 }
