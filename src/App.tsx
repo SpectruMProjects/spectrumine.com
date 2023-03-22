@@ -1,11 +1,12 @@
-import { Layout } from 'antd'
+import { ConfigProvider, Layout, theme } from 'antd'
 import Header from "./components/Header"
 import { Route, Routes } from 'react-router'
 import Pages from './pages'
 
 function App() {
   return (
-    <Layout style={{ height: '100%' }}>
+    <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
+      <Layout style={{ height: '100%' }}>
       <Layout.Header>
         <Header />
       </Layout.Header>
@@ -16,7 +17,8 @@ function App() {
           <Route path='*' element={<Pages.NotFound />}/>
         </Routes>
       </Layout.Content>
-    </Layout>
+      </Layout>
+    </ConfigProvider>
   )
 }
 
