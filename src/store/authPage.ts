@@ -1,4 +1,5 @@
 import { create } from "zustand"
+import { User } from "../models"
 
 interface Register {
   username: string
@@ -12,6 +13,8 @@ interface Login {
 }
 
 interface AuthPageState {
+  user: User | null
+
   type: 'register' | 'login'
 
   registerStatus: 'unknown' | 'process' | 'ok' | 'error'
@@ -23,6 +26,8 @@ interface AuthPageState {
 }
 
 export const useAuthPageState = create<AuthPageState>((set, get) => ({
+  user: null,
+  
   type: 'register',
   registerStatus: 'unknown',
   loginStatus: 'unknown',
