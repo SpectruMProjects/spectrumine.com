@@ -5,7 +5,7 @@ import Pages from './pages'
 
 function App() {
   return (
-    <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
+    <ConfigProvider>
       <Layout style={{ height: '100%' }}>
       <Layout.Header>
         <Header />
