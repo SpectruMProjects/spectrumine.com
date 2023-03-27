@@ -1,10 +1,5 @@
-import axios from 'axios'
-
-function url(uri: string) {
-  return uri.startsWith('/')
-    ? `http://localhost:5168${uri}`
-    : `http://localhost:5168/${uri}`
-}
+import axios_lib from 'axios'
+const axios = axios_lib.create({ url: 'http://localhost:5168' })
 
 interface Register {
   username: string
@@ -23,7 +18,7 @@ export async function register({
   email
 }: Register): Promise<RegisterResponse> {
   try {
-    const res = await axios.post(url('/Auth/Reg'), { 
+    const res = await axios.post('/Auth/Reg', { 
       username,
       password,
       email
