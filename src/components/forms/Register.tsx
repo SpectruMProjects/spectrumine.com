@@ -26,7 +26,8 @@ export default function Register() {
   return (
     <Card style={{ padding: 28 }}>
       <Form 
-        form={form}>
+        form={form}
+        onFinish={e => console.log(e)}>
         <Form.Item 
           name='username'
           rules={rules.username}

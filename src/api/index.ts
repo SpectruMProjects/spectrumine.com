@@ -6,22 +6,22 @@ function url(uri: string) {
     : `http://localhost:5168/${uri}`
 }
 
-interface Login {
+interface Register {
   username: string
   password: string
   email: string
 }
-type LoginResponse =
+type RegisterResponse =
 {
   code: 'ok'
 } | {
   code: 'error'
 }
-export async function login({
+export async function register({
   username,
   password,
   email
-}: Login): Promise<LoginResponse> {
+}: Register): Promise<RegisterResponse> {
   try {
     const res = await axios.post(url('/Auth/Reg'), { 
       username,
