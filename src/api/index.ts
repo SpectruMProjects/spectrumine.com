@@ -1,6 +1,47 @@
 import axios_lib from 'axios'
 const axios = axios_lib.create({ baseURL: 'http://localhost:5168' })
 
+export const tokens = {
+  get accessToken(): string | null {
+    return localStorage.getItem('accessToken')
+  },
+  set accessToken(token: string | null) {
+    if (!token) {
+      localStorage.removeItem('accessToken')
+      return
+    }
+    localStorage.setItem('accessToken', token)
+  },
+  get refreshToken(): string | null {
+    return localStorage.getItem('refreshToken')
+  },
+  set refreshToken(token: string | null) {
+    if (!token) {
+      localStorage.removeItem('refreshToken')
+      return
+    }
+    localStorage.setItem('refreshToken', token)
+  },
+}
+interface LocalUser {
+  username: string
+  email?: string
+}
+export const localUser = {
+  get(): LocalUser | null {
+    const data = localStorage.getItem('user')
+    if (!data) return null
+    return JSON.parse(data)
+  },
+  set(user: LocalUser | null) {
+    if (!user) {
+      localStorage.removeItem('user')
+      return
+    }
+    localStorage.setItem('user', JSON.stringify(user))
+  }
+}
+
 interface Register {
   username: string
   password: string
@@ -23,9 +64,70 @@ export async function register({
       password,
       email
     })
+    localUser.set({ username, email })
     return { 
       code: 'ok' 
     }
+  } catch (e) {
+    return { code: 'error' }
+  }
+}
+
+interface Login {
+  username: string
+  password: string
+}
+type LoginResponse =
+{
+  code: 'ok',
+} | {
+  code: 'error'
+}
+export async function login({
+  username,
+  password
+}: Login): Promise<LoginResponse> {
+  try {
+    const loginRes = await axios.post('/Auth/Tokens', { 
+      username,
+      password
+    })
+    tokens.refreshToken = loginRes.data.refreshToken
+    tokens.accessToken = loginRes.data.accessToken
+    localUser.set({ username })
+    
+    return { code: 'ok' }
+  } catch (e) {
+    return { code: 'error' }
+  }
+}
+
+type AuthResponse = {
+  code: 'ok'
+} | {
+  code: 'error'
+}
+export async function auth(): Promise<AuthResponse> {
+  try {
+    const res = await axios.get('...', {  })
+    return { code: 'ok' }
+  } catch (e) {
+    return { code: 'error' }
+  }
+}
+
+interface ActivateRegister {
+  code: string
+}
+type ActivateRegisterResponse = {
+  code: 'ok'
+} | {
+  code: 'error'
+}
+export async function activateRegister({ code }: ActivateRegister): Promise<ActivateRegisterResponse> {
+  try {
+    await axios.get(`/Mail/activate/${code}`)
+    return { code: 'ok' }
   } catch (e) {
     return { code: 'error' }
   }

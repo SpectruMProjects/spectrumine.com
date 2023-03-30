@@ -34,8 +34,7 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
   loginStatus: 'unknown',
 
   switchType() {
-    set({ type: get().type == 'login' ? 'register' : 'login' })
-  },
+    set({ type: get().type == 'login' ? 'register' : 'login' })},
 
   async register(data) {
     if (get().registerStatus == 'process') return 'process'
@@ -62,6 +61,24 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     if (get().loginStatus == 'process') return 'process'
     set({ loginStatus: 'process' })
 
-    return 'error'
-  },
+    const res = await api.login(data)
+    switch(res.code) {
+      case 'ok': {
+        set({ registerStatus: 'ok', 
+              user: new User(
+                '', 
+                api.localUser.get()?.username!, 
+                '')})
+        return 'ok'
+      }
+      case 'error': {
+        set({ registerStatus: 'error' })
+        return 'error'
+      }
+      default: {
+        set({ registerStatus: 'unknown' })
+        return 'error'
+      }
+    }
+  }
 }))

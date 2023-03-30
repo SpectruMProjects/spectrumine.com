@@ -25,8 +25,6 @@ interface Form {
   password: string
 }
 
-
-
 export default function Register() {
   const [register, status] = useAuthPageState(s => [s.register, s.registerStatus])
   const [form] = Form.useForm<Form>()

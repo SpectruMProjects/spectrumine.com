@@ -1,5 +1,6 @@
-import { Button, Card, Form, Input } from "antd";
+import { Button, Card, Form, Input, message } from "antd";
 import { Rule } from "antd/es/form";
+import { useNavigate } from "react-router-dom";
 import { useAuthPageState } from "../../store";
 
 const rules: Record<'username' | 'password', Rule[]> = {
@@ -15,14 +16,32 @@ const rules: Record<'username' | 'password', Rule[]> = {
   ]
 }
 
+interface Form {
+  username: string
+  password: string
+}
+
 export default function Login() {
-  const [form] = Form.useForm()
+  const [login, status] = useAuthPageState(s => [s.login, s.loginStatus])
+  const [form] = Form.useForm<Form>()
+  const nav = useNavigate()
   const switchToRegister = useAuthPageState(s => s.switchType)
   
+  function onFinish(data: Form) {
+    login(data).then(code => {
+      if (code == 'error')
+        message.error('Ошибка 🤓. Отсоси')
+      else if (code == 'ok') {
+        nav('/')
+      }
+    })
+  }
+
   return (
     <Card style={{ padding: 28 }}>
       <Form 
-        form={form}>
+        form={form}
+        onFinish={onFinish}>
         <Form.Item 
           name='username'
           rules={rules.username}
@@ -39,7 +58,12 @@ export default function Login() {
 
         <Form.Item>
           <div>
-            <Button type="primary" htmlType="submit" style={{ marginRight: 30 }}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{ marginRight: 30 }}
+              loading={status == 'process'}
+            >
               Войти
             </Button>
 
