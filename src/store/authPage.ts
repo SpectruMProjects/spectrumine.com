@@ -20,10 +20,13 @@ interface AuthPageState {
 
   registerStatus: 'unknown' | 'process' | 'ok' | 'error'
   loginStatus: 'unknown' | 'process' | 'ok' | 'error'
+  activateRegisterCodeStatus: 'unknown' | 'process' | 'ok' | 'error'
 
   switchType(): void
   register(data: Register): Promise<'process' | 'ok' | 'error'>
   login(data: Login): Promise<'process' | 'ok' | 'error'>
+  activateRegisterCode(code: string): Promise<'process' | 'ok' | 'error'>
+  auth(): Promise<'process' | 'ok' | 'error'>
 }
 
 export const useAuthPageState = create<AuthPageState>((set, get) => ({
@@ -32,6 +35,7 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
   type: 'register',
   registerStatus: 'unknown',
   loginStatus: 'unknown',
+  activateRegisterCodeStatus: 'unknown',
 
   switchType() {
     set({ type: get().type == 'login' ? 'register' : 'login' })},
@@ -79,6 +83,48 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
         set({ registerStatus: 'unknown' })
         return 'error'
       }
+    }
+  },
+
+  async activateRegisterCode(code) {
+    if (get().activateRegisterCodeStatus === 'process') return 'process'
+    set({ activateRegisterCodeStatus: 'process' })
+
+    const res = await api.activateRegister({code})
+    switch (res.code) {
+      case 'ok':
+        const lu = api.localUser.get()
+        set({ 
+          activateRegisterCodeStatus: 'ok',
+          user: new User(
+            '',
+            lu?.username ?? 'Ник',
+            lu?.email ?? 'Почта'
+          ) 
+        })
+        return 'ok'
+      case 'error':
+        set({ activateRegisterCodeStatus: 'error' })
+        return 'error'
+      default:
+        set({ activateRegisterCodeStatus: 'unknown' })
+        return 'error'
+    }
+  },
+
+  async auth() {
+    const res = await api.auth()
+    switch (res.code) {
+      case 'ok':
+        const lu = api.localUser.get()
+        set({ user: new User(
+          '',
+         lu?.username ?? 'Ник',
+         lu?.email ?? 'email'
+        ) })   
+        return 'ok'
+      default:
+        return 'error'
     }
   }
 }))

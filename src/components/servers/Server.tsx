@@ -21,7 +21,7 @@ export default function Server({
       {icon}
 
       <div className={styles['info']}>
-        {info.map(i => <p>{i}</p>)}
+        {info.map(i => <p key={i}>{i}</p>)}
       </div>
     </div>
   )

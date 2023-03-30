@@ -109,7 +109,10 @@ type AuthResponse = {
 }
 export async function auth(): Promise<AuthResponse> {
   try {
-    const res = await axios.get('...', {  })
+    const res = await axios.get('/Auth/CheckToken', { 
+      headers: { Authorization: `Bearer ${tokens.accessToken}` 
+    }})
+    localUser.set({ username: res.data })
     return { code: 'ok' }
   } catch (e) {
     return { code: 'error' }

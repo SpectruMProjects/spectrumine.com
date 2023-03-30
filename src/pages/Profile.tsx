@@ -27,6 +27,6 @@ export default function Profile() {
     </div>
   
   return <div style={rootStyle}><Card>
-    <Typography.Title>ТЫ {`[${user}]`}</Typography.Title>
+    <Typography.Title>ТЫ {`[${JSON.stringify(user)}]`}</Typography.Title>
   </Card></div>
 }

@@ -42,6 +42,7 @@ export default function Servers() {
       className={styles['block']}>
       {servers.map(server => 
         <Server 
+          key={server.name}
           name={server.name} 
           description={server.description} 
           icon={server.icon} 
