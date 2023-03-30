@@ -1,4 +1,4 @@
-import { Button, Card, Form, Input } from "antd";
+import { Button, Card, Form, Input, message } from "antd";
 import { Rule } from "antd/es/form";
 import { useAuthPageState } from "../../store";
 
@@ -19,15 +19,35 @@ const rules: Record<'username' | 'email' | 'password', Rule[]> = {
   ]
 }
 
+interface Form {
+  username: string
+  email: string
+  password: string
+}
+
+
+
 export default function Register() {
-  const [form] = Form.useForm()
+  const [register, status] = useAuthPageState(s => [s.register, s.registerStatus])
+  const [form] = Form.useForm<Form>()
   const switchToLogin = useAuthPageState(s => s.switchType)
   
+  function onFinish(data: Form) {
+    register(data).then(result => {
+      if (result == 'error')
+        message.error('Ошибка 🤓. Отсоси')
+      else if (result == 'ok') {
+        message.success('Запрос на регистрацию отправлен')
+        form.resetFields()
+      }
+    })
+  }
+
   return (
     <Card style={{ padding: 28 }}>
       <Form 
         form={form}
-        onFinish={e => console.log(e)}>
+        onFinish={onFinish}>
         <Form.Item 
           name='username'
           rules={rules.username}
@@ -51,7 +71,12 @@ export default function Register() {
 
         <Form.Item>
           <div>
-            <Button type="primary" htmlType="submit" style={{ marginRight: 30 }}>
+            <Button 
+              type="primary" 
+              htmlType="submit" 
+              style={{ marginRight: 30 }}
+              loading={status == "process"}
+            >
               Регистрация
             </Button>
 

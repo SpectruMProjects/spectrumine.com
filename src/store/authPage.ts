@@ -1,5 +1,6 @@
 import { create } from "zustand"
 import { User } from "../models"
+import * as api from '../api'
 
 interface Register {
   username: string
@@ -40,7 +41,21 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     if (get().registerStatus == 'process') return 'process'
     set({ registerStatus: 'process' })
 
-    return 'error'
+    const res = await api.register(data)
+    switch(res.code) {
+      case 'ok': {
+        set({ registerStatus: 'ok' })
+        return 'ok'
+      }
+      case 'error': {
+        set({ registerStatus: 'error' })
+        return 'error'
+      }
+      default: {
+        set({ registerStatus: 'unknown' })
+        return 'error'
+      }
+    }
   },
 
   async login(data) {

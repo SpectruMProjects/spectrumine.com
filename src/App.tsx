@@ -14,6 +14,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Pages.Main />}/>
           <Route path='/auth' element={<Pages.Auth />}/>
+          <Route path='/profile' element={<Pages.Profile />}/>
           <Route path='*' element={<Pages.NotFound />}/>
         </Routes>
       </Layout.Content>
