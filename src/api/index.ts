@@ -1,5 +1,5 @@
 import axios_lib from 'axios'
-const axios = axios_lib.create({ baseURL: 'http://localhost:5168' })
+const axios = axios_lib.create({ baseURL: 'http://localhost:5000' })
 
 export const tokens = {
   get accessToken(): string | null {
