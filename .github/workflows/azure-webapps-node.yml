@@ -1,0 +1,11 @@
+
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  update:
+    runs-on: self-hosted
+    steps:
+    - run: cd ~/dev/front/ &&  git pull --force origin main
+    - run: cd ~/dev/front/ && npm i
+    - run: cd ~/dev/front && npm run build
