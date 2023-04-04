@@ -46,16 +46,13 @@ export class DependencyNotFoundError extends Error {
 }
 
 const provider = new Provider<Locator>()
-export function localLocator(): Locator | undefined {
-  return provider.get()
-}
 export function createLocator(builder: () => void): Locator {
   const locator = new Locator()
-  
-  Provider.provide(provider, locator)
-          .run(builder)
-  
+  provider.provide(locator).run(builder)
   return locator
+}
+export function localLocator() {
+  return provider.get()
 }
 export function fabric(key: any, fabric: (locator: Locator) => any) {
   localLocator()?.fabric(key, fabric)

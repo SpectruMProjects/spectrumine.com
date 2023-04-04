@@ -18,10 +18,11 @@ export class Provider<T> {
     return load<T>(this._key)
   }
 
-  static provide<T>(provider: Provider<T>, value: T) {
+  provide(value: T) {
+    const self = this
     return {
       run(block: () => any) {
-        return provide({ [provider._key]: value }, block)
+        return provide({ [self._key]: value }, block)
       }
     }
   }
