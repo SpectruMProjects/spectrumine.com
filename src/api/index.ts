@@ -136,3 +136,19 @@ export async function activateRegister({ code }: ActivateRegister): Promise<Acti
     return { code: 'error' }
   }
 }
+
+export async function checkMojangExist(username: String): Promise<Boolean | null> {
+    try{
+    await axios.get(`https://api.mojang.com/users/profiles/minecraft/${username}`)
+    return true
+    }catch(e)
+    {
+      if(e instanceof AxiosError)
+      {
+        if(!e.response){
+          return null
+        }else
+        return false
+      }else return null
+    }
+}
