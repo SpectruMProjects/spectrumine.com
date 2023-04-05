@@ -18,12 +18,12 @@ interface AuthPageState {
 
   type: 'register' | 'login'
 
-  registerStatus: 'unknown' | 'process' | 'ok' | 'error'
+  registerStatus: 'unknown' | 'process' | 'ok' | 'error' | 'RegexNotMatch' | 'Conflict' | 'UUIDFailed'
   loginStatus: 'unknown' | 'process' | 'ok' | 'error'
   activateRegisterCodeStatus: 'unknown' | 'process' | 'ok' | 'error'
 
   switchType(): void
-  register(data: Register): Promise<'process' | 'ok' | 'error'>
+  register(data: Register): Promise<String | undefined>
   login(data: Login): Promise<'process' | 'ok' | 'error'>
   activateRegisterCode(code: string): Promise<'process' | 'ok' | 'error'>
   auth(): Promise<'process' | 'ok' | 'error'>
@@ -45,18 +45,14 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     set({ registerStatus: 'process' })
 
     const res = await api.register(data)
-    switch(res.code) {
-      case 'ok': {
+    switch(res?.cause) {
+      case undefined: {
         set({ registerStatus: 'ok' })
-        return 'ok'
-      }
-      case 'error': {
-        set({ registerStatus: 'error' })
-        return 'error'
+        return 'Ok'
       }
       default: {
-        set({ registerStatus: 'unknown' })
-        return 'error'
+        set({ registerStatus: 'error' })
+        return res?.cause
       }
     }
   },

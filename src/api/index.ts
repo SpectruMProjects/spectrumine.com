@@ -1,6 +1,6 @@
-import axios_lib from 'axios'
+import axios_lib, { AxiosError } from 'axios'
 
-let url = import.meta.env.PROD ? "https://devapi.spectrumine.com" : "http://localhost:5000"
+let url = import.meta.env.PROD ? "https://devapi.spectrumine.com" : "https://devapi.spectrumine.com" //: "http://localhost:5000"
 const axios = axios_lib.create({ baseURL: url })
 
 export const tokens = {
@@ -49,29 +49,28 @@ interface Register {
   password: string
   email: string
 }
-type RegisterResponse =
-{
-  code: 'ok'
-} | {
-  code: 'error'
+type RegisterResponse = {
+  cause: String,
+  message: String
 }
 export async function register({
   username,
   password,
   email
-}: Register): Promise<RegisterResponse> {
+}: Register): Promise<RegisterResponse | null> {
   try {
-    await axios.post('/Auth/Reg', { 
+    let res = await axios.post('/Auth/Reg', { 
       username,
       password,
       email
     })
     localUser.set({ username, email })
-    return { 
-      code: 'ok' 
-    }
+    return null
   } catch (e) {
-    return { code: 'error' }
+    if (e instanceof AxiosError){
+        return e.response?.data
+    }
+    return null
   }
 }
 

@@ -32,10 +32,14 @@ export default function Register() {
   
   function onFinish(data: Form) {
     register(data).then(result => {
-      if (result == 'error')
-        message.error('Ошибка 🤓. Отсоси')
-      else if (result == 'ok') {
-        message.success('Запрос на регистрацию отправлен')
+      if (result == 'UUIDFailed')
+        message.error('Аккаунта не существует со стороны Mojang')
+      else if (result == 'RegexNotMatch')
+        message.error('Данные не удволетворяют запрошенным')
+      else if (result == 'Conflict')
+        message.error('Аккаунт уже существует')
+      else if (result == 'Ok') {
+        message.success('Аккаунт ушёл на подтверждение! Проверьте почту')
         form.resetFields()
       }
     })
@@ -50,21 +54,21 @@ export default function Register() {
           name='username'
           rules={rules.username}
           required>
-          <Input placeholder="Ник в Minecraft"/>
+          <Input placeholder="Ник в Minecraft" autoComplete="username"/>
         </Form.Item>
 
         <Form.Item 
           name='email'
           rules={rules.email}
           required>
-          <Input type="email" placeholder="Почта"/>
+          <Input type="email" placeholder="Почта" autoComplete="email"/>
         </Form.Item>
 
         <Form.Item 
           name='password'
           rules={rules.password}
           required>
-          <Input type="password" placeholder="Пароль"/>
+          <Input type="password" placeholder="Пароль" autoComplete="password"/>
         </Form.Item>
 
         <Form.Item>
