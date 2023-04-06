@@ -1,6 +1,8 @@
-import { Button, Card, Form, Input, message } from "antd";
-import { Rule } from "antd/es/form";
-import { useAuthPageState } from "../../store";
+import { Button, Card, Form, Input, message } from "antd"
+import { Rule } from 'antd/es/form'
+import { useAuthPageState } from '@/store'
+import { useState } from 'react'
+import { useDebounce } from "@/core"
 
 const rules: Record<'username' | 'email' | 'password', Rule[]> = {
   'username': [
@@ -26,29 +28,37 @@ interface Form {
 }
 
 export default function Register() {
-  const [register, status] = useAuthPageState(s => [s.register, s.registerStatus])
+  const [register, status, checkUsername] = useAuthPageState(s => [
+    s.register, 
+    s.registerStatus,
+    s.checkUsername
+  ])
   const [form] = Form.useForm<Form>()
   const switchToLogin = useAuthPageState(s => s.switchType)
   
   function onFinish(data: Form) {
     register(data).then(result => {
-      if (result == 'UUIDFailed')
-        message.error('Аккаунта не существует со стороны Mojang')
-      else if (result == 'RegexNotMatch')
-        message.error('Данные не удволетворяют запрошенным')
-      else if (result == 'Conflict')
-        message.error('Аккаунт с таким ником уже существует')
-      else if (result == 'EmailRegistered')
-        message.error('Аккаунт с такой почтой уже существует')
-      else if (result == 'Ok') {
-        message.success('Аккаунт ушёл на подтверждение! Проверьте почту')
-        form.resetFields()
-      }else 
-      {
-        message.error(result)
+      switch (result[0]) {
+        case 'ok':
+          message.success('Аккаунт ушёл на подтверждение! Проверьте почту', 3)
+          form.resetFields()    
+          break
+        case 'error':
+          message.error(result[1], 3)
       }
     })
   }
+
+  const [username, setUsername] = useState<string | undefined>(undefined)
+  useDebounce(username => {
+    if (!username) return
+    if (username.length < 3) return
+    
+    checkUsername(username).then(result => {
+      if (result == 'error')
+        message.warning('Не существует аккаунта с этим ником в Monang')
+    })
+  }, 1000, username)
 
   return (
     <Card style={{ padding: 28 }}>
@@ -59,7 +69,10 @@ export default function Register() {
           name='username'
           rules={rules.username}
           required>
-          <Input placeholder="Ник в Minecraft" autoComplete="username"/>
+          <Input
+            placeholder="Ник в Minecraft" 
+            autoComplete="username"
+            onChange={(e) => {setUsername(e.target.value)}}/>
         </Form.Item>
 
         <Form.Item 

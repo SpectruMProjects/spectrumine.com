@@ -18,15 +18,17 @@ interface AuthPageState {
 
   type: 'register' | 'login'
 
-  registerStatus: 'unknown' | 'process' | 'ok' | 'error' | 'RegexNotMatch' | 'Conflict' | 'UUIDFailed'
+  registerStatus: 'unknown' | 'process' | 'ok' | 'error'
   loginStatus: 'unknown' | 'process' | 'ok' | 'error'
   activateRegisterCodeStatus: 'unknown' | 'process' | 'ok' | 'error'
+  checkUsernameStatus: 'unknown' | 'process' | 'ok' | 'error'
 
   switchType(): void
-  register(data: Register): Promise<String | undefined>
+  register(data: Register): Promise<['process'] | ['ok'] | ['error', string]>
   login(data: Login): Promise<'process' | 'ok' | 'error'>
   activateRegisterCode(code: string): Promise<'process' | 'ok' | 'error'>
-  auth(): Promise<'process' | 'ok' | 'error'>
+  auth(): Promise<'process' | 'ok' | 'error'>,
+  checkUsername(username: string): Promise<AuthPageState['checkUsernameStatus']>
 }
 
 export const useAuthPageState = create<AuthPageState>((set, get) => ({
@@ -36,23 +38,40 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
   registerStatus: 'unknown',
   loginStatus: 'unknown',
   activateRegisterCodeStatus: 'unknown',
+  checkUsernameStatus: 'unknown',
 
   switchType() {
     set({ type: get().type == 'login' ? 'register' : 'login' })},
 
   async register(data) {
-    if (get().registerStatus == 'process') return 'process'
+    if (get().registerStatus == 'process') return ['process']
     set({ registerStatus: 'process' })
 
     const res = await api.register(data)
-    switch(res?.cause) {
-      case undefined: {
+    switch(res.code) {
+      case 'ok': {
         set({ registerStatus: 'ok' })
-        return 'Ok'
+        return ['ok']
+      }
+      case 'Conflict': {
+        set({ registerStatus: 'error' })
+        return ['error', 'Аккаунт с таким ником уже существует']
+      }
+      case 'RegexNotMatch': {
+        set({ registerStatus: 'error' })
+        return ['error', 'Неправильно заполнена форма']
+      }
+      case 'EmailRegistered': {
+        set({ registerStatus: 'error' })
+        return ['error', 'Аккаунт с такой почтой уже существует']
+      }
+      case 'UUIDFailed': {
+        set({ registerStatus: 'error' })
+        return ['error', 'Аккаунта не существует со стороны Mojang']
       }
       default: {
         set({ registerStatus: 'error' })
-        return res?.cause
+        return ['error', 'Произошла неизвестная ошибка']
       }
     }
   },
@@ -64,11 +83,7 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     const res = await api.login(data)
     switch(res.code) {
       case 'ok': {
-        set({ registerStatus: 'ok', 
-              user: new User(
-                '', 
-                api.localUser.get()?.username!, 
-                '')})
+        set({ registerStatus: 'ok' })
         return 'ok'
       }
       case 'error': {
@@ -89,14 +104,9 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     const res = await api.activateRegister({code})
     switch (res.code) {
       case 'ok':
-        const lu = api.localUser.get()
         set({ 
           activateRegisterCodeStatus: 'ok',
-          user: new User(
-            '',
-            lu?.username ?? 'Ник',
-            lu?.email ?? 'Почта'
-          ) 
+           
         })
         return 'ok'
       case 'error':
@@ -111,16 +121,31 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
   async auth() {
     const res = await api.auth()
     switch (res.code) {
-      case 'ok':
-        const lu = api.localUser.get()
-        set({ user: new User(
-          '',
-         lu?.username ?? 'Ник',
-         lu?.email ?? 'email'
-        ) })   
+      case 'ok':   
         return 'ok'
       default:
         return 'error'
+    }
+  },
+
+  async checkUsername(username) {
+    if (get().checkUsernameStatus == 'process') return 'process'
+    set({ checkUsernameStatus: 'process' })
+    
+    const exists = await api.checkMojangExist(username)
+    switch (exists) {
+      case true: {
+        set({ checkUsernameStatus: 'ok' })
+        return 'ok'
+      }
+      case false: {
+        set({ checkUsernameStatus: 'error' })
+        return 'error'
+      }
+      default: {
+        set({ checkUsernameStatus: 'unknown' })
+        return 'error'
+      }
     }
   }
 }))

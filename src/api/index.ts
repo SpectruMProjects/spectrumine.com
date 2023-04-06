@@ -25,24 +25,6 @@ export const tokens = {
     localStorage.setItem('refreshToken', token)
   },
 }
-interface LocalUser {
-  username: string
-  email?: string
-}
-export const localUser = {
-  get(): LocalUser | null {
-    const data = localStorage.getItem('user')
-    if (!data) return null
-    return JSON.parse(data)
-  },
-  set(user: LocalUser | null) {
-    if (!user) {
-      localStorage.removeItem('user')
-      return
-    }
-    localStorage.setItem('user', JSON.stringify(user))
-  }
-}
 
 interface Register {
   username: string
@@ -50,27 +32,31 @@ interface Register {
   email: string
 }
 type RegisterResponse = {
-  cause: String,
-  message: String
+  code: 'ok'
+} | {
+  code: 'error' | 
+        'RegexNotMatch' | 
+        'Conflict' | 
+        'UUIDFailed' |
+        'EmailRegistered'
 }
 export async function register({
   username,
   password,
   email
-}: Register): Promise<RegisterResponse | null> {
+}: Register): Promise<RegisterResponse> {
   try {
     let res = await axios.post('/Auth/Reg', { 
       username,
       password,
       email
     })
-    localUser.set({ username, email })
-    return null
+    return { code: 'ok' }
   } catch (e) {
     if (e instanceof AxiosError){
-        return e.response?.data
+      return { code: e.response?.data?.cause }
     }
-    return null
+    return { code: 'error' }
   }
 }
 
@@ -95,8 +81,6 @@ export async function login({
     })
     tokens.refreshToken = loginRes.data.refreshToken
     tokens.accessToken = loginRes.data.accessToken
-    localUser.set({ username })
-    
     return { code: 'ok' }
   } catch (e) {
     return { code: 'error' }
@@ -110,10 +94,9 @@ type AuthResponse = {
 }
 export async function auth(): Promise<AuthResponse> {
   try {
-    const res = await axios.get('/Auth/CheckToken', { 
+    const res = await axios.get('/Auth/GetUser', { 
       headers: { Authorization: `Bearer ${tokens.accessToken}` 
     }})
-    localUser.set({ username: res.data })
     return { code: 'ok' }
   } catch (e) {
     return { code: 'error' }
@@ -137,18 +120,13 @@ export async function activateRegister({ code }: ActivateRegister): Promise<Acti
   }
 }
 
-export async function checkMojangExist(username: String): Promise<Boolean | null> {
-    try{
+export async function checkMojangExist(username: string): Promise<boolean | null> {
+  try{
     await axios.get(`https://api.mojang.com/users/profiles/minecraft/${username}`)
     return true
-    }catch(e)
-    {
-      if(e instanceof AxiosError)
-      {
-        if(!e.response){
-          return null
-        }else
-        return false
-      }else return null
-    }
+  } catch(e) {
+    if(e instanceof AxiosError) {
+      return e.response ? false : null
+    } else return null
+  }
 }

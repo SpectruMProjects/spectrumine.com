@@ -1,7 +1,6 @@
 import { message, Progress, Spin } from "antd"
 import { useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { localUser } from "../api"
 import { useAuthPageState } from "../store"
 
 export default function ActivateRegisterCode() {
@@ -18,7 +17,7 @@ export default function ActivateRegisterCode() {
       if (r == 'error') {
         message.error('Не удалось подтвердить почту')
       } else if (r == 'process')  {
-        message.success(`Вы вошли как ${localUser.get()?.username}`)
+        message.success(`Вы вошли как ${''}`)
         nav('/')
       } 
     })
