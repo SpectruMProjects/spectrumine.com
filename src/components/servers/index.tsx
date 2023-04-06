@@ -23,7 +23,8 @@ const servers = [
       'Лицензия',
       'Режим хардкор',
       'SMP'
-    ]
+    ],
+    url: '/servers/hardcore'
   },
   {
     name: 'Талант телепата',
@@ -46,7 +47,8 @@ export default function Servers() {
           name={server.name} 
           description={server.description} 
           icon={server.icon} 
-          info={server.info} />
+          info={server.info}
+          url={server.url} />
       )}
     </div>
   )

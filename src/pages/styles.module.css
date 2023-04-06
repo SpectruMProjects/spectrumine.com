@@ -6,3 +6,51 @@
   align-items: center;
   justify-content: center;
 }
+
+.hardcore-page {
+  min-height: calc(100vh - 64px);
+  width: 100%;
+  background-color: #001529;
+  color: white;
+}
+
+.hardcore-page > * {
+  margin: 8vh 16vw;
+}
+
+.points .point {
+  color: white;
+  font-size: large;
+}
+
+
+.description_point {
+  font-size: large;
+}
+
+.description_dop {
+  font-size: medium;
+  color: #8c8c8c;
+}
+
+.description p {
+  padding: 0.5em;
+}
+
+.about .point {
+  font-size: large;
+}
+
+.condition-of-use {
+  width: 100%;
+  padding: 10vh 16vw;
+}
+
+.condition-of-use p {
+  font-size: large;
+}
+@media (max-width: 500px) {
+  .condition-of-use p {
+    font-size: small;
+  } 
+}

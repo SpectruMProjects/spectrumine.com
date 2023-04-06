@@ -1,5 +1,4 @@
 import styles from './styles.module.css'
-import bg from '@/assets/images/bg-main.gif'
 
 export default function MainPagePreview() {
   return (
