@@ -37,10 +37,15 @@ export default function Register() {
       else if (result == 'RegexNotMatch')
         message.error('Данные не удволетворяют запрошенным')
       else if (result == 'Conflict')
-        message.error('Аккаунт уже существует')
+        message.error('Аккаунт с таким ником уже существует')
+      else if (result == 'EmailRegistered')
+        message.error('Аккаунт с такой почтой уже существует')
       else if (result == 'Ok') {
         message.success('Аккаунт ушёл на подтверждение! Проверьте почту')
         form.resetFields()
+      }else 
+      {
+        message.error(result)
       }
     })
   }
