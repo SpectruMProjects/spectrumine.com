@@ -54,3 +54,12 @@
     font-size: small;
   } 
 }
+
+.profile-page {
+  width: 100%;
+  padding: 4vh 4vw;
+}
+
+.profile-page__user {
+  width: fit-content;
+}
