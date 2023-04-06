@@ -88,7 +88,12 @@ export async function login({
 }
 
 type AuthResponse = {
-  code: 'ok'
+  code: 'ok',
+  user: {
+    id: string,
+    username: string,
+    email: string
+  }
 } | {
   code: 'error'
 }
@@ -97,7 +102,10 @@ export async function auth(): Promise<AuthResponse> {
     const res = await axios.get('/Auth/GetUser', { 
       headers: { Authorization: `Bearer ${tokens.accessToken}` 
     }})
-    return { code: 'ok' }
+    return { 
+      code: 'ok',
+      user: res.data
+    }
   } catch (e) {
     return { code: 'error' }
   }
@@ -113,7 +121,9 @@ type ActivateRegisterResponse = {
 }
 export async function activateRegister({ code }: ActivateRegister): Promise<ActivateRegisterResponse> {
   try {
-    await axios.get(`/Mail/activate/${code}`)
+    const res = await axios.get(`/Mail/activate/${code}`)
+    tokens.accessToken = res.data.accessToken    
+    tokens.refreshToken = res.data.refreshToken    
     return { code: 'ok' }
   } catch (e) {
     return { code: 'error' }

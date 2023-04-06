@@ -1,5 +1,4 @@
 import { Button, Card, Typography } from 'antd'
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthPageState } from '../store'
 
@@ -13,7 +12,7 @@ const rootStyle = {
 }
 
 export default function Profile() {
-  const user = useAuthPageState(s => s.user)
+  const [user, logout] = useAuthPageState(s => [s.user, s.logout])
   const nav = useNavigate()
   if (!user) 
     return <div 
@@ -28,5 +27,12 @@ export default function Profile() {
   
   return <div style={rootStyle}><Card>
     <Typography.Title>ТЫ {`[${JSON.stringify(user)}]`}</Typography.Title>
+    <Button
+      type='primary' 
+      size='large' 
+      style={{ backgroundColor: '#f5222d' }} 
+      onClick={logout}>
+      Выйти
+    </Button>
   </Card></div>
 }

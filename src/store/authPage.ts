@@ -29,6 +29,7 @@ interface AuthPageState {
   activateRegisterCode(code: string): Promise<'process' | 'ok' | 'error'>
   auth(): Promise<'process' | 'ok' | 'error'>,
   checkUsername(username: string): Promise<AuthPageState['checkUsernameStatus']>
+  logout(): void
 }
 
 export const useAuthPageState = create<AuthPageState>((set, get) => ({
@@ -84,6 +85,7 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     switch(res.code) {
       case 'ok': {
         set({ registerStatus: 'ok' })
+        get().auth()
         return 'ok'
       }
       case 'error': {
@@ -104,10 +106,8 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     const res = await api.activateRegister({code})
     switch (res.code) {
       case 'ok':
-        set({ 
-          activateRegisterCodeStatus: 'ok',
-           
-        })
+        get().auth()
+        set({ activateRegisterCodeStatus: 'ok' })
         return 'ok'
       case 'error':
         set({ activateRegisterCodeStatus: 'error' })
@@ -122,10 +122,20 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     const res = await api.auth()
     switch (res.code) {
       case 'ok':   
+        const { id, username, email } = res.user
+        const user = new User(id, username, email)
+        set({ user })
         return 'ok'
       default:
+        set({ user: null })
         return 'error'
     }
+  },
+
+  logout() {
+    set({ user: null })
+    api.tokens.accessToken = null
+    api.tokens.refreshToken = null
   },
 
   async checkUsername(username) {
