@@ -2,6 +2,7 @@ import { Button, Card, Form, Input, message } from "antd";
 import { Rule } from "antd/es/form";
 import { useNavigate } from "react-router-dom";
 import { useAuthPageState } from "../../store";
+import { UserOutlined } from "@ant-design/icons";
 
 const rules: Record<'username' | 'password', Rule[]> = {
   'username': [
@@ -63,6 +64,7 @@ export default function Login() {
               htmlType="submit"
               style={{ marginRight: 30 }}
               loading={status == 'process'}
+              icon={<UserOutlined />}
             >
               Войти
             </Button>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuthPageState } from '@/store'
 import styles from './styles.module.css'
 import HardcoreStatistics from '@/components/HardcoreStatistics'
+import { EditOutlined, UserDeleteOutlined } from '@ant-design/icons'
 
 export default function Profile() {
   const [user, logout] = useAuthPageState(s => [s.user, s.logout])
@@ -21,15 +22,30 @@ export default function Profile() {
   
   return <div className={styles['profile-page']}>
     <Card className={styles['profile-page__user']}>
-      <Typography.Title>{user.username} {user.email}</Typography.Title>
+      <h1 style={{ fontSize: '5vw' }}>
+        {user.username} <br/> {user.email}
+      </h1>
       <Divider />
-      <Button
-        type='primary' 
-        size='large' 
-        style={{ backgroundColor: '#f5222d' }} 
-        onClick={logout}>
-      Выйти
-      </Button>
+      <div>
+        <Button
+          type='primary' 
+          size='large' 
+          icon={<EditOutlined />}
+          onClick={logout}>
+          Изменить пароль
+        </Button>
+
+        <Divider type='vertical' />
+
+        <Button
+          type='primary' 
+          size='large' 
+          style={{ backgroundColor: '#f5222d' }} 
+          icon={<UserDeleteOutlined />}
+          onClick={logout}>
+          Выйти
+        </Button>
+      </div>
     </Card>
 
     <Divider />

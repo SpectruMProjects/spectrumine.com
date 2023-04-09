@@ -3,6 +3,7 @@ import { Rule } from 'antd/es/form'
 import { useAuthPageState } from '@/store'
 import { useState } from 'react'
 import { useDebounce } from "@/core"
+import { UserAddOutlined } from "@ant-design/icons"
 
 const rules: Record<'username' | 'email' | 'password', Rule[]> = {
   'username': [
@@ -96,6 +97,7 @@ export default function Register() {
               htmlType="submit" 
               style={{ marginRight: 30 }}
               loading={status == "process"}
+              icon={<UserAddOutlined />}
             >
               Регистрация
             </Button>
