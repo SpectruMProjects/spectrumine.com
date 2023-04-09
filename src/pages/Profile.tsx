@@ -3,11 +3,15 @@ import { useNavigate } from 'react-router-dom'
 import { useAuthPageState } from '@/store'
 import styles from './styles.module.css'
 import HardcoreStatistics from '@/components/HardcoreStatistics'
-import { EditOutlined, UserDeleteOutlined } from '@ant-design/icons'
+import { DownOutlined, EditOutlined, UserDeleteOutlined } from '@ant-design/icons'
+import { useState } from 'react'
+import Forms from '@/components/forms'
 
 export default function Profile() {
   const [user, logout] = useAuthPageState(s => [s.user, s.logout])
   const nav = useNavigate()
+  const [isChangePassOpened, setIsChangePassOpened] = useState(false)
+
   if (!user) 
     return <div 
       className={styles['centered-page']}
@@ -28,10 +32,10 @@ export default function Profile() {
       <Divider />
       <div>
         <Button
-          type='primary' 
+          type={isChangePassOpened ? 'default' : 'primary'} 
           size='large' 
-          icon={<EditOutlined />}
-          onClick={logout}>
+          icon={isChangePassOpened ? <DownOutlined /> : <EditOutlined />}
+          onClick={() => setIsChangePassOpened(i => !i)}>
           Изменить пароль
         </Button>
 
@@ -45,6 +49,9 @@ export default function Profile() {
           onClick={logout}>
           Выйти
         </Button>
+
+        {isChangePassOpened && <Divider type='horizontal' />}
+        {isChangePassOpened && <Forms.ChangePass />}
       </div>
     </Card>
 

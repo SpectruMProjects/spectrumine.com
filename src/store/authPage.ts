@@ -1,6 +1,7 @@
 import { create } from "zustand"
 import { User } from "../models"
 import * as api from '../api'
+import ChangePass from "@/components/forms/ChangePass"
 
 interface Register {
   username: string
@@ -13,23 +14,30 @@ interface Login {
   password: string
 }
 
+type Status = 'unknown' | 'process' | 'ok' | 'error'
+
 interface AuthPageState {
   user: User | null
 
   type: 'register' | 'login'
 
-  registerStatus: 'unknown' | 'process' | 'ok' | 'error'
-  loginStatus: 'unknown' | 'process' | 'ok' | 'error'
-  activateRegisterCodeStatus: 'unknown' | 'process' | 'ok' | 'error'
-  checkUsernameStatus: 'unknown' | 'process' | 'ok' | 'error'
+  registerStatus: Status
+  loginStatus: Status
+  activateRegisterCodeStatus: Status
+  checkUsernameStatus: Status
+  changePassStatus: Status
 
   switchType(): void
+  
   register(data: Register): Promise<['process'] | ['ok'] | ['error', string]>
-  login(data: Login): Promise<'process' | 'ok' | 'error'>
-  activateRegisterCode(code: string): Promise<'process' | 'ok' | 'error'>
+  login(data: Login): Promise<Status>
+  activateRegisterCode(code: string): Promise<Status>
   auth(): Promise<'process' | 'ok' | 'error'>,
+  
   checkUsername(username: string): Promise<AuthPageState['checkUsernameStatus']>
   logout(): void
+
+  changePass(newPassword: string): Promise<Status>
 }
 
 export const useAuthPageState = create<AuthPageState>((set, get) => ({
@@ -40,6 +48,7 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
   loginStatus: 'unknown',
   activateRegisterCodeStatus: 'unknown',
   checkUsernameStatus: 'unknown',
+  changePassStatus: 'unknown',
 
   switchType() {
     set({ type: get().type == 'login' ? 'register' : 'login' })},
@@ -156,6 +165,27 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
         set({ checkUsernameStatus: 'unknown' })
         return 'error'
       }
+    }
+  },
+
+  async changePass(newPassword) {
+    if (get().changePassStatus == 'process') return 'process'
+    set({ changePassStatus: 'process' })
+
+    const res = await api.changePass({ newPassword })
+    
+    switch (res.code) {
+      case 'ok':
+        set({ changePassStatus: 'ok' })   
+        return 'ok'
+
+      case 'error':
+        set({ changePassStatus: 'error' })   
+        return 'error'
+    
+      default:
+        set({ changePassStatus: 'unknown' })
+        return 'unknown'
     }
   }
 }))

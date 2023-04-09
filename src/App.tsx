@@ -5,12 +5,15 @@ import Pages from './pages'
 import { useAuthPageState } from './store'
 import { useEffect } from 'react'
 import Footer from '@/components/Footer'
+import { startUpdateTokenCycle } from '@/api'
 
 function App() {
   const auth = useAuthPageState(s => s.auth)
 
   useEffect(() => {
-    auth()
+    startUpdateTokenCycle().then(() => {
+      auth()
+    })
   }, [])
 
   return (

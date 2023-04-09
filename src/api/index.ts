@@ -25,6 +25,16 @@ export const tokens = {
     localStorage.setItem('refreshToken', token)
   },
 }
+let updateTokenCycle: number
+export async function startUpdateTokenCycle() {
+  await updateAccessToken()
+  updateTokenCycle = setInterval(() => {
+    updateAccessToken()
+  }, 1000*60*4)
+}
+export function stopUpdateTokenCycle() {
+  clearInterval(updateTokenCycle)
+}
 
 interface Register {
   username: string
@@ -138,5 +148,45 @@ export async function checkMojangExist(username: string): Promise<boolean | null
     if(e instanceof AxiosError) {
       return e.response ? false : null
     } else return null
+  }
+}
+
+
+export type ChangePass = {
+  newPassword: string
+}
+export type ChangePassResponse = {
+  code: 'ok'
+} | {
+  code: 'error'
+}
+export async function changePass({
+  newPassword
+}: ChangePass): Promise<ChangePassResponse> {
+  try {
+    await axios.post(
+      '/Auth/ResetPasswordAuth',
+      { NewPassword: newPassword },
+      { headers: { 'Authorization': `Bearer ${tokens.accessToken}` } })
+    return { code: 'ok' }
+  } catch (error) {
+    return { code: 'error' }
+  }
+}
+
+export type UpdateAccessTokenResponse = {
+  code: 'ok'
+} | {
+  code: 'error'
+}
+export async function updateAccessToken(): Promise<UpdateAccessTokenResponse> {
+  if (!tokens.refreshToken) return { code: 'error' }
+  try {
+    const res = await axios.post('/Auth/ReloadTokens', { refreshToken: tokens.refreshToken })
+    tokens.accessToken = res.data.accessToken
+    tokens.refreshToken = res.data.refreshToken
+    return { code: 'ok' }
+  } catch (error) {
+    return { code: 'error' }
   }
 }
