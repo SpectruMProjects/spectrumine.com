@@ -71,7 +71,7 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
         set({ registerStatus: 'error' })
         return ['error', 'Неправильно заполнена форма']
       }
-      case 'EmailRegistered': {
+      case 'MailRegistered': {
         set({ registerStatus: 'error' })
         return ['error', 'Аккаунт с такой почтой уже существует']
       }
@@ -81,7 +81,7 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
       }
       default: {
         set({ registerStatus: 'error' })
-        return ['error', 'Произошла неизвестная ошибка' + res.code]
+        return ['error', 'Произошла неизвестная ошибка ' + res.code]
       }
     }
   },
