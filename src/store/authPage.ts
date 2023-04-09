@@ -81,7 +81,7 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
       }
       default: {
         set({ registerStatus: 'error' })
-        return ['error', 'Произошла неизвестная ошибка']
+        return ['error', 'Произошла неизвестная ошибка' + res.code]
       }
     }
   },
