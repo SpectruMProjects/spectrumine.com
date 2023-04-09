@@ -3,9 +3,17 @@ import Header from "./components/Header"
 import { Route, Routes } from 'react-router'
 import Pages from './pages'
 import { useAuthPageState } from './store'
-import { useEffect } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 import Footer from '@/components/Footer'
 import { startUpdateTokenCycle } from '@/api'
+
+const PagesMain = lazy(() => Pages.Main)
+const PagesAuth = lazy(() => Pages.Auth)
+const PagesActivateRegisterCode = lazy(() => Pages.ActivateRegisterCode)
+const PagesProfile = lazy(() => Pages.Profile)
+const PagesHardcoreServer = lazy(() => Pages.HardcoreServer)
+const PagesConditionOfUse = lazy(() => Pages.ConditionOfUse)
+const PagesNotFound = lazy(() => Pages.NotFound)
 
 function App() {
   const auth = useAuthPageState(s => s.auth)
@@ -24,13 +32,13 @@ function App() {
       </Layout.Header>
       <Layout.Content style={{ display: 'flex' }}>
         <Routes>
-          <Route path='/' element={<Pages.Main />}/>
-          <Route path='/auth' element={<Pages.Auth />}/>
-          <Route path='/auth/activate-register/:code' element={<Pages.ActivateRegisterCode />}/>
-          <Route path='/profile' element={<Pages.Profile />}/>
-          <Route path='/servers/hardcore' element={<Pages.HardcoreServer />}/>
-          <Route path='/condition-of-use' element={<Pages.ConditionOfUse />}/>
-          <Route path='*' element={<Pages.NotFound />}/>
+          <Route path='/' element={<Suspense><PagesMain /></Suspense>}/>
+          <Route path='/auth' element={<PagesAuth />}/>
+          <Route path='/auth/activate-register/:code' element={<Suspense><PagesActivateRegisterCode /></Suspense>}/>
+          <Route path='/profile' element={<Suspense><PagesProfile /></Suspense>}/>
+          <Route path='/servers/hardcore' element={<Suspense><PagesHardcoreServer /></Suspense>}/>
+          <Route path='/condition-of-use' element={<Suspense><PagesConditionOfUse /></Suspense>}/>
+          <Route path='*' element={<Suspense><PagesNotFound /></Suspense>}/>
         </Routes>
       </Layout.Content>
       <Layout.Footer 

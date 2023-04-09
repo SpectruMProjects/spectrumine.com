@@ -1,10 +1,10 @@
-import Main from './Main'
-import NotFound from './NotFound'
-import Auth from './Auth'
-import Profile from './Profile'
-import ActivateRegisterCode from './ActivateRegisterCode'
-import HardcoreServer from './HardcoreServer'
-import ConditionOfUse from './ConditionOfUse'
+const Main = import('./Main')
+const NotFound = import('./NotFound')
+const Auth = import('./Auth')
+const Profile = import('./Profile')
+const ActivateRegisterCode = import('./ActivateRegisterCode')
+const HardcoreServer = import('./HardcoreServer')
+const ConditionOfUse = import('./ConditionOfUse')
 
 export default {
   Main,
