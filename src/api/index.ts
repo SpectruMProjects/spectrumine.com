@@ -48,7 +48,7 @@ type RegisterResponse = {
         'RegexNotMatch' | 
         'Conflict' | 
         'UUIDFailed' |
-        'EmailRegistered'
+        'MailRegistered'
 }
 export async function register({
   username,
