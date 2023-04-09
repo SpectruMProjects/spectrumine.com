@@ -35,7 +35,6 @@ export async function startUpdateTokenCycle() {
 export function stopUpdateTokenCycle() {
   clearInterval(updateTokenCycle)
 }
-
 interface Register {
   username: string
   password: string
