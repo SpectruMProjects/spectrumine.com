@@ -84,16 +84,16 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     const res = await api.login(data)
     switch(res.code) {
       case 'ok': {
-        set({ registerStatus: 'ok' })
+        set({ loginStatus: 'ok' })
         get().auth()
         return 'ok'
       }
       case 'error': {
-        set({ registerStatus: 'error' })
+        set({ loginStatus: 'error' })
         return 'error'
       }
       default: {
-        set({ registerStatus: 'unknown' })
+        set({ loginStatus: 'unknown' })
         return 'error'
       }
     }
