@@ -142,7 +142,7 @@ export async function activateRegister({ code }: ActivateRegister): Promise<Acti
 
 export async function checkMojangExist(username: string): Promise<boolean | null> {
   try{
-    await axios.get(`https://api.mojang.com/users/profiles/minecraft/${username}`)
+    await axios.get(`${url}/Auth/Checklicense/${username}`)
     return true
   } catch(e) {
     if(e instanceof AxiosError) {
