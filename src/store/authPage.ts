@@ -19,7 +19,7 @@ type Status = 'unknown' | 'process' | 'ok' | 'error'
 interface AuthPageState {
   user: User | null
 
-  type: 'register' | 'login'
+  type: 'register' | 'login' | 'change pass'
 
   registerStatus: Status
   loginStatus: Status
@@ -27,7 +27,7 @@ interface AuthPageState {
   checkUsernameStatus: Status
   changePassStatus: Status
 
-  switchType(): void
+  switchType(type?: AuthPageState['type']): void
   
   register(data: Register): Promise<['process'] | ['ok'] | ['error', string]>
   login(data: Login): Promise<Status>
@@ -37,7 +37,7 @@ interface AuthPageState {
   checkUsername(username: string): Promise<AuthPageState['checkUsernameStatus']>
   logout(): void
 
-  changePass(newPassword: string): Promise<Status>
+  changePass(newPassword: string, email?: string): Promise<Status>
 }
 
 export const useAuthPageState = create<AuthPageState>((set, get) => ({
@@ -50,8 +50,13 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
   checkUsernameStatus: 'unknown',
   changePassStatus: 'unknown',
 
-  switchType() {
-    set({ type: get().type == 'login' ? 'register' : 'login' })},
+  switchType(type) {
+    if (type) {
+      set({ type })
+    } else {
+      set({ type: get().type == 'login' ? 'register' : 'login' })
+    }
+  },
 
   async register(data) {
     if (get().registerStatus == 'process') return ['process']
@@ -168,11 +173,11 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     }
   },
 
-  async changePass(newPassword) {
+  async changePass(newPassword, email) {
     if (get().changePassStatus == 'process') return 'process'
     set({ changePassStatus: 'process' })
 
-    const res = await api.changePass({ newPassword })
+    const res = await api.changePass({ newPassword, email })
     
     switch (res.code) {
       case 'ok':

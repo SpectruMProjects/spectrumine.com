@@ -102,7 +102,7 @@ export default function Register() {
               Регистрация
             </Button>
 
-            <Button type="default" onClick={() => switchToLogin()}>
+            <Button type="link" onClick={() => switchToLogin()}>
               Есть аккаунт?
             </Button>
           </div>

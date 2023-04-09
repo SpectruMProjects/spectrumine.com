@@ -3,17 +3,9 @@ import Header from "./components/Header"
 import { Route, Routes } from 'react-router'
 import Pages from './pages'
 import { useAuthPageState } from './store'
-import { Suspense, lazy, useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import Footer from '@/components/Footer'
 import { startUpdateTokenCycle } from '@/api'
-
-const PagesMain = lazy(() => Pages.Main)
-const PagesAuth = lazy(() => Pages.Auth)
-const PagesActivateRegisterCode = lazy(() => Pages.ActivateRegisterCode)
-const PagesProfile = lazy(() => Pages.Profile)
-const PagesHardcoreServer = lazy(() => Pages.HardcoreServer)
-const PagesConditionOfUse = lazy(() => Pages.ConditionOfUse)
-const PagesNotFound = lazy(() => Pages.NotFound)
 
 function App() {
   const auth = useAuthPageState(s => s.auth)
@@ -32,13 +24,14 @@ function App() {
       </Layout.Header>
       <Layout.Content style={{ display: 'flex' }}>
         <Routes>
-          <Route path='/' element={<Suspense><PagesMain /></Suspense>}/>
-          <Route path='/auth' element={<PagesAuth />}/>
-          <Route path='/auth/activate-register/:code' element={<Suspense><PagesActivateRegisterCode /></Suspense>}/>
-          <Route path='/profile' element={<Suspense><PagesProfile /></Suspense>}/>
-          <Route path='/servers/hardcore' element={<Suspense><PagesHardcoreServer /></Suspense>}/>
-          <Route path='/condition-of-use' element={<Suspense><PagesConditionOfUse /></Suspense>}/>
-          <Route path='*' element={<Suspense><PagesNotFound /></Suspense>}/>
+          <Route path='/' element={<Suspense><Pages.Main /></Suspense>}/>
+          <Route path='/auth' element={<Suspense><Pages.Auth /></Suspense>}/>
+          <Route path='/auth/activate-register/:code' element={<Suspense><Pages.ActivateRegisterCode /></Suspense>}/>
+          <Route path='/auth/activate-change-pass/:code' element={<Suspense><Pages.ActivateChangePassCode /></Suspense>}/>
+          <Route path='/profile' element={<Suspense><Pages.Profile /></Suspense>}/>
+          <Route path='/servers/hardcore' element={<Suspense><Pages.HardcoreServer /></Suspense>}/>
+          <Route path='/condition-of-use' element={<Suspense><Pages.ConditionOfUse /></Suspense>}/>
+          <Route path='*' element={<Suspense><Pages.NotFound /></Suspense>}/>
         </Routes>
       </Layout.Content>
       <Layout.Footer 

@@ -1,8 +1,13 @@
 import { useAuthPageState } from "@/store"
-import { SaveOutlined } from "@ant-design/icons"
 import { Button, Card, Form, Input, message } from "antd"
+import { Rule } from "antd/es/form"
+import { createContext, useContext } from "react"
 
-const rules = {
+const rules: Record<'email' | 'password', Rule[]> = {
+  'email': [
+    { required: true, message: 'Почта обязательна' },
+    { type: 'email', message: 'Введите валидную почту' }
+  ],
   'password': [
     { required: true, message: 'Пароль обязателен' },
     { min: 8, max: 32, message: 'Пароль должен быть длинее 8 и короче 32' },
@@ -11,19 +16,26 @@ const rules = {
 }
 
 interface Form {
+  email?: string,
   newPassword: string
 }
 
 export default function ChangePass() {
-  const [change, status] = useAuthPageState(s => [s.changePass, s.changePassStatus])  
+  const [change, status, user, switchTo] = useAuthPageState(s => [
+    s.changePass, 
+    s.changePassStatus,
+    s.user,
+    s.switchType
+  ])  
   const [form] = Form.useForm<Form>()
+  const ctx = useContext(changePassContext)
   
   function onFinish(data: Form) {
-    change(data.newPassword).then(code => {
+    change(data.newPassword, data.email).then(code => {
       if (code == 'error')
         message.error('Ошибка 🤓. Отсоси')
       else if (code == 'ok') {
-        message.success('Пароль успешно сменён')
+        message.success('Проверьте почту')
       }
     })
   }
@@ -33,6 +45,14 @@ export default function ChangePass() {
       <Form 
         form={form}
         onFinish={onFinish}>
+        {!user && 
+          <Form.Item 
+            name='email'
+            rules={rules.email}
+            required>
+            <Input type="email" placeholder="Почта" autoComplete="email"/>
+          </Form.Item>}
+
         <Form.Item 
           name='newPassword'
           rules={rules.password}
@@ -41,16 +61,31 @@ export default function ChangePass() {
         </Form.Item>
 
         <Form.Item>
+          <div>
           <Button
             type="primary"
             htmlType="submit"
             style={{ marginRight: 30 }}
-            loading={status == 'process'}
-            icon={<SaveOutlined />}>
+            loading={status == 'process'}>
               Изменить
           </Button>
+
+          {ctx.backToLogin && 
+          <Button type="link" onClick={() => switchTo('login')}>
+            Войти
+          </Button>
+          }
+          </div>
         </Form.Item>
       </Form>
     </Card>
   )
 }
+
+interface ChangePassContext {
+  backToLogin: boolean
+}
+
+export const changePassContext = createContext<ChangePassContext>({ 
+  backToLogin: false 
+})

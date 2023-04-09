@@ -1,6 +1,6 @@
 import axios_lib, { AxiosError } from 'axios'
 
-let url = import.meta.env.PROD ? "https://devapi.spectrumine.com" : "http://localhost:5001"
+let url = import.meta.env.PROD ? "https://devapi.spectrumine.com" : "http://localhost:5168"
 const axios = axios_lib.create({ baseURL: url })
 
 export const tokens = {
@@ -153,6 +153,7 @@ export async function checkMojangExist(username: string): Promise<boolean | null
 
 
 export type ChangePass = {
+  email?: string,
   newPassword: string
 }
 export type ChangePassResponse = {
@@ -161,12 +162,15 @@ export type ChangePassResponse = {
   code: 'error'
 }
 export async function changePass({
+  email,
   newPassword
 }: ChangePass): Promise<ChangePassResponse> {
   try {
-    await axios.post(
+    if (email) {
+      await axios.post('/Auth/ResetPassword', { email, newPassword })
+    } else await axios.post(
       '/Auth/ResetPasswordAuth',
-      { NewPassword: newPassword },
+      { newPassword },
       { headers: { 'Authorization': `Bearer ${tokens.accessToken}` } })
     return { code: 'ok' }
   } catch (error) {
@@ -187,6 +191,20 @@ export async function updateAccessToken(): Promise<UpdateAccessTokenResponse> {
     tokens.refreshToken = res.data.refreshToken
     return { code: 'ok' }
   } catch (error) {
+    return { code: 'error' }
+  }
+}
+
+export type ActivateChangePassResponse = {
+  code: 'ok'
+} | {
+  code: 'error'
+}
+export async function activateChangePass(code: string): Promise<ActivateChangePassResponse> {
+  try {
+    await axios.get(`/Mail/restore/${code}`)
+    return { code: 'ok' }
+  } catch (e) {
     return { code: 'error' }
   }
 }

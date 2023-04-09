@@ -1,10 +1,13 @@
-const Main = import('./Main')
-const NotFound = import('./NotFound')
-const Auth = import('./Auth')
-const Profile = import('./Profile')
-const ActivateRegisterCode = import('./ActivateRegisterCode')
-const HardcoreServer = import('./HardcoreServer')
-const ConditionOfUse = import('./ConditionOfUse')
+import { lazy } from 'react'
+
+const Main = lazy(() => import('./Main'))
+const NotFound = lazy(() => import('./NotFound'))
+const Auth = lazy(() => import('./Auth'))
+const Profile = lazy(() => import('./Profile'))
+const ActivateRegisterCode = lazy(() => import('./ActivateRegisterCode'))
+const HardcoreServer = lazy(() => import('./HardcoreServer'))
+const ConditionOfUse = lazy(() => import('./ConditionOfUse'))
+const ActivateChangePassCode = lazy(() => import('./ActivateChangePassCode'))
 
 export default {
   Main,
@@ -13,5 +16,6 @@ export default {
   Profile,
   ActivateRegisterCode,
   HardcoreServer,
-  ConditionOfUse
+  ConditionOfUse,
+  ActivateChangePassCode
 }

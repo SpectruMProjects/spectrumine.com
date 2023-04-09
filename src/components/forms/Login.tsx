@@ -1,8 +1,9 @@
-import { Button, Card, Form, Input, message } from "antd";
+import { Button, Card, Divider, Form, Input, message } from "antd";
 import { Rule } from "antd/es/form";
 import { useNavigate } from "react-router-dom";
 import { useAuthPageState } from "../../store";
 import { UserOutlined } from "@ant-design/icons";
+import { createContext } from "react";
 
 const rules: Record<'username' | 'password', Rule[]> = {
   'username': [
@@ -58,7 +59,6 @@ export default function Login() {
         </Form.Item>
 
         <Form.Item>
-          <div>
             <Button
               type="primary"
               htmlType="submit"
@@ -68,11 +68,16 @@ export default function Login() {
             >
               Войти
             </Button>
+        </Form.Item>
 
-            <Button type="default" onClick={() => switchToRegister()}>
+        <Form.Item>
+          <Button type="link" onClick={() => switchToRegister()}>
               Нет аккаунта?
             </Button>
-          </div>
+
+            <Button type="link" onClick={() => switchToRegister('change pass')}>
+              Забыли пароль?
+            </Button>
         </Form.Item>
       </Form>
     </Card>
