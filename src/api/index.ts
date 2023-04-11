@@ -77,7 +77,7 @@ type LoginResponse =
 {
   code: 'ok',
 } | {
-  code: 'error'
+  code: 'error' | 'UserNotFound' | 'InvalidPassword' | 'AccountDisabled'
 }
 export async function login({
   identifier,
@@ -92,6 +92,11 @@ export async function login({
     tokens.accessToken = loginRes.data.accessToken
     return { code: 'ok' }
   } catch (e) {
+    if (e instanceof AxiosError) {
+      if (e.response?.status == 401) {
+        return { code: e.response?.data?.cause }
+      }
+    }
     return { code: 'error' }
   }
 }
@@ -104,7 +109,7 @@ type AuthResponse = {
     email: string
   }
 } | {
-  code: 'error'
+  code: 'error' | '403'
 }
 export async function auth(): Promise<AuthResponse> {
   try {
@@ -116,6 +121,10 @@ export async function auth(): Promise<AuthResponse> {
       user: res.data
     }
   } catch (e) {
+    if (e instanceof AxiosError) {
+      if (e.response?.status == 403)
+        return { code: '403' }
+    }
     return { code: 'error' }
   }
 }
@@ -126,7 +135,7 @@ interface ActivateRegister {
 type ActivateRegisterResponse = {
   code: 'ok'
 } | {
-  code: 'error'
+  code: 'error' | 'UserNotFound' | 'CodeExpire'
 }
 export async function activateRegister({ code }: ActivateRegister): Promise<ActivateRegisterResponse> {
   try {
@@ -135,21 +144,15 @@ export async function activateRegister({ code }: ActivateRegister): Promise<Acti
     tokens.refreshToken = res.data.refreshToken    
     return { code: 'ok' }
   } catch (e) {
+    if (e instanceof AxiosError) {
+      const res = e.response
+      if (res?.status == 400) {
+        return { code: res?.data?.cause }
+      }
+    }
     return { code: 'error' }
   }
 }
-
-export async function checkMojangExist(username: string): Promise<boolean | null> {
-  try{
-    await axios.get(`${url}/Auth/Checklicense/${username}`)
-    return true
-  } catch(e) {
-    if(e instanceof AxiosError) {
-      return e.response ? false : null
-    } else return null
-  }
-}
-
 
 export type ChangePass = {
   email?: string,
@@ -158,7 +161,7 @@ export type ChangePass = {
 export type ChangePassResponse = {
   code: 'ok'
 } | {
-  code: 'error'
+  code: 'error' | 'UserNotFound' | 'RegexNotMatch'
 }
 export async function changePass({
   email,
@@ -172,7 +175,13 @@ export async function changePass({
       { newPassword },
       { headers: { 'Authorization': `Bearer ${tokens.accessToken}` } })
     return { code: 'ok' }
-  } catch (error) {
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      const res = e.response
+      if (res?.status == 400 || res?.status == 404) {
+        return { code: res?.data?.cause }
+      }
+    }
     return { code: 'error' }
   }
 }
@@ -197,13 +206,30 @@ export async function updateAccessToken(): Promise<UpdateAccessTokenResponse> {
 export type ActivateChangePassResponse = {
   code: 'ok'
 } | {
-  code: 'error'
+  code: 'error' | 'UserNotFound' | 'CodeExpire'
 }
 export async function activateChangePass(code: string): Promise<ActivateChangePassResponse> {
   try {
     await axios.get(`/Mail/restore/${code}`)
     return { code: 'ok' }
   } catch (e) {
+    if (e instanceof AxiosError) {
+      const res = e.response
+      if (res?.status == 400) {
+        return { code: res?.data?.cause }
+      }
+    }
     return { code: 'error' }
+  }
+}
+
+export async function checkMojangExist(username: string): Promise<boolean | null> {
+  try{
+    await axios.get(`${url}/Auth/Checklicense/${username}`)
+    return true
+  } catch(e) {
+    if(e instanceof AxiosError) {
+      return e.response ? false : null
+    } else return null
   }
 }
