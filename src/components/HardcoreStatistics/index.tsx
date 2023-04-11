@@ -84,15 +84,29 @@ function Respwan({rT}: {rT: number}) {
   const [timeToRespawn, setTimeToRespawn] = useState('0:0:0:0')
 
   useEffect(() => {
+    if (Date.now() > rT) {
+      setTimeToRespawn('0:0:0:0')
+      return
+    }
     setTimeToRespawn(formatTimeToRespawn(rT))
     const id = setInterval(() => {
+      if (Date.now() > rT) {
+        setTimeToRespawn('0:0:0:0')
+        clearInterval(id)
+        return
+      }
       setTimeToRespawn(formatTimeToRespawn(rT))
     }, 1000)
     return () => clearInterval(id)
   }, [rT])
 
   if (timeToRespawn == '0:0:0:0') 
-    return <div className={styles['respawn']} style={{ color: '#73d13d' }}>
+    return <div 
+      className={styles['respawn']} 
+      style={{ 
+        fontSize: '2em', 
+        color: '#73d13d' 
+      }}>
       Вы можете играть
     </div>
 
