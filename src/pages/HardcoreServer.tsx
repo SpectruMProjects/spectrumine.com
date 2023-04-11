@@ -1,6 +1,7 @@
 import { List, Typography, message } from 'antd'
 import styles from './styles.module.css'
 import HardcoreMonitor from '@/components/HardcoreMonitor'
+import { CopyOutlined } from '@ant-design/icons'
 
 const points = [
   'Ванильный геймплей, минимальное количество плагинов для комфортной игры',
@@ -14,7 +15,7 @@ export default function HardcoreServer() {
   return (
     <div className={styles['hardcore-page']}>
       <h1 className={styles['hardcore-page__ip']}>
-        Ip: 
+        Ip:
         <a 
           href={hardcoreUrl}
           onClick={(e) => {
@@ -23,7 +24,7 @@ export default function HardcoreServer() {
               .then(() => { message.success('ip сервера скопирован') })
               .catch(() => { message.error('Не удалось скопировать ip.\nПопробуйте вручную') })
           }}>
-          {hardcoreUrl}
+            {hardcoreUrl} <CopyOutlined />
         </a>
       </h1>
 

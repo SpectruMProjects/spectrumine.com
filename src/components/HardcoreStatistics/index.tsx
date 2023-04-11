@@ -2,6 +2,7 @@ import { HardcoreStatistics as Model} from "@/models/HardcoreStatistics"
 import styles from './styles.module.css'
 import { Card } from "antd"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 interface Props {
   statistics: Model
@@ -52,11 +53,18 @@ function formatTimeToRespawn(time: number) {
 }
 
 export default function HardcoreStatistics({ statistics }: Props) {
+  const nav = useNavigate()
+
   return (
     <Card style={{ width: 'fit-content' }}>
       <div className={styles['block']}>
         <p className={styles['title']}>
-          Статистика сервера hardcore
+          Статистика сервера <a 
+            href="/servers/hardcore"
+            onClick={(e) => {
+              e.preventDefault()
+              nav('/servers/hardcore')              
+            }}>hardcore</a>
         </p>
 
         <div className={styles['content']}>

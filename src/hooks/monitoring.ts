@@ -2,7 +2,7 @@ import { getHardcorePlayersOnServer } from "@/api";
 import { useEffect, useState } from "react";
 
 export function useHardcoreMonitor(delay: number): { max: number, current: number } {
-  const [state, setState] = useState({ max: 2, current: 1 })
+  const [state, setState] = useState({ max: 20, current: 20 })
 
   useEffect(() => {
     const interval = setInterval(() => {
