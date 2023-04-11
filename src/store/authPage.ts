@@ -181,8 +181,10 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
 
   logout() {
     set({ user: null })
-    api.tokens.accessToken = null
-    api.tokens.refreshToken = null
+    api.logout().then(() => {
+      api.tokens.accessToken = null
+      api.tokens.refreshToken = null      
+    })
   },
 
   async checkUsername(username) {

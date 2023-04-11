@@ -1,20 +1,24 @@
 import { create } from 'zustand'
 import { activateChangePass } from '@/api'
+import * as api from '@/api'
 
 interface ChangePassState {
   state: 'unknown' | 'process' | 'ok' | 'error'
 
-  activate(code: string): Promise<['ok'] | ['process'] | ['unknown'] | ['error', string]>
+  activate(code: string, logoutAnywhere?: boolean): Promise<['ok'] | ['process'] | ['unknown'] | ['error', string]>
 }
 
 export const useChangePassState = create<ChangePassState>((set, get) => ({
   state: 'unknown',
 
-  async activate(code) {
+  async activate(code, logoutAnywhere = false) {
     if (get().state == 'process') return ['process']
     set({ state: 'process' })
 
+    if (logoutAnywhere) await api.logoutAnywhere()
+
     const res = await activateChangePass(code)
+
     switch (res.code) {
       case 'ok':
         set({ state: 'ok' })

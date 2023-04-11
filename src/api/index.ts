@@ -223,6 +223,28 @@ export async function activateChangePass(code: string): Promise<ActivateChangePa
   }
 }
 
+export async function logout() {
+  try {
+    await axios.post('/Auth/Logout', { 
+      refreshToken: tokens.refreshToken 
+    })
+    return 'ok'
+  } catch (e) {
+    return 'error'
+  }
+}
+
+export async function logoutAnywhere() {
+  try {
+    await axios.post('/Auth/ReloadTokens', { 
+      refreshToken: tokens.refreshToken 
+    })
+    return 'ok'
+  } catch (e) {
+    return 'error'
+  }
+}
+
 export async function checkMojangExist(username: string): Promise<boolean | null> {
   try{
     await axios.get(`${url}/Auth/Checklicense/${username}`)

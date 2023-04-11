@@ -1,15 +1,17 @@
 import { useNavigate, useParams } from "react-router-dom"
 import styles from './styles.module.css'
-import { Button, Divider, message } from "antd"
+import { Button, Checkbox, Divider, Input, message } from "antd"
 import { useChangePassState } from "@/store/changePass"
+import { useState } from "react"
 
 export default function ActivateChangePassCode() {
   const {code} = useParams()
   const [activate, state] = useChangePassState(s => [s.activate, s.state])
   const nav = useNavigate()
+  const [logout, setLogout] = useState(true)
 
   function onClick() {
-    activate(code!).then(status => {
+    activate(code!, logout).then(status => {
       if (status[0] == 'ok') {
         message.success('Пароль изменён')
         nav('/')
@@ -22,20 +24,29 @@ export default function ActivateChangePassCode() {
   }
 
   return (
-    <div className={styles['centered-page']}>
-      <Button 
-        loading={state == 'process'}
-        type="primary"
-        disabled={state != 'unknown'}
-        onClick={onClick}>
-        Изменить пароль
-      </Button>
+    <div className={styles['centered-page']} style={{ flexDirection: 'column' }}>
+      <Checkbox 
+        style={{ margin: 16 }} 
+        defaultChecked
+        onChange={() => setLogout(l => !l)}>
+        Выйти со всех устройств
+      </Checkbox>
 
-      <Divider type='vertical'/>
+      <div>
+        <Button 
+          loading={state == 'process'}
+          type="primary"
+          disabled={state != 'unknown'}
+          onClick={onClick}>
+          Изменить пароль
+        </Button>
 
-      <Button type='link' onClick={() => nav('/')}>
-        На главную
-      </Button>
+        <Divider type='vertical'/>
+
+        <Button type='link' onClick={() => nav('/')}>
+          На главную
+        </Button>
+      </div>
     </div>
   )
 }
