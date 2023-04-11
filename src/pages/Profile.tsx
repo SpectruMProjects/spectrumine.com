@@ -2,10 +2,18 @@ import { Button, Card, Divider, Typography } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { useAuthPageState } from '@/store'
 import styles from './styles.module.css'
+import { HardcoreStatistics as HardcoreStatisticsModel } from '@/models'
 import HardcoreStatistics from '@/components/HardcoreStatistics'
 import { DownOutlined, EditOutlined, UserDeleteOutlined, UsergroupDeleteOutlined } from '@ant-design/icons'
 import { useState } from 'react'
 import Forms from '@/components/forms'
+
+const stats = new HardcoreStatisticsModel(0, 0, [{ 
+  issue: 'Динамит', 
+  issuer: 'Эндермен', 
+  time: 1681223729775, 
+  timeToRespawn: 1681223729775 + (1000*60*60*1)
+}])
 
 export default function Profile() {
   const [user, logout] = useAuthPageState(s => [s.user, s.logout])
@@ -64,6 +72,6 @@ export default function Profile() {
 
     <Divider />
 
-    <HardcoreStatistics />
+    <HardcoreStatistics statistics={stats}/>
   </div>
 }

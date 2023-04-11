@@ -1,6 +1,6 @@
-import { Death } from "./Death";
+import { Death } from './Death'
 
-export class Statistics {
+export class HardcoreStatistics {
   readonly lastDeath?: Death
   
   constructor(
@@ -9,7 +9,7 @@ export class Statistics {
     readonly deaths: Death[] = []
   ) {
     for(const death of deaths) {
-      if ((this.lastDeath?.time ?? 0) > death.time) {
+      if ((this.lastDeath?.time ?? 0) < death.time) {
         this.lastDeath = death
       }
     } 

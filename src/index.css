@@ -11,3 +11,7 @@
 html {
   scroll-behavior: smooth;
 }
+
+.hardcore-heart-icon {
+  background-image: url("/images/hcheart.png");
+}
