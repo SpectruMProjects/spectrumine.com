@@ -9,22 +9,21 @@ const points = [
   'Ванильное выживание'
 ]
 
-const hardcoreUrl = 'spectrum.com'
+const hardcoreUrl = 'http://185.250.36.214:10100'
 
 export default function HardcoreServer() {
   return (
     <div className={styles['hardcore-page']}>
       <h1 className={styles['hardcore-page__ip']}>
-        Ip:
         <a 
+          style={{ textAlign: 'center' }}
           href={hardcoreUrl}
           onClick={(e) => {
             e.preventDefault()
             navigator.clipboard.writeText(hardcoreUrl)
               .then(() => { message.success('ip сервера скопирован') })
               .catch(() => { message.error('Не удалось скопировать ip.\nПопробуйте вручную') })
-          }}>
-            {hardcoreUrl} <CopyOutlined />
+          }}>Скопировать ip <CopyOutlined />
         </a>
       </h1>
 
