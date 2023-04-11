@@ -61,7 +61,6 @@ export default function Register() {
     }
     
     checkUsername(username).then(result => {
-      console.log({ username, result })
       setUsernameW(result == 'error')
       setUsernameH(result == 'error'
         ? 'Не существует аккаунта с этим ником в Monang' 
