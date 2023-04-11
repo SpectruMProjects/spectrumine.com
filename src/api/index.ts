@@ -71,7 +71,7 @@ export async function register({
 }
 
 interface Login {
-  username: string
+  identifier: string
   password: string
 }
 type LoginResponse =
@@ -81,12 +81,12 @@ type LoginResponse =
   code: 'error'
 }
 export async function login({
-  username,
+  identifier,
   password
 }: Login): Promise<LoginResponse> {
   try {
     const loginRes = await axios.post('/Auth/Tokens', { 
-      username,
+      username: identifier,
       password
     })
     tokens.refreshToken = loginRes.data.refreshToken

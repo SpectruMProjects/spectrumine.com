@@ -1,7 +1,6 @@
 import { create } from "zustand"
 import { User } from "../models"
 import * as api from '../api'
-import ChangePass from "@/components/forms/ChangePass"
 
 interface Register {
   username: string
@@ -10,7 +9,7 @@ interface Register {
 }
 
 interface Login {
-  username: string
+  identifier: string
   password: string
 }
 

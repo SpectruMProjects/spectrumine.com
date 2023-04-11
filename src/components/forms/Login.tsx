@@ -3,13 +3,10 @@ import { Rule } from "antd/es/form";
 import { useNavigate } from "react-router-dom";
 import { useAuthPageState } from "../../store";
 import { UserOutlined } from "@ant-design/icons";
-import { createContext } from "react";
 
-const rules: Record<'username' | 'password', Rule[]> = {
-  'username': [
-    { required: true, message: 'Ник обязателен' },
-    { min: 3, max: 16, message: 'Ник должен быть длинее 3 и короче 16' },
-    { pattern: /^[a-zA-Z0-9_]{3,16}$/, message: 'Ник должен содержать только латинские буквы и цифры' }
+const rules: Record<'identifier' | 'password', Rule[]> = {
+  'identifier': [
+    { required: true, message: 'Ник или почта обязателен' },
   ],
   'password': [
     { required: true, message: 'Пароль обязателен' },
@@ -19,7 +16,7 @@ const rules: Record<'username' | 'password', Rule[]> = {
 }
 
 interface Form {
-  username: string
+  identifier: string
   password: string
 }
 
@@ -45,10 +42,10 @@ export default function Login() {
         form={form}
         onFinish={onFinish}>
         <Form.Item 
-          name='username'
-          rules={rules.username}
+          name='identifier'
+          rules={rules.identifier}
           required>
-          <Input placeholder="Ник в Minecraft"/>
+          <Input placeholder="Ник или почта"/>
         </Form.Item>
 
         <Form.Item 
