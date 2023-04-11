@@ -19,7 +19,9 @@ export default function HardcoreMonitor() {
       
       <div className={styles['block__in']}>
         <p>0</p>
-        <span></span>
+        <span style={{ flex: stats.current }}/>
+        <p>{stats.current}</p>
+        <span style={{ flex: stats.max - stats.current }}/>
         <p>{stats.max}</p>
       </div>
     </div>

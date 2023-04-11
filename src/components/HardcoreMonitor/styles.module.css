@@ -6,7 +6,7 @@
 }
 
 .block__in span {
-  flex: 1;
+  transition: all;
 }
 
 .block__in p {
