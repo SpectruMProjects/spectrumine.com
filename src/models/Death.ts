@@ -3,6 +3,6 @@ export class Death {
     readonly issue: string,
     readonly issuer: string,
     readonly time: number,
-    readonly timeToRespawn: number
+    readonly respawnTime: number
   ) {}
 }

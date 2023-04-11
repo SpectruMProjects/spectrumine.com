@@ -245,6 +245,37 @@ export async function logoutAnywhere() {
   }
 }
 
+export type StatisticsResponse = {
+  code: 'ok',
+  data: {
+    lastServerTime: 0,
+    timeOnServer: 0,
+    deaths: {
+      deathIssue: string,
+      deathIssuer: string,
+      deathTime: number,
+      timeToRespawn: number
+    }[]
+  }
+} | {
+  code: 'error' | 'UserNotFound'
+}
+export async function statistics(username: string): Promise<StatisticsResponse> {
+  try {
+    const res = await axios.get(`/Hardcore/stats/${username}`)
+    return { 
+      code: 'ok',
+      data: res.data
+    }
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      if(e.response?.status == 404)
+        return { code: 'UserNotFound' }
+    }
+    return { code: 'error' }
+  }
+}
+
 export async function checkMojangExist(username: string): Promise<boolean | null> {
   try{
     await axios.get(`${url}/Auth/Checklicense/${username}`)

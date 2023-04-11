@@ -1,12 +1,8 @@
-import { HardcoreStatistics as Model} from "@/models/HardcoreStatistics"
+import { useUserHardcoreStatistics } from '@/hooks'
 import styles from './styles.module.css'
-import { Card } from "antd"
+import { Card, Spin } from "antd"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-
-interface Props {
-  statistics: Model
-}
 
 function formatDeaths(count: number) {
   if ([11,12,13,14,15,17,18,19].includes(count)) return 'смертей'
@@ -52,9 +48,23 @@ function formatTimeToRespawn(time: number) {
   return dateFormat(time - now)
 }
 
-export default function HardcoreStatistics({ statistics }: Props) {
+interface Props {
+  username: string
+}
+
+export default function HardcoreStatistics({ username }: Props) {
+  const [code, statistics] = useUserHardcoreStatistics(username)
   const nav = useNavigate()
 
+  if (code == 'error')
+    return <Card style={{ width: 'fit-content' }}>
+      Не удалось загрузить статистику
+    </Card>
+
+  if (code == 'loading')
+    return <Card style={{ width: 'fit-content' }}>
+      <Spin />
+    </Card>
   return (
     <Card style={{ width: 'fit-content' }}>
       <div className={styles['block']}>
@@ -73,8 +83,9 @@ export default function HardcoreStatistics({ statistics }: Props) {
             <p>{statistics.deaths.length} {formatDeaths(statistics.deaths.length)}</p>
           </div>
 
+          {statistics.lastDeath?.respawnTime &&
           <div className={styles['inner']}>
-            <Respwan rT={statistics.lastDeath?.timeToRespawn ?? 0}/>
+              <Respwan rT={statistics.lastDeath?.respawnTime}/>
 
           <div style={{ flex: 1, minHeight: 28 }}/>
 
@@ -86,15 +97,19 @@ export default function HardcoreStatistics({ statistics }: Props) {
               : `Умер из-за "${statistics.lastDeath.issue}"`}
             </p>
           </div>}
-          </div>
+          </div>}
         </div>
 
         <div className={styles['dop_info']}>
           <p>
-            Последний раз на сервере {formatDate(new Date(statistics.lastServerTime))}
+            {statistics.lastServerTime != 0 
+            ? `Последний раз на сервере ${formatDate(new Date(statistics.lastServerTime))}` 
+            : 'Не заходил'}
           </p>
           <p>
-            Проведено времени на сервере {dateFormat(statistics.timeOnServer)}
+            {statistics.timeOnServer != 0 
+              ? `Проведено времени на сервере ${dateFormat(statistics.timeOnServer)}`
+              : 'Не играл'}
           </p>
         </div>
       </div>
@@ -123,14 +138,15 @@ function Respwan({rT}: {rT: number}) {
   }, [rT])
 
   if (timeToRespawn == '0:0:0:0') 
-    return <div 
-      className={styles['respawn']} 
-      style={{ 
-        fontSize: '2em', 
-        color: '#73d13d' 
-      }}>
-      Вы можете играть
-    </div>
+    return <></>
+    //  <div 
+    //   className={styles['respawn']} 
+    //   style={{ 
+    //     fontSize: '2em', 
+    //     color: '#73d13d' 
+    //   }}>
+    //   Вы можете играть
+    // </div>
 
   return <div className={styles['respawn']}>
       Возрождение через <p style={{ fontSize: '1.2em', color: '#f5222d' }}>

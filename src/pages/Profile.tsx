@@ -6,20 +6,7 @@ import { HardcoreStatistics as HardcoreStatisticsModel } from '@/models'
 import HardcoreStatistics from '@/components/HardcoreStatistics'
 import { DownOutlined, EditOutlined, UserDeleteOutlined, UsergroupDeleteOutlined } from '@ant-design/icons'
 import { useState } from 'react'
-import Forms from '@/components/forms'
-
-const stats = new HardcoreStatisticsModel(
-  1681228423684 + 8000, 
-  1000*60*60*8, 
-  [
-    { 
-      issue: 'Динамит', 
-      issuer: 'Эндермен', 
-      time: 1681228423684, 
-      timeToRespawn: 1681228423684 + (1000*60*60*1)
-    }
-  ]
-)
+import Forms from '@/components/forms'  
 
 export default function Profile() {
   const [user, logout] = useAuthPageState(s => [s.user, s.logout])
@@ -78,6 +65,6 @@ export default function Profile() {
 
     <Divider />
 
-    <HardcoreStatistics statistics={stats}/>
+    <HardcoreStatistics username={user.username}/>
   </div>
 }
