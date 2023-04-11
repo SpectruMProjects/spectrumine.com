@@ -1,5 +1,6 @@
-import { List, Typography } from 'antd'
+import { List, Typography, message } from 'antd'
 import styles from './styles.module.css'
+import HardcoreMonitor from '@/components/HardcoreMonitor'
 
 const points = [
   'Ванильный геймплей, минимальное количество плагинов для комфортной игры',
@@ -7,15 +8,32 @@ const points = [
   'Ванильное выживание'
 ]
 
+const hardcoreUrl = 'spectrum.com'
+
 export default function HardcoreServer() {
   return (
     <div className={styles['hardcore-page']}>
+      <h1 className={styles['hardcore-page__ip']}>
+        Ip: 
+        <a 
+          href={hardcoreUrl}
+          onClick={(e) => {
+            e.preventDefault()
+            navigator.clipboard.writeText(hardcoreUrl)
+              .then(() => { message.success('ip сервера скопирован') })
+              .catch(() => { message.error('Не удалось скопировать ip.\nПопробуйте вручную') })
+          }}>
+          {hardcoreUrl}
+        </a>
+      </h1>
+
+      <HardcoreMonitor />
+
       <List
         size='large'
         className={styles['points']}
         header={<Header />}
         dataSource={points}
-        bordered
         renderItem={
           point => <List.Item>
             <p className={styles['point']}>{point}</p>

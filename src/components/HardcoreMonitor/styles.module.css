@@ -1,0 +1,14 @@
+.block__in {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.block__in span {
+  flex: 1;
+}
+
+.block__in p {
+  font-size: 2em;
+}

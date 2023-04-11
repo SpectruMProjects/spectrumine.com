@@ -255,3 +255,11 @@ export async function checkMojangExist(username: string): Promise<boolean | null
     } else return null
   }
 }
+
+function randInt(min: number = 0, max: number = 1000) {
+  return Math.floor(Math.random() * (max + min) - min)
+}
+
+export async function getHardcorePlayersOnServer(): Promise<{ max: number; current: number }> {
+  return { max: 50, current: randInt(0, 50) }
+}

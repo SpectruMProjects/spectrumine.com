@@ -19,7 +19,7 @@ export default function Header() {
         { type: 'divider', style: { flex: 1 } },
         user 
           ? { key: '/profile', label: 'Профиль', icon: <UserOutlined /> }
-          : { key: '/auth', label: 'Регистрация', icon: <UserOutlined /> },           
+          : { key: '/auth', label: 'Авторизация', icon: <UserOutlined /> },           
       ]}/>
   )
 }
