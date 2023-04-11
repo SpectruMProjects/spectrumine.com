@@ -8,6 +8,7 @@ const ActivateRegisterCode = lazy(() => import('./ActivateRegisterCode'))
 const HardcoreServer = lazy(() => import('./HardcoreServer'))
 const ConditionOfUse = lazy(() => import('./ConditionOfUse'))
 const ActivateChangePassCode = lazy(() => import('./ActivateChangePassCode'))
+const UserHardcoreStatistics = lazy(() => import('./UserHardcoreStatistics'))
 
 export default {
   Main,
@@ -17,5 +18,6 @@ export default {
   ActivateRegisterCode,
   HardcoreServer,
   ConditionOfUse,
-  ActivateChangePassCode
+  ActivateChangePassCode,
+  UserHardcoreStatistics
 }

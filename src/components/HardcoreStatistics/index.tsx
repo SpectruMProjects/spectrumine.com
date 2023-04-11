@@ -74,7 +74,8 @@ export default function HardcoreStatistics({ username }: Props) {
             onClick={(e) => {
               e.preventDefault()
               nav('/servers/hardcore')              
-            }}>hardcore</a>
+            }}>hardcore</a><br/>
+          {username}
         </p>
 
         <div className={styles['content']}>
