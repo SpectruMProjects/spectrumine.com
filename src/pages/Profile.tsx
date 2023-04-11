@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuthPageState } from '@/store'
 import styles from './styles.module.css'
 import HardcoreStatistics from '@/components/HardcoreStatistics'
-import { DownOutlined, EditOutlined, UserDeleteOutlined } from '@ant-design/icons'
+import { DownOutlined, EditOutlined, UserDeleteOutlined, UsergroupDeleteOutlined } from '@ant-design/icons'
 import { useState } from 'react'
 import Forms from '@/components/forms'
 
@@ -30,7 +30,7 @@ export default function Profile() {
         {user.username} <br/> {user.email}
       </h1>
       <Divider />
-      <div>
+      <div className={styles['profile-page__user__buttons']}>
         <Button
           type={isChangePassOpened ? 'default' : 'primary'} 
           size='large' 
@@ -39,8 +39,6 @@ export default function Profile() {
           Изменить пароль
         </Button>
 
-        <Divider type='vertical' />
-
         <Button
           type='primary' 
           size='large' 
@@ -48,6 +46,15 @@ export default function Profile() {
           icon={<UserDeleteOutlined />}
           onClick={logout}>
           Выйти
+        </Button>
+
+        <Button
+          type='primary' 
+          size='large' 
+          style={{ backgroundColor: '#f5222d' }} 
+          icon={<UsergroupDeleteOutlined />}
+          onClick={logout}>
+          Выйти со всех устройств
         </Button>
 
         {isChangePassOpened && <Divider type='horizontal' />}

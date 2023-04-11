@@ -63,3 +63,9 @@
 .profile-page__user {
   width: fit-content;
 }
+
+.profile-page__user__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
