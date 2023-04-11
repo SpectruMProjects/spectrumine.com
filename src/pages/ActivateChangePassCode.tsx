@@ -10,11 +10,13 @@ export default function ActivateChangePassCode() {
 
   function onClick() {
     activate(code!).then(status => {
-      if (status != 'ok') {
-        message.error('Не удалось изменить пароль')
-      } else {
+      if (status[0] == 'ok') {
         message.success('Пароль изменён')
         nav('/')
+      } else if (status[0] == 'error') {
+        message.error(status[1])
+      } else {
+        message.error('Не удалось изменить пароль')        
       }
     })
   }
