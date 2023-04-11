@@ -11,7 +11,8 @@ function formatDeaths(count: number) {
   if ([11,12,13,14,15,17,18,19].includes(count)) return 'смертей'
 
   const last = count % 10
-  if ([1].includes(last)) return 'смерть'
+  if (last == 1) return 'смерть'
+  if (last == 0) return 'смертей'
   
   return 'смерти'
 }
@@ -28,9 +29,8 @@ function formatDate(date: Date) {
   return formatter.format(date)
 }
 
-function formatTimeToRespawn(time: number) {
-  const now = Date.now()
-  let delta = Math.abs(time - now) / 1000
+function dateFormat(time: number) {
+  let delta = Math.abs(time) / 1000
   
   const days = Math.floor(delta / 86400)
   delta -= days * 86400
@@ -44,6 +44,11 @@ function formatTimeToRespawn(time: number) {
   const seconds = Math.floor(delta % 60)
   
   return `${days}:${hours}:${minutes}:${seconds}`
+}
+
+function formatTimeToRespawn(time: number) {
+  const now = Date.now()
+  return dateFormat(time - now)
 }
 
 export default function HardcoreStatistics({ statistics }: Props) {
@@ -74,6 +79,15 @@ export default function HardcoreStatistics({ statistics }: Props) {
             </p>
           </div>}
           </div>
+        </div>
+
+        <div className={styles['dop_info']}>
+          <p>
+            Последний раз на сервере {formatDate(new Date(statistics.lastServerTime))}
+          </p>
+          <p>
+            Проведено времени на сервере {dateFormat(statistics.timeOnServer)}
+          </p>
         </div>
       </div>
     </Card>

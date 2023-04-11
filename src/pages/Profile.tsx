@@ -8,12 +8,18 @@ import { DownOutlined, EditOutlined, UserDeleteOutlined, UsergroupDeleteOutlined
 import { useState } from 'react'
 import Forms from '@/components/forms'
 
-const stats = new HardcoreStatisticsModel(0, 0, [{ 
-  issue: 'Динамит', 
-  issuer: 'Эндермен', 
-  time: 1681223729775, 
-  timeToRespawn: 1681223729775 + (1000*60*60*1)
-}])
+const stats = new HardcoreStatisticsModel(
+  1681228423684 + 8000, 
+  1000*60*60*8, 
+  [
+    { 
+      issue: 'Динамит', 
+      issuer: 'Эндермен', 
+      time: 1681228423684, 
+      timeToRespawn: 1681228423684 + (1000*60*60*1)
+    }
+  ]
+)
 
 export default function Profile() {
   const [user, logout] = useAuthPageState(s => [s.user, s.logout])

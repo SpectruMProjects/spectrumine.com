@@ -58,6 +58,11 @@
   font-size: 1.5em;
 }
 
+.dop_info {
+  margin-top: 1em;
+  font-size: 1.5em;
+}
+
 @media (max-width: 700px) {
   .content {
     flex-direction: column;
@@ -72,6 +77,10 @@
   }
 
   .info {
+    font-size: 4vw;
+  }
+
+  .dop_info {
     font-size: 4vw;
   }
 }
