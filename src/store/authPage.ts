@@ -29,7 +29,7 @@ interface AuthPageState {
   switchType(type?: AuthPageState['type']): void
   
   register(data: Register): Promise<['process'] | ['ok'] | ['error', string]>
-  login(data: Login): Promise<Status>
+  login(data: Login): Promise<['process'] | ['ok'] | ['unknown'] | ['error', string]>
   activateRegisterCode(code: string): Promise<Status>
   auth(): Promise<'process' | 'ok' | 'error'>,
   
@@ -91,7 +91,7 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
   },
 
   async login(data) {
-    if (get().loginStatus == 'process') return 'process'
+    if (get().loginStatus == 'process') return ['process']
     set({ loginStatus: 'process' })
 
     const res = await api.login(data)
@@ -99,15 +99,32 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
       case 'ok': {
         set({ loginStatus: 'ok' })
         get().auth()
-        return 'ok'
+        return ['ok']
       }
+      
+      case 'AccountDisabled': {
+        set({ loginStatus: 'error' })
+        return ['error', 'Аккакунт не активирован']
+      }
+      
+      case 'InvalidPassword': {
+        set({ loginStatus: 'error' })
+        return ['error', 'Неверный пароль']
+      }
+
+      case 'UserNotFound': {
+        set({ loginStatus: 'error' })
+        return ['error', 'Пользователь не найден']
+      }
+      
       case 'error': {
         set({ loginStatus: 'error' })
-        return 'error'
+        return ['error', 'Произошла неизвестная ошибка']
       }
+      
       default: {
         set({ loginStatus: 'unknown' })
-        return 'error'
+        return ['unknown']
       }
     }
   },

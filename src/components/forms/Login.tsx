@@ -27,11 +27,14 @@ export default function Login() {
   const switchToRegister = useAuthPageState(s => s.switchType)
   
   function onFinish(data: Form) {
-    login(data).then(code => {
-      if (code == 'error')
-        message.error('Ошибка 🤓. Отсоси')
-      else if (code == 'ok') {
+    login(data).then(res => {
+      const code = res[0]
+      if (code == 'ok') {
         nav('/')
+      } else if (code == 'error') {
+        message.error(res[1])
+      } else {
+        message.error('Неизвестная ошибка')
       }
     })
   }
