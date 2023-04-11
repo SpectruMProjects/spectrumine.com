@@ -31,12 +31,11 @@ export default function ChangePass() {
   const ctx = useContext(changePassContext)
   
   function onFinish(data: Form) {
-    change(data.newPassword, data.email).then(code => {
-      if (code == 'error')
-        message.error('Ошибка 🤓. Отсоси')
-      else if (code == 'ok') {
+    change(data.newPassword, data.email).then(res => {
+      const code = res[0]
+      if (code == 'ok') {
         message.success('Проверьте почту')
-      }
+      } else  if (code == 'error') message.error(res[1])
     })
   }
 

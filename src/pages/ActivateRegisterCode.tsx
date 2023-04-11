@@ -6,20 +6,19 @@ import { useAuthPageState } from "../store"
 export default function ActivateRegisterCode() {
   const [activate, status] = useAuthPageState(s => [
     s.activateRegisterCode, 
-    s.activateRegisterCodeStatus, 
-    s.user
+    s.activateRegisterCodeStatus
   ])
   const code = useParams()?.['code']
   const nav = useNavigate()
 
   useEffect(() => {
     activate(code!).then(r => {
-      if (r == 'error') {
-        message.error('Не удалось подтвердить почту')
-      } else if (r == 'process')  {
-        message.success(`Вы вошли как ${''}`)
+      const code = r[0]
+      if (code == 'ok') {
         nav('/')
-      } 
+      } else if (code == 'error') {
+        message.error(r[1])
+      }
     })
   }, [])
 

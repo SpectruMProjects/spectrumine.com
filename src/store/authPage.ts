@@ -14,6 +14,7 @@ interface Login {
 }
 
 type Status = 'unknown' | 'process' | 'ok' | 'error'
+type ResStatus = ['process'] | ['ok'] | ['error', string]
 
 interface AuthPageState {
   user: User | null
@@ -28,15 +29,21 @@ interface AuthPageState {
 
   switchType(type?: AuthPageState['type']): void
   
-  register(data: Register): Promise<['process'] | ['ok'] | ['error', string]>
-  login(data: Login): Promise<['process'] | ['ok'] | ['unknown'] | ['error', string]>
-  activateRegisterCode(code: string): Promise<Status>
+  register(data: Register): Promise<ResStatus>
+  login(data: Login): Promise<ResStatus>
+  activateRegisterCode(code: string): Promise<ResStatus>
   auth(): Promise<'process' | 'ok' | 'error'>,
   
-  checkUsername(username: string): Promise<AuthPageState['checkUsernameStatus']>
+  checkUsername(username: string): Promise<'ok' | 'error' | 'process'>
   logout(): void
 
-  changePass(newPassword: string, email?: string): Promise<Status>
+  changePass(newPassword: string, email?: string): Promise<ResStatus>
+}
+
+const messages = {
+  error: 'Произошла неизвестная ошибка',
+  codeExpire: 'Срок действия кода истёк',
+  userNotFound: 'Польщователь не найден'
 }
 
 export const useAuthPageState = create<AuthPageState>((set, get) => ({
@@ -124,13 +131,13 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
       
       default: {
         set({ loginStatus: 'unknown' })
-        return ['unknown']
+        return ['error', 'Произошла неизвестная ошибка']
       }
     }
   },
 
   async activateRegisterCode(code) {
-    if (get().activateRegisterCodeStatus === 'process') return 'process'
+    if (get().activateRegisterCodeStatus === 'process') return ['process']
     set({ activateRegisterCodeStatus: 'process' })
 
     const res = await api.activateRegister({code})
@@ -138,13 +145,23 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
       case 'ok':
         get().auth()
         set({ activateRegisterCodeStatus: 'ok' })
-        return 'ok'
+        return ['ok']
+
+      case 'CodeExpire':
+        set({ activateRegisterCodeStatus: 'error' })
+        return ['error', messages.codeExpire]
+
+      case 'UserNotFound':
+        set({ activateRegisterCodeStatus: 'error' })
+        return ['error', messages.userNotFound]
+    
       case 'error':
         set({ activateRegisterCodeStatus: 'error' })
-        return 'error'
-      default:
+        return ['error', messages.error]
+      
+        default:
         set({ activateRegisterCodeStatus: 'unknown' })
-        return 'error'
+        return ['error', messages.error]
     }
   },
 
@@ -190,7 +207,7 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
   },
 
   async changePass(newPassword, email) {
-    if (get().changePassStatus == 'process') return 'process'
+    if (get().changePassStatus == 'process') return ['process']
     set({ changePassStatus: 'process' })
 
     const res = await api.changePass({ newPassword, email })
@@ -198,15 +215,19 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     switch (res.code) {
       case 'ok':
         set({ changePassStatus: 'ok' })   
-        return 'ok'
+        return ['ok']
 
+      case 'UserNotFound':
+        set({ changePassStatus: 'error' })   
+        return ['error', messages.userNotFound]
+    
       case 'error':
         set({ changePassStatus: 'error' })   
-        return 'error'
+        return ['error', messages.error]
     
       default:
         set({ changePassStatus: 'unknown' })
-        return 'unknown'
+        return ['error', messages.error]
     }
   }
 }))

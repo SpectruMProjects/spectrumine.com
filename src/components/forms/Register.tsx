@@ -51,13 +51,21 @@ export default function Register() {
   }
 
   const [username, setUsername] = useState<string | undefined>(undefined)
+  const [usernameW, setUsernameW] = useState<boolean>(false)
+  const [usernameH, setUsernameH] = useState<undefined | string>(undefined)
   useDebounce(username => {
     if (!username) return
-    if (username.length < 3) return
+    if (form.getFieldError('username').length != 0) {return} else {
+      setUsernameW(false)
+      setUsernameH(undefined)
+    }
     
     checkUsername(username).then(result => {
-      if (result == 'error')
-        message.warning('Не существует аккаунта с этим ником в Monang')
+      console.log({ username, result })
+      setUsernameW(result == 'error')
+      setUsernameH(result == 'error'
+        ? 'Не существует аккаунта с этим ником в Monang' 
+        : undefined)
     })
   }, 1000, username)
 
@@ -69,25 +77,36 @@ export default function Register() {
         <Form.Item 
           name='username'
           rules={rules.username}
+          validateStatus={usernameW ? 'warning' : undefined}
+          help={usernameH}
           required>
           <Input
             placeholder="Ник в Minecraft" 
             autoComplete="username"
-            onChange={(e) => {setUsername(e.target.value)}}/>
+            onChange={(e) => {setUsername(e.target.value)}}
+            allowClear/>
         </Form.Item>
 
         <Form.Item 
           name='email'
           rules={rules.email}
           required>
-          <Input type="email" placeholder="Почта" autoComplete="email"/>
+          <Input 
+            type="email" 
+            placeholder="Почта" 
+            autoComplete="email"
+            allowClear/>
         </Form.Item>
 
         <Form.Item 
           name='password'
           rules={rules.password}
           required>
-          <Input type="password" placeholder="Пароль" autoComplete="password"/>
+          <Input 
+            type="password" 
+            placeholder="Пароль" 
+            autoComplete="password"
+            allowClear/>
         </Form.Item>
 
         <Form.Item>
