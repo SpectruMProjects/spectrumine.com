@@ -26,7 +26,7 @@ function mapApiToStats(data: ApiData): HardcoreStatistics {
       death.deathIssue,
       death.deathIssuer,
       death.deathTime,
-      Date.now() - death.timeToRespawn
+      death.timeToRespawn
     ))
   )
 }
