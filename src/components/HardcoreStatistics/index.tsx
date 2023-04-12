@@ -3,14 +3,14 @@ import styles from './styles.module.css'
 import { Card, Spin } from 'antd'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { HardcoreStatistics as Model } from '@/models'
 
 function formatDeaths(count: number) {
   if ([11,12,13,14,15,17,18,19].includes(count)) return 'смертей'
 
   const last = count % 10
   if (last == 1) return 'смерть'
-  if (last == 0) return 'смертей'
+  if ([5,6,7,8,9,0].includes(last))
+    return 'смертей'
   
   return 'смерти'
 }
