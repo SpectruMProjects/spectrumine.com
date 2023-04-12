@@ -6,7 +6,7 @@ import { useAuthPageState } from "../../store";
 export default function Header() {
   const path = useLocation().pathname
   const nav = useNavigate()
-  const user = useAuthPageState(s => s.user)
+  const [user, authStatus] = useAuthPageState(s => [s.user, s.authStatus])
 
   return (
     <Menu 
@@ -17,9 +17,10 @@ export default function Header() {
       items={[
         { key: '/', label: 'Главная', icon: <HomeOutlined /> },           
         { type: 'divider', style: { flex: 1 } },
-        user 
-          ? { key: '/profile', label: 'Профиль', icon: <UserOutlined /> }
-          : { key: '/auth', label: 'Авторизация', icon: <UserOutlined /> },           
+        ['process', 'unknown'].includes(authStatus) ? { type: 'divider' } 
+          : user 
+            ? { key: '/profile', label: 'Профиль', icon: <UserOutlined /> }
+            : { key: '/auth', label: 'Авторизация', icon: <UserOutlined /> },           
       ]}/>
   )
 }

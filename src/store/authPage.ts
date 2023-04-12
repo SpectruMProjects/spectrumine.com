@@ -26,6 +26,7 @@ interface AuthPageState {
   activateRegisterCodeStatus: Status
   checkUsernameStatus: Status
   changePassStatus: Status
+  authStatus: Status
 
   switchType(type?: AuthPageState['type']): void
   
@@ -55,6 +56,7 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
   activateRegisterCodeStatus: 'unknown',
   checkUsernameStatus: 'unknown',
   changePassStatus: 'unknown',
+  authStatus: 'unknown',
 
   switchType(type) {
     if (type) {
@@ -166,15 +168,18 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
   },
 
   async auth() {
+    if (get().authStatus == 'process') return 'process'
+    set({ authStatus: 'process' })
+
     const res = await api.auth()
     switch (res.code) {
       case 'ok':   
         const { id, username, email } = res.user
         const user = new User(id, username, email)
-        set({ user })
+        set({ user, authStatus: 'ok' })
         return 'ok'
       default:
-        set({ user: null })
+        set({ user: null, authStatus: 'error' })
         return 'error'
     }
   },
