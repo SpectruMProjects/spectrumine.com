@@ -252,7 +252,7 @@ export type StatisticsResponse = {
     timeOnServer: 0,
     deaths: {
       deathIssue: string,
-      deathIssuer: string,
+      deathIssuer?: string,
       deathTime: number,
       timeToRespawn: number
     }[]

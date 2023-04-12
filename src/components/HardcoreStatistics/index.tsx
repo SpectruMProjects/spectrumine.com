@@ -1,8 +1,9 @@
 import { useUserHardcoreStatistics } from '@/hooks'
 import styles from './styles.module.css'
-import { Card, Spin } from "antd"
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Card, Spin } from 'antd'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { HardcoreStatistics as Model } from '@/models'
 
 function formatDeaths(count: number) {
   if ([11,12,13,14,15,17,18,19].includes(count)) return 'смертей'
@@ -40,7 +41,13 @@ function dateFormat(time: number) {
 
   const seconds = Math.floor(delta % 60)
   
-  return `${days}:${hours}:${minutes}:${seconds}`
+  let result = []
+  result.push(days < 10 ? `0${days}` : days)
+  result.push(hours < 10 ? `0${hours}` : hours)
+  result.push(minutes < 10 ? `0${minutes}` : minutes)
+  result.push(seconds < 10 ? `0${seconds}` : seconds)
+
+  return result.join(':')
 }
 
 function formatTimeToRespawn(time: number) {

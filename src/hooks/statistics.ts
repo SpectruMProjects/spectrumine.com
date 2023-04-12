@@ -1,6 +1,6 @@
 import { statistics } from "@/api";
 import { Death, HardcoreStatistics } from "@/models";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
 type State = 
   ['ok', HardcoreStatistics] |
@@ -12,7 +12,7 @@ interface ApiData {
   timeOnServer: 0,
   deaths: {
     deathIssue: string,
-    deathIssuer: string,
+    deathIssuer?: string,
     deathTime: number,
     timeToRespawn: number
   }[]  
@@ -23,10 +23,10 @@ function mapApiToStats(data: ApiData): HardcoreStatistics {
     data.lastServerTime,
     data.timeOnServer,
     data.deaths.map(death => new Death(
+      death.deathTime,
+      death.timeToRespawn,
       death.deathIssue,
       death.deathIssuer,
-      death.deathTime,
-      death.timeToRespawn
     ))
   )
 }
