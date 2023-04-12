@@ -18,11 +18,42 @@
   margin: 8vh 16vw;
 }
 
+@media (max-width: 700px) {
+  .hardcore-page > * {
+    margin: 8vh 8vw;
+  }
+}
+
+.points__table {
+  border-spacing: 2em 1em;
+}
+
 .points .point {
   color: white;
   font-size: large;
 }
 
+.points .points__title {
+  margin: 1em;
+  text-align: center;
+  color: white;
+}
+
+.points .point__prefix {
+  color: white;
+  font-size: x-large; 
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .point__prefix {
+    display: none;
+  }
+}
+
+.points span  {
+  color: rgb(245, 34, 45);
+} 
 
 .description_point {
   font-size: large;
@@ -71,16 +102,12 @@
 }
 
 .hardcore-page__ip {
-  font-size: 4em;
+  font-size: 2em;
   font-weight: bold;
 }
 
 @media (max-width: 700px) {
   .hardcore-page__ip {
-    font-size: 8vw;
+    font-size: 6vw;
   }
-}
-
-.hardcore-page__ip a {
-  margin-left: 1em;
 }

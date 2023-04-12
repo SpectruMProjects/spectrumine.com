@@ -4,12 +4,12 @@ import HardcoreMonitor from '@/components/HardcoreMonitor'
 import { CopyOutlined } from '@ant-design/icons'
 
 const points = [
-  'Ванильный геймплей, минимальное количество плагинов для комфортной игры',
-  'Только хардкор! Платите за свою смерть временем потраченным на сервере',
-  'Ванильное выживание'
+  ['Vanilla', 'Ванильный геймплей, минимальное количество плагинов для комфортной игры'],
+  ['<span>Hardcore</span>', 'Только <span>хардкор</span>! Платите за свою смерть временем потраченным на сервере'],
+  ['SMP', 'Ванильное выживание']
 ]
 
-const hardcoreUrl = 'http://185.250.36.214:10100'
+const hardcoreUrl = '185.250.36.214:10100'
 
 export default function HardcoreServer() {
   return (
@@ -21,7 +21,7 @@ export default function HardcoreServer() {
           onClick={(e) => {
             e.preventDefault()
             navigator.clipboard.writeText(hardcoreUrl)
-              .then(() => { message.success('ip сервера скопирован') })
+              .then(() => { message.success(`ip сервера ${hardcoreUrl} скопирован`) })
               .catch(() => { message.error('Не удалось скопировать ip.\nПопробуйте вручную') })
           }}>Скопировать ip <CopyOutlined />
         </a>
@@ -29,16 +29,21 @@ export default function HardcoreServer() {
 
       <HardcoreMonitor />
 
-      <List
-        size='large'
-        className={styles['points']}
-        header={<Header />}
-        dataSource={points}
-        renderItem={
-          point => <List.Item>
-            <p className={styles['point']}>{point}</p>
-          </List.Item>
-        }/>
+      <div className={styles['points']}>
+        <Typography.Title>
+          <p className={styles['points__title']}>
+            О сервере
+          </p>
+        </Typography.Title>
+        <table className={styles['points__table']}>
+          <tbody>
+            {points.map(point =><tr key={point[0]}>
+              <td><p className={styles['point__prefix']} dangerouslySetInnerHTML={{ __html: point[0] }} /></td>
+              <td><p className={styles['point']} dangerouslySetInnerHTML={{ __html: point[1] }} /></td>
+            </tr>)}
+          </tbody> 
+        </table>
+      </div>
 
       <div className={styles['description']}>
         <Typography.Title>
@@ -74,12 +79,4 @@ export default function HardcoreServer() {
       </div>
     </div>
   )
-}
-
-function Header() {
-  return <Typography.Title>
-    <p style={{color: 'white', textAlign: 'center'}}>
-      О сервере
-    </p>
-  </Typography.Title>
 }
