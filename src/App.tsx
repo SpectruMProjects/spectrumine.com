@@ -1,4 +1,4 @@
-import { ConfigProvider, Layout, theme } from 'antd'
+import { ConfigProvider, Layout } from 'antd'
 import Header from "./components/Header"
 import { Route, Routes } from 'react-router'
 import Pages from './pages'

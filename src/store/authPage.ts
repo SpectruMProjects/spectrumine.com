@@ -173,11 +173,12 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
 
     const res = await api.auth()
     switch (res.code) {
-      case 'ok':   
+      case 'ok': {
         const { id, username, email } = res.user
         const user = new User(id, username, email)
         set({ user, authStatus: 'ok' })
         return 'ok'
+      }
       default:
         set({ user: null, authStatus: 'error' })
         return 'error'

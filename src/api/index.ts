@@ -1,6 +1,6 @@
 import axios_lib, { AxiosError } from 'axios'
 
-let url = import.meta.env.PROD ? "https://devapi.spectrumine.com" : "http://localhost:5168"
+const url = import.meta.env.PROD ? "https://devapi.spectrumine.com" : "http://localhost:5168"
 const axios = axios_lib.create({ baseURL: url })
 
 export const tokens = {
@@ -55,7 +55,7 @@ export async function register({
   email
 }: Register): Promise<RegisterResponse> {
   try {
-    let res = await axios.post('/Auth/Reg', { 
+    await axios.post('/Auth/Reg', { 
       username,
       password,
       email
@@ -287,7 +287,7 @@ export async function checkMojangExist(username: string): Promise<boolean | null
   }
 }
 
-function randInt(min: number = 0, max: number = 1000) {
+function randInt(min = 0, max = 1000) {
   return Math.floor(Math.random() * (max + min) - min)
 }
 

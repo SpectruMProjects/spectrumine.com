@@ -1,4 +1,4 @@
-import { message, Progress, Spin } from "antd"
+import { message, Spin } from "antd"
 import { useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { useAuthPageState } from "../store"
@@ -12,7 +12,7 @@ export default function ActivateRegisterCode() {
   const nav = useNavigate()
 
   useEffect(() => {
-    activate(code!).then(r => {
+    code && activate(code).then(r => {
       const code = r[0]
       if (code == 'ok') {
         nav('/')

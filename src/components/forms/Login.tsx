@@ -1,4 +1,4 @@
-import { Button, Card, Divider, Form, Input, message } from "antd";
+import { Button, Card, Form, Input, message } from "antd";
 import { Rule } from "antd/es/form";
 import { useNavigate } from "react-router-dom";
 import { useAuthPageState } from "../../store";

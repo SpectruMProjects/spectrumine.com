@@ -1,4 +1,4 @@
-import { List, Typography, message } from 'antd'
+import { Typography, message } from 'antd'
 import styles from './styles.module.css'
 import HardcoreMonitor from '@/components/HardcoreMonitor'
 import { CopyOutlined } from '@ant-design/icons'

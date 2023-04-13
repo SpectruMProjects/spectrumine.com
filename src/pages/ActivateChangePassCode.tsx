@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom"
 import styles from './styles.module.css'
-import { Button, Checkbox, Divider, Input, message } from "antd"
+import { Button, Checkbox, Divider, message } from "antd"
 import { useChangePassState } from "@/store/changePass"
 import { useState } from "react"
 
@@ -11,7 +11,7 @@ export default function ActivateChangePassCode() {
   const [logout, setLogout] = useState(true)
 
   function onClick() {
-    activate(code!, logout).then(status => {
+    code && activate(code, logout).then(status => {
       if (status[0] == 'ok') {
         message.success('Пароль изменён')
         nav('/')

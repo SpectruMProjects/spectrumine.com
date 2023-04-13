@@ -18,9 +18,9 @@ export default function Server({
 }: Props) {
   const nav = useNavigate()
   
-  const onClick = url 
-    ? () => nav(url)
-    : () => {}
+  function onClick() {
+    if (url) nav(url)
+  }
 
   return (
     <div 

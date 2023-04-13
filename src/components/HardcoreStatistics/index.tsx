@@ -33,15 +33,15 @@ function dateFormat(time: number) {
   const days = Math.floor(delta / 86400)
   delta -= days * 86400
 
-  let hours = Math.floor(delta / 3600) % 24
+  const hours = Math.floor(delta / 3600) % 24
   delta -= hours * 3600
 
-  var minutes = Math.floor(delta / 60) % 60
+  const minutes = Math.floor(delta / 60) % 60
   delta -= minutes * 60
 
   const seconds = Math.floor(delta % 60)
   
-  let result = []
+  const result = []
   result.push(days < 10 ? `0${days}` : days)
   result.push(hours < 10 ? `0${hours}` : hours)
   result.push(minutes < 10 ? `0${minutes}` : minutes)
