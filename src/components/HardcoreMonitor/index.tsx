@@ -1,26 +1,25 @@
 import { useHardcoreMonitor } from "@/hooks";
 import Progress from "antd/lib/progress";
 import styles from './styles.module.css'
-import HardcoreServer from "@/pages/HardcoreServer";
 
 function percent(max: number, current: number) {
   return current / (max / 100)
 }
 export default function HardcoreMonitor() {
   //here enter IP for stats
-  const stats = useHardcoreMonitor(10000, "185.250.36.214:10100")
+  const stats = useHardcoreMonitor(1000, "185.250.36.214:10100")
   
-  if(stats.max = 0){
+  if(stats.max == 0){
   return (
     <div className={styles['block']}>
     <Progress
       style={{ flex: 1 }}
       strokeColor={{ '0%': '#262626', '100%': '#f5222d' }} 
       status='active'
-      percent={percent(100, 100)}
+      percent={percent(1, 1)}
       showInfo={false}/>
     <div className={styles['block__in']}>
-      <p>offline</p>
+      <p>сервер отключён</p>
     </div>
   </div>
   )
