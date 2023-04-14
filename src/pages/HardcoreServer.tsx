@@ -21,9 +21,9 @@ export default function HardcoreServer() {
           onClick={(e) => {
             e.preventDefault()
             navigator.clipboard.writeText(hardcoreUrl)
-              .then(() => { message.success(`ip сервера ${hardcoreUrl} скопирован`) })
+              .then(() => { message.success(`IP сервера ${hardcoreUrl} скопирован`) })
               .catch(() => { message.error('Не удалось скопировать ip.\nПопробуйте вручную') })
-          }}>Скопировать ip <CopyOutlined />
+          }}>Скопировать IP<CopyOutlined />
         </a>
       </h1>
 
