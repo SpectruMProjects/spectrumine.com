@@ -1,6 +1,6 @@
 import axios_lib, { AxiosError } from 'axios'
 
-const url = import.meta.env.PROD ? "https://devapi.spectrumine.com" : "http://localhost:5168"
+const url = "https://devapi.spectrumine.com" //import.meta.env.PROD ? "https://devapi.spectrumine.com" : "http://localhost:5168"
 const axios = axios_lib.create({ baseURL: url })
 
 export const tokens = {
@@ -25,7 +25,7 @@ export const tokens = {
     localStorage.setItem('refreshToken', token)
   },
 }
-let updateTokenCycle: number
+let updateTokenCycle: number | any
 export async function startUpdateTokenCycle() {
   await updateAccessToken()
   updateTokenCycle = setInterval(() => {

@@ -12,7 +12,7 @@ export default function Profile() {
   const nav = useNavigate()
   const [isChangePassOpened, setIsChangePassOpened] = useState(false)
 
-  if (!user) 
+  if (!user)
     return <div 
       className={styles['centered-page']}
       style={{ padding: '2em' }}>
@@ -26,9 +26,11 @@ export default function Profile() {
   
   return <div className={styles['profile-page']}>
     <Card className={styles['profile-page__user']}>
-      <h1 style={{ fontSize: '5vw' }}>
-        {user.username} <br/> {user.email}
-      </h1>
+     <div style={{display: 'flex', justifyContent: 'space-between'}}>
+      <h1 style={{ fontSize: '3vw' }}>
+        {user.username}
+      </h1><h1 style={{ fontSize: '2vw', fontWeight: 300 }}>{user.email}</h1>
+      </div>
       <Divider />
       <div className={styles['profile-page__user__buttons']}>
         <Button
@@ -60,10 +62,11 @@ export default function Profile() {
         {isChangePassOpened && <Divider type='horizontal' />}
         {isChangePassOpened && <Forms.ChangePass />}
       </div>
+
+      <Divider />
+      <HardcoreStatistics username={user.username}/>
     </Card>
 
-    <Divider />
 
-    <HardcoreStatistics username={user.username}/>
   </div>
 }

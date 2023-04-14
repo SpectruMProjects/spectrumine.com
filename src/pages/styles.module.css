@@ -88,6 +88,9 @@
 
 .profile-page {
   width: 100%;
+  width:100%;
+  display: flex;
+  justify-content: center;
   padding: 4vh 4vw;
 }
 
