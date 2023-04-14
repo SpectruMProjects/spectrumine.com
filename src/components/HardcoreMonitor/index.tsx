@@ -21,10 +21,6 @@ export default function HardcoreMonitor() {
       showInfo={false}/>
     
     <div className={styles['block__in']}>
-      <p>0</p>
-      <span style={{ flex: 0 }}/>
-      {(stats.current != 0 && stats.current != stats.max) && <p>{stats.current}</p>}
-      <span style={{ flex: 0 }}/>
       <p>offline</p>
     </div>
   </div>
