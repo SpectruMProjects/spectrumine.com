@@ -27,9 +27,9 @@ export default function Profile() {
   return <div className={styles['profile-page']}>
     <Card className={styles['profile-page__user']}>
      <div style={{display: 'flex', justifyContent: 'space-between'}}>
-      <h1 style={{ fontSize: '4em' }}>
+      <h1 style={{ fontSize: '3vw' }}>
         {user.username}
-      </h1><h1 style={{ fontSize: '2em', fontWeight: 300 }}>{user.email}</h1>
+      </h1><h1 style={{ fontSize: '2vw', fontWeight: 300 }}>{user.email}</h1>
       </div>
       <Divider />
       <div className={styles['profile-page__user__buttons']}>
