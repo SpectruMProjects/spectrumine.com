@@ -1,12 +1,14 @@
 import { useHardcoreMonitor } from "@/hooks";
 import Progress from "antd/lib/progress";
 import styles from './styles.module.css'
+import HardcoreServer from "@/pages/HardcoreServer";
 
 function percent(max: number, current: number) {
   return current / (max / 100)
 }
 export default function HardcoreMonitor() {
-  const stats = useHardcoreMonitor(10000)
+  //here enter IP for stats
+  const stats = useHardcoreMonitor(10000, "185.250.36.214:10100")
   
   return (
     <div className={styles['block']}>

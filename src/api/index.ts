@@ -291,6 +291,9 @@ function randInt(min = 0, max = 1000) {
   return Math.floor(Math.random() * (max + min) - min)
 }
 
-export async function getHardcorePlayersOnServer(): Promise<{ max: number; current: number }> {
-  return { max: 50, current: randInt(0, 50) }
+export async function getHardcorePlayersOnServer(serveraddr: string): Promise<{ max: number; current: number } | null> {
+  let resp = await axios.get(`https://api.mcsrvstat.us/2/${serveraddr}`)
+  if(!resp.data.online)
+    return null
+  return { max: resp.data.players.max, current: resp.data.players.online }
 }
