@@ -10,14 +10,14 @@ export default function HardcoreMonitor() {
   //here enter IP for stats
   const stats = useHardcoreMonitor(10000, "185.250.36.214:10100")
   
-  if(stats.max = 0)
+  if(stats.max = 0){
   return (
     <div className={styles['block']}>
     <Progress
       style={{ flex: 1 }}
       strokeColor={{ '0%': '#262626', '100%': '#f5222d' }} 
       status='active'
-      percent={percent(0, 0)}
+      percent={percent(100, 100)}
       showInfo={false}/>
     
     <div className={styles['block__in']}>
@@ -25,6 +25,7 @@ export default function HardcoreMonitor() {
     </div>
   </div>
   )
+  }
   return (
     <div className={styles['block']}>
       <Progress
