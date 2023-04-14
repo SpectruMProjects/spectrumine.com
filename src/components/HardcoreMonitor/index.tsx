@@ -19,7 +19,6 @@ export default function HardcoreMonitor() {
       status='active'
       percent={percent(100, 100)}
       showInfo={false}/>
-    
     <div className={styles['block__in']}>
       <p>offline</p>
     </div>
