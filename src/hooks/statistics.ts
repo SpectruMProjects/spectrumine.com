@@ -35,7 +35,6 @@ export function useUserHardcoreStatistics(username: string): State {
   const [state, setState] = useState<State>(['loading'])
 
   useEffect(() => {
-    setState(['loading'])
     statistics(username).then(res => {
       switch (res.code) {
         case 'ok':

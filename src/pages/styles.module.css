@@ -127,5 +127,5 @@
 .profile-page__user__info 
 .profile-page__user__info__email {
   flex: 1;
-  text-align: center;
+  text-align: right;
 }

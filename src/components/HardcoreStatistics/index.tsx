@@ -69,7 +69,7 @@ function map(model: Model): ComponentProps['statistics'] {
   }
 }
 
-export function HardcoreStatistics({ username }: Props) {
+export default function HardcoreStatistics({ username }: Props) {
   const [code, statistics] = useUserHardcoreStatistics(username)
   const nav = useNavigate()
 
@@ -103,7 +103,7 @@ interface ComponentProps {
   onHardcoreClick: () => void
 }
 
-export default function HardcoreStatisticsComponent({ 
+export function HardcoreStatisticsComponent({ 
   onHardcoreClick,
   statistics
 }: ComponentProps) {
