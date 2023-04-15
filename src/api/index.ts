@@ -25,7 +25,7 @@ export const tokens = {
     localStorage.setItem('refreshToken', token)
   },
 }
-let updateTokenCycle: NodeJS.Timer
+let updateTokenCycle: ReturnType<typeof setTimeout> | undefined
 export async function startUpdateTokenCycle() {
   await updateAccessToken()
   updateTokenCycle = setInterval(() => {

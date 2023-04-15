@@ -5,7 +5,7 @@ export function useDebounce<T>(
   delay: number,
   dependency: T
 ) {
-  const [prev, setPrev] = useState<number | undefined>(undefined)
+  const [prev, setPrev] = useState<ReturnType<typeof setTimeout> | undefined>(undefined)
   
   useEffect(() => {
     clearTimeout(prev)
