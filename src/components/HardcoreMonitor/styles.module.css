@@ -15,30 +15,28 @@
 
 .hearts {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
+  gap: 1vw;
   justify-content: space-between;
 }
 
 
 .hearts * {
-  height: 4vw;
-  width: 4vw;
-
+  flex: 1;
+  aspect-ratio: 1/1;
   image-rendering: pixelated;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 .hearts .active {
   background-image: url("/images/hcheart.png");  
-  background-size: 100%;
-  background-repeat: no-repeat;
 }
 
 .hearts .active-on-half {
   background-image: url("/images/hcheart-half.png");  
-  background-size: 100%;
-  background-repeat: no-repeat;
 }
 
 .hearts .nonactive {
-  visibility: hidden;
+  background-image: url("/images/hcheart-empty.png");  
 }

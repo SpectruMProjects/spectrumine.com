@@ -12,7 +12,7 @@ export default function HardcoreMonitor() {
   return <HardcoreMonitorComponent stats={stats}/>
 }
 
-const twentyItems = Array(20).fill(0).map((_, i) => i)
+const heartsArray = Array(10).fill(0).map((_, i) => i)
 
 interface ComponentProps {
   stats: {
@@ -42,7 +42,7 @@ export function HardcoreMonitorComponent({
   
   const per = percent(stats.max, stats.current)
   function getClassForHeart(i: number) {
-    const oneHeartPercent = 100 / twentyItems.length
+    const oneHeartPercent = 100 / heartsArray.length
     const heartPercent = i * oneHeartPercent
     const less = heartPercent - oneHeartPercent/4
     const more = heartPercent + oneHeartPercent/4
@@ -57,20 +57,20 @@ export function HardcoreMonitorComponent({
 
   return (
     <div className={styles['block']}>
-      <div className={styles['hearts']}>
-        {twentyItems.map(i => 
-          <div
-            className={getClassForHeart(i)} 
-            key={i}/>
-        )}
-      </div>
-
       <Progress
         style={{ flex: 1 }}
         strokeColor={{ '0%': '#262626', '100%': '#f5222d' }} 
         status='active'
         percent={per}
         showInfo={false}/>
+      
+      <div className={styles['hearts']}>
+        {heartsArray.map(i => 
+          <div
+            className={getClassForHeart(i)} 
+            key={i}></div>
+        )}
+      </div>
       
       <div className={styles['block__in']}>
         <p>0</p>
