@@ -7,7 +7,7 @@ function percent(max: number, current: number) {
 }
 export default function HardcoreMonitor() {
   //here enter IP for stats
-  const stats = useHardcoreMonitor(1000, '185.250.36.214:10100')
+  const stats = useHardcoreMonitor(10000, '185.250.36.214:10100')
   
   return <HardcoreMonitorComponent stats={stats}/>
 }
