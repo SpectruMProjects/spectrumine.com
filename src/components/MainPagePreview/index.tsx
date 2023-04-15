@@ -7,7 +7,6 @@ export default function MainPagePreview() {
       <img 
         className={styles['logo']}
         src='/images/logo.png'/>
-      
     </div>
 
     <div className={styles['info']}>

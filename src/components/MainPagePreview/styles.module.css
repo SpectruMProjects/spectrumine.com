@@ -39,7 +39,7 @@
   text-transform: uppercase;
   margin: 150px 0;
 
-  font-size: 2vw;
+  font-size: x-large;
   transition: transform 0.5s;
   cursor: pointer;
 }
@@ -47,20 +47,19 @@
   transform: scale(1.05);
 }
 
-@media screen and (orientation:portrait) {
-  img{
-    transform: scale(0.9);
-  }
+.logo {
+  margin: 0 32px;
+  transform: scale(0.8);
+}
+
+@media (orientation:portrait) {
   .info {
     font-size: 3.5vh;
   }
+}
 
+@media (max-width: 600px) {
   .to-servers {
-    font-size: 3vh;
+    font-size: large;
   }
 }
-
-.logo {
-  margin-top: 0 4vw;
-}
-
