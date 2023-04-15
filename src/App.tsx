@@ -35,13 +35,7 @@ function App() {
           <Route path='*' element={<Suspense><Pages.NotFound /></Suspense>}/>
         </Routes>
       </Layout.Content>
-      <Layout.Footer 
-        style={{ 
-          backgroundColor: '#001529',
-          borderTop: 'white solid 1px'
-        }}>
-        <Footer />
-      </Layout.Footer>
+      <Footer />
       </Layout>
     </ConfigProvider>
   )
