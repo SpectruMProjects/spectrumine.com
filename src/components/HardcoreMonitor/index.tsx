@@ -44,8 +44,8 @@ export function HardcoreMonitorComponent({
   function getClassForHeart(i: number) {
     const oneHeartPercent = 100 / twentyItems.length
     const heartPercent = i * oneHeartPercent
-    const less = heartPercent - oneHeartPercent/2
-    const more = heartPercent + oneHeartPercent/2
+    const less = heartPercent - oneHeartPercent/4
+    const more = heartPercent + oneHeartPercent/4
 
     if ((less <= per) && (more <= per)) 
       return styles['active']

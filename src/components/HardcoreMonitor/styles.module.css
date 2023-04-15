@@ -30,11 +30,13 @@
 .hearts .active {
   background-image: url("/images/hcheart.png");  
   background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 .hearts .active-on-half {
   background-image: url("/images/hcheart-half.png");  
   background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 .hearts .nonactive {
