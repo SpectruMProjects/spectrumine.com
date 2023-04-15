@@ -1,20 +1,23 @@
 import ProductsList from '@/components/ProductsList'
-import { HatProduct } from '@/models'
+import { HatListSkeleton } from '@/components/ProductsList/Hat'
+import { useHatProductsState } from '@/store/hatProducts'
 import { Typography } from 'antd'
-
-const data = Array(10).fill(0).map((_, i) => new HatProduct(
-  i.toString(),
-  (i*1000).toString(),
-  `name ${i}`,
-  `description description description description description description description ${i}`
-))
+import { useEffect } from 'react'
 
 export default function Store() {
+  const [hatsState, hats, load] = useHatProductsState(s => [s.loadState, s.hats, s.load])
+
+  useEffect(() => {
+    load()
+  }, [])
+
   return (
     <div style={{ height: '100%', width: '100%' }}>
       <div style={{ padding: 16 }}>
         <Typography.Title style={{ textAlign: 'center' }}>Шапки</Typography.Title>
-        <ProductsList.Hat hats={data} />
+        {hatsState == 'process' 
+          ? <HatListSkeleton/> 
+          : <ProductsList.Hat hats={hats ?? []}/>}
       </div>
     </div>
   )

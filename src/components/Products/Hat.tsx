@@ -35,3 +35,16 @@ export default function Hat({ hat }: Props) {
     </div>
   )
 }
+
+export function HatProductSkeleton() {
+  return <div className={styles['hat']}>
+    <Skeleton.Image
+      active={true}
+      style={{ width: 150, height: 150 }}
+      className={styles['hat__preview']}/>
+
+    <Skeleton
+      style={{ marginTop: 16 }} 
+      active/>
+  </div>
+}

@@ -6,6 +6,7 @@ import { useAuthPageState } from './store'
 import { Suspense, useEffect } from 'react'
 import Footer from '@/components/Footer'
 import { startUpdateTokenCycle } from '@/api'
+import ru from 'antd/locale/ru_RU'
 
 function App() {
   const auth = useAuthPageState(s => s.auth)
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <ConfigProvider
+      locale={ru}
       theme={{
         token: {
           colorPrimary: '#5A4545'
