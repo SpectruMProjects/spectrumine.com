@@ -9,19 +9,20 @@ export default function MainPagePreview() {
     <div style={{ flex: 1 }}/>
 
     <div className={styles['header']}>
-      {window.location.hostname}
+      <img src='public/images/logo.png' style={{scale: '70%'}}></img>
+      
     </div>
 
-    <div style={{ flex: 2 }}/>
+    <div style={{ flex: 0 }}/>
 
     <div className={styles['info']}>
       Добро пожаловать на платформу лицензионных игровых серверов Minecraft
     </div>
 
-    <div style={{ flex: 5 }}/>
+    <div style={{ flex: 10  }}/>
     
     <a href='#servers' className={styles['to-servers']}>
-      сервера
+      наши сервера
     </a>
 
   </div>)
