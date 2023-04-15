@@ -6,6 +6,14 @@ import { useAuthPageState } from './store'
 import { Suspense, useEffect } from 'react'
 import Footer from '@/components/Footer'
 import { startUpdateTokenCycle } from '@/api'
+import { SeedToken } from 'antd/es/theme/internal'
+import { MapToken } from 'antd/es/theme/interface'
+
+// function defaultTheme(designTokens: SeedToken, derivativeTokens?: MapToken): MapToken {
+//   return {
+//     colorPrimary: 
+//   }
+// }
 
 function App() {
   const auth = useAuthPageState(s => s.auth)
@@ -17,7 +25,13 @@ function App() {
   }, [])
 
   return (
-    <ConfigProvider>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#5A4545',
+          colorBgContainer: '#1E1E2E'
+        }
+      }}>
       <Layout style={{ minHeight: '100%' }}>
       <Layout.Header style={{ position: 'sticky', top: 0, zIndex: 1, width: '100%' }}>
         <Header />

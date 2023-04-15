@@ -9,7 +9,22 @@ export default function HardcoreMonitor() {
   //here enter IP for stats
   const stats = useHardcoreMonitor(1000, '185.250.36.214:10100')
   
-  if(stats.max == 0)
+  return <HardcoreMonitorComponent stats={stats}/>
+}
+
+interface ComponentProps {
+  stats: {
+    online: false
+  } | {
+    online: true,
+    max: number,
+    current: number
+  }
+}
+export function HardcoreMonitorComponent({
+  stats
+}: ComponentProps) {
+  if(!stats.online)
   return ( 
     <div className={styles['block']}>
       <Progress

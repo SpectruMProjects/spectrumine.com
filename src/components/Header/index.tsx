@@ -1,7 +1,7 @@
-import { Menu } from "antd";
-import { useLocation, useNavigate } from "react-router";
+import { Menu } from 'antd'
+import { useLocation, useNavigate } from 'react-router'
 import { HomeOutlined, UserOutlined } from '@ant-design/icons'
-import { useAuthPageState } from "../../store";
+import { useAuthPageState } from '@/store'
 
 export default function Header() {
   const path = useLocation().pathname
@@ -16,7 +16,7 @@ export default function Header() {
       onSelect={i => nav(i.key)}
       items={[
         { key: '/', label: 'Главная', icon: <HomeOutlined /> },           
-        { type: 'divider', style: { flex: 1 } },
+        { type: 'divider', style: { flex: 1, margin: 0, border: 0 } },
         ['process', 'unknown'].includes(authStatus) ? { type: 'divider' } 
           : user 
             ? { key: '/profile', label: 'Профиль', icon: <UserOutlined /> }
