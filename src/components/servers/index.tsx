@@ -18,9 +18,6 @@ const servers = [
                   'Теперь ваша мечта сбылась! ' + 
                   'Минимальное количество плагинов, вы платите за свою смерть временем', 
     icon: <img
-      style={{
-        imageRendering: 'pixelated'
-      }}
       src='/images/hcheart.png' 
       className={styles['icon']} />, 
     info: [

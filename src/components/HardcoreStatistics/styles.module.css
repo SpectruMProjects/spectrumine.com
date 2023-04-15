@@ -17,6 +17,8 @@
 .heart {
   width: 10vw;
   height: 10vw;
+
+  image-rendering: pixelated;
 }
 
 @media (orientation: portrait) {
