@@ -6,8 +6,24 @@ function percent(max: number, current: number) {
   return current / (max / 100)
 }
 export default function HardcoreMonitor() {
-  const stats = useHardcoreMonitor(10000)
+  //here enter IP for stats
+  const stats = useHardcoreMonitor(1000, "185.250.36.214:10100")
   
+  if(stats.max == 0){
+  return (
+    <div className={styles['block']}>
+    <Progress
+      style={{ flex: 1 }}
+      strokeColor={{ '0%': '#262626', '100%': '#f5222d' }} 
+      status='active'
+      percent={percent(1, 1)}
+      showInfo={false}/>
+    <div className={styles['block__in']}>
+      <p>сервер отключён</p>
+    </div>
+  </div>
+  )
+  }
   return (
     <div className={styles['block']}>
       <Progress

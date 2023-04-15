@@ -1,6 +1,6 @@
 import axios_lib, { AxiosError } from 'axios'
 
-const url = import.meta.env.PROD ? "https://devapi.spectrumine.com" : "http://localhost:5168"
+const url = "https://devapi.spectrumine.com" //import.meta.env.PROD ? "https://devapi.spectrumine.com" : "http://localhost:5168"
 const axios = axios_lib.create({ baseURL: url })
 
 export const tokens = {
@@ -25,7 +25,7 @@ export const tokens = {
     localStorage.setItem('refreshToken', token)
   },
 }
-let updateTokenCycle: number
+let updateTokenCycle: number | any
 export async function startUpdateTokenCycle() {
   await updateAccessToken()
   updateTokenCycle = setInterval(() => {
@@ -100,7 +100,7 @@ export async function login({
     return { code: 'error' }
   }
 }
-
+ 
 type AuthResponse = {
   code: 'ok',
   user: {
@@ -291,6 +291,9 @@ function randInt(min = 0, max = 1000) {
   return Math.floor(Math.random() * (max + min) - min)
 }
 
-export async function getHardcorePlayersOnServer(): Promise<{ max: number; current: number }> {
-  return { max: 50, current: randInt(0, 50) }
+export async function getHardcorePlayersOnServer(serveraddr: string): Promise<{ max: number; current: number } | null> {
+  let resp = await axios.get(`https://api.mcsrvstat.us/2/${serveraddr}`)
+  if(!resp.data.online)
+    return null
+  return { max: resp.data.players.max, current: resp.data.players.online }
 }

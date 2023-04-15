@@ -76,21 +76,21 @@ export default function HardcoreStatistics({ username }: Props) {
     <Card style={{ width: 'fit-content' }}>
       <div className={styles['block']}>
         <p className={styles['title']}>
-          Статистика сервера <a 
+          Статистика <a 
             href="/servers/hardcore"
             onClick={(e) => {
               e.preventDefault()
               nav('/servers/hardcore')              
-            }}>hardcore</a><br/>
-          {username}
+            }}>HARDCORE</a> сервера<br/>
         </p>
 
         <div className={styles['content']}>
+          <div className={styles['content_outer']}>
           <div className={styles['deaths']}>
             <img src="/images/hcheart.png" alt="heart" className={styles['heart']}/>
             <p>{statistics.deaths.length} {formatDeaths(statistics.deaths.length)}</p>
           </div>
-
+            </div>
           {statistics.lastDeath?.respawnTime &&
           <div className={styles['inner']}>
               <Respwan rT={statistics.lastDeath?.respawnTime}/>

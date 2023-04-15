@@ -14,6 +14,11 @@ const hardcoreUrl = '185.250.36.214:10100'
 export default function HardcoreServer() {
   return (
     <div className={styles['hardcore-page']}>
+      <div className={styles['points']}>
+      <Typography.Title>
+          <h1 className={styles['points__title']}>Vanilla <span>Hardcore</span> SMP</h1>
+        </Typography.Title>
+      </div>
       <h1 className={styles['hardcore-page__ip']}>
         <a 
           style={{ textAlign: 'center' }}
@@ -21,13 +26,13 @@ export default function HardcoreServer() {
           onClick={(e) => {
             e.preventDefault()
             navigator.clipboard.writeText(hardcoreUrl)
-              .then(() => { message.success(`ip сервера ${hardcoreUrl} скопирован`) })
+              .then(() => { message.success(`IP сервера ${hardcoreUrl} скопирован`) })
               .catch(() => { message.error('Не удалось скопировать ip.\nПопробуйте вручную') })
-          }}>Скопировать ip <CopyOutlined />
+          }}>Скопировать IP <CopyOutlined/>
         </a>
       </h1>
-
-      <HardcoreMonitor />
+      
+      <HardcoreMonitor/>
 
       <div className={styles['points']}>
         <Typography.Title>
