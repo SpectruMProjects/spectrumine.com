@@ -42,6 +42,7 @@ function App() {
           <Route path='/servers/hardcore' element={<Suspense><Pages.HardcoreServer /></Suspense>}/>
           <Route path='/condition-of-use' element={<Suspense><Pages.ConditionOfUse /></Suspense>}/>
           <Route path='/hardcore/statistics/:username' element={<Suspense><Pages.UserHardcoreStatistics /></Suspense>}/>
+          <Route path='/store' element={<Suspense><Pages.Store /></Suspense>}/>
           <Route path='*' element={<Suspense><Pages.NotFound /></Suspense>}/>
         </Routes>
       </Layout.Content>
