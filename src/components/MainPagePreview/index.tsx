@@ -4,7 +4,9 @@ export default function MainPagePreview() {
   return (
   <div className={styles['main-page-preview']}>
     <div className={styles['header']}>
-      <img src='public/images/logo.png' style={{scale: '70%'}}></img>
+      <img 
+        className={styles['logo']}
+        src='/images/logo.png'/>
       
     </div>
 

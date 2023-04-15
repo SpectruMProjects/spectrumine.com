@@ -24,7 +24,12 @@ function App() {
         }
       }}>
       <Layout style={{ minHeight: '100%' }}>
-      <Layout.Header style={{ position: 'sticky', top: 0, zIndex: 1, width: '100%' }}>
+      <Layout.Header style={{ 
+        position: 'sticky', 
+        top: 0, 
+        zIndex: 1, 
+        width: '100%' 
+      }}>
         <Header />
       </Layout.Header>
       <Layout.Content style={{ display: 'flex' }}>
