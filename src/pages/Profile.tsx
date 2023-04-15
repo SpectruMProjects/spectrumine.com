@@ -1,4 +1,4 @@
-import { Button, Card, Divider, Progress, Spin, Typography } from 'antd'
+import { Button, Card, Divider, Spin, Typography } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { useAuthPageState } from '@/store'
 import styles from './styles.module.css'
