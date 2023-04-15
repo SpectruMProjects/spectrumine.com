@@ -13,13 +13,11 @@ export default function MainPagePreview() {
       
     </div>
 
-    <div style={{ flex: 0 }}/>
-
     <div className={styles['info']}>
       Добро пожаловать на платформу лицензионных игровых серверов Minecraft
     </div>
 
-    <div style={{ flex: 10  }}/>
+    <div style={{ flex: 1  }}/>
     
     <a href='#servers' className={styles['to-servers']}>
       наши сервера
