@@ -20,8 +20,7 @@ function App() {
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: '#5A4545',
-          colorBgContainer: '#1E1E2E'
+          colorPrimary: '#5A4545'
         }
       }}>
       <Layout style={{ minHeight: '100%' }}>
