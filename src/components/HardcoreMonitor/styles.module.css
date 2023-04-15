@@ -12,3 +12,31 @@
 .block__in p {
   font-size: 2em;
 }
+
+.hearts {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+.hearts * {
+  height: 4vw;
+  width: 4vw;
+
+  image-rendering: pixelated;
+}
+
+.hearts .active {
+  background-image: url("/images/hcheart.png");  
+  background-size: 100%;
+}
+
+.hearts .active-on-half {
+  background-image: url("/images/hcheart-half.png");  
+  background-size: 100%;
+}
+
+.hearts .nonactive {
+  visibility: hidden;
+}

@@ -122,7 +122,7 @@ export function HardcoreStatisticsComponent({
         <div className={styles['content']}>
           <div className={styles['content_outer']}>
           <div className={styles['deaths']}>
-            <img src="/images/hcheart.png" alt="heart" className={styles['heart']}/>
+            <img style={{ imageRendering: 'pixelated' }} src="/images/hcheart.png" alt="heart" className={styles['heart']}/>
             <p>{statistics.deathCount} {formatDeaths(statistics.deathCount)}</p>
           </div>
             </div>

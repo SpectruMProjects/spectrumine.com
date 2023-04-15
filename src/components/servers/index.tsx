@@ -17,7 +17,12 @@ const servers = [
     description:  'Мечтали поиграть в хардкор с друьзьями? ' + 
                   'Теперь ваша мечта сбылась! ' + 
                   'Минимальное количество плагинов, вы платите за свою смерть временем', 
-    icon: <img src='/images/hcheart.png' className={styles['icon']} />, 
+    icon: <img
+      style={{
+        imageRendering: 'pixelated'
+      }}
+      src='/images/hcheart.png' 
+      className={styles['icon']} />, 
     info: [
       '1.19.4',
       'Лицензия',

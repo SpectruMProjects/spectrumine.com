@@ -4,7 +4,16 @@ import { HardcoreMonitorComponent } from '@/components/HardcoreMonitor'
 const meta = {
   title: 'Components/HardcoreMonitor',
   component: HardcoreMonitorComponent,
-  tags: ['autodocs']
+  tags: ['autodocs'],
+  render({stats}) {
+    return <div 
+      style={{ 
+        backgroundColor: '#001529',
+        padding: 32 
+    }}>
+      <HardcoreMonitorComponent stats={stats}/>
+    </div>
+  }
 } satisfies Meta<typeof HardcoreMonitorComponent>
 export default meta
 
