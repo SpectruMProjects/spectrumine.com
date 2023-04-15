@@ -1,4 +1,4 @@
-import { Button, Card, Divider, Typography } from 'antd'
+import { Button, Card, Divider, Progress, Spin, Typography } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { useAuthPageState } from '@/store'
 import styles from './styles.module.css'
@@ -8,9 +8,17 @@ import { useState } from 'react'
 import Forms from '@/components/forms'  
 
 export default function Profile() {
-  const [user, logout] = useAuthPageState(s => [s.user, s.logout])
+  const [authStatus, user, logout] = useAuthPageState(s => [
+    s.authStatus, s.user, s.logout
+  ])
   const nav = useNavigate()
   const [isChangePassOpened, setIsChangePassOpened] = useState(false)
+
+  if (authStatus == 'process')
+    return <div 
+      className={styles['centered-page']}>
+        <Spin />
+    </div>
 
   if (!user)
     return <div 
