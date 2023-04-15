@@ -26,12 +26,15 @@ export default function Profile() {
   
   return <div className={styles['profile-page']}>
     <Card className={styles['profile-page__user']}>
-     <div style={{display: 'flex', justifyContent: 'space-between'}}>
-      <h1 style={{ fontSize: '3vw' }}>
-        {user.username}
-      </h1><h1 style={{ fontSize: '2vw', fontWeight: 300 }}>{user.email}</h1>
+      <div className={styles['profile-page__user__info']}>
+        <p>{user.username}</p>
+        <p className={styles['profile-page__user__info__email']}>
+          {user.email}
+        </p>
       </div>
+      
       <Divider />
+      
       <div className={styles['profile-page__user__buttons']}>
         <Button
           type={isChangePassOpened ? 'default' : 'primary'} 

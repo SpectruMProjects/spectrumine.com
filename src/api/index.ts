@@ -1,6 +1,6 @@
 import axios_lib, { AxiosError } from 'axios'
 
-const url = "https://devapi.spectrumine.com" //import.meta.env.PROD ? "https://devapi.spectrumine.com" : "http://localhost:5168"
+const url = import.meta.env.PROD ? 'https://devapi.spectrumine.com' : 'http://localhost:5168'
 const axios = axios_lib.create({ baseURL: url })
 
 export const tokens = {
@@ -25,7 +25,7 @@ export const tokens = {
     localStorage.setItem('refreshToken', token)
   },
 }
-let updateTokenCycle: number | any
+let updateTokenCycle: NodeJS.Timer
 export async function startUpdateTokenCycle() {
   await updateAccessToken()
   updateTokenCycle = setInterval(() => {
@@ -287,13 +287,23 @@ export async function checkMojangExist(username: string): Promise<boolean | null
   }
 }
 
-function randInt(min = 0, max = 1000) {
-  return Math.floor(Math.random() * (max + min) - min)
+export type GetServerOnlineResponse = {
+  online: true,
+  max: number,
+  current: number
+} | {
+  online: false
 }
-
-export async function getHardcorePlayersOnServer(serveraddr: string): Promise<{ max: number; current: number } | null> {
-  let resp = await axios.get(`https://api.mcsrvstat.us/2/${serveraddr}`)
-  if(!resp.data.online)
-    return null
-  return { max: resp.data.players.max, current: resp.data.players.online }
+export async function getServerOnline(
+  ip = ''
+): Promise<GetServerOnlineResponse> {
+  const res = await axios.get(`https://api.mcsrvstat.us/2/${ip}`)
+  
+  if(!res.data.online) return { online: false }
+  
+  return { 
+    online: true, 
+    max: res.data.players.max, 
+    current: res.data.players.online 
+  }
 }
