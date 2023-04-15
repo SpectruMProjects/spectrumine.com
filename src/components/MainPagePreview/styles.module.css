@@ -25,8 +25,8 @@
   text-transform: uppercase;
   height: 3dvh;
 
-  font-size: 4vw;
-  font-weight: 500;
+  font-size: 3.5vw;
+  font-weight: 400;
   text-align: center;
 }
 
@@ -39,7 +39,7 @@
   text-transform: uppercase;
   margin: 150px 0;
 
-  font-size: 2.3vw;
+  font-size: 2vw;
   transition: transform 0.5s;
   cursor: pointer;
 }
@@ -48,8 +48,11 @@
 }
 
 @media screen and (orientation:portrait) {
+  img{
+    transform: scale(0.9);
+  }
   .info {
-    font-size: 4vh;
+    font-size: 3.5vh;
   }
 
   .to-servers {
