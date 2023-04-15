@@ -44,7 +44,7 @@ interface AuthPageState {
 const messages = {
   error: 'Произошла неизвестная ошибка',
   codeExpire: 'Срок действия кода истёк',
-  userNotFound: 'Польщователь не найден'
+  userNotFound: 'Пользователь не найден'
 }
 
 export const useAuthPageState = create<AuthPageState>((set, get) => ({
