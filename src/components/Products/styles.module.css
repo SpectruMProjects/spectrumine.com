@@ -1,0 +1,31 @@
+.hat {
+  width: 150px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hat__price {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.hat__name {
+  font-size: 1.5em;
+  font-weight: bolder;
+}
+
+.hat__preview {
+  width: 150px;
+  height: 150px;
+  aspect-ratio: 1/1;
+}
+
+.hat__info {
+  display: block;
+}
+
+.hat__info > * {
+  margin-top: 0.5em;
+}

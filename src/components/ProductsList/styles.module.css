@@ -1,0 +1,11 @@
+.hats {
+  display: flex;
+  
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  gap: 4em;
+  row-gap: 4em;
+}

@@ -1,4 +1,6 @@
 import { HatProduct } from '@/models'
+import Products from '../Products'
+import styles from './styles.module.css'
 
 interface Props {
   hats: HatProduct[]
@@ -6,8 +8,11 @@ interface Props {
 
 export default function Hat({ hats }: Props) {
   return (
-    <div>
-      {JSON.stringify(hats)}
+    <div className={styles['hats']}>
+      {hats.map(hat => 
+        <Products.Hat
+          hat={hat} 
+          key={hat.id}/>)}
     </div>
   )
 }
