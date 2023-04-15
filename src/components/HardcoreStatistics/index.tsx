@@ -3,6 +3,7 @@ import styles from './styles.module.css'
 import { Card, Spin } from 'antd'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { HardcoreStatistics as Model } from '@/models'
 
 function formatDeaths(count: number) {
   if ([11,12,13,14,15,17,18,19].includes(count)) return 'смертей'
@@ -59,19 +60,53 @@ interface Props {
   username: string
 }
 
-export default function HardcoreStatistics({ username }: Props) {
+function map(model: Model): ComponentProps['statistics'] {
+  return {
+    deathCount: model.deaths.length,
+    lastServerTime: model.lastServerTime,
+    timeOnServer: model.timeOnServer,
+    lastDeath: model.lastDeath
+  }
+}
+
+export function HardcoreStatistics({ username }: Props) {
   const [code, statistics] = useUserHardcoreStatistics(username)
   const nav = useNavigate()
+
+  if (code == 'loading')
+    return <Card style={{ width: 'fit-content' }}>
+      <Spin />
+    </Card>
 
   if (code == 'error')
     return <Card style={{ width: 'fit-content' }}>
       Не удалось загрузить статистику
     </Card>
 
-  if (code == 'loading')
-    return <Card style={{ width: 'fit-content' }}>
-      <Spin />
-    </Card>
+  return <HardcoreStatisticsComponent 
+    statistics={map(statistics)}
+    onHardcoreClick={() => nav('/servers/hardcore')}/>
+}
+
+interface ComponentProps {
+  statistics: {
+    deathCount: number,
+    lastDeath?: {
+      respawnTime: number
+      issuer?: string
+      issue: string,
+      time: number
+    },
+    lastServerTime: number,
+    timeOnServer: number
+  }
+  onHardcoreClick: () => void
+}
+
+export default function HardcoreStatisticsComponent({ 
+  onHardcoreClick,
+  statistics
+}: ComponentProps) {
   return (
     <Card style={{ width: 'fit-content' }}>
       <div className={styles['block']}>
@@ -80,7 +115,7 @@ export default function HardcoreStatistics({ username }: Props) {
             href="/servers/hardcore"
             onClick={(e) => {
               e.preventDefault()
-              nav('/servers/hardcore')              
+              onHardcoreClick()              
             }}>HARDCORE</a> сервера<br/>
         </p>
 
@@ -88,12 +123,12 @@ export default function HardcoreStatistics({ username }: Props) {
           <div className={styles['content_outer']}>
           <div className={styles['deaths']}>
             <img src="/images/hcheart.png" alt="heart" className={styles['heart']}/>
-            <p>{statistics.deaths.length} {formatDeaths(statistics.deaths.length)}</p>
+            <p>{statistics.deathCount} {formatDeaths(statistics.deathCount)}</p>
           </div>
             </div>
           {statistics.lastDeath?.respawnTime &&
           <div className={styles['inner']}>
-              <Respwan rT={statistics.lastDeath?.respawnTime}/>
+              <Respawn rT={statistics.lastDeath?.respawnTime}/>
 
           <div style={{ flex: 1, minHeight: 28 }}/>
 
@@ -125,7 +160,7 @@ export default function HardcoreStatistics({ username }: Props) {
   )
 }
 
-function Respwan({rT}: {rT: number}) {
+function Respawn({rT}: {rT: number}) {
   const [timeToRespawn, setTimeToRespawn] = useState('0:0:0:0')
 
   useEffect(() => {
