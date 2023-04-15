@@ -182,14 +182,6 @@ function Respawn({rT}: {rT: number}) {
 
   if (timeToRespawn == '0:0:0:0') 
     return <></>
-    //  <div 
-    //   className={styles['respawn']} 
-    //   style={{ 
-    //     fontSize: '2em', 
-    //     color: '#73d13d' 
-    //   }}>
-    //   Вы можете играть
-    // </div>
 
   return <div className={styles['respawn']}>
       Возрождение через <p style={{ fontSize: '1.2em', color: '#f5222d' }}>

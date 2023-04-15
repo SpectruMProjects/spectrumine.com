@@ -6,14 +6,6 @@ import { useAuthPageState } from './store'
 import { Suspense, useEffect } from 'react'
 import Footer from '@/components/Footer'
 import { startUpdateTokenCycle } from '@/api'
-import { SeedToken } from 'antd/es/theme/internal'
-import { MapToken } from 'antd/es/theme/interface'
-
-// function defaultTheme(designTokens: SeedToken, derivativeTokens?: MapToken): MapToken {
-//   return {
-//     colorPrimary: 
-//   }
-// }
 
 function App() {
   const auth = useAuthPageState(s => s.auth)

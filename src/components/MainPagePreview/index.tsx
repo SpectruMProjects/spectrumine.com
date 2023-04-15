@@ -2,12 +2,7 @@ import styles from './styles.module.css'
 
 export default function MainPagePreview() {
   return (
-  <div 
-    className={styles['main-page-preview']}
-    // style={{ backgroundImage: `url(${bg})` }}
-  >
-    <div style={{ flex: 1 }}/>
-
+  <div className={styles['main-page-preview']}>
     <div className={styles['header']}>
       <img src='public/images/logo.png' style={{scale: '70%'}}></img>
       
