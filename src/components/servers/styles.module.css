@@ -27,7 +27,7 @@
   align-items: center;
   transition: all ease 0.1s;
 }
-.server:hover{
+.server:hover {
   transform: scale(1.05);
 }
 .icon {

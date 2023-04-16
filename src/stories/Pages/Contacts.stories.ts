@@ -4,7 +4,7 @@ import Contacts from '@/pages/Contacts'
 const meta = {
   title: 'Pages/Contacts',
   component: Contacts,
-  tags: ['autodocs'],
+  tags: ['autodocs']
 } satisfies Meta<typeof Contacts>
 export default meta
 

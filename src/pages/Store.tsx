@@ -7,8 +7,12 @@ import { useEffect } from 'react'
 
 export default function Store() {
   useSetPageTitle('SpectruM - Магазин')
-  
-  const [loadState, hats, load] = useHatProductsState(s => [s.loadState, s.hats, s.load])
+
+  const [loadState, hats, load] = useHatProductsState((s) => [
+    s.loadState,
+    s.hats,
+    s.load
+  ])
 
   useEffect(() => {
     load()
@@ -17,10 +21,14 @@ export default function Store() {
   return (
     <div style={{ height: '100%', width: '100%' }}>
       <div style={{ padding: 16 }}>
-        <Typography.Title style={{ textAlign: 'center' }}>Шапки</Typography.Title>
-        {loadState == 'process' && !hats?.length
-          ? <HatListSkeleton/> 
-          : <ProductsList.Hat hats={hats ?? []}/>}
+        <Typography.Title style={{ textAlign: 'center' }}>
+          Шапки
+        </Typography.Title>
+        {loadState == 'process' && !hats?.length ? (
+          <HatListSkeleton />
+        ) : (
+          <ProductsList.Hat hats={hats ?? []} />
+        )}
       </div>
     </div>
   )

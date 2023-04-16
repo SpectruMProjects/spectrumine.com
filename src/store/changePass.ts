@@ -5,7 +5,10 @@ import * as api from '@/api'
 interface ChangePassState {
   state: 'unknown' | 'process' | 'ok' | 'error'
 
-  activate(code: string, logoutAnywhere?: boolean): Promise<['ok'] | ['process'] | ['unknown'] | ['error', string]>
+  activate(
+    code: string,
+    logoutAnywhere?: boolean
+  ): Promise<['ok'] | ['process'] | ['unknown'] | ['error', string]>
 }
 
 export const useChangePassState = create<ChangePassState>((set, get) => ({
@@ -35,7 +38,7 @@ export const useChangePassState = create<ChangePassState>((set, get) => ({
       case 'error':
         set({ state: 'error' })
         return ['error', 'Произошла неизвестная ошибка при изменении пароля']
-    
+
       default:
         set({ state: 'unknown' })
         return ['unknown']

@@ -8,7 +8,7 @@
 
   color: white;
   font-size: 60px;
-  
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,7 +33,7 @@
 .to-servers {
   color: #ff4d4f !important;
   border: #ff4d4f solid 4px;
-  background-color: #001529D0;
+  background-color: #001529d0;
   border-radius: 10vw;
   padding: 15px 50px;
   text-transform: uppercase;
@@ -43,7 +43,7 @@
   transition: transform 0.5s;
   cursor: pointer;
 }
-.to-servers:hover{
+.to-servers:hover {
   transform: scale(1.05);
 }
 
@@ -52,7 +52,7 @@
   transform: scale(0.8);
 }
 
-@media (orientation:portrait) {
+@media (orientation: portrait) {
   .info {
     font-size: 3.5vh;
   }

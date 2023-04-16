@@ -10,8 +10,8 @@ if (import.meta.env.DEV) {
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </React.StrictMode>,
-  )  
+    </React.StrictMode>
+  )
 } else {
   ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <BrowserRouter>

@@ -5,10 +5,12 @@
 }
 
 :root {
-  --bg-color: #1E1E2E;
+  --bg-color: #1e1e2e;
 }
 
-#root, body, html {
+#root,
+body,
+html {
   height: 100%;
 }
 
@@ -17,7 +19,7 @@ html {
 }
 
 .hardcore-heart-icon {
-  background-image: url("/images/hcheart.png");
+  background-image: url('/images/hcheart.png');
 }
 
 .ant-message-custom-content {

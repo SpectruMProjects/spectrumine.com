@@ -9,17 +9,13 @@ interface Props {
 }
 
 export default function Hat({ hats }: Props) {
-  if (hats.length == 0)
-    return (
-      <Empty />
-    )
-  
+  if (hats.length == 0) return <Empty />
+
   return (
     <div className={styles['hats']}>
-      {hats.map(hat => 
-        <Products.Hat
-          hat={hat} 
-          key={hat.id}/>)}
+      {hats.map((hat) => (
+        <Products.Hat hat={hat} key={hat.id} />
+      ))}
     </div>
   )
 }
@@ -29,8 +25,13 @@ interface SkeletonProps {
 }
 
 export function HatListSkeleton({ count = 10 }: SkeletonProps) {
-  return <div className={styles['hats']}>
-    {Array(count).fill(0).map((_, i) => 
-      <HatProductSkeleton key={i}/>)}
-  </div>
+  return (
+    <div className={styles['hats']}>
+      {Array(count)
+        .fill(0)
+        .map((_, i) => (
+          <HatProductSkeleton key={i} />
+        ))}
+    </div>
+  )
 }

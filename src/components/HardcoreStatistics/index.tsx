@@ -6,17 +6,16 @@ import { useNavigate } from 'react-router-dom'
 import { HardcoreStatistics as Model } from '@/models'
 
 function formatDeaths(count: number) {
-  if ([11,12,13,14,15,17,18,19].includes(count)) return 'смертей'
+  if ([11, 12, 13, 14, 15, 17, 18, 19].includes(count)) return 'смертей'
 
   const last = count % 10
   if (last == 1) return 'смерть'
-  if ([5,6,7,8,9,0].includes(last))
-    return 'смертей'
-  
+  if ([5, 6, 7, 8, 9, 0].includes(last)) return 'смертей'
+
   return 'смерти'
 }
 
-const formatter = Intl.DateTimeFormat('ru', { 
+const formatter = Intl.DateTimeFormat('ru', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
@@ -30,7 +29,7 @@ function formatDate(date: Date) {
 
 function dateFormat(time: number) {
   let delta = Math.abs(time) / 1000
-  
+
   const days = Math.floor(delta / 86400)
   delta -= days * 86400
 
@@ -41,7 +40,7 @@ function dateFormat(time: number) {
   delta -= minutes * 60
 
   const seconds = Math.floor(delta % 60)
-  
+
   const result = []
   result.push(days < 10 ? `0${days}` : days)
   result.push(hours < 10 ? `0${hours}` : hours)
@@ -74,36 +73,43 @@ export default function HardcoreStatistics({ username }: Props) {
   const nav = useNavigate()
 
   if (code == 'loading')
-    return <Card style={{ width: 'fit-content' }}>
-      <Spin />
-    </Card>
+    return (
+      <Card style={{ width: 'fit-content' }}>
+        <Spin />
+      </Card>
+    )
 
   if (code == 'error')
-    return <Card style={{ width: 'fit-content' }}>
-      Не удалось загрузить статистику
-    </Card>
+    return (
+      <Card style={{ width: 'fit-content' }}>
+        Не удалось загрузить статистику
+      </Card>
+    )
 
-  return <HardcoreStatisticsComponent 
-    statistics={map(statistics)}
-    onHardcoreClick={() => nav('/servers/hardcore')}/>
+  return (
+    <HardcoreStatisticsComponent
+      statistics={map(statistics)}
+      onHardcoreClick={() => nav('/servers/hardcore')}
+    />
+  )
 }
 
 interface ComponentProps {
   statistics: {
-    deathCount: number,
+    deathCount: number
     lastDeath?: {
       respawnTime: number
       issuer?: string
-      issue: string,
+      issue: string
       time: number
-    },
-    lastServerTime: number,
+    }
+    lastServerTime: number
     timeOnServer: number
   }
   onHardcoreClick: () => void
 }
 
-export function HardcoreStatisticsComponent({ 
+export function HardcoreStatisticsComponent({
   onHardcoreClick,
   statistics
 }: ComponentProps) {
@@ -111,47 +117,69 @@ export function HardcoreStatisticsComponent({
     <Card style={{ width: 'fit-content' }}>
       <div className={styles['block']}>
         <p className={styles['title']}>
-          Статистика <a 
+          Статистика{' '}
+          <a
             href="/servers/hardcore"
             onClick={(e) => {
               e.preventDefault()
-              onHardcoreClick()              
-            }}>HARDCORE</a> сервера<br/>
+              onHardcoreClick()
+            }}
+          >
+            HARDCORE
+          </a>{' '}
+          сервера
+          <br />
         </p>
 
         <div className={styles['content']}>
           <div className={styles['content_outer']}>
-          <div className={styles['deaths']}>
-            <img src="/images/hcheart.png" alt="heart" className={styles['heart']}/>
-            <p>{statistics.deathCount} {formatDeaths(statistics.deathCount)}</p>
-          </div>
+            <div className={styles['deaths']}>
+              <img
+                src="/images/hcheart.png"
+                alt="heart"
+                className={styles['heart']}
+              />
+              <p>
+                {statistics.deathCount} {formatDeaths(statistics.deathCount)}
+              </p>
             </div>
-          {statistics.lastDeath?.respawnTime &&
-          <div className={styles['inner']}>
-              <Respawn rT={statistics.lastDeath?.respawnTime}/>
+          </div>
+          {statistics.lastDeath?.respawnTime && (
+            <div className={styles['inner']}>
+              <Respawn rT={statistics.lastDeath?.respawnTime} />
 
-          <div style={{ flex: 1, minHeight: 28 }}/>
+              <div style={{ flex: 1, minHeight: 28 }} />
 
-          {statistics.lastDeath != undefined &&
-          <div className={styles['info']}>
-            <p>Дата последней смерти {formatDate(new Date(statistics.lastDeath.time))}</p>
-            <p>{statistics.lastDeath.issuer 
-              ? `Был убит "${statistics.lastDeath.issuer}" при помощи "${statistics.lastDeath.issue}"` 
-              : `Умер из-за "${statistics.lastDeath.issue}"`}
-            </p>
-          </div>}
-          </div>}
+              {statistics.lastDeath != undefined && (
+                <div className={styles['info']}>
+                  <p>
+                    Дата последней смерти{' '}
+                    {formatDate(new Date(statistics.lastDeath.time))}
+                  </p>
+                  <p>
+                    {statistics.lastDeath.issuer
+                      ? `Был убит "${statistics.lastDeath.issuer}" при помощи "${statistics.lastDeath.issue}"`
+                      : `Умер из-за "${statistics.lastDeath.issue}"`}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         <div className={styles['dop_info']}>
           <p>
-            {statistics.lastServerTime != 0 
-            ? `Последний раз на сервере ${formatDate(new Date(statistics.lastServerTime))}` 
-            : 'Не заходил'}
+            {statistics.lastServerTime != 0
+              ? `Последний раз на сервере ${formatDate(
+                  new Date(statistics.lastServerTime)
+                )}`
+              : 'Не заходил'}
           </p>
           <p>
-            {statistics.timeOnServer != 0 
-              ? `Проведено времени на сервере ${dateFormat(statistics.timeOnServer)}`
+            {statistics.timeOnServer != 0
+              ? `Проведено времени на сервере ${dateFormat(
+                  statistics.timeOnServer
+                )}`
               : 'Не играл'}
           </p>
         </div>
@@ -160,7 +188,7 @@ export function HardcoreStatisticsComponent({
   )
 }
 
-function Respawn({rT}: {rT: number}) {
+function Respawn({ rT }: { rT: number }) {
   const [timeToRespawn, setTimeToRespawn] = useState('0:0:0:0')
 
   useEffect(() => {
@@ -180,12 +208,12 @@ function Respawn({rT}: {rT: number}) {
     return () => clearInterval(id)
   }, [rT])
 
-  if (timeToRespawn == '0:0:0:0') 
-    return <></>
+  if (timeToRespawn == '0:0:0:0') return <></>
 
-  return <div className={styles['respawn']}>
-      Возрождение через <p style={{ fontSize: '1.2em', color: '#f5222d' }}>
-      {timeToRespawn}
-    </p>
-  </div>
+  return (
+    <div className={styles['respawn']}>
+      Возрождение через{' '}
+      <p style={{ fontSize: '1.2em', color: '#f5222d' }}>{timeToRespawn}</p>
+    </div>
+  )
 }

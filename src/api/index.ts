@@ -1,6 +1,8 @@
 import axios_lib, { AxiosError } from 'axios'
 
-const url = import.meta.env.PROD ? 'https://devapi.spectrumine.com' : 'http://localhost:5168'
+const url = import.meta.env.PROD
+  ? 'https://devapi.spectrumine.com'
+  : 'http://localhost:5168'
 const axios = axios_lib.create({ baseURL: url })
 
 export const tokens = {
@@ -23,14 +25,14 @@ export const tokens = {
       return
     }
     localStorage.setItem('refreshToken', token)
-  },
+  }
 }
 let updateTokenCycle: ReturnType<typeof setTimeout> | undefined
 export async function startUpdateTokenCycle() {
   await updateAccessToken()
   updateTokenCycle = setInterval(() => {
     updateAccessToken()
-  }, 1000*60*4)
+  }, 1000 * 60 * 4)
 }
 export function stopUpdateTokenCycle() {
   clearInterval(updateTokenCycle)
@@ -40,29 +42,32 @@ interface Register {
   password: string
   email: string
 }
-type RegisterResponse = {
-  code: 'ok'
-} | {
-  code: 'error' | 
-        'RegexNotMatch' | 
-        'Conflict' | 
-        'UUIDFailed' |
-        'MailRegistered'
-}
+type RegisterResponse =
+  | {
+      code: 'ok'
+    }
+  | {
+      code:
+        | 'error'
+        | 'RegexNotMatch'
+        | 'Conflict'
+        | 'UUIDFailed'
+        | 'MailRegistered'
+    }
 export async function register({
   username,
   password,
   email
 }: Register): Promise<RegisterResponse> {
   try {
-    await axios.post('/Auth/Reg', { 
+    await axios.post('/Auth/Reg', {
       username,
       password,
       email
     })
     return { code: 'ok' }
   } catch (e) {
-    if (e instanceof AxiosError){
+    if (e instanceof AxiosError) {
       return { code: e.response?.data?.cause }
     }
     return { code: 'error' }
@@ -74,17 +79,18 @@ interface Login {
   password: string
 }
 type LoginResponse =
-{
-  code: 'ok',
-} | {
-  code: 'error' | 'UserNotFound' | 'InvalidPassword' | 'AccountDisabled'
-}
+  | {
+      code: 'ok'
+    }
+  | {
+      code: 'error' | 'UserNotFound' | 'InvalidPassword' | 'AccountDisabled'
+    }
 export async function login({
   identifier,
   password
 }: Login): Promise<LoginResponse> {
   try {
-    const loginRes = await axios.post('/Auth/Tokens', { 
+    const loginRes = await axios.post('/Auth/Tokens', {
       username: identifier,
       password
     })
@@ -100,30 +106,31 @@ export async function login({
     return { code: 'error' }
   }
 }
- 
-type AuthResponse = {
-  code: 'ok',
-  user: {
-    id: string,
-    username: string,
-    email: string
-  }
-} | {
-  code: 'error' | '403'
-}
+
+type AuthResponse =
+  | {
+      code: 'ok'
+      user: {
+        id: string
+        username: string
+        email: string
+      }
+    }
+  | {
+      code: 'error' | '403'
+    }
 export async function auth(): Promise<AuthResponse> {
   try {
-    const res = await axios.get('/Auth/GetUser', { 
-      headers: { Authorization: `Bearer ${tokens.accessToken}` 
-    }})
-    return { 
+    const res = await axios.get('/Auth/GetUser', {
+      headers: { Authorization: `Bearer ${tokens.accessToken}` }
+    })
+    return {
       code: 'ok',
       user: res.data
     }
   } catch (e) {
     if (e instanceof AxiosError) {
-      if (e.response?.status == 403)
-        return { code: '403' }
+      if (e.response?.status == 403) return { code: '403' }
     }
     return { code: 'error' }
   }
@@ -132,16 +139,20 @@ export async function auth(): Promise<AuthResponse> {
 interface ActivateRegister {
   code: string
 }
-type ActivateRegisterResponse = {
-  code: 'ok'
-} | {
-  code: 'error' | 'UserNotFound' | 'CodeExpire'
-}
-export async function activateRegister({ code }: ActivateRegister): Promise<ActivateRegisterResponse> {
+type ActivateRegisterResponse =
+  | {
+      code: 'ok'
+    }
+  | {
+      code: 'error' | 'UserNotFound' | 'CodeExpire'
+    }
+export async function activateRegister({
+  code
+}: ActivateRegister): Promise<ActivateRegisterResponse> {
   try {
     const res = await axios.get(`/Mail/activate/${code}`)
-    tokens.accessToken = res.data.accessToken    
-    tokens.refreshToken = res.data.refreshToken    
+    tokens.accessToken = res.data.accessToken
+    tokens.refreshToken = res.data.refreshToken
     return { code: 'ok' }
   } catch (e) {
     if (e instanceof AxiosError) {
@@ -155,14 +166,16 @@ export async function activateRegister({ code }: ActivateRegister): Promise<Acti
 }
 
 export type ChangePass = {
-  email?: string,
+  email?: string
   newPassword: string
 }
-export type ChangePassResponse = {
-  code: 'ok'
-} | {
-  code: 'error' | 'UserNotFound' | 'RegexNotMatch'
-}
+export type ChangePassResponse =
+  | {
+      code: 'ok'
+    }
+  | {
+      code: 'error' | 'UserNotFound' | 'RegexNotMatch'
+    }
 export async function changePass({
   email,
   newPassword
@@ -170,10 +183,12 @@ export async function changePass({
   try {
     if (email) {
       await axios.post('/Auth/ResetPassword', { email, newPassword })
-    } else await axios.post(
-      '/Auth/ResetPasswordAuth',
-      { newPassword },
-      { headers: { 'Authorization': `Bearer ${tokens.accessToken}` } })
+    } else
+      await axios.post(
+        '/Auth/ResetPasswordAuth',
+        { newPassword },
+        { headers: { Authorization: `Bearer ${tokens.accessToken}` } }
+      )
     return { code: 'ok' }
   } catch (e) {
     if (e instanceof AxiosError) {
@@ -186,15 +201,19 @@ export async function changePass({
   }
 }
 
-export type UpdateAccessTokenResponse = {
-  code: 'ok'
-} | {
-  code: 'error'
-}
+export type UpdateAccessTokenResponse =
+  | {
+      code: 'ok'
+    }
+  | {
+      code: 'error'
+    }
 export async function updateAccessToken(): Promise<UpdateAccessTokenResponse> {
   if (!tokens.refreshToken) return { code: 'error' }
   try {
-    const res = await axios.post('/Auth/ReloadTokens', { refreshToken: tokens.refreshToken })
+    const res = await axios.post('/Auth/ReloadTokens', {
+      refreshToken: tokens.refreshToken
+    })
     tokens.accessToken = res.data.accessToken
     tokens.refreshToken = res.data.refreshToken
     return { code: 'ok' }
@@ -203,12 +222,16 @@ export async function updateAccessToken(): Promise<UpdateAccessTokenResponse> {
   }
 }
 
-export type ActivateChangePassResponse = {
-  code: 'ok'
-} | {
-  code: 'error' | 'UserNotFound' | 'CodeExpire'
-}
-export async function activateChangePass(code: string): Promise<ActivateChangePassResponse> {
+export type ActivateChangePassResponse =
+  | {
+      code: 'ok'
+    }
+  | {
+      code: 'error' | 'UserNotFound' | 'CodeExpire'
+    }
+export async function activateChangePass(
+  code: string
+): Promise<ActivateChangePassResponse> {
   try {
     await axios.get(`/Mail/restore/${code}`)
     return { code: 'ok' }
@@ -225,8 +248,8 @@ export async function activateChangePass(code: string): Promise<ActivateChangePa
 
 export async function logout() {
   try {
-    await axios.post('/Auth/Logout', { 
-      refreshToken: tokens.refreshToken 
+    await axios.post('/Auth/Logout', {
+      refreshToken: tokens.refreshToken
     })
     return 'ok'
   } catch (e) {
@@ -236,8 +259,8 @@ export async function logout() {
 
 export async function logoutAnywhere() {
   try {
-    await axios.post('/Auth/ReloadTokens', { 
-      refreshToken: tokens.refreshToken 
+    await axios.post('/Auth/ReloadTokens', {
+      refreshToken: tokens.refreshToken
     })
     return 'ok'
   } catch (e) {
@@ -245,65 +268,72 @@ export async function logoutAnywhere() {
   }
 }
 
-export type StatisticsResponse = {
-  code: 'ok',
-  data: {
-    lastServerTime: 0,
-    timeOnServer: 0,
-    deaths: {
-      deathIssue: string,
-      deathIssuer?: string,
-      deathTime: number,
-      timeToRespawn: number
-    }[]
-  }
-} | {
-  code: 'error' | 'UserNotFound'
-}
-export async function statistics(username: string): Promise<StatisticsResponse> {
+export type StatisticsResponse =
+  | {
+      code: 'ok'
+      data: {
+        lastServerTime: 0
+        timeOnServer: 0
+        deaths: {
+          deathIssue: string
+          deathIssuer?: string
+          deathTime: number
+          timeToRespawn: number
+        }[]
+      }
+    }
+  | {
+      code: 'error' | 'UserNotFound'
+    }
+export async function statistics(
+  username: string
+): Promise<StatisticsResponse> {
   try {
     const res = await axios.get(`/Hardcore/stats/${username}`)
-    return { 
+    return {
       code: 'ok',
       data: res.data
     }
   } catch (e) {
     if (e instanceof AxiosError) {
-      if(e.response?.status == 404)
-        return { code: 'UserNotFound' }
+      if (e.response?.status == 404) return { code: 'UserNotFound' }
     }
     return { code: 'error' }
   }
 }
 
-export async function checkMojangExist(username: string): Promise<boolean | null> {
-  try{
+export async function checkMojangExist(
+  username: string
+): Promise<boolean | null> {
+  try {
     await axios.get(`${url}/Auth/Checklicense/${username}`)
     return true
-  } catch(e) {
-    if(e instanceof AxiosError) {
+  } catch (e) {
+    if (e instanceof AxiosError) {
       return e.response ? false : null
     } else return null
   }
 }
 
-export type GetServerOnlineResponse = {
-  online: true,
-  max: number,
-  current: number
-} | {
-  online: false
-}
+export type GetServerOnlineResponse =
+  | {
+      online: true
+      max: number
+      current: number
+    }
+  | {
+      online: false
+    }
 export async function getServerOnline(
   ip = ''
 ): Promise<GetServerOnlineResponse> {
   const res = await axios.get(`https://api.mcsrvstat.us/2/${ip}`)
-  
-  if(!res.data.online) return { online: false }
-  
-  return { 
-    online: true, 
-    max: res.data.players.max, 
-    current: res.data.players.online 
+
+  if (!res.data.online) return { online: false }
+
+  return {
+    online: true,
+    max: res.data.players.max,
+    current: res.data.players.online
   }
 }

@@ -6,7 +6,7 @@ const meta = {
   title: 'Components/Footer',
   component: FooterComponent,
   tags: ['autodocs'],
-  parameters: { actions: { argTypesRegex: '^on.*' } },
+  parameters: { actions: { argTypesRegex: '^on.*' } }
 } satisfies Meta<typeof FooterComponent>
 export default meta
 
@@ -16,9 +16,10 @@ export const Footer: Story = {
   render({ onClickConditionOfUse, onClickContacts }) {
     return (
       <Layout>
-        <FooterComponent 
+        <FooterComponent
           onClickConditionOfUse={onClickConditionOfUse}
-          onClickContacts={onClickContacts}/>
+          onClickContacts={onClickContacts}
+        />
       </Layout>
     )
   }

@@ -1,33 +1,36 @@
-import { statistics } from "@/api";
-import { Death, HardcoreStatistics } from "@/models";
+import { statistics } from '@/api'
+import { Death, HardcoreStatistics } from '@/models'
 import { useEffect, useState } from 'react'
 
-type State = 
-  ['ok', HardcoreStatistics] |
-  ['loading'] |
-  ['error', 'UserNotFound' | 'error']
+type State =
+  | ['ok', HardcoreStatistics]
+  | ['loading']
+  | ['error', 'UserNotFound' | 'error']
 
 interface ApiData {
-  lastServerTime: 0,
-  timeOnServer: 0,
+  lastServerTime: 0
+  timeOnServer: 0
   deaths: {
-    deathIssue: string,
-    deathIssuer?: string,
-    deathTime: number,
+    deathIssue: string
+    deathIssuer?: string
+    deathTime: number
     timeToRespawn: number
-  }[]  
+  }[]
 }
 
 function mapApiToStats(data: ApiData): HardcoreStatistics {
   return new HardcoreStatistics(
     data.lastServerTime,
     data.timeOnServer,
-    data.deaths.map(death => new Death(
-      death.deathTime,
-      death.timeToRespawn,
-      death.deathIssue,
-      death.deathIssuer,
-    ))
+    data.deaths.map(
+      (death) =>
+        new Death(
+          death.deathTime,
+          death.timeToRespawn,
+          death.deathIssue,
+          death.deathIssuer
+        )
+    )
   )
 }
 
@@ -35,16 +38,16 @@ export function useUserHardcoreStatistics(username: string): State {
   const [state, setState] = useState<State>(['loading'])
 
   useEffect(() => {
-    statistics(username).then(res => {
+    statistics(username).then((res) => {
       switch (res.code) {
         case 'ok':
-          setState(['ok', mapApiToStats(res.data)])  
+          setState(['ok', mapApiToStats(res.data)])
           break
 
         case 'UserNotFound':
           setState(['ok', new HardcoreStatistics()])
           break
-        
+
         default:
           setState(['error', 'error'])
           break

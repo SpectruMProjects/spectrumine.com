@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
 export function useDebounce<T>(
-  callback: (t: T) => void, 
+  callback: (t: T) => void,
   delay: number,
   dependency: T
 ) {
-  const [prev, setPrev] = useState<ReturnType<typeof setTimeout> | undefined>(undefined)
-  
+  const [prev, setPrev] = useState<ReturnType<typeof setTimeout> | undefined>(
+    undefined
+  )
+
   useEffect(() => {
     clearTimeout(prev)
 

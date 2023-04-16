@@ -1,5 +1,5 @@
-import { create } from "zustand"
-import { User } from "../models"
+import { create } from 'zustand'
+import { User } from '../models'
 import * as api from '../api'
 
 interface Register {
@@ -29,12 +29,12 @@ interface AuthPageState {
   authStatus: Status
 
   switchType(type?: AuthPageState['type']): void
-  
+
   register(data: Register): Promise<ResStatus>
   login(data: Login): Promise<ResStatus>
   activateRegisterCode(code: string): Promise<ResStatus>
-  auth(): Promise<'process' | 'ok' | 'error'>,
-  
+  auth(): Promise<'process' | 'ok' | 'error'>
+
   checkUsername(username: string): Promise<'ok' | 'error' | 'process'>
   logout(): void
 
@@ -49,7 +49,7 @@ const messages = {
 
 export const useAuthPageState = create<AuthPageState>((set, get) => ({
   user: null,
-  
+
   type: 'register',
   registerStatus: 'unknown',
   loginStatus: 'unknown',
@@ -71,7 +71,7 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     set({ registerStatus: 'process' })
 
     const res = await api.register(data)
-    switch(res.code) {
+    switch (res.code) {
       case 'ok': {
         set({ registerStatus: 'ok' })
         return ['ok']
@@ -104,18 +104,18 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     set({ loginStatus: 'process' })
 
     const res = await api.login(data)
-    switch(res.code) {
+    switch (res.code) {
       case 'ok': {
         set({ loginStatus: 'ok' })
         get().auth()
         return ['ok']
       }
-      
+
       case 'AccountDisabled': {
         set({ loginStatus: 'error' })
         return ['error', 'Аккакунт не активирован']
       }
-      
+
       case 'InvalidPassword': {
         set({ loginStatus: 'error' })
         return ['error', 'Неверный пароль']
@@ -125,12 +125,12 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
         set({ loginStatus: 'error' })
         return ['error', 'Пользователь не найден']
       }
-      
+
       case 'error': {
         set({ loginStatus: 'error' })
         return ['error', 'Произошла неизвестная ошибка']
       }
-      
+
       default: {
         set({ loginStatus: 'unknown' })
         return ['error', 'Произошла неизвестная ошибка']
@@ -142,7 +142,7 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     if (get().activateRegisterCodeStatus === 'process') return ['process']
     set({ activateRegisterCodeStatus: 'process' })
 
-    const res = await api.activateRegister({code})
+    const res = await api.activateRegister({ code })
     switch (res.code) {
       case 'ok':
         get().auth()
@@ -156,12 +156,12 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
       case 'UserNotFound':
         set({ activateRegisterCodeStatus: 'error' })
         return ['error', messages.userNotFound]
-    
+
       case 'error':
         set({ activateRegisterCodeStatus: 'error' })
         return ['error', messages.error]
-      
-        default:
+
+      default:
         set({ activateRegisterCodeStatus: 'unknown' })
         return ['error', messages.error]
     }
@@ -189,14 +189,14 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     set({ user: null })
     api.logout().then(() => {
       api.tokens.accessToken = null
-      api.tokens.refreshToken = null      
+      api.tokens.refreshToken = null
     })
   },
 
   async checkUsername(username) {
     if (get().checkUsernameStatus == 'process') return 'process'
     set({ checkUsernameStatus: 'process' })
-    
+
     const exists = await api.checkMojangExist(username)
     switch (exists) {
       case true: {
@@ -219,20 +219,20 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     set({ changePassStatus: 'process' })
 
     const res = await api.changePass({ newPassword, email })
-    
+
     switch (res.code) {
       case 'ok':
-        set({ changePassStatus: 'ok' })   
+        set({ changePassStatus: 'ok' })
         return ['ok']
 
       case 'UserNotFound':
-        set({ changePassStatus: 'error' })   
+        set({ changePassStatus: 'error' })
         return ['error', messages.userNotFound]
-    
+
       case 'error':
-        set({ changePassStatus: 'error' })   
+        set({ changePassStatus: 'error' })
         return ['error', messages.error]
-    
+
       default:
         set({ changePassStatus: 'unknown' })
         return ['error', messages.error]

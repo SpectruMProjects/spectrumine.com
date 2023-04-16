@@ -5,14 +5,17 @@ const meta = {
   title: 'Components/HardcoreMonitor',
   component: HardcoreMonitorComponent,
   tags: ['autodocs'],
-  render({stats}) {
-    return <div 
-      style={{ 
-        backgroundColor: '#001529',
-        padding: 32 
-    }}>
-      <HardcoreMonitorComponent stats={stats}/>
-    </div>
+  render({ stats }) {
+    return (
+      <div
+        style={{
+          backgroundColor: '#001529',
+          padding: 32
+        }}
+      >
+        <HardcoreMonitorComponent stats={stats} />
+      </div>
+    )
   }
 } satisfies Meta<typeof HardcoreMonitorComponent>
 export default meta
@@ -34,7 +37,7 @@ export const Offline: Story = {
 }
 
 export const Empty: Story = {
-  args: { 
+  args: {
     stats: {
       online: true,
       current: 0,

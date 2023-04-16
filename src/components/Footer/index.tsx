@@ -5,49 +5,61 @@ import { Layout } from 'antd'
 
 export default function Footer() {
   const nav = useNavigate()
-  const onClickConditionOfUse = useCallback(() => nav('/condition-of-use'), [nav])
+  const onClickConditionOfUse = useCallback(
+    () => nav('/condition-of-use'),
+    [nav]
+  )
   const onClickContacts = useCallback(() => nav('/contacts'), [nav])
-  
-  return <FooterComponent 
-    onClickConditionOfUse={onClickConditionOfUse}
-    onClickContacts={onClickContacts}/>
+
+  return (
+    <FooterComponent
+      onClickConditionOfUse={onClickConditionOfUse}
+      onClickContacts={onClickContacts}
+    />
+  )
 }
 
 interface ComponentProps {
-  onClickConditionOfUse: () => void,
+  onClickConditionOfUse: () => void
   onClickContacts: () => void
 }
-export function FooterComponent({ 
+export function FooterComponent({
   onClickConditionOfUse,
-  onClickContacts 
+  onClickContacts
 }: ComponentProps) {
   return (
-    <Layout.Footer 
-      style={{ 
+    <Layout.Footer
+      style={{
         backgroundColor: '#001529',
         borderTop: 'white solid 1px'
-      }}>
+      }}
+    >
       <div className={styles['block']}>
         <p>
-          Организация не имеет никакого отношения к Mojang AB, не нарушает принципы EULA.
-          Все права на игру принадлежат Mojang AB. Весь остальной контент принадлежит команде {"\"Спектрум\""}.
-        
-          <a 
-            href='/condition-of-use'
-            onClick={e => {
+          Организация не имеет никакого отношения к Mojang AB, не нарушает
+          принципы EULA. Все права на игру принадлежат Mojang AB. Весь остальной
+          контент принадлежит команде {'"Спектрум"'}.
+          <a
+            href="/condition-of-use"
+            onClick={(e) => {
               e.preventDefault()
               onClickConditionOfUse()
             }}
-          > Условия пользования. </a>
-          <a 
-            href='/contacts'
-            onClick={e => {
+          >
+            {' '}
+            Условия пользования.{' '}
+          </a>
+          <a
+            href="/contacts"
+            onClick={(e) => {
               e.preventDefault()
               onClickContacts()
             }}
-          >Наши контакты</a>
+          >
+            Наши контакты
+          </a>
         </p>
-      </div>  
+      </div>
     </Layout.Footer>
   )
 }

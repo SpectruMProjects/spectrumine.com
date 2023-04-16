@@ -6,7 +6,7 @@ const meta = {
   title: 'Components/Products/Hat',
   component: Products.Hat,
   tags: ['autodocs'],
-  parameters: { actions: { argTypesRegex: '^on.*' } },
+  parameters: { actions: { argTypesRegex: '^on.*' } }
 } satisfies Meta<typeof Products.Hat>
 export default meta
 
@@ -30,12 +30,12 @@ export const NoPreview: Story = {
       id: 'id',
       name: 'Имя',
       descriptions: 'Описание описание описание описание описание описание',
-      price: '300',
+      price: '300'
     }
   }
 }
 
-export const Skeleton = {  
+export const Skeleton = {
   render() {
     return <HatProductSkeleton />
   }

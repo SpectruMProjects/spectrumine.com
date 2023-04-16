@@ -40,7 +40,7 @@
 
 .points .point__prefix {
   color: white;
-  font-size: x-large; 
+  font-size: x-large;
   font-weight: bold;
 }
 
@@ -50,9 +50,9 @@
   }
 }
 
-.points span  {
+.points span {
   color: rgb(245 34 45);
-} 
+}
 
 .description_point {
   font-size: large;
@@ -83,11 +83,11 @@
 @media (width <= 500px) {
   .condition-of-use p {
     font-size: small;
-  } 
+  }
 }
 
 .profile-page {
-  width:100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   padding: 4vh 4vw;
@@ -123,8 +123,7 @@
   font-size: large;
 }
 
-.profile-page__user__info 
-.profile-page__user__info__email {
+.profile-page__user__info .profile-page__user__info__email {
   flex: 1;
   text-align: right;
 }
@@ -144,8 +143,8 @@
   width: fit-content;
 }
 
- 
-.contacts-page__messengers__title, .contacts-page__emails__title {
+.contacts-page__messengers__title,
+.contacts-page__emails__title {
   font-size: 2em;
   font-weight: bold;
 }
@@ -156,8 +155,7 @@
   align-items: center;
 }
 
-
-.contacts-page__messengers__contact__text  {
+.contacts-page__messengers__contact__text {
   font-size: 1.5em;
 }
 
