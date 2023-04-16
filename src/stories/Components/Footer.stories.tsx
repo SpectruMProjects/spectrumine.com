@@ -13,11 +13,12 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Footer: Story = {
-  render({ onClickConditionOfUse }) {
+  render({ onClickConditionOfUse, onClickContacts }) {
     return (
       <Layout>
         <FooterComponent 
-          onClickConditionOfUse={onClickConditionOfUse}/>
+          onClickConditionOfUse={onClickConditionOfUse}
+          onClickContacts={onClickContacts}/>
       </Layout>
     )
   }
