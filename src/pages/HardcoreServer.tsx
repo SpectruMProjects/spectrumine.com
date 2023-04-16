@@ -2,6 +2,7 @@ import { Typography, message } from 'antd'
 import styles from './styles.module.css'
 import HardcoreMonitor from '@/components/HardcoreMonitor'
 import { CopyOutlined } from '@ant-design/icons'
+import { useSetPageTitle } from '@/hooks'
 
 const points = [
   ['Vanilla', 'Ванильный геймплей, минимальное количество плагинов для комфортной игры'],
@@ -12,6 +13,8 @@ const points = [
 const hardcoreUrl = '185.250.36.214:10100'
 
 export default function HardcoreServer() {
+  useSetPageTitle('SpectruM - Hardcore сервер')
+
   return (
     <div className={styles['hardcore-page']}>
       <div className={styles['points']}>

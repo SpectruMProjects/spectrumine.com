@@ -6,8 +6,11 @@ import HardcoreStatistics from '@/components/HardcoreStatistics'
 import { DownOutlined, EditOutlined, UserDeleteOutlined, UsergroupDeleteOutlined } from '@ant-design/icons'
 import { useState } from 'react'
 import Forms from '@/components/forms'  
+import { useSetPageTitle } from '@/hooks'
 
 export default function Profile() {
+  useSetPageTitle('SpectruM - Профиль')
+  
   const [authStatus, user, logout] = useAuthPageState(s => [
     s.authStatus, s.user, s.logout
   ])

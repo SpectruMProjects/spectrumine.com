@@ -1,9 +1,12 @@
-import { message, Spin } from "antd"
-import { useEffect } from "react"
-import { useNavigate, useParams } from "react-router-dom"
-import { useAuthPageState } from "../store"
+import { message, Spin } from 'antd'
+import { useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useAuthPageState } from '../store'
+import { useSetPageTitle } from '@/hooks'
 
 export default function ActivateRegisterCode() {
+  useSetPageTitle('SpectruM - Подтверждение регистрации')
+  
   const [activate, status] = useAuthPageState(s => [
     s.activateRegisterCode, 
     s.activateRegisterCodeStatus

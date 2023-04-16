@@ -1,9 +1,12 @@
-import { useAuthPageState } from "@/store"
+import { useAuthPageState } from '@/store'
 import Form from '@/components/forms'
 import { changePassContext } from '@/components/forms/ChangePass'
 import styles from './styles.module.css'
+import { useSetPageTitle } from '@/hooks'
 
 export default function Auth() {
+  useSetPageTitle('SpectruM - Авторизация')
+
   const type = useAuthPageState(s => s.type)
   
   return <changePassContext.Provider value={{ backToLogin: true }}>

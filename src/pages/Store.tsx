@@ -1,10 +1,13 @@
 import ProductsList from '@/components/ProductsList'
 import { HatListSkeleton } from '@/components/ProductsList/Hat'
+import { useSetPageTitle } from '@/hooks'
 import { useHatProductsState } from '@/store/hatProducts'
 import { Typography } from 'antd'
 import { useEffect } from 'react'
 
 export default function Store() {
+  useSetPageTitle('SpectruM - ')
+  
   const [loadState, hats, load] = useHatProductsState(s => [s.loadState, s.hats, s.load])
 
   useEffect(() => {

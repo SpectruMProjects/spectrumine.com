@@ -1,10 +1,13 @@
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from 'react-router-dom'
 import styles from './styles.module.css'
-import { Button, Checkbox, Divider, message } from "antd"
-import { useChangePassState } from "@/store/changePass"
+import { Button, Checkbox, Divider, message } from 'antd'
+import { useChangePassState } from '@/store/changePass'
 import { useState } from "react"
+import { useSetPageTitle } from '@/hooks'
 
 export default function ActivateChangePassCode() {
+  useSetPageTitle('SpectruM - Подтверждение смены пароля')
+
   const {code} = useParams()
   const [activate, state] = useChangePassState(s => [s.activate, s.state])
   const nav = useNavigate()

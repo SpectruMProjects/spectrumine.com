@@ -1,7 +1,10 @@
 import { Divider, List } from 'antd'
 import styles from './styles.module.css'
+import { useSetPageTitle } from '@/hooks'
 
 export default function ConditionOfUse() {
+  useSetPageTitle('SpectruM - Условия пользования')
+  
   return (
     <div className={styles['condition-of-use']}>
       <p>Пользователь, игрок – Физическое лицо использующее проект.</p>

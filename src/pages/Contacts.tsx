@@ -1,5 +1,6 @@
 import { List, Typography } from 'antd'
 import styles from './styles.module.css'
+import { useSetPageTitle } from '@/hooks'
 
 const messengers = [
   {
@@ -21,6 +22,8 @@ const messengers = [
 ]
 
 export default function Contacts() {
+  useSetPageTitle('SpectruM - Контакты')
+
   return (
     <div className={styles['contacts-page']}>
       <List
