@@ -1,14 +1,19 @@
 import { HatProduct } from '@/models'
 import styles from './styles.module.css'
 import { Skeleton, Typography } from 'antd'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   hat: HatProduct
+  onClick?: () => void
 }
 
-export default function Hat({ hat }: Props) {
+export default function Hat({ hat, onClick }: Props) {
+  const nav = useNavigate()
+  onClick ??= () => nav(`/store/hats/${hat.id}`)
+
   return (
-    <div className={styles['hat']}>
+    <div onClick={onClick} className={styles['hat']}>
       {hat.previewUrl ? (
         <img
           loading="lazy"

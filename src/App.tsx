@@ -114,6 +114,14 @@ function App() {
               }
             />
             <Route
+              path="/store/hats/:id"
+              element={
+                <Suspense>
+                  <Pages.HatProductsPreview />
+                </Suspense>
+              }
+            />
+            <Route
               path="/contacts"
               element={
                 <Suspense>
