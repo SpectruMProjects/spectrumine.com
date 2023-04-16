@@ -17,7 +17,7 @@ export default function Profile() {
   const nav = useNavigate()
   const [isChangePassOpened, setIsChangePassOpened] = useState(false)
 
-  if (authStatus == 'process')
+  if (authStatus == 'process' || authStatus == 'unknown')
     return <div 
       className={styles['centered-page']}>
         <Spin />
