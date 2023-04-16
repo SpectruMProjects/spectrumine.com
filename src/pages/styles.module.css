@@ -139,6 +139,10 @@
   font-weight: bold;
 }
 
+.contacts-page__messengers {
+  width: fit-content;
+}
+
 .contacts-page__messengers__contact {
   padding: 1em 0;
 
