@@ -18,8 +18,10 @@ export default function HardcoreServer() {
   return (
     <div className={styles['hardcore-page']}>
       <div className={styles['points']}>
-      <Typography.Title>
-          <h1 className={styles['points__title']}>Vanilla <span>Hardcore</span> SMP</h1>
+        <Typography.Title>
+          <p className={styles['points__title']}>
+            Vanilla <span>Hardcore</span> SMP
+          </p>
         </Typography.Title>
       </div>
       <h1 className={styles['hardcore-page__ip']}>

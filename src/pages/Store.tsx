@@ -6,7 +6,7 @@ import { Typography } from 'antd'
 import { useEffect } from 'react'
 
 export default function Store() {
-  useSetPageTitle('SpectruM - ')
+  useSetPageTitle('SpectruM - Магазин')
   
   const [loadState, hats, load] = useHatProductsState(s => [s.loadState, s.hats, s.load])
 

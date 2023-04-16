@@ -2,6 +2,11 @@ import { Menu } from 'antd'
 import { useLocation, useNavigate } from 'react-router'
 import { ContactsOutlined, HomeOutlined, MenuOutlined, ShopOutlined, UserOutlined } from '@ant-design/icons'
 import { useAuthPageState } from '@/store'
+import Link from 'antd/es/typography/Link'
+
+function onLinkClick(e: {preventDefault: () => void}) {
+  e.preventDefault()
+}
 
 export default function Header() {
   const path = useLocation().pathname
@@ -15,15 +20,23 @@ export default function Header() {
       selectedKeys={[path]}
       onSelect={i => nav(i.key)}
       items={[
-        { key: '/', label: 'Главная', icon: <HomeOutlined /> },           
+        { key: '/', label: <Link onClick={onLinkClick} href='/'>Главная</Link>, icon: <HomeOutlined /> },           
         { type: 'divider', style: { flex: 1, margin: 0, border: 0 } },
     ...(['process', 'unknown'].includes(authStatus) ? [] 
           : user 
-            ? [{ key: '/profile', label: 'Профиль', icon: <UserOutlined /> }]
-            : [{ key: '/auth', label: 'Авторизация', icon: <UserOutlined /> }]),
+            ? [{ 
+                key: '/profile', 
+                label: <Link onClick={onLinkClick} href='/profile'>Профиль</Link>, 
+                icon: <UserOutlined /> 
+              }]
+            : [{ 
+                key: '/auth', 
+                label: <Link onClick={onLinkClick} href='/auth'>Авторизация</Link>, 
+                icon: <UserOutlined /> 
+              }]),
         { 
           key: '/store', 
-          label: 'Магазин', 
+          label: <Link onClick={onLinkClick} href='/auth'>Магазин</Link>, 
           icon: <ShopOutlined /> 
         }          
       ]}/>
