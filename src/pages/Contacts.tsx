@@ -1,6 +1,5 @@
 import { List, Typography } from 'antd'
 import styles from './styles.module.css'
-import { SendOutlined } from '@ant-design/icons'
 
 const messengers = [
   {
