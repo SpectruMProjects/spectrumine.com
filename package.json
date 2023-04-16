@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "eslint": "eslint src",
     "stylelint": "stylelint src/**/*.css",
+    "lint": "eslint src; stylelint src/**/*.css",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
