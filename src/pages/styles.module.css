@@ -131,16 +131,26 @@
 }
 
 .contacts-page {
+  width: 100%;
+  height: fit-content;
   padding: 16px;
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+
+  gap: 4em;
 }
 
-.contacts-page__messengers__title {
+.contacts-page * {
+  height: fit-content;
+  width: fit-content;
+}
+
+ 
+.contacts-page__messengers__title, .contacts-page__emails__title {
   font-size: 2em;
   font-weight: bold;
-}
-
-.contacts-page__messengers {
-  width: fit-content;
 }
 
 .contacts-page__messengers__contact {
@@ -149,6 +159,7 @@
   display: flex;
   align-items: center;
 }
+
 
 .contacts-page__messengers__contact__text  {
   font-size: 1.5em;
@@ -162,4 +173,13 @@
   width: 1.5em;
   height: 1.5em;
   display: block;
+}
+
+.contacts-page__emails__contact {
+  padding: 1em 0;
+}
+
+.contacts-page__emails__contact * {
+  font-size: 1.5em;
+  font-weight: bold;
 }
