@@ -21,9 +21,9 @@ function App() {
     <ConfigProvider
       locale={ru}
       theme={{
-        token: {
-          colorPrimary: '#5A4545'
-        }
+        // token: {
+        //   colorPrimary: '#5A4545'
+        // }
       }}>
       <Layout style={{ minHeight: '100%' }}>
       <Layout.Header style={{ 
@@ -45,6 +45,7 @@ function App() {
           <Route path='/condition-of-use' element={<Suspense><Pages.ConditionOfUse /></Suspense>}/>
           <Route path='/hardcore/statistics/:username' element={<Suspense><Pages.UserHardcoreStatistics /></Suspense>}/>
           <Route path='/store' element={<Suspense><Pages.Store /></Suspense>}/>
+          <Route path='/contacts' element={<Suspense><Pages.Contacts /></Suspense>}/>
           <Route path='*' element={<Suspense><Pages.NotFound /></Suspense>}/>
         </Routes>
       </Layout.Content>

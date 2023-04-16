@@ -129,3 +129,33 @@
   flex: 1;
   text-align: right;
 }
+
+.contacts-page {
+  padding: 16px;
+}
+
+.contacts-page__messengers__title {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.contacts-page__messengers__contact {
+  padding: 1em 0;
+
+  display: flex;
+  align-items: center;
+}
+
+.contacts-page__messengers__contact__text  {
+  font-size: 1.5em;
+}
+
+.contacts-page__messengers__contact * {
+  margin: 0 0.2em;
+}
+
+.contacts-page__messengers__contact img {
+  width: 1.5em;
+  height: 1.5em;
+  display: block;
+}

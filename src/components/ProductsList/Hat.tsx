@@ -30,7 +30,7 @@ interface SkeletonProps {
 
 export function HatListSkeleton({ count = 10 }: SkeletonProps) {
   return <div className={styles['hats']}>
-    {Array(count).fill(0).map(_ => 
-      <HatProductSkeleton key={_}/>)}
+    {Array(count).fill(0).map((_, i) => 
+      <HatProductSkeleton key={i}/>)}
   </div>
 }

@@ -1,6 +1,6 @@
 import { Menu } from 'antd'
 import { useLocation, useNavigate } from 'react-router'
-import { HomeOutlined, UserOutlined } from '@ant-design/icons'
+import { ContactsOutlined, HomeOutlined, MenuOutlined, ShopOutlined, UserOutlined } from '@ant-design/icons'
 import { useAuthPageState } from '@/store'
 
 export default function Header() {
@@ -17,10 +17,26 @@ export default function Header() {
       items={[
         { key: '/', label: 'Главная', icon: <HomeOutlined /> },           
         { type: 'divider', style: { flex: 1, margin: 0, border: 0 } },
-        ['process', 'unknown'].includes(authStatus) ? { type: 'divider' } 
+    ...(['process', 'unknown'].includes(authStatus) ? [] 
           : user 
-            ? { key: '/profile', label: 'Профиль', icon: <UserOutlined /> }
-            : { key: '/auth', label: 'Авторизация', icon: <UserOutlined /> },           
+            ? [{ key: '/profile', label: 'Профиль', icon: <UserOutlined /> }]
+            : [{ key: '/auth', label: 'Авторизация', icon: <UserOutlined /> }]),
+        { 
+          key: 'menu',
+          label: <MenuOutlined />,
+          children: [
+            { 
+              key: '/store', 
+              label: 'Магазин', 
+              icon: <ShopOutlined /> 
+            },
+            {
+              key: '/contacts',
+              label: 'Контакты',
+              icon: <ContactsOutlined />
+            }
+          ]
+        }           
       ]}/>
   )
 }

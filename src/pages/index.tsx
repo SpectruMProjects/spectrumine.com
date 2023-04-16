@@ -10,6 +10,7 @@ const ConditionOfUse = lazy(() => import('./ConditionOfUse'))
 const ActivateChangePassCode = lazy(() => import('./ActivateChangePassCode'))
 const UserHardcoreStatistics = lazy(() => import('./UserHardcoreStatistics'))
 const Store = lazy(() => import('./Store'))
+const Contacts = lazy(() => import('./Contacts'))
 
 export default {
   Main,
@@ -21,5 +22,6 @@ export default {
   ConditionOfUse,
   ActivateChangePassCode,
   UserHardcoreStatistics,
-  Store
+  Store,
+  Contacts
 }
