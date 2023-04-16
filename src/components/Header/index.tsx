@@ -1,6 +1,6 @@
 import { Menu } from 'antd'
 import { useLocation, useNavigate } from 'react-router'
-import { ContactsOutlined, HomeOutlined, MenuOutlined, ShopOutlined, UserOutlined } from '@ant-design/icons'
+import { HomeOutlined, ShopOutlined, UserOutlined } from '@ant-design/icons'
 import { useAuthPageState } from '@/store'
 import Link from 'antd/es/typography/Link'
 
