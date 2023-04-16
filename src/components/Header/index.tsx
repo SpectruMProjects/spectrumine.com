@@ -22,21 +22,10 @@ export default function Header() {
             ? [{ key: '/profile', label: 'Профиль', icon: <UserOutlined /> }]
             : [{ key: '/auth', label: 'Авторизация', icon: <UserOutlined /> }]),
         { 
-          key: 'menu',
-          label: <MenuOutlined />,
-          children: [
-            { 
-              key: '/store', 
-              label: 'Магазин', 
-              icon: <ShopOutlined /> 
-            },
-            {
-              key: '/contacts',
-              label: 'Контакты',
-              icon: <ContactsOutlined />
-            }
-          ]
-        }           
+          key: '/store', 
+          label: 'Магазин', 
+          icon: <ShopOutlined /> 
+        }          
       ]}/>
   )
 }

@@ -1,20 +1,26 @@
 import { useNavigate } from 'react-router-dom'
 import styles from './styles.module.css'
-import { useMemo } from 'react'
+import { useCallback } from 'react'
 import { Layout } from 'antd'
 
 export default function Footer() {
   const nav = useNavigate()
-  const onClick = useMemo(() => () => nav('/condition-of-use'), [nav])
+  const onClickConditionOfUse = useCallback(() => nav('/condition-of-use'), [nav])
+  const onClickContacts = useCallback(() => nav('/contacts'), [nav])
   
   return <FooterComponent 
-    onClickConditionOfUse={onClick}/>
+    onClickConditionOfUse={onClickConditionOfUse}
+    onClickContacts={onClickContacts}/>
 }
 
 interface ComponentProps {
-  onClickConditionOfUse: () => void
+  onClickConditionOfUse: () => void,
+  onClickContacts: () => void
 }
-export function FooterComponent({ onClickConditionOfUse }: ComponentProps) {
+export function FooterComponent({ 
+  onClickConditionOfUse,
+  onClickContacts 
+}: ComponentProps) {
   return (
     <Layout.Footer 
       style={{ 
@@ -25,15 +31,21 @@ export function FooterComponent({ onClickConditionOfUse }: ComponentProps) {
         <p>
           Организация не имеет никакого отношения к Mojang AB, не нарушает принципы EULA.
           Все права на игру принадлежат Mojang AB. Весь остальной контент принадлежит команде {"\"Спектрум\""}.
-        </p>
-        <p>
+        
           <a 
             href='/condition-of-use'
             onClick={e => {
               e.preventDefault()
               onClickConditionOfUse()
             }}
-          >Условия пользования</a>
+          > Условия пользования. </a>
+          <a 
+            href='/contacts'
+            onClick={e => {
+              e.preventDefault()
+              onClickContacts()
+            }}
+          >Наши контакты</a>
         </p>
       </div>  
     </Layout.Footer>
