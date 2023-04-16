@@ -7,7 +7,9 @@ const messengers = [
     name: 'Telegram',
     link: 'Lisoveily',
     linkSrc: 'https://t.me/Lisoveily',
-    icon: <SendOutlined />
+    icon: <img
+      src='/icons/telegram.svg' 
+      alt='telegram logo' />
   },
   {
     name: 'Discord',
