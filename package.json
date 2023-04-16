@@ -11,7 +11,8 @@
     "stylelint": "stylelint src/**/*.css",
     "lint": "eslint src; stylelint src/**/*.css",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "prettier": "prettier --write ./src"
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
@@ -20,8 +21,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",
-    "zustand": "^4.3.6",
-    "prettier": "prettier --write ./src"
+    "zustand": "^4.3.6"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.4",
