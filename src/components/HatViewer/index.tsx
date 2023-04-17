@@ -26,7 +26,7 @@ export default function HatViewer({ width = 400, height = 400 }: Props) {
 
     const scene = new Scene()
     const camera = new PerspectiveCamera(75)
-    const renderer = new WebGLRenderer()
+    const renderer = new WebGLRenderer({ antialias: true })
 
     const topLight = new DirectionalLight('wheat')
     topLight.position.set(0, 100, 0)
