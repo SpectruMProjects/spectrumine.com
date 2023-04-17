@@ -5,9 +5,10 @@ import {
   MeshBasicMaterial,
   PerspectiveCamera,
   Scene,
-  WebGLRenderer
+  WebGLRenderer,
+  DirectionalLight
 } from 'three'
-import { OrbitControls } from '@/core'
+import { OBJLoader, OrbitControls } from '@/core'
 
 interface Props {
   width?: number
@@ -20,24 +21,33 @@ export default function HatViewer({ width = 400, height = 400 }: Props) {
 
   useLayoutEffect(() => {
     if (!ref.current) return
+    let isWork = true
+
     const scene = new Scene()
     const camera = new PerspectiveCamera(75)
     const renderer = new WebGLRenderer()
-
-    const hat = createHatObj()
-    scene.add(hat)
+    const light = new DirectionalLight('white', 2)
 
     camera.position.x = 2
+    light.position.set(3, 5, 7)
 
     renderer.setClearColor(0xffffff, 0)
     renderer.setSize(w, h)
+    scene.add(light)
 
     ref.current.replaceWith(renderer.domElement)
 
     const controls = new OrbitControls(camera, renderer.domElement)
-    const { x, y, z } = hat.position
-    controls.target.set(x, y, z)
-    controls.update()
+
+    const objLoader = new OBJLoader()
+    loadObj(objLoader, '/models/test_hat.obj').then((hat) => {
+      if (!isWork) return
+      scene.add(hat)
+
+      const { x, y, z } = hat.position
+      controls.target.set(x, y, z)
+      controls.update()
+    })
 
     let draw = () => {
       requestAnimationFrame(draw)
@@ -46,6 +56,7 @@ export default function HatViewer({ width = 400, height = 400 }: Props) {
     draw()
 
     return () => {
+      isWork = false
       draw = () => {}
       try {
         renderer.dispose()
@@ -70,60 +81,8 @@ function createHatObj() {
   return cube
 }
 
-class Viewier {
-  private readonly scene: Scene
-  private readonly renderer: WebGLRenderer
-  private isStopped = false
-
-  readonly camera: PerspectiveCamera
-  readonly hat: Mesh<BoxGeometry, MeshBasicMaterial>
-
-  get domElement() {
-    return this.renderer.domElement
-  }
-
-  constructor(width: number, height: number, element: HTMLCanvasElement) {
-    this.scene = new Scene()
-    this.camera = new PerspectiveCamera(75)
-    this.renderer = new WebGLRenderer()
-
-    this.hat = createHatObj()
-    this.scene.add(this.hat)
-
-    this._initCamera()
-    this._initRenderer(width, height, element)
-  }
-
-  private _initCamera() {
-    this.camera.position.z = 2
-  }
-
-  private _initRenderer(
-    width: number,
-    height: number,
-    element: HTMLCanvasElement
-  ) {
-    this.renderer.setClearColor(0xffffff, 0)
-    this.renderer.setSize(width, height)
-    element.replaceWith(this.renderer.domElement)
-  }
-
-  destroy() {
-    this.isStopped = true
-    try {
-      this.renderer.dispose()
-    } catch (e) {
-      console.error(e)
-    }
-  }
-
-  start() {
-    this.draw()
-  }
-
-  private draw() {
-    if (this.isStopped) return
-    requestAnimationFrame(this.draw.bind(this))
-    this.renderer.render(this.scene, this.camera)
-  }
+function loadObj(loader: OBJLoader, url: string) {
+  return new Promise<Mesh>((r, rj) => {
+    loader.load(url, r, () => {}, rj)
+  })
 }
