@@ -1,20 +1,24 @@
-import { Divider } from 'antd'
 import { Suspense, lazy } from 'react'
+import styles from './hatProductPreview.module.css'
 
 const AsyncHatViewer = lazy(() => import('@/components/HatViewer'))
 
 export default function HatProductsPreview() {
   return (
-    <div style={{ backgroundColor: '#001529', width: '100%', color: 'white' }}>
+    <div className={styles['block']}>
       <Suspense>
         <AsyncHatViewer />
       </Suspense>
 
-      <Divider type="horizontal" />
-
-      <p>price</p>
-      <p>name</p>
-      <p>description</p>
+      <div className={styles['text']}>
+        <span className={styles['price']}>1000 $</span>
+        <br />
+        <span className={styles['name']}>name</span>
+        <br />
+        <span className={styles['description']}>
+          {Array(10).fill('description').join(', ')}
+        </span>
+      </div>
     </div>
   )
 }

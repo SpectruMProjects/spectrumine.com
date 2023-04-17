@@ -1,8 +1,8 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import {
-  BoxGeometry,
+  // BoxGeometry,
   Mesh,
-  MeshBasicMaterial,
+  // MeshBasicMaterial,
   PerspectiveCamera,
   Scene,
   WebGLRenderer,
@@ -64,20 +64,24 @@ export default function HatViewer({ width = 400, height = 400 }: Props) {
     const objLoader = new OBJLoader()
     const mtlLoader = new MTLLoader()
 
-    loadMTL(mtlLoader, '/textures/test_hat.mtl').then((mtl) => {
-      if (!isWork) return
-      mtl.preload()
-      objLoader.setMaterials(mtl)
-
-      loadObj(objLoader, '/models/test_hat.obj').then((hat) => {
+    loadMTL(mtlLoader, '/textures/test_hat.mtl')
+      .then((mtl) => {
         if (!isWork) return
-        scene.add(hat)
+        mtl.preload()
+        objLoader.setMaterials(mtl)
 
-        const { x, y, z } = hat.position
-        controls.target.set(x, y, z)
-        controls.update()
+        loadObj(objLoader, '/models/test_hat.obj')
+          .then((hat) => {
+            if (!isWork) return
+            scene.add(hat)
+
+            const { x, y, z } = hat.position
+            controls.target.set(x, y, z)
+            controls.update()
+          })
+          .catch(console.error)
       })
-    })
+      .catch(console.error)
 
     let draw = () => {
       requestAnimationFrame(draw)
@@ -103,22 +107,38 @@ export default function HatViewer({ width = 400, height = 400 }: Props) {
   )
 }
 
-function createHatObj() {
-  const geometry = new BoxGeometry(1, 1, 1)
-  const material = new MeshBasicMaterial({ color: 0x00ff00 })
-  const cube = new Mesh(geometry, material)
+// function createHatObj() {
+//   const geometry = new BoxGeometry(1, 1, 1)
+//   const material = new MeshBasicMaterial({ color: 0x00ff00 })
+//   const cube = new Mesh(geometry, material)
 
-  return cube
-}
+//   return cube
+// }
 
 function loadObj(loader: OBJLoader, url: string) {
   return new Promise<Mesh>((r, rj) => {
-    loader.load(url, r, () => {}, rj)
+    loader.load(
+      url,
+      r,
+      () => {},
+      (...args: any) => {
+        console.error(args)
+        rj(...args)
+      }
+    )
   })
 }
 
 function loadMTL(loader: MTLLoader, url: string) {
   return new Promise<any>((r, rj) => {
-    loader.load(url, r, () => {}, rj)
+    loader.load(
+      url,
+      r,
+      () => {},
+      (...args: any) => {
+        console.error(args)
+        rj(...args)
+      }
+    )
   })
 }

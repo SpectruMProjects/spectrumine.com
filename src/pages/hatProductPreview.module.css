@@ -1,0 +1,32 @@
+.block {
+  background-color: #001529;
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  min-width: 300px;
+  max-width: 500px;
+  text-align: start;
+  padding: 2em 0;
+}
+
+.price {
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.name {
+  font-size: 2em;
+  font-weight: bolder;
+  margin: 1em 0;
+}
+
+.description {
+  font-size: 1.5em;
+  text-align: center;
+}
