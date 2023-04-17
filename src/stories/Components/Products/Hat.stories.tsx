@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import Products from '@/components/Products'
 import { HatProductSkeleton } from '@/components/Products/Hat'
+import { BrowserRouter } from 'react-router-dom'
 
 const meta = {
   title: 'Components/Products/Hat',
@@ -12,6 +13,14 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
+function render(props: any) {
+  return (
+    <BrowserRouter>
+      <Products.Hat {...props} />
+    </BrowserRouter>
+  )
+}
+
 export const Default: Story = {
   args: {
     hat: {
@@ -21,7 +30,8 @@ export const Default: Story = {
       price: '300',
       previewUrl: '/images/bg-main.gif'
     }
-  }
+  },
+  render
 }
 
 export const NoPreview: Story = {
@@ -32,7 +42,8 @@ export const NoPreview: Story = {
       descriptions: 'Описание описание описание описание описание описание',
       price: '300'
     }
-  }
+  },
+  render
 }
 
 export const Skeleton = {
