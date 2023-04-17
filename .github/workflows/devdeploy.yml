@@ -10,4 +10,4 @@ jobs:
     - run: cd ~/development/front/ &&  git pull --force origin main
     - run: cd ~/development/front/ && npm i
     - run: cd ~/development/front && npm run build
-    - run: cd ~/development/front && npm run build-storybook
+    
