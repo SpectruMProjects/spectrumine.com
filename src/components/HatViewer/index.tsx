@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import {
   BoxGeometry,
   Mesh,
@@ -7,7 +7,7 @@ import {
   Scene,
   WebGLRenderer
 } from 'three'
-import { makeObjectMovable } from './makeObjectMovable'
+import { OrbitControls } from '@/core'
 
 interface Props {
   width?: number
@@ -16,18 +16,50 @@ interface Props {
 
 export default function HatViewer({ width = 400, height = 400 }: Props) {
   const ref = useRef<HTMLCanvasElement | null>(null)
+  const [[w, h]] = useState([width, height])
 
   useLayoutEffect(() => {
     if (!ref.current) return
-    const viewer = new Viewver(width, height, ref.current)
-    viewer.start()
+    const scene = new Scene()
+    const camera = new PerspectiveCamera(75)
+    const renderer = new WebGLRenderer()
 
-    makeObjectMovable(viewer.domElement, viewer.hat)
+    const hat = createHatObj()
+    scene.add(hat)
 
-    return () => viewer.destroy()
+    camera.position.x = 2
+
+    renderer.setClearColor(0xffffff, 0)
+    renderer.setSize(w, h)
+
+    ref.current.replaceWith(renderer.domElement)
+
+    const controls = new OrbitControls(camera, renderer.domElement)
+    const { x, y, z } = hat.position
+    controls.target.set(x, y, z)
+    controls.update()
+
+    let draw = () => {
+      requestAnimationFrame(draw)
+      renderer.render(scene, camera)
+    }
+    draw()
+
+    return () => {
+      draw = () => {}
+      try {
+        renderer.dispose()
+      } catch (e) {
+        console.error(e)
+      }
+    }
   }, [])
 
-  return <canvas style={{ width, height }} ref={ref}></canvas>
+  return (
+    <div>
+      <canvas style={{ width: w, height: h }} ref={ref} />
+    </div>
+  )
 }
 
 function createHatObj() {
@@ -38,11 +70,13 @@ function createHatObj() {
   return cube
 }
 
-class Viewver {
+class Viewier {
   private readonly scene: Scene
-  private readonly camera: PerspectiveCamera
-  readonly hat: Mesh<BoxGeometry, MeshBasicMaterial>
   private readonly renderer: WebGLRenderer
+  private isStopped = false
+
+  readonly camera: PerspectiveCamera
+  readonly hat: Mesh<BoxGeometry, MeshBasicMaterial>
 
   get domElement() {
     return this.renderer.domElement
@@ -75,12 +109,12 @@ class Viewver {
   }
 
   destroy() {
+    this.isStopped = true
     try {
-      this.camera.remove()
-      this.hat.remove()
-      this.scene.remove()
       this.renderer.dispose()
-    } catch (e) {}
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   start() {
@@ -88,6 +122,7 @@ class Viewver {
   }
 
   private draw() {
+    if (this.isStopped) return
     requestAnimationFrame(this.draw.bind(this))
     this.renderer.render(this.scene, this.camera)
   }
