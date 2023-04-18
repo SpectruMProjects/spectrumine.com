@@ -13,7 +13,6 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    mtlUrl: '/textures/test_hat.mtl',
-    objUrl: '/models/test_hat.obj'
+    url: '/models/test_hat.fbx'
   }
 }

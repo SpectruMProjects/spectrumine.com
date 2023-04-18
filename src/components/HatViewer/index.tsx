@@ -1,33 +1,23 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import {
-  // BoxGeometry,
   Mesh,
-  // MeshBasicMaterial,
   PerspectiveCamera,
   Scene,
   WebGLRenderer,
   DirectionalLight,
-  Color,
-  NearestFilter,
-  MeshPhongMaterial,
-  ColorRepresentation,
-  BufferGeometry,
-  BoxGeometry,
-  Material
+  Color
 } from 'three'
-import { OBJLoader, OrbitControls, MTLLoader } from '@/core'
+import { OrbitControls } from '@/core'
+import { FBXLoader } from '@/core/threejs/FBXLoader'
 
 interface Props {
-  objUrl: string
-  mtlUrl: string
-
+  url: string
   width?: number
   height?: number
 }
 
 export default function HatViewer({
-  objUrl,
-  mtlUrl,
+  url,
 
   width = 400,
   height = 400
@@ -81,29 +71,15 @@ export default function HatViewer({
     controls.target.set(1, 1, 1)
     controls.update()
 
-    const objLoader = new OBJLoader()
-    const mtlLoader = new MTLLoader()
+    const fbxLoader = new FBXLoader()
 
-    loadMTL(mtlLoader, mtlUrl)
-      .then((mtl) => {
+    loadFbx(fbxLoader, url)
+      .then((mesh) => {
         if (!isWork) return
-        mtl.preload()
-        for (const material of Object.values(mtl.materials) as any[]) {
-          material.transparent = true
-          if (material?.map?.magFilter) material.map.magFilter = NearestFilter
-        }
-        objLoader.setMaterials(mtl)
-
-        loadObj(objLoader, objUrl)
-          .then((hat) => {
-            if (!isWork) return
-            scene.add(hat)
-
-            const { x, y, z } = hat.position
-            controls.target.set(x, y, z)
-            controls.update()
-          })
-          .catch(console.error)
+        scene.add(mesh)
+        const { x, y, z } = mesh.position
+        controls.target.set(x, y, z)
+        controls.update()
       })
       .catch(console.error)
 
@@ -122,7 +98,7 @@ export default function HatViewer({
         console.error(e)
       }
     }
-  }, [mtlUrl, objUrl])
+  }, [url])
 
   return (
     <div>
@@ -131,46 +107,8 @@ export default function HatViewer({
   )
 }
 
-function hsl(h: number, s: number, l: number) {
-  return new Color().setHSL(h, s, l)
-}
-
-function makeCube(geometry: BufferGeometry, color: ColorRepresentation) {
-  const material = new MeshPhongMaterial({
-    color,
-    opacity: 0.5,
-    transparent: true
-  })
-
-  const cube = new Mesh(geometry, material)
-
-  return cube
-}
-
-function loadObj(loader: OBJLoader, url: string) {
-  return new Promise<Mesh>((r, rj) => {
-    loader.load(
-      url,
-      r,
-      () => {},
-      (...args: any) => {
-        console.error(args)
-        rj(...args)
-      }
-    )
-  })
-}
-
-function loadMTL(loader: MTLLoader, url: string) {
-  return new Promise<any>((r, rj) => {
-    loader.load(
-      url,
-      r,
-      () => {},
-      (...args: any) => {
-        console.error(args)
-        rj(...args)
-      }
-    )
+function loadFbx(loader: FBXLoader, url: string) {
+  return new Promise<Mesh>((res, rej) => {
+    loader.load(url, res, () => {}, rej)
   })
 }

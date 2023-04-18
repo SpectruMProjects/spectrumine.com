@@ -34,7 +34,6 @@ export const useHatProductsState = create<HatProductsState>((set, get) => ({
                 data.name,
                 data.description,
                 data.objUrl,
-                data.mtlUrl,
                 data.imgUrl
               )
           )
