@@ -21,8 +21,6 @@ export default function HatProductsPreview() {
   const ref = useRef(true) //isAlive
   const [load] = useHatProductsState((s) => [s.loadHat])
 
-  console.log({ id, isLoad, hat })
-
   useLayoutEffect(() => {
     ref.current = true
     return () => {
