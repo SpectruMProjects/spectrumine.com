@@ -1,14 +1,12 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import {
-  Mesh,
   PerspectiveCamera,
   Scene,
   WebGLRenderer,
   DirectionalLight,
   Color
 } from 'three'
-import { OrbitControls } from '@/core'
-import { FBXLoader } from '@/core/threejs/FBXLoader'
+import { GLTFLoader, OrbitControls } from '@/core'
 
 interface Props {
   url: string
@@ -71,14 +69,14 @@ export default function HatViewer({
     controls.target.set(1, 1, 1)
     controls.update()
 
-    const fbxLoader = new FBXLoader()
+    const gLTFLoader = new GLTFLoader()
 
-    loadFbx(fbxLoader, url)
-      .then((mesh) => {
+    loadGLTF(gLTFLoader, url)
+      .then((gFTL) => {
         if (!isWork) return
-        scene.add(mesh)
-        const { x, y, z } = mesh.position
-        controls.target.set(x, y, z)
+        const root = gFTL.scene
+        scene.add(root)
+        controls.target.set(0, 0, 0)
         controls.update()
       })
       .catch(console.error)
@@ -107,8 +105,8 @@ export default function HatViewer({
   )
 }
 
-function loadFbx(loader: FBXLoader, url: string) {
-  return new Promise<Mesh>((res, rej) => {
+function loadGLTF(loader: GLTFLoader, url: string) {
+  return new Promise<any>((res, rej) => {
     loader.load(url, res, () => {}, rej)
   })
 }
