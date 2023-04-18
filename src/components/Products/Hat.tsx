@@ -10,7 +10,7 @@ interface Props {
 
 export default function Hat({ hat, onClick }: Props) {
   const nav = useNavigate()
-  onClick ??= () => nav(`/store/hats/${hat.id}`)
+  onClick ??= () => nav(`/products/hardcore/${hat.id}`)
 
   return (
     <div onClick={onClick} className={styles['hat']}>
@@ -37,7 +37,7 @@ export default function Hat({ hat, onClick }: Props) {
           {hat.name}
         </Typography.Text>
         <br />
-        <Typography.Text>{hat.descriptions}</Typography.Text>
+        <Typography.Text>{hat.description}</Typography.Text>
       </div>
     </div>
   )

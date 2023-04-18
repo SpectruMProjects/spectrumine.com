@@ -12,11 +12,20 @@ import {
 import { OBJLoader, OrbitControls, MTLLoader } from '@/core'
 
 interface Props {
+  objUrl: string
+  mtlUrl: string
+
   width?: number
   height?: number
 }
 
-export default function HatViewer({ width = 400, height = 400 }: Props) {
+export default function HatViewer({
+  objUrl,
+  mtlUrl,
+
+  width = 400,
+  height = 400
+}: Props) {
   const ref = useRef<HTMLCanvasElement | null>(null)
   const [[w, h]] = useState([width, height])
 
@@ -64,13 +73,13 @@ export default function HatViewer({ width = 400, height = 400 }: Props) {
     const objLoader = new OBJLoader()
     const mtlLoader = new MTLLoader()
 
-    loadMTL(mtlLoader, '/textures/test_hat.mtl')
+    loadMTL(mtlLoader, mtlUrl)
       .then((mtl) => {
         if (!isWork) return
         mtl.preload()
         objLoader.setMaterials(mtl)
 
-        loadObj(objLoader, '/models/test_hat.obj')
+        loadObj(objLoader, objUrl)
           .then((hat) => {
             if (!isWork) return
             scene.add(hat)
@@ -98,7 +107,7 @@ export default function HatViewer({ width = 400, height = 400 }: Props) {
         console.error(e)
       }
     }
-  }, [])
+  }, [mtlUrl, objUrl])
 
   return (
     <div>

@@ -3,7 +3,9 @@ export class HatProduct {
     readonly id: string,
     readonly price: string,
     readonly name: string,
-    readonly descriptions: string,
+    readonly description: string,
+    readonly objUrl: string,
+    readonly mtlUrl: string,
     readonly previewUrl?: string
   ) {}
 }

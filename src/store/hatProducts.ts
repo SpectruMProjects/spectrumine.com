@@ -1,3 +1,4 @@
+import { getHardcoreProducts } from '@/api'
 import { HatProduct } from '@/models'
 import { create } from 'zustand'
 
@@ -9,6 +10,8 @@ interface HatProductsState {
   loadState: 'unknown' | 'process' | 'ok' | 'error'
 
   load(): Promise<MethodRes>
+
+  loadHat(id: string): Promise<HatProduct | null>
 }
 
 export const useHatProductsState = create<HatProductsState>((set, get) => ({
@@ -18,24 +21,44 @@ export const useHatProductsState = create<HatProductsState>((set, get) => ({
     if (get().loadState == 'process') return ['process']
     set({ loadState: 'process' })
 
-    await wait(2000)
-    const hats = Array(10)
-      .fill(0)
-      .map(
-        (_, i) =>
-          new HatProduct(
-            i.toString(),
-            (i * 1000).toString(),
-            `name ${i}`,
-            `description description 🤓 description description 🤓 description description description 🤓 ${i}`,
-            '/images/bg-main.gif'
+    const res = await getHardcoreProducts()
+    switch (res.code) {
+      case 'ok':
+        set({
+          loadState: 'ok',
+          hats: res.data.map(
+            (data) =>
+              new HatProduct(
+                data.id,
+                data.price,
+                data.name,
+                data.description,
+                data.objUrl,
+                data.mtlUrl,
+                data.imgUrl
+              )
           )
-      )
-    set({ loadState: 'ok', hats })
-    return ['ok']
+        })
+        return ['ok']
+
+      default:
+        set({ loadState: 'error' })
+        return ['error', 'Произошла неизвестная ошибка']
+    }
+  },
+
+  async loadHat(id) {
+    if (get().hats) {
+      const hat = get().hats?.find((hat) => hat.id == id)
+      if (hat) return hat
+    }
+
+    if (get().loadState != 'process') await get().load()
+    if (get().hats) {
+      const hat = get().hats?.find((hat) => hat.id == id)
+      if (hat) return hat
+    }
+
+    return null
   }
 }))
-
-function wait(delay: number) {
-  return new Promise((res) => setTimeout(res, delay))
-}

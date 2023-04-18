@@ -302,6 +302,38 @@ export async function statistics(
   }
 }
 
+export type GetHardcoreProductsResponse =
+  | {
+      code: 'ok'
+      data: {
+        id: string
+        name: string
+        description: string
+        imgUrl: string
+        objUrl: string
+        mtlUrl: string
+        price: string
+      }[]
+    }
+  | {
+      code: 'error'
+    }
+export async function getHardcoreProducts(): Promise<GetHardcoreProductsResponse> {
+  try {
+    const res = await axios.get('/Products/hardcore')
+    return {
+      code: 'ok',
+      data: res.data.map((product: any) => ({
+        ...product,
+        mtlUrl: String(product.matUrl),
+        price: String(product.price)
+      }))
+    }
+  } catch (e) {
+    return { code: 'error' }
+  }
+}
+
 export async function checkMojangExist(
   username: string
 ): Promise<boolean | null> {

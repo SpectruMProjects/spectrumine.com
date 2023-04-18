@@ -11,4 +11,9 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+export const Default: Story = {
+  args: {
+    mtlUrl: '/textures/test_hat.mtl',
+    objUrl: '/models/test_hat.obj'
+  }
+}

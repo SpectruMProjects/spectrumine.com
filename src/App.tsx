@@ -114,7 +114,7 @@ function App() {
               }
             />
             <Route
-              path="/store/hats/:id"
+              path="/products/hardcore/:id"
               element={
                 <Suspense>
                   <Pages.HatProductsPreview />
