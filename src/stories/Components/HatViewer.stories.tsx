@@ -15,4 +15,11 @@ export const Default: Story = {
   args: {
     url: '/models/squid.gltf'
   }
+  // render(props) {
+  //   return (
+  //     <div style={{ width: 500, height: 500 }}>
+  //       <HatViewer {...props} />
+  //     </div>
+  //   )
+  // }
 }
