@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 jobs:
   update:
     runs-on: self-hosted
@@ -9,4 +9,3 @@ jobs:
     - run: cd ~/development/front/ &&  git pull --force origin main
     - run: cd ~/development/front/ && npm i
     - run: cd ~/development/front && npm run build
-    
