@@ -49,7 +49,7 @@ export default function HatProductsPreview() {
   return (
     <div className={styles['block']}>
       <Suspense>
-        <AsyncHatViewer url={hat.fbxUrl} />
+        <AsyncHatViewer url={hat.gLTFUrl} />
       </Suspense>
 
       <div className={styles['text']}>

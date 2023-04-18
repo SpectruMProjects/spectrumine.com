@@ -311,7 +311,6 @@ export type GetHardcoreProductsResponse =
         description: string
         imgUrl: string
         objUrl: string
-        mtlUrl: string
         price: string
       }[]
     }
@@ -325,7 +324,6 @@ export async function getHardcoreProducts(): Promise<GetHardcoreProductsResponse
       code: 'ok',
       data: res.data.map((product: any) => ({
         ...product,
-        mtlUrl: String(product.matUrl),
         price: String(product.price)
       }))
     }

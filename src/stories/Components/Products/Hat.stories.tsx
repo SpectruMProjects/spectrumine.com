@@ -29,8 +29,7 @@ export const Default: Story = {
       description: 'Описание описание описание описание описание описание',
       price: '300',
       previewUrl: '/images/logo.png',
-      objUrl: '/models/test_hat.obj',
-      mtlUrl: '/textures/test_hat.mtl'
+      gLTFUrl: '/models/squid.gftl'
     }
   },
   render
@@ -43,8 +42,7 @@ export const NoPreview: Story = {
       name: 'Имя',
       description: 'Описание описание описание описание описание описание',
       price: '300',
-      objUrl: '/models/test_hat.obj',
-      mtlUrl: '/textures/test_hat.mtl'
+      gLTFUrl: '/models/squid.gftl'
     }
   },
   render
