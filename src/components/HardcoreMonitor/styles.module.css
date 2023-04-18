@@ -1,16 +1,18 @@
+.block {
+  font-size: 2em;
+  color: white;
+  display: grid;
+  grid-template-columns: 10px 1fr 10px;
+  column-gap: 1vw;
+}
+
 .block__in {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
+  text-align: center;
 }
 
-.block__in span {
-  transition: all;
-}
-
-.block__in p {
-  font-size: 2em;
+.block__in > * {
+  flex: 1;
 }
 
 .hearts {
