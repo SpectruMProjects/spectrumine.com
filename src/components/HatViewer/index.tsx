@@ -1,5 +1,11 @@
 import { useLayoutEffect, useRef } from 'react'
-import { PerspectiveCamera, Scene, WebGLRenderer, AmbientLight } from 'three'
+import {
+  PerspectiveCamera,
+  Scene,
+  WebGLRenderer,
+  AmbientLight,
+  Mesh
+} from 'three'
 import { GLTFLoader, OrbitControls } from '@/core'
 
 interface Props {
@@ -12,7 +18,7 @@ export default function HatViewer({ url }: Props) {
     if (!ref.current) return
     let isWork = true
     const width = ref.current.parentElement?.offsetWidth ?? 400
-    const height = ref.current.parentElement?.offsetWidth ?? 400
+    const height = ref.current.parentElement?.offsetHeight ?? 400
 
     const scene = new Scene()
     const camera = new PerspectiveCamera(75, width / height)
@@ -24,7 +30,7 @@ export default function HatViewer({ url }: Props) {
     const light = new AmbientLight('white', 1)
     scene.add(light)
 
-    camera.position.x = -2
+    camera.position.x = -3
 
     renderer.setClearColor(0x000000, 0)
     renderer.setSize(width, height)
@@ -32,16 +38,19 @@ export default function HatViewer({ url }: Props) {
     ref.current.replaceWith(renderer.domElement)
 
     const controls = new OrbitControls(camera, renderer.domElement)
-    controls.target.set(0, 0, 0)
-    controls.update()
 
     const gLTFLoader = new GLTFLoader()
 
+    let hat: Mesh
     loadGLTF(gLTFLoader, url)
       .then((gFTL) => {
         if (!isWork) return
-
+        // console.log(gFTL)
         const root = gFTL.scene
+        const { x, y, z } = root.position
+        hat = root
+        controls.target.set(x, y, z)
+        controls.update()
         // const mixer = new AnimationMixer(root)
         // console.log(gFTL.animations)
 
@@ -51,6 +60,11 @@ export default function HatViewer({ url }: Props) {
 
     let draw = () => {
       requestAnimationFrame(draw)
+      if (hat) {
+        // hat.rotation.x += 0.01
+        hat.rotation.y += 0.02
+        // hat.rotation.z += 0.01
+      }
       renderer.render(scene, camera)
     }
     draw()
