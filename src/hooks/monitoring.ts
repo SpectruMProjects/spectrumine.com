@@ -15,6 +15,11 @@ export function useHardcoreMonitor(delay: number, address: string): State {
   const [state, setState] = useState<State>({ online: false })
 
   useEffect(() => {
+    getServerOnline(address).then((stat) => {
+      if (!stat.online) {
+        setState({ online: false })
+      } else setState(stat)
+    })
     const interval = setInterval(() => {
       getServerOnline(address).then((stat) => {
         if (!stat.online) {
