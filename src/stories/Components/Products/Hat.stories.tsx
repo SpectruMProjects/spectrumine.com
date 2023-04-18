@@ -26,9 +26,11 @@ export const Default: Story = {
     hat: {
       id: 'id',
       name: 'Имя',
-      descriptions: 'Описание описание описание описание описание описание',
+      description: 'Описание описание описание описание описание описание',
       price: '300',
-      previewUrl: '/images/bg-main.gif'
+      previewUrl: '/images/logo.png',
+      objUrl: '/models/test_hat.obj',
+      mtlUrl: '/textures/test_hat.mtl'
     }
   },
   render
@@ -39,8 +41,10 @@ export const NoPreview: Story = {
     hat: {
       id: 'id',
       name: 'Имя',
-      descriptions: 'Описание описание описание описание описание описание',
-      price: '300'
+      description: 'Описание описание описание описание описание описание',
+      price: '300',
+      objUrl: '/models/test_hat.obj',
+      mtlUrl: '/textures/test_hat.mtl'
     }
   },
   render
