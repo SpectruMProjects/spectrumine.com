@@ -2,7 +2,7 @@ import { HatProduct } from '@/models'
 import styles from './styles.module.css'
 import { Skeleton, Typography } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { Suspense, lazy } from 'react'
+import { lazy } from 'react'
 
 interface Props {
   hat: HatProduct
@@ -14,20 +14,15 @@ const AsyncHatViewer = lazy(() => import('@/components/HatViewer'))
 export default function Hat({ hat, onClick }: Props) {
   const nav = useNavigate()
   onClick ??= () => nav(`/products/hardcore/${hat.id}`)
-
   return (
     <div onClick={onClick} className={styles['hat']}>
       {hat.previewUrl ? (
-        <img
-          loading="lazy"
-          className={styles['hat__preview']}
-          src={hat.previewUrl}
-          alt={`${hat.name} preview`}
-        />
+        <AsyncHatViewer url={hat.gLTFUrl} />
       ) : (
-        <Suspense>
-          <AsyncHatViewer url={hat.gLTFUrl} />
-        </Suspense>
+        <Skeleton.Image
+          style={{ width: 150, height: 150 }}
+          className={styles['hat__preview']}
+        />
       )}
 
       <div className={styles['hat__info']}>
