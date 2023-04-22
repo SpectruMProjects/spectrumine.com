@@ -9,10 +9,6 @@ import {
 import { OrbitControls } from '@/core'
 import type { GLTFLoader } from '@/core'
 
-interface Props {
-  url: string
-}
-
 let gLTFLoader: GLTFLoader | null = null
 let loaderUsers = 0
 async function getgLTFLoader() {
@@ -30,7 +26,13 @@ async function disposeLoader() {
   }
 }
 
-export default function HatViewer({ url }: Props) {
+interface Props {
+  url: string
+  onEnd?: () => void
+  width?: string | number
+  height?: string | number
+}
+export default function HatViewer({ url, onEnd, width, height }: Props) {
   const ref = useRef<HTMLCanvasElement | null>(null)
   useLayoutEffect(() => {
     if (!ref.current) return
@@ -51,7 +53,6 @@ export default function HatViewer({ url }: Props) {
     camera.position.x = -3
 
     renderer.setClearColor(0x000000, 0)
-    renderer.setSize(width, height)
 
     ref.current.replaceWith(renderer.domElement)
 
@@ -64,18 +65,21 @@ export default function HatViewer({ url }: Props) {
       loadGLTF(gLTFLoader, url)
         .then((gFTL) => {
           if (!isWork) return
-          // console.log(gFTL)
           const root = gFTL.scene
           const { x, y, z } = root.position
           hat = root
+          // hat.geometry.center()
           controls.target.set(x, y, z)
           controls.update()
-          // const mixer = new AnimationMixer(root)
-          // console.log(gFTL.animations)
 
           scene.add(root)
+          onEnd?.()
+          renderer.setSize(width, height)
         })
-        .catch(console.error)
+        .catch((err) => {
+          onEnd?.()
+          console.error(err)
+        })
     })
 
     let draw = () => {
@@ -101,9 +105,10 @@ export default function HatViewer({ url }: Props) {
     }
   }, [url])
 
+  const style = { width: width ?? '100%', height: height ?? '100%' }
   return (
-    <div style={{ width: '100%', height: '100%' }}>
-      <canvas ref={ref} />
+    <div style={style}>
+      <canvas ref={ref} width={width ?? '100%'} height={height ?? '100%'} />
     </div>
   )
 }

@@ -2,7 +2,6 @@ import { HatProduct } from '@/models'
 import styles from './styles.module.css'
 import { Skeleton, Typography } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { lazy } from 'react'
 import HatViewer from '../HatViewer'
 
 interface Props {
@@ -13,18 +12,10 @@ interface Props {
 export default function Hat({ hat, onClick }: Props) {
   const nav = useNavigate()
   onClick ??= () => nav(`/products/hardcore/${hat.id}`)
+
   return (
     <div onClick={onClick} className={styles['hat']}>
-      {hat.gLTFUrl ? (
-        <div style={{ width: 150, height: 150 }}>
-          <HatViewer url={hat.gLTFUrl} />
-        </div>
-      ) : (
-        <Skeleton.Image
-          style={{ width: 150, height: 150 }}
-          className={styles['hat__preview']}
-        />
-      )}
+      <HatViewer width={150} height={150} url={hat.gLTFUrl} />
 
       <div className={styles['hat__info']}>
         <Typography.Text className={styles['hat__price']}>
