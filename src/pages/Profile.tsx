@@ -1,6 +1,6 @@
 import { Button, Card, Divider, Spin, Typography } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { useAuthPageState } from '@/store'
+import { useAuthPageState, useInventoryState } from '@/store'
 import styles from './styles.module.css'
 import HardcoreStatistics from '@/components/HardcoreStatistics'
 import {
@@ -9,9 +9,10 @@ import {
   UserDeleteOutlined,
   UsergroupDeleteOutlined
 } from '@ant-design/icons'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Forms from '@/components/forms'
 import { useSetPageTitle } from '@/hooks'
+import ProductsList from '@/components/ProductsList'
 
 export default function Profile() {
   useSetPageTitle('SpectruM - Профиль')
@@ -23,6 +24,15 @@ export default function Profile() {
   ])
   const nav = useNavigate()
   const [isChangePassOpened, setIsChangePassOpened] = useState(false)
+  const [hats, loadHats, loadHatsState] = useInventoryState((s) => [
+    s.hats,
+    s.load,
+    s.loadingState
+  ])
+
+  useEffect(() => {
+    loadHats()
+  }, [])
 
   if (authStatus == 'process' || authStatus == 'unknown')
     return (
@@ -91,6 +101,14 @@ export default function Profile() {
 
         <Divider />
         <HardcoreStatistics username={user.username} />
+
+        <Divider />
+        <h2 style={{ textAlign: 'center' }}>Инвентарь</h2>
+        {loadHatsState == 'process' ? (
+          <Spin />
+        ) : (
+          <ProductsList.Hat hats={hats ?? []} />
+        )}
       </Card>
     </div>
   )

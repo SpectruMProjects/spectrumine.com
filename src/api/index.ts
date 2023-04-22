@@ -333,6 +333,15 @@ export async function getHardcoreProducts(): Promise<GetHardcoreProductsResponse
   }
 }
 
+export async function getInventory() {
+  try {
+    const res = await axios.get('/Products/GetUserInventory', {
+      headers: { Authorization: `Bearer ${tokens.accessToken}` }
+    })
+    return res.data
+  } catch (e) {}
+}
+
 export async function checkMojangExist(
   username: string
 ): Promise<boolean | null> {
