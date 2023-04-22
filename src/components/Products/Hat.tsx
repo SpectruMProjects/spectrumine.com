@@ -3,21 +3,22 @@ import styles from './styles.module.css'
 import { Skeleton, Typography } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { lazy } from 'react'
+import HatViewer from '../HatViewer'
 
 interface Props {
   hat: HatProduct
   onClick?: () => void
 }
 
-const AsyncHatViewer = lazy(() => import('@/components/HatViewer'))
-
 export default function Hat({ hat, onClick }: Props) {
   const nav = useNavigate()
   onClick ??= () => nav(`/products/hardcore/${hat.id}`)
   return (
     <div onClick={onClick} className={styles['hat']}>
-      {hat.previewUrl ? (
-        <AsyncHatViewer url={hat.gLTFUrl} />
+      {hat.gLTFUrl ? (
+        <div style={{ width: 150, height: 150 }}>
+          <HatViewer url={hat.gLTFUrl} />
+        </div>
       ) : (
         <Skeleton.Image
           style={{ width: 150, height: 150 }}

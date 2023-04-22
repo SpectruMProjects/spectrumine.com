@@ -6,10 +6,28 @@ import {
   AmbientLight,
   Mesh
 } from 'three'
-import { GLTFLoader, OrbitControls } from '@/core'
+import { OrbitControls } from '@/core'
+import type { GLTFLoader } from '@/core'
 
 interface Props {
   url: string
+}
+
+let gLTFLoader: GLTFLoader | null = null
+let loaderUsers = 0
+async function getgLTFLoader() {
+  if (!gLTFLoader) {
+    const { GLTFLoader } = await import('@/core')
+    gLTFLoader = new GLTFLoader()
+  }
+  loaderUsers++
+  return gLTFLoader
+}
+async function disposeLoader() {
+  loaderUsers = Math.max(0, loaderUsers - 1)
+  if (loaderUsers == 0) {
+    gLTFLoader = null
+  }
 }
 
 export default function HatViewer({ url }: Props) {
@@ -39,24 +57,26 @@ export default function HatViewer({ url }: Props) {
 
     const controls = new OrbitControls(camera, renderer.domElement)
 
-    const gLTFLoader = new GLTFLoader()
-
     let hat: Mesh
-    loadGLTF(gLTFLoader, url)
-      .then((gFTL) => {
-        if (!isWork) return
-        // console.log(gFTL)
-        const root = gFTL.scene
-        const { x, y, z } = root.position
-        hat = root
-        controls.target.set(x, y, z)
-        controls.update()
-        // const mixer = new AnimationMixer(root)
-        // console.log(gFTL.animations)
 
-        scene.add(root)
-      })
-      .catch(console.error)
+    getgLTFLoader().then((gLTFLoader) => {
+      if (!isWork) return
+      loadGLTF(gLTFLoader, url)
+        .then((gFTL) => {
+          if (!isWork) return
+          // console.log(gFTL)
+          const root = gFTL.scene
+          const { x, y, z } = root.position
+          hat = root
+          controls.target.set(x, y, z)
+          controls.update()
+          // const mixer = new AnimationMixer(root)
+          // console.log(gFTL.animations)
+
+          scene.add(root)
+        })
+        .catch(console.error)
+    })
 
     let draw = () => {
       requestAnimationFrame(draw)
@@ -72,6 +92,7 @@ export default function HatViewer({ url }: Props) {
     return () => {
       isWork = false
       draw = () => {}
+      disposeLoader()
       try {
         renderer.dispose()
       } catch (e) {

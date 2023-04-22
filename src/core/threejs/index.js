@@ -1,5 +1,2 @@
 export { OrbitControls } from './OrbitControls'
-export { OBJLoader } from './OBJLoader'
-export { MTLLoader } from './MTLLoader'
-export { FBXLoader } from './FBXLoader'
 export { GLTFLoader } from './GFTLLoader'
