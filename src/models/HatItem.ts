@@ -4,7 +4,7 @@ export class HatItem {
     readonly name: string,
     readonly description: string,
     readonly imgUrl: string,
-    readonly fbxUrl: string,
+    readonly gLTFUrl: string,
     readonly price: string
   ) {}
 }
