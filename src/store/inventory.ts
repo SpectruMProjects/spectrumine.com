@@ -1,9 +1,9 @@
 import { getInventory } from '@/api'
-import { HatProduct } from '@/models'
+import { HatItem } from '@/models'
 import { create } from 'zustand'
 
 interface InventoryState {
-  hats: HatProduct[] | null
+  hats: HatItem[] | null
 
   loadingState: 'unknown' | 'process' | 'ok' | 'error'
 
@@ -19,8 +19,27 @@ export const useInventoryState = create<InventoryState>((set, get) => ({
     set({ loadingState: 'process' })
 
     const res = await getInventory()
-    console.log(res)
+    switch (res.code) {
+      case 'ok':
+        set({
+          loadingState: 'ok',
+          hats: res.data.map(
+            (json) =>
+              new HatItem(
+                json.id,
+                json.name,
+                json.description,
+                json.imgUrl,
+                json.objUrl,
+                String(json.price)
+              )
+          )
+        })
+        return ['ok']
 
-    return ['ok']
+      default:
+        set({ loadingState: 'error' })
+        return ['error', 'Произошла неизвестная ошибка']
+    }
   }
 }))
