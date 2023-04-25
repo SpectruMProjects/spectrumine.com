@@ -27,6 +27,42 @@
   border-spacing: 2em 1em;
 }
 
+@media (width <= 700px) {
+  .points__table tr td:nth-child(1) {
+    display: none;
+  }
+}
+
+.points,
+.description,
+.about {
+  background-color: #001a33;
+  border-radius: 16px;
+}
+
+.points h1,
+.description h1,
+.about h1 {
+  font-size: 2em;
+}
+
+.points {
+  padding-top: 0.1em;
+  padding-bottom: 2em;
+}
+
+.points span {
+  color: rgb(245 34 45);
+}
+
+.points__dup .points__title {
+  color: white;
+}
+
+.points__dup .points__title span {
+  color: rgb(245 34 45);
+}
+
 .points .point {
   color: white;
   font-size: large;
@@ -50,8 +86,8 @@
   }
 }
 
-.points span {
-  color: rgb(245 34 45);
+.description {
+  padding: 2em;
 }
 
 .description_point {
@@ -65,6 +101,10 @@
 
 .description p {
   padding: 0.5em;
+}
+
+.about {
+  padding: 2em;
 }
 
 .about .point {

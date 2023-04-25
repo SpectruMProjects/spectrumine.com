@@ -23,7 +23,7 @@ export default function HardcoreServer() {
 
   return (
     <div className={styles['hardcore-page']}>
-      <div className={styles['points']}>
+      <div className={styles['points__dup']}>
         <Typography.Title>
           <p className={styles['points__title']}>
             Vanilla <span>Hardcore</span> SMP
@@ -94,10 +94,10 @@ export default function HardcoreServer() {
           Поэтому мы сделали плагин, который даёт возможность возродиться спустя
           время, которое вы провели на сервере.
         </p>
-        <p className={styles['description_dop']}>
+        {/* <p className={styles['description_dop']}>
           *Для того чтобы точно расчитать время возрождения, мы пользуемся{' '}
           <a href="/formula">формулой</a>
-        </p>
+        </p> */}
       </div>
 
       <div className={styles['about']}>
