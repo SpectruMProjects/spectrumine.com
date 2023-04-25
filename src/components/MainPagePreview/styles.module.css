@@ -2,9 +2,10 @@
   height: calc(100vh - 64px);
   width: 100%;
 
-  background-image: url('/images/bg-main.gif');
+  background-image: url('/images/bg-main.webp');
   background-size: cover;
   background-position: center;
+  image-rendering: pixelated;
 
   color: white;
   font-size: 60px;
