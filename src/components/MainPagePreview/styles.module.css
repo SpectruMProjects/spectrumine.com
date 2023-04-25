@@ -1,15 +1,12 @@
 .main-page-preview {
   height: calc(100vh - 64px);
   width: 100%;
-
   background-image: url('/images/bg-main.webp');
   background-size: cover;
   background-position: center;
   image-rendering: pixelated;
-
   color: white;
   font-size: 60px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,7 +22,6 @@
   padding: 0 10vw;
   text-transform: uppercase;
   height: 3dvh;
-
   font-size: 3.5vw;
   font-weight: 400;
   text-align: center;
@@ -39,11 +35,11 @@
   padding: 15px 50px;
   text-transform: uppercase;
   margin: 150px 0;
-
   font-size: x-large;
   transition: transform 0.5s;
   cursor: pointer;
 }
+
 .to-servers:hover {
   transform: scale(1.05);
 }
@@ -59,7 +55,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .to-servers {
     font-size: large;
   }
