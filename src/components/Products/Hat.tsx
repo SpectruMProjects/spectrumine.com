@@ -11,15 +11,14 @@ interface Props {
 
 export default function Hat({ hat, onClick }: Props) {
   const nav = useNavigate()
-  onClick ??= () => nav(`/products/hardcore/${hat.id}`)
+  //onClick ??= () => nav(`/products/hardcore/${hat.id}`)
 
   return (
-    <div onClick={onClick} className={styles['hat']}>
+    <div className={styles['hat']}>
       <HatViewer width={150} height={150} url={hat.gLTFUrl} />
-
       <div className={styles['hat__info']}>
         <Typography.Text className={styles['hat__price']}>
-          {hat.price}
+          {hat.price} Руб.
         </Typography.Text>
         <br />
         <Typography.Text className={styles['hat__name']}>

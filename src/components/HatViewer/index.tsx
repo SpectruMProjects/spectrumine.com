@@ -1,10 +1,11 @@
 import { useLayoutEffect, useRef } from 'react'
-import {
+import THREE, {
   PerspectiveCamera,
   Scene,
   WebGLRenderer,
   AmbientLight,
-  Mesh
+  Mesh,
+  Vector3
 } from 'three'
 import { OrbitControls } from '@/core'
 import type { GLTFLoader } from '@/core'
@@ -59,6 +60,7 @@ export default function HatViewer({ url, onEnd, width, height }: Props) {
     const controls = new OrbitControls(camera, renderer.domElement)
 
     let hat: Mesh
+    let vert: Vector3
 
     getgLTFLoader().then((gLTFLoader) => {
       if (!isWork) return
@@ -67,12 +69,15 @@ export default function HatViewer({ url, onEnd, width, height }: Props) {
           if (!isWork) return
           const root = gFTL.scene
           const { x, y, z } = root.position
-          hat = root
-          // hat.geometry.center()
+          console.log(root)
+          console.log(root.children[0])
+          hat = root.children[0];
           controls.target.set(x, y, z)
           controls.update()
-
-          scene.add(root)
+          //vert = new THREE.Box3().setFromObject(hat).getCenter(hat.position)
+          //vert = new Vector3(3,0,0.8)
+          //hat.position.set(vert.x, vert.y, vert.z)
+          scene.add(hat)
           onEnd?.()
           renderer.setSize(width, height)
         })
