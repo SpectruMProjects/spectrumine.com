@@ -30,7 +30,7 @@ export const useHatProductsState = create<HatProductsState>((set, get) => ({
             (data) =>
               new HatProduct(
                 data.id,
-                data.price,
+                `${data.price} ₽`,
                 data.name,
                 data.description,
                 data.objUrl,

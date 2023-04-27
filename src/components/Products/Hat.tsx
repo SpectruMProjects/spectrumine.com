@@ -6,10 +6,11 @@ import HatViewer from '../HatViewer'
 
 interface Props {
   hat: HatProduct
+  showPrice?: boolean
   onClick?: () => void
 }
 
-export default function Hat({ hat }: Props) {
+export default function Hat({ hat, showPrice = true }: Props) {
   // const nav = useNavigate()
   //onClick ??= () => nav(`/products/hardcore/${hat.id}`)
 
@@ -19,9 +20,11 @@ export default function Hat({ hat }: Props) {
         <HatViewer width={150} height={150} url={hat.gLTFUrl} />
       </div>
       <div className={styles['hat__info']}>
-        <Typography.Text className={styles['hat__price']}>
-          {hat.price} Руб.
-        </Typography.Text>
+        {showPrice && (
+          <Typography.Text className={styles['hat__price']}>
+            {hat.price}
+          </Typography.Text>
+        )}
         <br />
         <Typography.Text className={styles['hat__name']}>
           {hat.name}
@@ -41,7 +44,6 @@ export function HatProductSkeleton() {
         style={{ width: 150, height: 150 }}
         className={styles['hat__preview']}
       />
-
       <Skeleton style={{ marginTop: 16 }} active />
     </div>
   )

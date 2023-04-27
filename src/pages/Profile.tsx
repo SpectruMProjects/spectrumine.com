@@ -106,8 +106,21 @@ export default function Profile() {
         <h2 style={{ textAlign: 'center' }}>Инвентарь</h2>
         {loadHatsState == 'process' ? (
           <Spin />
+        ) : hats?.length != 0 ? (
+          <ProductsList.Hat hats={hats ?? []} showPrice={false} />
         ) : (
-          <ProductsList.Hat hats={hats ?? []} />
+          <div style={{ textAlign: 'center' }}>
+            Пусто. Посетите наш{' '}
+            <a
+              href="/store"
+              onClick={(e) => {
+                e.preventDefault()
+                nav('/store')
+              }}
+            >
+              магазин
+            </a>
+          </div>
         )}
       </Card>
     </div>

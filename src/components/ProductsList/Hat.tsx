@@ -6,15 +6,16 @@ import { Empty } from 'antd'
 
 interface Props {
   hats: HatProduct[]
+  showPrice?: boolean
 }
 
-export default function Hat({ hats }: Props) {
+export default function Hat({ hats, showPrice = true }: Props) {
   if (hats.length == 0) return <Empty />
 
   return (
     <div className={styles['hats']}>
       {hats.map((hat) => (
-        <Products.Hat hat={hat} key={hat.id} />
+        <Products.Hat hat={hat} key={hat.id} showPrice={showPrice} />
       ))}
     </div>
   )
