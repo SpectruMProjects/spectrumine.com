@@ -60,7 +60,6 @@ export default function HatViewer({ url, onEnd, width, height }: Props) {
     const controls = new OrbitControls(camera, renderer.domElement)
 
     let hat: Mesh
-    let vert: Vector3
 
     getgLTFLoader().then((gLTFLoader) => {
       if (!isWork) return
@@ -69,9 +68,7 @@ export default function HatViewer({ url, onEnd, width, height }: Props) {
           if (!isWork) return
           const root = gFTL.scene
           const { x, y, z } = root.position
-          console.log(root)
-          console.log(root.children[0])
-          hat = root.children[0];
+          hat = root.children[0]
           controls.target.set(x, y, z)
           controls.update()
           //vert = new THREE.Box3().setFromObject(hat).getCenter(hat.position)

@@ -4,6 +4,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* background-color: rgb(105, 95, 88); */
+  border-radius: 16px;
 }
 
 .hat__price {
@@ -20,12 +22,14 @@
   width: 150px;
   height: 150px;
   aspect-ratio: 1/1;
-  border-radius: 16px;
   object-fit: cover;
+  background-color: rgb(216, 216, 216);
+  border-radius: 16px;
 }
 
 .hat__info {
   display: block;
+  padding: 1em;
 }
 
 .hat__info > * {
