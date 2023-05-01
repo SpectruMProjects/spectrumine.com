@@ -4,6 +4,17 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: Manrope;
+  src: url('/fonts/Manrope.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body * {
+  font-family: Manrope, system-ui;
+}
+
 :root {
   --bg-color: #1e1e2e;
 }
