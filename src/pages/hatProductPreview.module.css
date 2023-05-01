@@ -1,29 +1,82 @@
-.block {
-  background-color: #001529;
+.centered-page {
   width: 100%;
-  color: white;
+  flex: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+}
+
+.block {
+  width: fit-content;
+  display: grid;
+  gap: 1em;
+  grid-template-columns: 400px auto;
+  grid-template-rows: 400px;
+}
+
+.view {
+  width: 400px;
+  height: 400px;
 }
 
 .text {
-  min-width: 300px;
-  max-width: 500px;
+  width: fit-content;
+  max-width: 300px;
   text-align: start;
-  padding: 2em 0;
+  padding: 0 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+@media (width <= 800px) {
+  .block {
+    grid-template-columns: 400px;
+    grid-template-rows: 400px auto;
+  }
+}
+
+@media (width <= 500px) {
+  .block {
+    grid-template-columns: 300px;
+    grid-template-rows: 300px auto;
+  }
+
+  .view {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (width <= 400px) {
+  .block {
+    grid-template-columns: 200px;
+    grid-template-rows: 200px auto;
+  }
+
+  .view {
+    width: 200px;
+    height: 200px;
+  }
+
+  .text {
+    max-width: 150px;
+  }
+}
+
+.text > * {
+  width: fit-content;
 }
 
 .price {
-  font-size: 3em;
+  font-size: 2em;
   font-weight: bold;
+  color: #f5222d;
 }
 
 .name {
-  font-size: 2em;
+  font-size: 3em;
   font-weight: bolder;
-  margin: 1em 0;
 }
 
 .description {
@@ -32,9 +85,15 @@
 }
 
 .hat-container {
-  width: 70vw;
-  aspect-ratio: 1;
-  max-height: calc(100vh - 400px);
-  border: 2px solid white;
+  background-color: #d8d8d8;
   border-radius: 32px;
+}
+
+.divider {
+  flex: 1;
+}
+
+.text > button {
+  align-self: center;
+  padding: 0 2em !important;
 }

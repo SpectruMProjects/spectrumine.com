@@ -113,14 +113,14 @@ function App() {
                 </Suspense>
               }
             />
-            {/* <Route
+            <Route
               path="/products/hardcore/:id"
               element={
                 <Suspense>
                   <Pages.HatProductsPreview />
                 </Suspense>
               }
-            /> */}
+            />
             <Route
               path="/contacts"
               element={

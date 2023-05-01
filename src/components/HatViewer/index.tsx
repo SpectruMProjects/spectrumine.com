@@ -1,11 +1,10 @@
-import { useLayoutEffect, useRef } from 'react'
-import THREE, {
+import { CSSProperties, useLayoutEffect, useRef } from 'react'
+import {
   PerspectiveCamera,
   Scene,
   WebGLRenderer,
   AmbientLight,
-  Mesh,
-  Vector3
+  Mesh
 } from 'three'
 import { OrbitControls } from '@/core'
 import type { GLTFLoader } from '@/core'
@@ -30,10 +29,10 @@ async function disposeLoader() {
 interface Props {
   url: string
   onEnd?: () => void
-  width?: string | number
-  height?: string | number
+  style?: CSSProperties
+  className?: string
 }
-export default function HatViewer({ url, onEnd, width, height }: Props) {
+export default function HatViewer({ url, onEnd, style, className }: Props) {
   const ref = useRef<HTMLCanvasElement | null>(null)
   useLayoutEffect(() => {
     if (!ref.current) return
@@ -107,10 +106,9 @@ export default function HatViewer({ url, onEnd, width, height }: Props) {
     }
   }, [url])
 
-  const style = { width: width ?? '100%', height: height ?? '100%' }
   return (
-    <div style={style}>
-      <canvas ref={ref} width={width ?? '100%'} height={height ?? '100%'} />
+    <div style={style} className={className}>
+      <canvas ref={ref} />
     </div>
   )
 }

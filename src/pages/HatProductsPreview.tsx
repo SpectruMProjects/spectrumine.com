@@ -10,16 +10,16 @@ import styles from './hatProductPreview.module.css'
 import { useParams } from 'react-router-dom'
 import { useHatProductsState } from '@/store/hatProducts'
 import { HatProduct } from '@/models'
-import { Empty, Spin } from 'antd'
+import { Button, Divider, Empty, Spin } from 'antd'
 
 const AsyncHatViewer = lazy(() => import('@/components/HatViewer'))
 
 export default function HatProductsPreview() {
-  const { id } = useParams()
-  const [isLoad, setIsLoad] = useState(false)
-  const [hat, setHat] = useState<HatProduct | null>(null)
   const ref = useRef(true) //isAlive
+  const { id } = useParams()
+  const [hat, setHat] = useState<HatProduct | null>(null)
   const [load] = useHatProductsState((s) => [s.loadHat])
+  const [isLoad, setIsLoad] = useState(false)
 
   useLayoutEffect(() => {
     ref.current = true
@@ -46,20 +46,32 @@ export default function HatProductsPreview() {
       </div>
     )
 
-  return (
-    <div className={styles['block']}>
-      <Suspense>
-        <div className={styles['hat-container']}>
-          <AsyncHatViewer url={hat.gLTFUrl} />
-        </div>
-      </Suspense>
+  return <HatProductsPreviewComponent hat={hat} />
+}
 
-      <div className={styles['text']}>
-        <span className={styles['price']}>{hat.price}</span>
-        <br />
-        <span className={styles['name']}>{hat.name}</span>
-        <br />
-        <span className={styles['description']}>{hat.description}</span>
+interface ComponentProps {
+  hat: HatProduct
+}
+
+export function HatProductsPreviewComponent({ hat }: ComponentProps) {
+  return (
+    <div className={styles['centered-page']}>
+      <div className={styles['block']}>
+        <Suspense>
+          <div className={styles['hat-container']}>
+            <AsyncHatViewer className={styles['view']} url={hat.gLTFUrl} />
+          </div>
+        </Suspense>
+
+        <div className={styles['text']}>
+          <span className={styles['name']}>{hat.name}</span>
+          <span className={styles['price']}>{hat.price}</span>
+          <span className={styles['description']}>{hat.description}</span>
+          <div className={styles['divider']} />
+          <Button type="primary" size="large" shape="round">
+            Купить
+          </Button>
+        </div>
       </div>
     </div>
   )
