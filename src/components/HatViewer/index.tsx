@@ -6,7 +6,6 @@ import {
   AmbientLight,
   Mesh
 } from 'three'
-import { OrbitControls } from '@/core'
 import type { GLTFLoader } from '@/core'
 
 let gLTFLoader: GLTFLoader | null = null
@@ -31,8 +30,15 @@ interface Props {
   onEnd?: () => void
   style?: CSSProperties
   className?: string
+  allowControl?: boolean
 }
-export default function HatViewer({ url, onEnd, style, className }: Props) {
+export default function HatViewer({
+  url,
+  onEnd,
+  style,
+  className,
+  allowControl
+}: Props) {
   const ref = useRef<HTMLCanvasElement | null>(null)
   useLayoutEffect(() => {
     if (!ref.current) return
@@ -56,7 +62,10 @@ export default function HatViewer({ url, onEnd, style, className }: Props) {
 
     ref.current.replaceWith(renderer.domElement)
 
-    const controls = new OrbitControls(camera, renderer.domElement)
+    const controls = async () => {
+      const { OrbitControls } = await import('@/core')
+      return new OrbitControls(camera, renderer.domElement)
+    }
 
     let hat: Mesh
 
@@ -66,16 +75,21 @@ export default function HatViewer({ url, onEnd, style, className }: Props) {
         .then((gFTL) => {
           if (!isWork) return
           const root = gFTL.scene
-          const { x, y, z } = root.position
           hat = root.children[0]
-          controls.target.set(x, y, z)
-          controls.update()
           //vert = new THREE.Box3().setFromObject(hat).getCenter(hat.position)
           //vert = new Vector3(3,0,0.8)
           //hat.position.set(vert.x, vert.y, vert.z)
           scene.add(hat)
           onEnd?.()
           renderer.setSize(width, height)
+
+          if (allowControl) {
+            controls().then((controls) => {
+              const { x, y, z } = root.position
+              controls.target.set(x, y, z)
+              controls.update()
+            })
+          }
         })
         .catch((err) => {
           onEnd?.()

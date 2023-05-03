@@ -59,7 +59,11 @@ export function HatProductsPreviewComponent({ hat }: ComponentProps) {
       <div className={styles['block']}>
         <Suspense>
           <div className={styles['hat-container']}>
-            <AsyncHatViewer className={styles['view']} url={hat.gLTFUrl} />
+            <AsyncHatViewer
+              className={styles['view']}
+              url={hat.gLTFUrl}
+              allowControl={true}
+            />
           </div>
         </Suspense>
 
