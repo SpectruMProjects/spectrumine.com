@@ -37,7 +37,7 @@ export default function HatViewer({
   onEnd,
   style,
   className,
-  allowControl
+  ...props
 }: Props) {
   const ref = useRef<HTMLCanvasElement | null>(null)
   useLayoutEffect(() => {
@@ -75,16 +75,15 @@ export default function HatViewer({
         .then((gFTL) => {
           if (!isWork) return
           const root = gFTL.scene
+          console.log(gFTL)
           hat = root.children[0]
-          //vert = new THREE.Box3().setFromObject(hat).getCenter(hat.position)
-          //vert = new Vector3(3,0,0.8)
-          //hat.position.set(vert.x, vert.y, vert.z)
           scene.add(hat)
           onEnd?.()
           renderer.setSize(width, height)
 
-          if (allowControl) {
+          if ('allowControls' in props || props.allowControl) {
             controls().then((controls) => {
+              if (!isWork) return
               const { x, y, z } = root.position
               controls.target.set(x, y, z)
               controls.update()
