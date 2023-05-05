@@ -32,13 +32,7 @@ interface Props {
   className?: string
   allowControl?: boolean
 }
-export default function HatViewer({
-  url,
-  onEnd,
-  style,
-  className,
-  ...props
-}: Props) {
+export default function HatViewer({ url, onEnd, style, className }: Props) {
   const ref = useRef<HTMLCanvasElement | null>(null)
   useLayoutEffect(() => {
     if (!ref.current) return
@@ -79,6 +73,7 @@ export default function HatViewer({
           scene.add(hat)
           onEnd?.()
           renderer.setSize(width, height)
+          //get root center
 
           controls().then((controls) => {
             if (!isWork) return
