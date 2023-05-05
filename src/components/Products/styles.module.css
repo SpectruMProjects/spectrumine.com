@@ -3,9 +3,12 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  /* background-color: rgb(105, 95, 88); */
+  align-items: start;
   border-radius: 16px;
+}
+
+.hat__info {
+  text-align: start;
 }
 
 .hat__price {
@@ -25,11 +28,6 @@
   object-fit: cover;
   background-color: rgb(216, 216, 216);
   border-radius: 16px;
-}
-
-.hat__info {
-  display: block;
-  padding: 1em;
 }
 
 .hat__info > * {

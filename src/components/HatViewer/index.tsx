@@ -75,20 +75,17 @@ export default function HatViewer({
         .then((gFTL) => {
           if (!isWork) return
           const root = gFTL.scene
-          console.log(gFTL)
           hat = root.children[0]
           scene.add(hat)
           onEnd?.()
           renderer.setSize(width, height)
 
-          if ('allowControls' in props || props.allowControl) {
-            controls().then((controls) => {
-              if (!isWork) return
-              const { x, y, z } = root.position
-              controls.target.set(x, y, z)
-              controls.update()
-            })
-          }
+          controls().then((controls) => {
+            if (!isWork) return
+            const { x, y, z } = root.position
+            controls.target.set(x, y, z)
+            controls.update()
+          })
         })
         .catch((err) => {
           onEnd?.()
