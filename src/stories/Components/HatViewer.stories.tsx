@@ -13,13 +13,11 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    url: '/models/squid.gltf'
+    url: '/models/squid.gltf',
+    style: {
+      width: 500,
+      height: 500,
+      backgroundColor: '#333'
+    }
   }
-  // render(props) {
-  //   return (
-  //     <div style={{ width: 500, height: 500 }}>
-  //       <HatViewer {...props} />
-  //     </div>
-  //   )
-  // }
 }

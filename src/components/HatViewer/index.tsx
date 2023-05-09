@@ -4,7 +4,9 @@ import {
   Scene,
   WebGLRenderer,
   AmbientLight,
-  Mesh
+  Mesh,
+  Box3,
+  Vector3
 } from 'three'
 import type { GLTFLoader } from '@/core'
 
@@ -50,7 +52,9 @@ export default function HatViewer({ url, onEnd, style, className }: Props) {
     const light = new AmbientLight('white', 1)
     scene.add(light)
 
+    camera.position.z = -3
     camera.position.x = -3
+    // camera.position.y = -3
 
     renderer.setClearColor(0x000000, 0)
 
@@ -68,17 +72,19 @@ export default function HatViewer({ url, onEnd, style, className }: Props) {
       loadGLTF(gLTFLoader, url)
         .then((gFTL) => {
           if (!isWork) return
+
+          renderer.setSize(width, height)
           const root = gFTL.scene
           hat = root.children[0]
-          scene.add(hat)
           onEnd?.()
-          renderer.setSize(width, height)
-          //get root center
+
+          scene.add(hat)
 
           controls().then((controls) => {
             if (!isWork) return
-            const { x, y, z } = root.position
-            controls.target.set(x, y, z)
+            controls.target.copy(root.position)
+            // controls.zoom0 = -1
+            // controls.autoRotate = true
             controls.update()
           })
         })
@@ -88,11 +94,16 @@ export default function HatViewer({ url, onEnd, style, className }: Props) {
         })
     })
 
+    let i = 0.01
     let draw = () => {
       requestAnimationFrame(draw)
       if (hat) {
         // hat.rotation.x += 0.01
-        hat.rotation.y += 0.02
+        hat.rotation.y += 0.01
+        hat.position.y = Math.cos(i) * 1.5
+        i += 0.03
+        // hat.position.z = Math.sin(i)
+        // z += 0.01
         // hat.rotation.z += 0.01
       }
       renderer.render(scene, camera)
