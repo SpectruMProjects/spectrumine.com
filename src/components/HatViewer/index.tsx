@@ -94,12 +94,12 @@ export default function HatViewer({ url, onEnd, style, className }: Props) {
         })
     })
 
-    let i = 0.01
+    let i = Math.random() * 10
     let draw = () => {
       requestAnimationFrame(draw)
       if (hat) {
         // hat.rotation.x += 0.01
-        hat.rotation.y += 0.01
+        hat.rotation.y += 0.02
         hat.position.y = Math.cos(i) * 1.5
         i += 0.03
         // hat.position.z = Math.sin(i)
