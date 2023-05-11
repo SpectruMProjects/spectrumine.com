@@ -55,15 +55,15 @@ export default function Header() {
                 icon: <UserOutlined />
               }
             ]),
-        {
-          key: '/store',
-          label: (
-            <Link onClick={onLinkClick} href="/auth">
-              Магазин
-            </Link>
-          ),
-          icon: <ShopOutlined />
-        }
+        // {
+        //   key: '/store',
+        //   label: (
+        //     <Link onClick={onLinkClick} href="/auth">
+        //       Магазин
+        //     </Link>
+        //   ),
+        //   icon: <ShopOutlined />
+        // }
       ]}
     />
   )

@@ -105,7 +105,7 @@ function App() {
                 </Suspense>
               }
             />
-            <Route
+            {/* <Route
               path="/store"
               element={
                 <Suspense>
@@ -120,7 +120,7 @@ function App() {
                   <Pages.HatProductsPreview />
                 </Suspense>
               }
-            />
+            /> */}
             <Route
               path="/contacts"
               element={
