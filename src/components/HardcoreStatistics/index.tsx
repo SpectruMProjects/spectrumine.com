@@ -4,6 +4,7 @@ import { Card, Spin } from 'antd'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { HardcoreStatistics as Model } from '@/models'
+import { mcConstants } from '@/constans'
 
 function formatDeaths(count: number) {
   if ([11, 12, 13, 14, 15, 17, 18, 19].includes(count)) return 'смертей'
@@ -158,8 +159,17 @@ export function HardcoreStatisticsComponent({
                   </p>
                   <p>
                     {statistics.lastDeath.issuer
-                      ? `Был убит "${statistics.lastDeath.issuer}" при помощи "${statistics.lastDeath.issue}"`
-                      : `Умер из-за "${statistics.lastDeath.issue}"`}
+                      ? `Был убит "${
+                          mcConstants[statistics.lastDeath.issuer] ??
+                          statistics.lastDeath.issuer
+                        }" при помощи "${
+                          mcConstants[statistics.lastDeath.issue] ??
+                          statistics.lastDeath.issue
+                        }"`
+                      : `Умер из-за "${
+                          mcConstants[statistics.lastDeath.issue] ??
+                          statistics.lastDeath.issue
+                        }"`}
                   </p>
                 </div>
               )}
