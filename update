@@ -1,0 +1,22 @@
+#! /bin/sh
+
+echo "Start git pullign..."
+echo ""
+git pull --force orign main
+echo "Git pullign done!"
+echo ""
+echo ""
+
+echo "Installing packages..."
+echo ""
+yarn -s install
+echo "packages installed!"
+echo ""
+echo ""
+
+echo "Start build..."
+echo ""
+yarn -s build
+echo "Build done!"
+echo ""
+echo ""
