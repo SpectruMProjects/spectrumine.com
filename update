@@ -2,7 +2,7 @@
 
 echo "Start git pullign..."
 echo ""
-git pull --force orign main
+git pull --force origin main
 echo "Git pullign done!"
 echo ""
 echo ""
