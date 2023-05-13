@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styles from './styles.module.css'
 import { useCallback } from 'react'
 import { Layout } from 'antd'
@@ -57,7 +57,8 @@ export function FooterComponent({
             }}
           >
             Наши контакты
-          </a>
+          </a> 
+          <Link to="/rules"> Правила</Link>
         </p>
       </div>
     </Layout.Footer>
