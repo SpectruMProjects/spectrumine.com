@@ -22,7 +22,7 @@ const servers = [
     name: 'Талант телепата',
     description: 'Сервер с заклинаниями. В разработке',
     icon: <img src="/images/wrench.png" className={styles['icon']} />,
-    info: ['Лицензия']
+    info: ['Лицензия', 'No SMP']
   }
 ]
 
