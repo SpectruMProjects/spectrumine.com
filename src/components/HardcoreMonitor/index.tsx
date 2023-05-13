@@ -67,7 +67,7 @@ export function HardcoreMonitorComponent({ stats }: ComponentProps) {
       <div />
       <div className={styles['hearts']}>
         {heartsArray.map((i) => (
-          <div className={styles[getClassForHeart(i)]} key={i}></div>
+          <span className={styles[getClassForHeart(i)]} key={i} />
         ))}
       </div>
       <div />
