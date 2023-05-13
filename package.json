@@ -6,13 +6,17 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:dev": "tsc && vite build --mode proddev",
     "preview": "vite preview",
     "eslint": "eslint src",
     "stylelint": "stylelint src/**/*.css",
     "lint": "eslint src; stylelint src/**/*.css",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prettier": "prettier --write ./src"
+    "prettier": "prettier --write ./src",
+    "gen:env:dev": "cp .env.example .env.development.local",
+    "gen:env:prod": "cp .env.example .env.production.local",
+    "gen:env:dev_prod": "cp .env.example .env.proddev.local"
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",

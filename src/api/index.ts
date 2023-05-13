@@ -1,9 +1,6 @@
 import axios_lib, { AxiosError } from 'axios'
 
-const url = import.meta.env.PROD
-  ? 'https://api.spectrumine.com'
-  : 'https://devapi.spectrumine.com'
-//'http://localhost:5168'
+const url = import.meta.env.VITE_BASE_URL
 const axios = axios_lib.create({ baseURL: url })
 
 export const tokens = {
