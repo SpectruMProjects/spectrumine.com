@@ -99,7 +99,17 @@ export default function HardcoreServer() {
           <a href="/formula">формулой</a>
         </p> */}
       </div>
-
+      <div className={styles['description']}>
+        <Typography.Title>
+          <p style={{ color: 'white', textAlign: 'center' }}>
+            Голосовой чат
+          </p>
+        </Typography.Title>
+        <p className={styles['description_point']}>
+          На сервере присутствует плагин PlasmoVoice для голосового общения внутри игры. Установите его на свой клиент и играйте вместе с другими
+          используя голосовой чат!
+        </p>
+      </div>
       <div className={styles['about']}>
         <Typography.Title>
           <p style={{ color: 'white', textAlign: 'center' }}>
@@ -109,8 +119,8 @@ export default function HardcoreServer() {
 
         <p className={styles['point']}>
           Сервер на Paper, дружелюбное комьюнити, полностью бесплатное
-          пользование, Discord сервер и другие плюшки. Регестрируйся и заходи на
-          сервер
+          пользование, Discord сервер и другие плюшки. Регистрируйтесь и заходите на
+          сервер!
         </p>
       </div>
     </div>

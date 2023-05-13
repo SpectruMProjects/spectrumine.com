@@ -10,7 +10,7 @@ import styles from './hatProductPreview.module.css'
 import { useParams } from 'react-router-dom'
 import { useHatProductsState } from '@/store/hatProducts'
 import { HatProduct } from '@/models'
-import { Button, Divider, Empty, Spin } from 'antd'
+import { Button, Empty, Spin } from 'antd'
 
 const AsyncHatViewer = lazy(() => import('@/components/HatViewer'))
 
