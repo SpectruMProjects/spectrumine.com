@@ -130,6 +130,14 @@ function App() {
               }
             />
             <Route
+              path="/rules"
+              element={
+                <Suspense>
+                  <Pages.Rules />
+                </Suspense>
+              }
+            />
+            <Route
               path="*"
               element={
                 <Suspense>
