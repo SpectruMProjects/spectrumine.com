@@ -19,8 +19,8 @@ const servers = [
     url: '/servers/hardcore'
   },
   {
-    name: 'Талант телепата. В разработке',
-    description: 'Сервер с заклинаниями',
+    name: 'Талант телепата',
+    description: 'Сервер с заклинаниями. В разработке',
     icon: <img src="/images/wrench.png" className={styles['icon']} />,
     info: ['Лицензия']
   }
