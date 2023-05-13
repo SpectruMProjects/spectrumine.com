@@ -4,7 +4,7 @@ import { useSetPageTitle } from '@/hooks'
 import { MailOutlined } from '@ant-design/icons'
 
 const messengers = [
-  {
+  { 
     name: 'Telegram - ',
     link: ' Наша группа',
     linkSrc: 'https://t.me/spectrumine',
