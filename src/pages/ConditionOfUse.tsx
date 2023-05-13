@@ -1,9 +1,13 @@
 import { Divider, List } from 'antd'
 import styles from './styles.module.css'
 import { useSetPageTitle } from '@/hooks'
+import { useLayoutEffect } from 'react'
 
 export default function ConditionOfUse() {
   useSetPageTitle('SpectruM - Условия пользования')
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div className={styles['condition-of-use']}>

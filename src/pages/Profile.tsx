@@ -9,13 +9,16 @@ import {
   UserDeleteOutlined,
   UsergroupDeleteOutlined
 } from '@ant-design/icons'
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import Forms from '@/components/forms'
 import { useSetPageTitle } from '@/hooks'
 import ProductsList from '@/components/ProductsList'
 
 export default function Profile() {
   useSetPageTitle('SpectruM - Профиль')
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   const [authStatus, user, logout] = useAuthPageState((s) => [
     s.authStatus,

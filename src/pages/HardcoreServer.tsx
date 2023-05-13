@@ -3,6 +3,7 @@ import styles from './styles.module.css'
 import HardcoreMonitor from '@/components/HardcoreMonitor'
 import { CopyOutlined } from '@ant-design/icons'
 import { useSetPageTitle } from '@/hooks'
+import { useLayoutEffect } from 'react'
 
 const points = [
   [
@@ -20,6 +21,9 @@ const hardcoreUrl = '185.250.36.214:10100'
 
 export default function HardcoreServer() {
   useSetPageTitle('SpectruM - Hardcore сервер')
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div className={styles['hardcore-page']}>
@@ -101,12 +105,11 @@ export default function HardcoreServer() {
       </div>
       <div className={styles['description']}>
         <Typography.Title>
-          <p style={{ color: 'white', textAlign: 'center' }}>
-            Голосовой чат
-          </p>
+          <p style={{ color: 'white', textAlign: 'center' }}>Голосовой чат</p>
         </Typography.Title>
         <p className={styles['description_point']}>
-          На сервере присутствует плагин PlasmoVoice для голосового общения внутри игры. Установите его на свой клиент и играйте вместе с другими
+          На сервере присутствует плагин PlasmoVoice для голосового общения
+          внутри игры. Установите его на свой клиент и играйте вместе с другими
           используя голосовой чат!
         </p>
       </div>
@@ -119,8 +122,8 @@ export default function HardcoreServer() {
 
         <p className={styles['point']}>
           Сервер на Paper, дружелюбное комьюнити, полностью бесплатное
-          пользование, Discord сервер и другие плюшки. Регистрируйтесь и заходите на
-          сервер!
+          пользование, Discord сервер и другие плюшки. Регистрируйтесь и
+          заходите на сервер!
         </p>
       </div>
     </div>
