@@ -7,9 +7,25 @@ import { Suspense, useEffect } from 'react'
 import Footer from '@/components/Footer'
 import { startUpdateTokenCycle } from '@/api'
 import ru from 'antd/locale/ru_RU'
+import { usePlugins } from './store/plugins'
 
 function App() {
   const auth = useAuthPageState((s) => s.auth)
+  const pluginsRoutes: {
+    path: string
+    element: JSX.Element
+  }[] = usePlugins((s) =>
+    s.plugins.reduce(
+      (acc: any, plugin) => [
+        ...acc,
+        ...(plugin
+          ?.routes?.()
+          ?.map((route) => ({ ...route, path: plugin.name + route.path })) ??
+          [])
+      ],
+      []
+    )
+  )
 
   useEffect(() => {
     startUpdateTokenCycle().then(() => {
@@ -137,6 +153,13 @@ function App() {
                 </Suspense>
               }
             />
+            {pluginsRoutes.map((route) => (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={route.element}
+              />
+            ))}
             <Route
               path="*"
               element={

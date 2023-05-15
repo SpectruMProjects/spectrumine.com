@@ -1,9 +1,9 @@
 import { Menu } from 'antd'
 import { useLocation, useNavigate } from 'react-router'
-import { HomeOutlined, ShopOutlined, UserOutlined } from '@ant-design/icons'
+import { HomeOutlined, UserOutlined } from '@ant-design/icons'
 import { useAuthPageState } from '@/store'
 import Link from 'antd/es/typography/Link'
-
+import { usePluginsMenuOptions } from '@/core'
 function onLinkClick(e: { preventDefault: () => void }) {
   e.preventDefault()
 }
@@ -12,6 +12,7 @@ export default function Header() {
   const path = useLocation().pathname
   const nav = useNavigate()
   const [user, authStatus] = useAuthPageState((s) => [s.user, s.authStatus])
+  const pluginsOptions = usePluginsMenuOptions()
 
   return (
     <Menu
@@ -55,6 +56,7 @@ export default function Header() {
                 icon: <UserOutlined />
               }
             ]),
+        ...pluginsOptions
         // {
         //   key: '/store',
         //   label: (
