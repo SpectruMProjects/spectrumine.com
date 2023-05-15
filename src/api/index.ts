@@ -1,6 +1,6 @@
 import axios_lib, { AxiosError } from 'axios'
 
-const url = "https://api.spectrumine.com"
+const url = import.meta.env.VITE_BASE_URL
 const axios = axios_lib.create({ baseURL: url })
 
 export const tokens = {
