@@ -1,42 +1,13 @@
-* {
+body {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@font-face {
-  font-family: Manrope;
-  src: url('/fonts/Manrope.ttf');
-  font-weight: normal;
-  font-style: normal;
-}
-
-body * {
-  font-family: Manrope, system-ui;
-}
-
-:root {
-  --bg-color: #1e1e2e;
-}
-
-#root,
-body,
-html {
-  height: 100%;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-.hardcore-heart-icon {
-  background-image: url('/images/hcheart.png');
-}
-
-.ant-message-custom-content {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5em;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
