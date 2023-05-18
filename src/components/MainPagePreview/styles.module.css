@@ -1,7 +1,7 @@
 .block {
   min-height: calc(100vh - 64px);
   width: 100%;
-  background-image: url('images/bg-main.png');
+  background-image: url('/images/bg-main.png');
   background-size: cover;
   background-position: center;
   image-rendering: pixelated;
