@@ -50,7 +50,7 @@ export default function Header() {
                 key: '/auth',
                 label: (
                   <Link onClick={onLinkClick} href="/auth">
-                    Авторизация
+                    Войти
                   </Link>
                 ),
                 icon: <UserOutlined />

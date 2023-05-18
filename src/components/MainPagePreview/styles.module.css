@@ -1,63 +1,85 @@
-.main-page-preview {
-  height: calc(100vh - 64px);
+.block {
+  min-height: calc(100vh - 64px);
   width: 100%;
-  background-image: url('/images/bg-main.webp');
+  background-image: url('images/bg-main.png');
   background-size: cover;
   background-position: center;
   image-rendering: pixelated;
   color: white;
-  font-size: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.header {
-  font-size: 4vh;
-  text-transform: uppercase;
-}
-
-.info {
-  padding: 0 10vw;
-  text-transform: uppercase;
-  height: 3dvh;
-  font-size: 3.5vw;
-  font-weight: 400;
+.greeting {
+  font-size: 26pt;
+  margin-bottom: 120px;
   text-align: center;
 }
 
-.to-servers {
-  color: #ff4d4f !important;
-  border: #ff4d4f solid 4px;
-  background-color: #001529d0;
-  border-radius: 10vw;
-  padding: 15px 50px;
-  text-transform: uppercase;
-  margin: 150px 0;
-  margin-bottom: 2em;
-  font-size: x-large;
-  transition: transform 0.5s;
-  cursor: pointer;
-}
-
-.to-servers:hover {
-  transform: scale(1.05);
-}
-
 .logo {
-  margin: 0 32px;
-  transform: scale(0.8);
+  scale: 1.2;
 }
 
-@media (orientation: portrait) {
-  .info {
-    font-size: 3.5vh;
+@media (width <= 1000px) {
+  .logo {
+    scale: 1;
   }
 }
 
-@media (width <= 600px) {
-  .to-servers {
-    font-size: large;
+@media (width <= 800px) {
+  .logo {
+    scale: 0.8;
   }
+
+  .greeting {
+    font-size: 20pt;
+  }
+}
+
+@media (width <= 620px) {
+  .logo {
+    scale: 0.6;
+  }
+}
+
+@media (width <= 480px) {
+  .logo {
+    scale: 0.5;
+  }
+}
+
+@media (width <= 400px) {
+  .logo {
+    scale: 0.4;
+  }
+
+  .greeting {
+    font-size: 18pt;
+  }
+}
+
+@media (width <= 340px) {
+  .logo {
+    scale: 0.3;
+  }
+
+  .greeting {
+    font-size: 16pt;
+  }
+}
+
+.to-servers {
+  width: 200px;
+  height: 60px;
+  cursor: pointer;
+  background-color: #FFFFFF40;
+  border: 1px solid #FFF;
+  border-radius: 100px;
+  font-size: 16pt;;
+}
+
+.to-servers > a {
+  color: white;
 }

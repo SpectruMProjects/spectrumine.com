@@ -11,7 +11,7 @@ export default function Main() {
   }, [])
 
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       <MainPagePreview />
       <Servers />
     </div>
