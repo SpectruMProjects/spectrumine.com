@@ -1,4 +1,4 @@
-import { Button, Card, Form, Input, message } from 'antd'
+import { Button, Card, Form, Input, Typography, message } from 'antd'
 import { Rule } from 'antd/es/form'
 import { useAuthPageState } from '@/store'
 import { useState } from 'react'
@@ -85,7 +85,7 @@ export default function Register() {
   return (
     <div>
     <div style={{display: 'flex', justifyContent: 'center'}}>
-    <h1 style={{color: 'whitesmoke', paddingBottom:'0.5em'}}>Регистрация</h1>
+    <Typography.Title>Регистрация</Typography.Title>
     </div>
     <Card style={{ padding: 28 }}>
       <Form form={form} onFinish={onFinish}>

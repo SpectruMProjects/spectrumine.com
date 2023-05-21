@@ -1,4 +1,4 @@
-import { Button, Card, Form, Input, message } from 'antd'
+import { Button, Card, Form, Input, Typography, message } from 'antd'
 import { Rule } from 'antd/es/form'
 import { useNavigate } from 'react-router-dom'
 import { useAuthPageState } from '../../store'
@@ -43,7 +43,7 @@ export default function Login() {
   return (
     <div>
     <div style={{display: 'flex', justifyContent: 'center'}}>
-    <h1 style={{color: 'whitesmoke', paddingBottom:'0.5em'}}>Войти</h1>
+    <Typography.Title>Войти</Typography.Title>
     </div>
     <Card style={{ padding: 28 }}>
       <Form form={form} onFinish={onFinish}>
