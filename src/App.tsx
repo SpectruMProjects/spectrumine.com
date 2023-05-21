@@ -47,10 +47,12 @@ function App() {
       <Layout style={{ minHeight: '100%' }}>
         <Layout.Header
           style={{
-            position: 'sticky',
+            position: 'fixed',
             top: 0,
             zIndex: 1,
-            width: '100%'
+            width: '100%',
+            backgroundColor: 'transparent',
+            backdropFilter: 'blur(16px)',
           }}
         >
           <Header />

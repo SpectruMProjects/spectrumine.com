@@ -16,6 +16,7 @@ export default function Header() {
 
   return (
     <Menu
+      style={{ backgroundColor: 'transparent' }}
       theme="dark"
       mode="horizontal"
       selectedKeys={[path]}
