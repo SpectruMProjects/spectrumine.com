@@ -12,11 +12,11 @@ const hardcoreUrl = '185.250.36.214:10100'
 const points = [
   { icon: '/icons/server.svg', title: 'О сервере', description: 'Ванильный геймплей, минимальное количество плагинов. Только хардкор! Платите за свою смерть временем потраченным на сервере.' },
   
-  { icon: '/icons/headphones.svg', title: 'Голосовой сат', description: <>На сервере присутствует плагин <a href='https://plasmovoice.com/'>PlasmoVoice</a> для голосового общения внутри игры.</> },
+  { icon: '/icons/headphones.svg', title: 'Голосовой сат', description: 'На сервере присутствует плагин PlasmoVoice для голосового общения внутри игры.' },
   
   { icon: '/icons/gears.svg', title: 'Как работает?', description: 'Мы сделали плагин, который даёт возможность возродиться спустя время, которое вы провели на сервере.' },
 
-  { icon: '/icons/discord.svg', title: 'Сообщество', description: <>Дружелюбное комьюнити. <Link to='https://discord.gg/w2Ks8HFPDJ'>Discord</Link> сервер и другие плюшки. Регистрируйтесь и заходите на сервер!</> },
+  { icon: '/icons/discord.svg', title: 'Сообщество', description: <>Дружелюбное комьюнити. Discord сервер и другие плюшки. Регистрируйтесь и заходите на сервер!</> },
 ]
 
 export default function HardcoreServer() {
@@ -26,7 +26,7 @@ export default function HardcoreServer() {
   }, [])
 
   return (
-    <div className={styles['hardcore-page']}>
+    <div className={styles['hardcore-page'] + ' ' + sls['page']}>
       <div className={styles['points__dup']}>
         <Typography.Title>
           <p className={styles['points__title']}>
