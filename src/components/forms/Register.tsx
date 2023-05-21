@@ -123,6 +123,7 @@ export default function Register() {
         <Form.Item>
           <div>
             <Button
+            shape='round'
               type="primary"
               htmlType="submit"
               style={{ marginRight: 30 }}

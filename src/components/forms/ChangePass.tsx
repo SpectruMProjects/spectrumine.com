@@ -58,6 +58,7 @@ export default function ChangePass() {
         <Form.Item>
           <div>
             <Button
+              shape='round'
               type="primary"
               htmlType="submit"
               style={{ marginRight: 30 }}

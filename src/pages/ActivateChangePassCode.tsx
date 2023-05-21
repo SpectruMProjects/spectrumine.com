@@ -42,6 +42,7 @@ export default function ActivateChangePassCode() {
 
       <div>
         <Button
+          shape='round'
           loading={state == 'process'}
           type="primary"
           disabled={state != 'unknown'}

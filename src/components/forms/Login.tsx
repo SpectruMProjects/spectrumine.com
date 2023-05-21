@@ -53,6 +53,7 @@ export default function Login() {
 
         <Form.Item>
           <Button
+            shape='round'
             type="primary"
             htmlType="submit"
             style={{ marginRight: 30 }}

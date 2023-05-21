@@ -49,7 +49,7 @@ export default function Profile() {
       <div className={styles['centered-page']} style={{ padding: '2em' }}>
         <Card style={{ height: 'fit-content' }}>
           <Typography.Title>Вы не авторизованы</Typography.Title>
-          <Button type="primary" onClick={() => nav('/auth')}>
+          <Button shape='round' type="primary" onClick={() => nav('/auth')}>
             Войти
           </Button>
         </Card>
@@ -70,6 +70,7 @@ export default function Profile() {
 
         <div className={styles['profile-page__user__buttons']}>
           <Button
+            shape='round'
             type={isChangePassOpened ? 'default' : 'primary'}
             size="large"
             icon={isChangePassOpened ? <DownOutlined /> : <EditOutlined />}
@@ -79,6 +80,7 @@ export default function Profile() {
           </Button>
 
           <Button
+            shape='round'
             type="primary"
             size="large"
             style={{ backgroundColor: '#f5222d' }}
@@ -89,6 +91,7 @@ export default function Profile() {
           </Button>
 
           <Button
+            shape='round'
             type="primary"
             size="large"
             style={{ backgroundColor: '#f5222d' }}

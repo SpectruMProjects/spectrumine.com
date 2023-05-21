@@ -21,7 +21,7 @@ export default function Main() {
       >
         <Card style={{ height: 'fit-content' }}>
           <Typography.Title>Вы не авторизованы</Typography.Title>
-          <Button type="primary" onClick={() => nav('/auth')}>
+          <Button shape='round' type="primary" onClick={() => nav('/auth')}>
             Войти
           </Button>
         </Card>
