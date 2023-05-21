@@ -1,10 +1,10 @@
 import { Menu } from 'antd'
 import { useLocation, useNavigate } from 'react-router'
-import { HomeOutlined, UserOutlined } from '@ant-design/icons'
 import { useAuthPageState } from '@/store'
 import Link from 'antd/es/typography/Link'
 import { usePluginsMenuOptions } from '@/core'
 import styles from './styles.module.css'
+import './global.css'
 function onLinkClick(e: { preventDefault: () => void }) {
   e.preventDefault()
 }
@@ -31,7 +31,7 @@ export default function Header() {
               Главная
             </Link>
           ),
-          icon: <HomeOutlined />
+          icon: <img width='32' height='32' src='/icons/home.svg' alt='home'/>
         },
         { type: 'divider', style: { flex: 1, margin: 0, border: 0 } },
         ...(['process', 'unknown'].includes(authStatus)
@@ -45,7 +45,7 @@ export default function Header() {
                     Профиль
                   </Link>
                 ),
-                icon: <UserOutlined />
+                icon: <img width='32' height='32' src='/icons/user-profile.svg' alt='profile'/>
               }
             ]
           : [
@@ -56,7 +56,7 @@ export default function Header() {
                     Войти
                   </Link>
                 ),
-                icon: <UserOutlined />
+                icon: <img width='32' height='32' src='/icons/user-profile.svg' alt='profile'/>
               }
             ]),
         ...pluginsOptions

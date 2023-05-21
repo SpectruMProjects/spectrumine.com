@@ -40,7 +40,7 @@ function App() {
         {
           algorithm: theme.darkAlgorithm,
           token: {
-            colorPrimary: 'f5222d',
+            colorPrimary: '13c2c2',
             colorBgBase: '141414'
           }
         }

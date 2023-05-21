@@ -15,6 +15,18 @@
   font-weight: bold;
 }
 
+@media (width <= 550px) {
+  .online > * {
+    font-size: 1em;
+  }
+}
+
+@media (width <= 320px) {
+  .online > * {
+    font-size: 0.7em;
+  }
+}
+
 .block__in {
   display: flex;
   text-align: center;
