@@ -32,7 +32,8 @@ export default function HardcoreServer() {
             Vanilla <span>Hardcore</span> SMP
           </p>
         </Typography.Title>
-
+        <br/>
+        <br/>
         <a
           href={hardcoreUrl}
           className={styles['hardcore-page__ip']}
@@ -48,7 +49,7 @@ export default function HardcoreServer() {
               })
           }}
         >
-          Скопировать IP <CopyOutlined />
+          IP Адрес <CopyOutlined />
         </a>
       </div>
 
