@@ -1,4 +1,4 @@
-import { ConfigProvider, Layout } from 'antd'
+import { ConfigProvider, Layout, theme } from 'antd'
 import Header from './components/Header'
 import { Route, Routes } from 'react-router'
 import Pages from './pages'
@@ -38,9 +38,11 @@ function App() {
       locale={ru}
       theme={
         {
-          // token: {
-          //   colorPrimary: '#5A4545'
-          // }
+          algorithm: theme.darkAlgorithm,
+          token: {
+            colorPrimary: 'f5222d',
+            colorBgBase: '141414'
+          }
         }
       }
     >

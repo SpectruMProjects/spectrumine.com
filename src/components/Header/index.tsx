@@ -4,6 +4,7 @@ import { HomeOutlined, UserOutlined } from '@ant-design/icons'
 import { useAuthPageState } from '@/store'
 import Link from 'antd/es/typography/Link'
 import { usePluginsMenuOptions } from '@/core'
+import styles from './styles.module.css'
 function onLinkClick(e: { preventDefault: () => void }) {
   e.preventDefault()
 }
@@ -20,6 +21,7 @@ export default function Header() {
       theme="dark"
       mode="horizontal"
       selectedKeys={[path]}
+      className={styles['menu']}
       onSelect={(i) => nav(i.key)}
       items={[
         {

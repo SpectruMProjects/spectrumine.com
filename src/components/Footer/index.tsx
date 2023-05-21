@@ -28,12 +28,7 @@ export function FooterComponent({
   onClickContacts
 }: ComponentProps) {
   return (
-    <Layout.Footer
-      style={{
-        backgroundColor: '#1f1f1f',
-        // borderTop: 'white solid 1px'
-      }}
-    >
+    <Layout.Footer>
       <div className={styles['block']}>
         <p>
           Организация не имеет никакого отношения к Mojang AB, не нарушает
