@@ -11,16 +11,18 @@
 }
 
 .server {
+  position: relative;
   background-size: cover;
   background-size: 300%;
   background-position: center;
   image-rendering: pixelated;
   border-radius: 16px;
-  transition: transform 0.1s ease-out;
+  box-shadow: #FFFFFF30 0 2px 4px 0;
+  transition: all 0.3s ease-out;
 }
-.server:hover{
-  transition: transform 0.05s ease-out;
-  transform: scale(1.02);
+
+.server:hover {
+  box-shadow: #FFFFFF60 0 2px 16px 0;
 }
 
 .container {
