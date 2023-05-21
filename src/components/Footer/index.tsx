@@ -30,8 +30,8 @@ export function FooterComponent({
   return (
     <Layout.Footer
       style={{
-        backgroundColor: '#001529',
-        borderTop: 'white solid 1px'
+        backgroundColor: '#1f1f1f',
+        // borderTop: 'white solid 1px'
       }}
     >
       <div className={styles['block']}>
