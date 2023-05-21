@@ -29,7 +29,8 @@
   background-size: 100%;
   background-repeat: no-repeat;
 }
-.hearts > * {
+
+/* .hearts > * {
   position: relative;
   animation: bounce 4s ease-out infinite alternate;
 }
@@ -65,7 +66,7 @@
   100% {
     bottom: 0;
   }
-}
+} */
 
 .hearts .active {
   background-image: url('/images/hcheart.png');
