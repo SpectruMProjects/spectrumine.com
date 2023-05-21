@@ -9,9 +9,9 @@ const HardcoreServer = lazy(() => import('./HardcoreServer'))
 const ConditionOfUse = lazy(() => import('./ConditionOfUse'))
 const ActivateChangePassCode = lazy(() => import('./ActivateChangePassCode'))
 const UserHardcoreStatistics = lazy(() => import('./UserHardcoreStatistics'))
-const Store = lazy(() => import('./Store'))
+// const Store = lazy(() => import('./Store'))
 const Contacts = lazy(() => import('./Contacts'))
-const HatProductsPreview = lazy(() => import('./HatProductsPreview'))
+// const HatProductsPreview = lazy(() => import('./HatProductsPreview'))
 const Rules = lazy(() => import('./Rules'))
 
 export default {
@@ -24,8 +24,8 @@ export default {
   ConditionOfUse,
   ActivateChangePassCode,
   UserHardcoreStatistics,
-  Store,
+  // Store,
   Contacts,
-  HatProductsPreview,
+  // HatProductsPreview,
   Rules
 }
