@@ -1,0 +1,44 @@
+.points {
+  display: flex;
+  flex-wrap: wrap;
+  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+  flex-direction: row;
+  justify-content: space-between;
+  row-gap: 2em;
+}
+
+@media (width <= 600px) {
+  .points {
+    justify-content: center;
+  }
+}
+
+.point {
+  width: 240px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em; 
+}
+
+.icon, .title {
+  text-align: start;
+  width: 100%;
+}
+
+.icon {
+  width: 160px;
+  height: 160px;
+}
+
+.title {
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.description {
+  display: block;
+  font-size: 1.2em;
+}
