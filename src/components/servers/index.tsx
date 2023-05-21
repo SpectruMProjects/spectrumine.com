@@ -5,7 +5,7 @@ const servers = [
   {
     name: 'SpectruMSteam',
     description: 'Сервер с модами. Create и SMP! В разработке...',
-    icon: <img src="/images/wrench.png" className={styles['icon']} />,
+    icon: "/images/wrench.png",
     info: ['Без лицензии', 'Моды', 'SMP']
   },
   {
@@ -14,14 +14,14 @@ const servers = [
       'Мечтали поиграть в хардкор с друьзьями? ' +
       'Теперь ваша мечта сбылась! ' +
       'Минимальное количество плагинов, вы платите за свою смерть временем',
-    icon: <img src="/images/hcheart.png" className={styles['icon']} />,
+    icon: "/images/hcheart.png",
     info: ['1.19.4', 'Лицензия', 'Режим хардкор', 'SMP'],
     url: '/servers/hardcore'
   },
   {
     name: 'Талант телепата',
     description: 'Сервер с заклинаниями. В разработке',
-    icon: <img src="/images/wrench.png" className={styles['icon']} />,
+    icon: "/images/wrench.png",
     info: ['Лицензия', 'No SMP']
   }
 ]
