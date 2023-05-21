@@ -29,6 +29,43 @@
   background-size: 100%;
   background-repeat: no-repeat;
 }
+.hearts > * {
+  position: relative;
+  animation: bounce 4s ease-out infinite alternate;
+}
+
+.hearts span:nth-child(1) { animation-delay: .1s; }
+.hearts span:nth-child(2) { animation-delay: .2s; }
+.hearts span:nth-child(3) { animation-delay: .3s; }
+.hearts span:nth-child(4) { animation-delay: .4s; }
+.hearts span:nth-child(5) { animation-delay: .5s; }
+.hearts span:nth-child(6) { animation-delay: .6s; }
+.hearts span:nth-child(7) { animation-delay: .7s; }
+.hearts span:nth-child(8) { animation-delay: .8s; }
+.hearts span:nth-child(9) { animation-delay: .9s; }
+.hearts span:nth-child(10) { animation-delay: 1s; }
+
+@keyframes bounce {
+  0% {
+    bottom: 0;
+  }
+  
+  48% {
+    bottom: 0;
+  }
+
+  50% {
+    bottom: 2em;
+  }
+  
+  52% {
+    bottom: 0;
+  }
+
+  100% {
+    bottom: 0;
+  }
+}
 
 .hearts .active {
   background-image: url('/images/hcheart.png');
