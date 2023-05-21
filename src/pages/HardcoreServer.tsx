@@ -28,16 +28,15 @@ export default function HardcoreServer() {
   return (
     <div className={styles['hardcore-page'] + ' ' + sls['page']}>
       <div className={styles['points__dup']}>
-        <Typography.Title>
+        <Typography.Title style={{ display: 'inline' }}>
           <p className={styles['points__title']}>
             Vanilla <span>Hardcore</span> SMP
           </p>
         </Typography.Title>
-      </div>
-      <h1 className={styles['hardcore-page__ip']}>
+
         <a
-          style={{ textAlign: 'center' }}
           href={hardcoreUrl}
+          className={styles['hardcore-page__ip']}
           onClick={(e) => {
             e.preventDefault()
             navigator.clipboard
@@ -52,7 +51,7 @@ export default function HardcoreServer() {
         >
           Скопировать IP <CopyOutlined />
         </a>
-      </h1>
+      </div>
 
       <HardcoreMonitor />
 

@@ -4,15 +4,17 @@
 } */
 
 .points {
+  margin-top: 120px;
   display: flex;
   flex-wrap: wrap;
   /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
   flex-direction: row;
   justify-content: space-between;
   row-gap: 4em;
+  gap: 3em;
 }
 
-@media (width <= 600px) {
+@media (width <= 840px) {
   .points {
     justify-content: center;
   }

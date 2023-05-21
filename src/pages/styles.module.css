@@ -13,7 +13,11 @@
 }
 
 .hardcore-page > * {
-  margin: 8vh 16vw;
+  margin: 1em 16vw;
+}
+
+.hardcore-page > *:nth-child(1) {
+  margin-top: calc(64px + 1em);
 }
 
 @media (width <= 700px) {
@@ -56,6 +60,14 @@
 
 .points__dup .points__title {
   color: white;
+  display: inline;
+  margin-right: 2em;
+}
+
+@media (width <= 1050px) {
+  .points__dup .points__title {
+    margin-right: 0;
+  } 
 }
 
 .points__dup .points__title span {
@@ -143,8 +155,16 @@
 }
 
 .hardcore-page__ip {
+  display: inline;
   font-size: 2em;
   font-weight: bold;
+}
+
+@media (width <= 1050px) {
+  .hardcore-page__ip {
+    display: block;
+    text-align: left;
+  } 
 }
 
 @media (width <= 700px) {
