@@ -53,7 +53,7 @@ export default function Header() {
                 key: '/auth',
                 label: (
                   <Link onClick={onLinkClick} href="/auth">
-                    Войти
+                    Регистрация/Вход
                   </Link>
                 ),
                 icon: <img width='32' height='32' src='/icons/user-profile.svg' alt='profile'/>
