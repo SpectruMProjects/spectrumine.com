@@ -7,5 +7,5 @@ jobs:
     steps:
       - run: cd ~/development/front/ &&  git reset --hard
       - run: cd ~/development/front/ &&  git pull --force origin dev
-      - run: cd ~/development/front/ && npm i
-      - run: cd ~/development/front && npm run build:dev
+      - run: cd ~/development/front/ && yarn
+      - run: cd ~/development/front && yarn build:dev
