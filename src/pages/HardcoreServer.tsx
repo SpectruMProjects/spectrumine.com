@@ -5,14 +5,13 @@ import HardcoreMonitor from '@/components/HardcoreMonitor'
 import { CopyOutlined } from '@ant-design/icons'
 import { useSetPageTitle } from '@/hooks'
 import { useLayoutEffect } from 'react'
-import { Link } from 'react-router-dom'
 
 const hardcoreUrl = '185.250.36.214:10100'
 
 const points = [
   { icon: '/icons/server.svg', title: 'О сервере', description: 'Ванильный геймплей, минимальное количество плагинов. Только хардкор! Платите за свою смерть временем потраченным на сервере.' },
   
-  { icon: '/icons/headphones.svg', title: 'Голосовой сат', description: 'На сервере присутствует плагин PlasmoVoice для голосового общения внутри игры.' },
+  { icon: '/icons/headphones.svg', title: 'Голосовой чат', description: 'На сервере присутствует плагин PlasmoVoice для голосового общения внутри игры.' },
   
   { icon: '/icons/gears.svg', title: 'Как работает?', description: 'Мы сделали плагин, который даёт возможность возродиться спустя время, которое вы провели на сервере.' },
 
