@@ -73,7 +73,7 @@ export default function Register() {
         setUsernameW(result == 'error')
         setUsernameH(
           result == 'error'
-            ? 'Не существует аккаунта с этим ником в Monang'
+            ? 'Не существует аккаунта с этим ником у Mojang'
             : undefined
         )
       })
@@ -83,6 +83,10 @@ export default function Register() {
   )
 
   return (
+    <div>
+    <div style={{display: 'flex', justifyContent: 'center'}}>
+    <h1 style={{color: 'whitesmoke', paddingBottom:'0.5em'}}>Регистрация</h1>
+    </div>
     <Card style={{ padding: 28 }}>
       <Form form={form} onFinish={onFinish}>
         <Form.Item
@@ -106,7 +110,7 @@ export default function Register() {
           <Input
             type="email"
             placeholder="Почта"
-            autoComplete="email"
+            autoComplete="mail"
             allowClear
           />
         </Form.Item>
@@ -140,5 +144,6 @@ export default function Register() {
         </Form.Item>
       </Form>
     </Card>
+    </div>
   )
 }

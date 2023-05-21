@@ -41,6 +41,10 @@ export default function Login() {
   }
 
   return (
+    <div>
+    <div style={{display: 'flex', justifyContent: 'center'}}>
+    <h1 style={{color: 'whitesmoke', paddingBottom:'0.5em'}}>Войти</h1>
+    </div>
     <Card style={{ padding: 28 }}>
       <Form form={form} onFinish={onFinish}>
         <Form.Item name="identifier" rules={rules.identifier} required>
@@ -75,5 +79,6 @@ export default function Login() {
         </Form.Item>
       </Form>
     </Card>
+    </div>
   )
 }
