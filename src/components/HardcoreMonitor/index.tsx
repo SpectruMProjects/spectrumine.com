@@ -1,6 +1,7 @@
 import { useHardcoreMonitor } from '@/hooks'
 import Progress from 'antd/lib/progress'
 import styles from './styles.module.css'
+import { Typography } from 'antd'
 
 function percent(max: number, current: number) {
   return current / (max / 100)
@@ -64,15 +65,17 @@ export function HardcoreMonitorComponent({ stats }: ComponentProps) {
 
   return (
     <div className={styles['block']}>
-      <div />
+      <div className={styles['online']}>
+        <Typography.Text>0</Typography.Text>
+        <Typography.Text>{stats.max}</Typography.Text>
+      </div>
+
       <div className={styles['hearts']}>
         {heartsArray.map((i) => (
           <span className={styles[getClassForHeart(i)]} key={i} />
         ))}
       </div>
-      <div />
 
-      <p>0</p>
       <div className={styles['block__in']}>
         {stats.current != 0 &&
           stats.current != stats.max &&
@@ -80,7 +83,6 @@ export function HardcoreMonitorComponent({ stats }: ComponentProps) {
             i == latI ? <span key={i}>{stats.current}</span> : <span key={i} />
           )}
       </div>
-      <p>{stats.max}</p>
     </div>
   )
 }
