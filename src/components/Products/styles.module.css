@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  border-radius: 16px;
 }
 
 .hat__info {

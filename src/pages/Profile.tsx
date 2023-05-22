@@ -16,7 +16,7 @@ import { useUserTheme } from '@/store/theme'
 // import ProductsList from '@/components/ProductsList'
 
 export default function Profile() {
-  const locale = useUserTheme(s => s.locale.profile)
+  const locale = useUserTheme((s) => s.locale.profile)
   useSetPageTitle(locale.pageTitle)
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
@@ -51,7 +51,7 @@ export default function Profile() {
       <div className={styles['centered-page']} style={{ padding: '2em' }}>
         <Card style={{ height: 'fit-content' }}>
           <Typography.Title>{locale.needAuth}</Typography.Title>
-          <Button shape='round' type="primary" onClick={() => nav('/auth')}>
+          <Button type="primary" onClick={() => nav('/auth')}>
             {locale.auth}
           </Button>
         </Card>
@@ -72,7 +72,6 @@ export default function Profile() {
 
         <div className={styles['profile-page__user__buttons']}>
           <Button
-            shape='round'
             type={isChangePassOpened ? 'default' : 'primary'}
             size="large"
             icon={isChangePassOpened ? <DownOutlined /> : <EditOutlined />}
@@ -82,7 +81,6 @@ export default function Profile() {
           </Button>
 
           <Button
-            shape='round'
             type="primary"
             size="large"
             style={{ backgroundColor: '#f5222d' }}
@@ -93,7 +91,6 @@ export default function Profile() {
           </Button>
 
           <Button
-            shape='round'
             type="primary"
             size="large"
             style={{ backgroundColor: '#f5222d' }}

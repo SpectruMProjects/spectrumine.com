@@ -76,14 +76,14 @@
   cursor: pointer;
   background-color: #FFFFFF40;
   border: 1px solid #FFF;
-  border-radius: 100px;
-  font-size: 16pt;;
+  font-size: 16pt;
   transition: transform 0.1s ease-out;
 }
 
 .to-servers > a {
   color: white;
 }
+
 .to-servers:hover{
   transition: transform 0.1s ease-out;
   transform: scale(1.05);

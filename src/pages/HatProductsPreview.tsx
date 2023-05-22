@@ -72,7 +72,7 @@ export function HatProductsPreviewComponent({ hat }: ComponentProps) {
           <span className={styles['price']}>{hat.price}</span>
           <span className={styles['description']}>{hat.description}</span>
           <div className={styles['divider']} />
-          <Button type="primary" size="large" shape="round">
+          <Button type="primary" size="large">
             Купить
           </Button>
         </div>

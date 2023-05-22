@@ -17,7 +17,11 @@ export default function Header() {
   const nav = useNavigate()
   const [user, authStatus] = useAuthPageState((s) => [s.user, s.authStatus])
   // const pluginsOptions = usePluginsMenuOptions()
-  const [setLang, setColorTheme, locale] = useUserTheme(s => [s.setLang, s.setColor, s.locale.header])
+  const [setLang, setColorTheme, locale] = useUserTheme((s) => [
+    s.setLang,
+    s.setColor,
+    s.locale.header
+  ])
 
   return (
     <Menu
@@ -28,13 +32,15 @@ export default function Header() {
       className={styles['menu']}
       onSelect={(i) => i.key.startsWith('@') || nav(i.key)}
       overflowedIndicator={
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'center', 
-          alignItems: 'center', 
-          height: 64 
-        }}>
-          <img width='28' height='28' src='/icons/list.svg' alt='more'/>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: 64
+          }}
+        >
+          <img width="28" height="28" src="/icons/list.svg" alt="more" />
         </div>
       }
       items={[
@@ -45,7 +51,7 @@ export default function Header() {
               {locale.main}
             </Link>
           ),
-          icon: <img width='28' height='28' src='/icons/home.svg' alt='home'/>
+          icon: <img width="28" height="28" src="/icons/home.svg" alt="home" />
         },
         { type: 'divider', style: { flex: 1, margin: 0, border: 0 } },
         ...(['process', 'unknown'].includes(authStatus)
@@ -59,7 +65,14 @@ export default function Header() {
                     {locale.profile}
                   </Link>
                 ),
-                icon: <img width='28' height='28' src='/icons/user-profile.svg' alt='profile'/>
+                icon: (
+                  <img
+                    width="28"
+                    height="28"
+                    src="/icons/user-profile.svg"
+                    alt="profile"
+                  />
+                )
               }
             ]
           : [
@@ -70,13 +83,20 @@ export default function Header() {
                     {locale.auth}
                   </Link>
                 ),
-                icon: <img width='28' height='28' src='/icons/user-profile.svg' alt='profile'/>
+                icon: (
+                  <img
+                    width="28"
+                    height="28"
+                    src="/icons/user-profile.svg"
+                    alt="profile"
+                  />
+                )
               }
             ]),
-        { 
+        {
           key: '@locale',
-          label: locale.lang, 
-          children: locales.locales.map(key => ({
+          label: locale.lang,
+          children: locales.locales.map((key) => ({
             key: `@locale-${key}`,
             label: locales.localesNames[key],
             onClick() {
@@ -87,18 +107,23 @@ export default function Header() {
         {
           key: '@color',
           label: locale.theme,
-          children: colors.map(color => ({
+          children: colors.map((color) => ({
             key: `@color-${color}`,
             label: color,
-            icon: <span style={{ 
-              width: 28, 
-              height: 28, 
-              borderRadius: 8,
-              backgroundColor: colorsMap[color] 
-            }}/>,
-            onClick(){ setColorTheme(color) }
+            icon: (
+              <span
+                style={{
+                  width: 28,
+                  height: 28,
+                  backgroundColor: colorsMap[color]
+                }}
+              />
+            ),
+            onClick() {
+              setColorTheme(color)
+            }
           }))
-        },
+        }
         // ...pluginsOptions
         // {
         //   key: '/store',

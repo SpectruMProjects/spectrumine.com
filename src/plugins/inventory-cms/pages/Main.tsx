@@ -21,7 +21,7 @@ export default function Main() {
       >
         <Card style={{ height: 'fit-content' }}>
           <Typography.Title>Вы не авторизованы</Typography.Title>
-          <Button shape='round' type="primary" onClick={() => nav('/auth')}>
+          <Button type="primary" onClick={() => nav('/auth')}>
             Войти
           </Button>
         </Card>
@@ -35,11 +35,7 @@ interface ComponentProps {
   userId: string
 }
 function Component({ userId }: ComponentProps) {
-  const [items, status, load] = useUserItems((s) => [
-    s.items,
-    s.loadItemsStatus,
-    s.loadItems
-  ])
+  const [items, load] = useUserItems((s) => [s.items, s.loadItems])
 
   useEffect(() => {
     load(userId)
