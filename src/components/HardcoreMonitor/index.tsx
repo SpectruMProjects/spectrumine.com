@@ -62,6 +62,9 @@ export function HardcoreMonitorComponent({ stats }: ComponentProps) {
     latI = i
     return 'active-on-half'
   }
+  const heartClasses = Array(10)
+    .fill(0)
+    .map((_, i) => styles[getClassForHeart(i)])
 
   return (
     <div className={styles['block']}>
@@ -72,16 +75,14 @@ export function HardcoreMonitorComponent({ stats }: ComponentProps) {
 
       <div className={styles['hearts']}>
         {heartsArray.map((i) => (
-          <span className={styles[getClassForHeart(i)]} key={i} />
+          <span className={heartClasses[i]} key={i}>
+            {stats.current != 0 && stats.current != stats.max && i == latI ? (
+              <div key={i}>{stats.current}</div>
+            ) : (
+              <div key={i} />
+            )}
+          </span>
         ))}
-      </div>
-
-      <div className={styles['block__in']}>
-        {stats.current != 0 &&
-          stats.current != stats.max &&
-          heartsArray.map((i) =>
-            i == latI ? <span key={i}>{stats.current}</span> : <span key={i} />
-          )}
       </div>
     </div>
   )
