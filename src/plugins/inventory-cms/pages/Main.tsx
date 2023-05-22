@@ -45,9 +45,11 @@ function Component({ userId }: ComponentProps) {
 
   return (
     <div className={styles['page']}>
-      {items?.map((i) => (
-        <UserItem item={i} key={i.item.id} />
-      ))}
+      <div className={styles['items']}>
+        {items?.map((i) => (
+          <UserItem item={i} key={i.item.id} />
+        ))}
+      </div>
     </div>
   )
 }
