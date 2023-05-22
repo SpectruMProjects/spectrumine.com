@@ -23,6 +23,16 @@ export default function Header() {
       selectedKeys={[path]}
       className={styles['menu']}
       onSelect={(i) => nav(i.key)}
+      overflowedIndicator={
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center', 
+          height: 64 
+        }}>
+          <img width='28' height='28' src='/icons/list.svg' alt='more'/>
+        </div>
+      }
       items={[
         {
           key: '/',
@@ -31,7 +41,7 @@ export default function Header() {
               Главная
             </Link>
           ),
-          icon: <img width='32' height='32' src='/icons/home.svg' alt='home'/>
+          icon: <img width='28' height='28' src='/icons/home.svg' alt='home'/>
         },
         { type: 'divider', style: { flex: 1, margin: 0, border: 0 } },
         ...(['process', 'unknown'].includes(authStatus)
@@ -45,7 +55,7 @@ export default function Header() {
                     Профиль
                   </Link>
                 ),
-                icon: <img width='32' height='32' src='/icons/user-profile.svg' alt='profile'/>
+                icon: <img width='28' height='28' src='/icons/user-profile.svg' alt='profile'/>
               }
             ]
           : [
@@ -53,10 +63,10 @@ export default function Header() {
                 key: '/auth',
                 label: (
                   <Link onClick={onLinkClick} href="/auth">
-                    Регистрация/Вход
+                    Войти
                   </Link>
                 ),
-                icon: <img width='32' height='32' src='/icons/user-profile.svg' alt='profile'/>
+                icon: <img width='28' height='28' src='/icons/user-profile.svg' alt='profile'/>
               }
             ]),
         ...pluginsOptions
