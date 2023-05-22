@@ -10,6 +10,10 @@ export interface Locale {
   name: string
   code: string
 
+  words: {
+    unknownError: string
+  }
+
   mainPagePreview: {
     greeting: string
     toServers: string
@@ -23,6 +27,50 @@ export interface Locale {
 
   forms: {
     register: string
+    successRegister: string
+    change: string
+    login: string
+    'noAccount?': string
+    'hasAccount?': string
+    'forgotPassword?': string
+
+    email: {
+      placeholder: string
+      checkMailbox: string
+      rules: {
+        required: string
+        valid: string
+      }
+    }
+
+    password: {
+      placeholder: string
+      newPlaceholder: string
+      rules: {
+        required: string
+        between(min: number, max: number): string
+        mustContainNumbersAndUppercase: string
+      }
+    }
+
+    identifier: {
+      placeholder: string
+      rules: {
+        required: string
+      }
+    }
+
+    username: {
+      placeholder: string
+      rules: {
+        required: string
+        between(min: number, max: number): string
+        latinAndNumbers: string
+      }
+      warnings: {
+        noMojangAccount: string
+      }
+    }
   }
 
   footer: {

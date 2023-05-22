@@ -4,6 +4,10 @@ const ru: Locale = {
   name: 'Русский',
   code: 'ru',
 
+  words: {
+    unknownError: 'Неизвестная ошибка'
+  },
+
   mainPagePreview: {
     greeting: 'Платформа лицензионных серверов Minecraft',
     toServers: 'К серверам'
@@ -36,7 +40,52 @@ const ru: Locale = {
   },
 
   forms: {
-    register: 'Регистрация'
+    register: 'Регистрация',
+    successRegister: 'Аккаунт ушёл на подтверждение! Проверьте почту',
+    change: 'Изменить',
+    login: 'Войти',
+    'noAccount?': 'Нет аккаунта?',
+    'hasAccount?': 'Есть аккаунт?',
+    'forgotPassword?': 'Забыли пароль?',
+    email: {
+      placeholder: 'Почта',
+      checkMailbox: 'Проверьте почту',
+      rules: {
+        required: 'Почта обязательна',
+        valid: 'Введите валидную почту'
+      }
+    },
+    password: {
+      placeholder: 'Пароль',
+      newPlaceholder: 'Новый пароль',
+      rules: {
+        required: 'Пароль обязателен',
+        mustContainNumbersAndUppercase:
+          'Пароль должен содержать цифры, прописные и заглавные буквы',
+        between(min, max) {
+          return `Пароль должен быть длинее ${min} и короче ${max}`
+        }
+      }
+    },
+    identifier: {
+      placeholder: 'Ник или почта',
+      rules: {
+        required: 'Ник или почта обязателен'
+      }
+    },
+    username: {
+      placeholder: 'Ник в майнкрафте',
+      rules: {
+        required: 'Ник обязателен',
+        between(min, max) {
+          return `Ник должен быть длинее ${min} и короче ${max}`
+        },
+        latinAndNumbers: 'Ник должен содержать только латинские буквы и цифры'
+      },
+      warnings: {
+        noMojangAccount: 'Не существует аккаунта с этим ником у Mojang'
+      }
+    }
   },
 
   footer: {

@@ -1,20 +1,9 @@
-import { Button, Card, Form, Input, Typography, message } from 'antd'
-import { Rule } from 'antd/es/form'
+import { Button, Card, Form, Typography, message } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { useAuthPageState } from '../../store'
 import { UserOutlined } from '@ant-design/icons'
-
-const rules: Record<'identifier' | 'password', Rule[]> = {
-  identifier: [{ required: true, message: 'Ник или почта обязателен' }],
-  password: [
-    { required: true, message: 'Пароль обязателен' },
-    { min: 8, max: 32, message: 'Пароль должен быть длинее 8 и короче 32' },
-    {
-      pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/,
-      message: 'Пароль должен содержать цифры, прописные и заглавные буквы'
-    }
-  ]
-}
+import Inputs from './inputs'
+import { useUserTheme } from '@/store/theme'
 
 interface Form {
   identifier: string
@@ -22,6 +11,10 @@ interface Form {
 }
 
 export default function Login() {
+  const [locale, localeWords] = useUserTheme((s) => [
+    s.locale.forms,
+    s.locale.words
+  ])
   const [login, status] = useAuthPageState((s) => [s.login, s.loginStatus])
   const [form] = Form.useForm<Form>()
   const nav = useNavigate()
@@ -35,50 +28,45 @@ export default function Login() {
       } else if (code == 'error') {
         message.error(res[1])
       } else {
-        message.error('Неизвестная ошибка')
+        message.error(localeWords.unknownError)
       }
     })
   }
 
   return (
     <div>
-    <div style={{display: 'flex', justifyContent: 'center'}}>
-    <Typography.Title>Войти</Typography.Title>
-    </div>
-    <Card style={{ padding: 28 }}>
-      <Form form={form} onFinish={onFinish}>
-        <Form.Item name="identifier" rules={rules.identifier} required>
-          <Input placeholder="Ник или почта" />
-        </Form.Item>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Typography.Title>{locale.login}</Typography.Title>
+      </div>
+      <Card style={{ padding: 28 }}>
+        <Form form={form} onFinish={onFinish}>
+          <Inputs.Identifier />
+          <Inputs.Password />
 
-        <Form.Item name="password" rules={rules.password} required>
-          <Input type="password" placeholder="Пароль" />
-        </Form.Item>
+          <Form.Item>
+            <Button
+              shape="round"
+              type="primary"
+              htmlType="submit"
+              style={{ marginRight: 30 }}
+              loading={status == 'process'}
+              icon={<UserOutlined />}
+            >
+              {locale.login}
+            </Button>
+          </Form.Item>
 
-        <Form.Item>
-          <Button
-            shape='round'
-            type="primary"
-            htmlType="submit"
-            style={{ marginRight: 30 }}
-            loading={status == 'process'}
-            icon={<UserOutlined />}
-          >
-            Войти
-          </Button>
-        </Form.Item>
+          <Form.Item>
+            <Button type="link" onClick={() => switchToRegister()}>
+              {locale['noAccount?']}
+            </Button>
 
-        <Form.Item>
-          <Button type="link" onClick={() => switchToRegister()}>
-            Нет аккаунта?
-          </Button>
-
-          <Button type="link" onClick={() => switchToRegister('change pass')}>
-            Забыли пароль?
-          </Button>
-        </Form.Item>
-      </Form>
-    </Card>
+            <Button type="link" onClick={() => switchToRegister('change pass')}>
+              {locale['forgotPassword?']}
+            </Button>
+          </Form.Item>
+        </Form>
+      </Card>
     </div>
   )
 }
