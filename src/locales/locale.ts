@@ -41,6 +41,7 @@ export interface Locale {
   }
 
   conditionOfUse: {
+    pageTitle: string
     definitions: string
     conditions: [string, string[]][]
   }
@@ -102,5 +103,17 @@ export interface Locale {
     changePass: string
     logOut: string
     logOutFromAllDevices: string
+  }
+
+  userHardcoreStatistics: {
+    pageTitle: string
+  }
+
+  auth: {
+    pageTitle: string
+  }
+
+  main: {
+    pageTitle: string
   }
 }

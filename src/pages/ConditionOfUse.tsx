@@ -6,11 +6,11 @@ import {Typography} from 'antd'
 import { useUserTheme } from '@/store/theme'
 
 export default function ConditionOfUse() {
-  useSetPageTitle('SpectruM - Условия пользования')
+  const locale = useUserTheme(s => s.locale.conditionOfUse)
+  useSetPageTitle(locale.pageTitle)
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
   }, [])
-  const locale = useUserTheme(s => s.locale.conditionOfUse)
 
   return (
     <div className={styles['condition-of-use']}>

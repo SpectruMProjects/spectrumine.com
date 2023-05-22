@@ -55,6 +55,7 @@ const ru: Locale = {
   },
 
   conditionOfUse: {
+    pageTitle: 'SpectruM - Условия пользования',
     definitions:
       'Пользователь, игрок – Физическое лицо использующее проект. Проект – Вся платформа, включая сайт, игровые сервера, лаунчер и т.п.',
     conditions: [
@@ -322,6 +323,18 @@ const ru: Locale = {
     changePass: 'Изменить пароль',
     logOut: 'Выйти',
     logOutFromAllDevices: 'Выйти со всех устройств'
+  },
+
+  userHardcoreStatistics: {
+    pageTitle: 'SpectrumM - Статистика'
+  },
+
+  auth: {
+    pageTitle: 'SpectruM - Авторизация'
+  },
+
+  main: {
+    pageTitle: 'SpectruM - Сервера Minecraft'
   }
 }
 export default ru
