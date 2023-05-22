@@ -12,6 +12,7 @@ import Preloader from './components/Preloader'
 const App = lazy(() => import('./App'))
 
 window.onload = () => {
+  document.querySelector('.body_1111')?.remove()
   if (import.meta.env.DEV) {
     ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <React.StrictMode>

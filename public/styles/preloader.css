@@ -1,4 +1,4 @@
-.body {
+.body_1111 {
 	position: static;
 	top: 0;
   background-color: #141414;
@@ -8,7 +8,7 @@
   position: relative;
 }
 
-.scene {
+.scene_1111 {
   position: relative;
   z-index: 2;
   height: 220px;
@@ -17,18 +17,18 @@
   place-items: center;
 }
 
-.cube-wrapper {
+.cube-wrapper_1111 {
   transform-style: preserve-3d;
-  animation: bouncing 2s infinite;
+  animation: bouncing_11 2s infinite;
 }
 
-.cube {
+.cube_111 {
   transform-style: preserve-3d;
   transform: rotateX(45deg) rotateZ(45deg);
-  animation: rotation 2s infinite;
+  animation: rotation_11 2s infinite;
 }
 
-.cube-faces {
+.cube-faces_1111 {
   transform-style: preserve-3d;
   height: 80px;
   width: 80px;
@@ -37,43 +37,43 @@
   transform: translateX(0) translateY(0) translateZ(-40px);
 }
 
-.cube-face {
+.cube-face_111 {
   position: absolute;
   inset: 0;
   background: #ff8484ff;
   border: solid 1px #141414;
 }
 
-.cube-face.shadow {
+.cube-face_111.shadow_1111 {
   transform: translateZ(-80px);
   animation: bouncing-shadow 2s infinite;
 }
 
-.cube-face.top {
+.cube-face_111.top_111 {
   transform: translateZ(80px);
 }
 
-.cube-face.front {
+.cube-face_111.front_111 {
   transform-origin: 0 50%;
   transform: rotateY(-90deg);
 }
 
-.cube-face.back {
+.cube-face_111.back_111 {
   transform-origin: 0 50%;
   transform: rotateY(-90deg) translateZ(-80px);
 }
 
-.cube-face.right {
+.cube-face_111.right_111 {
   transform-origin: 50% 0;
   transform: rotateX(-90deg) translateY(-80px);
 }
 
-.cube-face.left {
+.cube-face_111.left_111 {
   transform-origin: 50% 0;
   transform: rotateX(-90deg) translateY(-80px) translateZ(80px);
 }
 
-@keyframes rotation {
+@keyframes rotation_11 {
   0% {
     transform: rotateX(45deg) rotateY(0) rotateZ(45deg);
     animation-timing-function: cubic-bezier(0.17, 0.84, 0.44, 1);
@@ -90,7 +90,7 @@
   }
 }
 
-@keyframes bouncing {
+@keyframes bouncing_11 {
   0% {
     transform: translateY(-40px);
     animation-timing-function: cubic-bezier(0.76, 0.05, 0.86, 0.06);
