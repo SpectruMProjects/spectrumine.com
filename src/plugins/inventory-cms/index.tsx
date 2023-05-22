@@ -1,5 +1,4 @@
 import { Plugin } from '@/core'
-import { Suspense } from 'react'
 import Pages from './pages'
 import { DropboxOutlined } from '@ant-design/icons'
 
@@ -12,11 +11,7 @@ export const inventoryCmsPlugin: Plugin = {
     return [
       {
         path: '/',
-        element: (
-          <Suspense>
-            <Pages.Main />
-          </Suspense>
-        )
+        element: <Pages.Main />
       }
     ]
   }

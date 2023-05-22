@@ -1,26 +1,34 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
+import Preloader from './components/Preloader'
 // import { inventoryCmsPlugin } from './plugins'
 // import { usePlugins } from './store/plugins'
 
 // const pluginsState = usePlugins.getState()
 // pluginsState.addPlugin(inventoryCmsPlugin)
 
-if (import.meta.env.DEV) {
-  ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-    <React.StrictMode>
+const App = lazy(() => import('./App'))
+
+window.onload = () => {
+  if (import.meta.env.DEV) {
+    ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+      <React.StrictMode>
+        <BrowserRouter>
+          <Suspense fallback={<Preloader />}>
+            <App />
+          </Suspense>
+        </BrowserRouter>
+      </React.StrictMode>
+    )
+  } else {
+    ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <BrowserRouter>
-        <App />
+        <Suspense fallback={<Preloader />}>
+          <App />
+        </Suspense>
       </BrowserRouter>
-    </React.StrictMode>
-  )
-} else {
-  ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  )
+    )
+  }
 }

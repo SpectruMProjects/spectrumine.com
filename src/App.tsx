@@ -10,14 +10,14 @@ import { usePlugins } from './store/plugins'
 import { useUserTheme } from './store/theme'
 
 export const colorsMap = {
-  'Blue': '#1677ff',
-  'Purple': '#722ed1',
-  'Cyan': '#13c2c2',
-  'Pink': '#eb2f96',
-  'Red': '#f5222d',
-  'Yellow': '#fadb14',
-  'Orange': '#fa541c',
-  'LightGreen': '#a0d911'
+  Blue: '#1677ff',
+  Purple: '#722ed1',
+  Cyan: '#13c2c2',
+  Pink: '#eb2f96',
+  Red: '#f5222d',
+  Yellow: '#fadb14',
+  Orange: '#fa541c',
+  LightGreen: '#a0d911'
 }
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
       []
     )
   )
-  const [loadLang, color] = useUserTheme(s => [s.preloadLang, s.color])
+  const [loadLang, color] = useUserTheme((s) => [s.preloadLang, s.color])
 
   useEffect(() => {
     startUpdateTokenCycle().then(() => {
@@ -48,15 +48,13 @@ function App() {
 
   return (
     <ConfigProvider
-      theme={
-        {
-          algorithm: theme.darkAlgorithm,
-          token: {
-            colorPrimary: colorsMap[color],
-            colorBgBase: '141414'
-          }
+      theme={{
+        algorithm: theme.darkAlgorithm,
+        token: {
+          colorPrimary: colorsMap[color],
+          colorBgBase: '141414'
         }
-      }
+      }}
     >
       <Layout style={{ minHeight: '100%' }}>
         <Layout.Header
@@ -66,76 +64,35 @@ function App() {
             zIndex: 1,
             width: '100%',
             backgroundColor: 'transparent',
-            backdropFilter: 'blur(16px)',
+            backdropFilter: 'blur(16px)'
           }}
         >
           <Header />
         </Layout.Header>
         <Layout.Content style={{ display: 'flex' }}>
           <Routes>
-            <Route
-              path="/"
-              element={
-                <Suspense>
-                  <Pages.Main />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/auth"
-              element={
-                <Suspense>
-                  <Pages.Auth />
-                </Suspense>
-              }
-            />
+            <Route path="/" element={<Pages.Main />} />
+            <Route path="/auth" element={<Pages.Auth />} />
             <Route
               path="/auth/activate-register/:code"
-              element={
-                <Suspense>
-                  <Pages.ActivateRegisterCode />
-                </Suspense>
-              }
+              element={<Pages.ActivateRegisterCode />}
             />
             <Route
               path="/auth/activate-change-pass/:code"
-              element={
-                <Suspense>
-                  <Pages.ActivateChangePassCode />
-                </Suspense>
-              }
+              element={<Pages.ActivateChangePassCode />}
             />
-            <Route
-              path="/profile"
-              element={
-                <Suspense>
-                  <Pages.Profile />
-                </Suspense>
-              }
-            />
+            <Route path="/profile" element={<Pages.Profile />} />
             <Route
               path="/servers/hardcore"
-              element={
-                <Suspense>
-                  <Pages.HardcoreServer />
-                </Suspense>
-              }
+              element={<Pages.HardcoreServer />}
             />
             <Route
               path="/condition-of-use"
-              element={
-                <Suspense>
-                  <Pages.ConditionOfUse />
-                </Suspense>
-              }
+              element={<Pages.ConditionOfUse />}
             />
             <Route
               path="/hardcore/statistics/:username"
-              element={
-                <Suspense>
-                  <Pages.UserHardcoreStatistics />
-                </Suspense>
-              }
+              element={<Pages.UserHardcoreStatistics />}
             />
             {/* <Route
               path="/store"
@@ -153,22 +110,8 @@ function App() {
                 </Suspense>
               }
             /> */}
-            <Route
-              path="/contacts"
-              element={
-                <Suspense>
-                  <Pages.Contacts />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/rules"
-              element={
-                <Suspense>
-                  <Pages.Rules />
-                </Suspense>
-              }
-            />
+            <Route path="/contacts" element={<Pages.Contacts />} />
+            <Route path="/rules" element={<Pages.Rules />} />
             {pluginsRoutes.map((route) => (
               <Route
                 key={route.path}
@@ -176,14 +119,7 @@ function App() {
                 element={route.element}
               />
             ))}
-            <Route
-              path="*"
-              element={
-                <Suspense>
-                  <Pages.NotFound />
-                </Suspense>
-              }
-            />
+            <Route path="*" element={<Pages.NotFound />} />
           </Routes>
         </Layout.Content>
         <Footer />
