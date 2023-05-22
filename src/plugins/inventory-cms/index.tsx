@@ -1,11 +1,26 @@
 import { Plugin } from '@/core'
 import Pages from './pages'
-import { DropboxOutlined } from '@ant-design/icons'
+import { useUserTheme } from '@/store/theme'
 
 export const inventoryCmsPlugin: Plugin = {
   name: 'inventory-cms',
   menuOptions() {
-    return [{ key: '/', label: 'Инвентарь', icon: <DropboxOutlined /> }]
+    const locale = useUserTheme((s) => s.locale.inventoryCms.inventory)
+
+    return [
+      {
+        key: '/',
+        label: locale,
+        icon: (
+          <img
+            width="28"
+            height="28"
+            src="/icons/backpack.svg"
+            alt="inventory"
+          />
+        )
+      }
+    ]
   },
   routes() {
     return [

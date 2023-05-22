@@ -8,7 +8,7 @@ export function usePluginsMenuOptions() {
         ...acc,
         ...(cur?.menuOptions?.() ?? []).map((item) => ({
           ...item,
-          key: cur.name + item?.key
+          key: '/' + cur.name + item?.key
         }))
       ],
       []

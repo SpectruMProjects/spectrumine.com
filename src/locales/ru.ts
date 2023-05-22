@@ -398,6 +398,10 @@ const ru: Locale = {
 
   main: {
     pageTitle: 'SpectruM - Сервера Minecraft'
+  },
+
+  inventoryCms: {
+    inventory: 'Инветарь'
   }
 }
 export default ru

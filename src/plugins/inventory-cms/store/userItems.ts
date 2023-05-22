@@ -1,19 +1,9 @@
 import { create } from 'zustand'
 import * as api from '../api'
+import { UserItem } from '../models'
 
 interface UserItemsState {
-  items:
-    | {
-        count: number
-        item: {
-          id: string
-          name: string
-          description: string
-          imgUrl?: string
-          meta?: string
-        }
-      }[]
-    | null
+  items: UserItem[] | null
 
   loadItemsStatus: 'unknown' | 'process' | 'ok' | 'error'
 
@@ -35,13 +25,14 @@ export const useUserItems = create<UserItemsState>((set, get) => ({
       case 'ok':
         set({
           loadItemsStatus: 'ok',
-          items: res.items.map((i) => ({
-            ...i,
-            item: {
-              ...i.item,
-              id: i.item.id.toString()
-            }
-          }))
+          items: res.items.map(
+            (i) =>
+              new UserItem(
+                userId,
+                { ...i.item, id: i.item.id.toString() },
+                i.count
+              )
+          )
         })
         return 'ok'
 
