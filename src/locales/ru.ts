@@ -1,4 +1,3 @@
-import { changePass } from '@/api'
 import { Locale } from './locale'
 
 const ru: Locale = {
@@ -127,6 +126,7 @@ const ru: Locale = {
   },
 
   contacts: {
+    pageTitle: 'SpectruM - Контакты',
     messengersTitle: 'Мессенджеры',
     messengers: [
       {
@@ -267,6 +267,11 @@ const ru: Locale = {
     logOutFromAllDevices: 'Выйти со всех устройств',
     changePass: 'Изменить пароль',
     toMain: 'На главную'
+  },
+
+  activateRegisterCode: {
+    pageTitle: 'SpectruM - Подтверждение регистрации',
+    loadTip: 'Подтверждение регистрации'
   }
 }
 export default ru

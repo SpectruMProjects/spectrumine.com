@@ -5,8 +5,8 @@ import { MailOutlined } from '@ant-design/icons'
 import { useUserTheme } from '@/store/theme'
 
 export default function Contacts() {
-  useSetPageTitle('SpectruM - Контакты')
   const locale = useUserTheme(s => s.locale.contacts)
+  useSetPageTitle(locale.pageTitle)
 
   return (
     <div className={styles['contacts-page']}>

@@ -46,6 +46,7 @@ export interface Locale {
   }
 
   contacts: {
+    pageTitle: string
     messengersTitle: string
     messengers: {
       name: string
@@ -72,5 +73,10 @@ export interface Locale {
     logOutFromAllDevices: string
     changePass: string
     toMain: string
+  }
+
+  activateRegisterCode: {
+    pageTitle: string
+    loadTip: string
   }
 }
