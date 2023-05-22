@@ -6,8 +6,8 @@ import { useAuthPageState } from './store'
 import { Suspense, useEffect } from 'react'
 import Footer from '@/components/Footer'
 import { startUpdateTokenCycle } from '@/api'
-import ru from 'antd/locale/ru_RU'
 import { usePlugins } from './store/plugins'
+import { useUserTheme } from './store/theme'
 
 function App() {
   const auth = useAuthPageState((s) => s.auth)
@@ -26,16 +26,17 @@ function App() {
       []
     )
   )
+  const loadLang = useUserTheme(s => s.preloadLang)
 
   useEffect(() => {
     startUpdateTokenCycle().then(() => {
       auth()
     })
+    loadLang()
   }, [])
 
   return (
     <ConfigProvider
-      locale={ru}
       theme={
         {
           algorithm: theme.darkAlgorithm,

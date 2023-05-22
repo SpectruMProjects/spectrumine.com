@@ -5,6 +5,8 @@ import Link from 'antd/es/typography/Link'
 import { usePluginsMenuOptions } from '@/core'
 import styles from './styles.module.css'
 import './global.css'
+import { useUserTheme } from '@/store/theme'
+import locales from '@/locales'
 function onLinkClick(e: { preventDefault: () => void }) {
   e.preventDefault()
 }
@@ -14,6 +16,7 @@ export default function Header() {
   const nav = useNavigate()
   const [user, authStatus] = useAuthPageState((s) => [s.user, s.authStatus])
   const pluginsOptions = usePluginsMenuOptions()
+  const [locale, setLang] = useUserTheme(s => [s.locale, s.setLang])
 
   return (
     <Menu
@@ -22,7 +25,7 @@ export default function Header() {
       mode="horizontal"
       selectedKeys={[path]}
       className={styles['menu']}
-      onSelect={(i) => nav(i.key)}
+      onSelect={(i) => i.key.startsWith('@') || nav(i.key)}
       overflowedIndicator={
         <div style={{ 
           display: 'flex', 
@@ -69,6 +72,17 @@ export default function Header() {
                 icon: <img width='28' height='28' src='/icons/user-profile.svg' alt='profile'/>
               }
             ]),
+        { 
+          key: '@locale',
+          label: 'Язык', 
+          children: locales.locales.map(key => ({
+            key: `@locale-${key}`,
+            label: locales.localesNames[key],
+            onClick() {
+              setLang(key)
+            }
+          }))
+        },
         ...pluginsOptions
         // {
         //   key: '/store',

@@ -4,6 +4,7 @@ import { useAuthPageState } from '@/store'
 import { useState } from 'react'
 import { useDebounce } from '@/core'
 import { UserAddOutlined } from '@ant-design/icons'
+import { useUserTheme } from '@/store/theme'
 
 const rules: Record<'username' | 'email' | 'password', Rule[]> = {
   username: [
@@ -42,6 +43,7 @@ export default function Register() {
   ])
   const [form] = Form.useForm<Form>()
   const switchToLogin = useAuthPageState((s) => s.switchType)
+  const locale = useUserTheme(s => s.locale.forms)
 
   function onFinish(data: Form) {
     register(data).then((result) => {
@@ -85,7 +87,7 @@ export default function Register() {
   return (
     <div>
     <div style={{display: 'flex', justifyContent: 'center'}}>
-    <Typography.Title>Регистрация</Typography.Title>
+    <Typography.Title>{locale.register}</Typography.Title>
     </div>
     <Card style={{ padding: 28 }}>
       <Form form={form} onFinish={onFinish}>
