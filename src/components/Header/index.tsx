@@ -1,4 +1,4 @@
-import { Avatar, Menu } from 'antd'
+import { Menu } from 'antd'
 import { useLocation, useNavigate } from 'react-router'
 import { useAuthPageState } from '@/store'
 import Link from 'antd/es/typography/Link'

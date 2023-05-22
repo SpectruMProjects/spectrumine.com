@@ -39,4 +39,9 @@ export interface Locale {
     lang: string
     theme: string
   }
+
+  conditionOfUse: {
+    definitions: string
+    conditions: [string, string[]][]
+  }
 }
