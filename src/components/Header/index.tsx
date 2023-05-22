@@ -17,7 +17,7 @@ export default function Header() {
   const nav = useNavigate()
   const [user, authStatus] = useAuthPageState((s) => [s.user, s.authStatus])
   // const pluginsOptions = usePluginsMenuOptions()
-  const [setLang, setColorTheme] = useUserTheme(s => [s.setLang, s.setColor])
+  const [setLang, setColorTheme, locale] = useUserTheme(s => [s.setLang, s.setColor, s.locale.header])
 
   return (
     <Menu
@@ -42,7 +42,7 @@ export default function Header() {
           key: '/',
           label: (
             <Link onClick={onLinkClick} href="/">
-              Главная
+              {locale.main}
             </Link>
           ),
           icon: <img width='28' height='28' src='/icons/home.svg' alt='home'/>
@@ -56,7 +56,7 @@ export default function Header() {
                 key: '/profile',
                 label: (
                   <Link onClick={onLinkClick} href="/profile">
-                    Профиль
+                    {locale.profile}
                   </Link>
                 ),
                 icon: <img width='28' height='28' src='/icons/user-profile.svg' alt='profile'/>
@@ -67,7 +67,7 @@ export default function Header() {
                 key: '/auth',
                 label: (
                   <Link onClick={onLinkClick} href="/auth">
-                    Войти
+                    {locale.auth}
                   </Link>
                 ),
                 icon: <img width='28' height='28' src='/icons/user-profile.svg' alt='profile'/>
@@ -75,7 +75,7 @@ export default function Header() {
             ]),
         { 
           key: '@locale',
-          label: 'Язык', 
+          label: locale.lang, 
           children: locales.locales.map(key => ({
             key: `@locale-${key}`,
             label: locales.localesNames[key],
@@ -86,7 +86,7 @@ export default function Header() {
         },
         {
           key: '@color',
-          label: 'Тема',
+          label: locale.theme,
           children: colors.map(color => ({
             key: `@color-${color}`,
             label: color,

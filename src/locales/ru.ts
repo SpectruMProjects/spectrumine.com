@@ -44,6 +44,14 @@ const ru: Locale = {
     conditionOfUse: 'Условия пользования',
     contacts: 'Наши контакты',
     rules: 'Правила'
+  },
+
+  header: {
+    main: 'Главная',
+    lang: 'Язык',
+    profile: 'Профиль',
+    auth: 'Войти',
+    theme: 'Тема'
   }
 }
 export default ru

@@ -31,4 +31,12 @@ export interface Locale {
     contacts: string
     rules: string
   }
+
+  header: {
+    main: string
+    auth: string
+    profile: string
+    lang: string
+    theme: string
+  }
 }
