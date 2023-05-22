@@ -64,4 +64,13 @@ export interface Locale {
     pageTitle: string
     rules: [string, string[]][]
   }
+
+  activateChangePass: {
+    pageTitle: string
+    passwordChanged: string
+    error: string
+    logOutFromAllDevices: string
+    changePass: string
+    toMain: string
+  }
 }

@@ -4,9 +4,11 @@ import { Button, Checkbox, Divider, message } from 'antd'
 import { useChangePassState } from '@/store/changePass'
 import { useState } from 'react'
 import { useSetPageTitle } from '@/hooks'
+import { useUserTheme } from '@/store/theme'
 
 export default function ActivateChangePassCode() {
-  useSetPageTitle('SpectruM - Подтверждение смены пароля')
+  const locale = useUserTheme(s => s.locale.activateChangePass)
+  useSetPageTitle(locale.pageTitle)
 
   const { code } = useParams()
   const [activate, state] = useChangePassState((s) => [s.activate, s.state])
@@ -17,12 +19,12 @@ export default function ActivateChangePassCode() {
     code &&
       activate(code, logout).then((status) => {
         if (status[0] == 'ok') {
-          message.success('Пароль изменён')
+          message.success(locale.passwordChanged)
           nav('/')
         } else if (status[0] == 'error') {
           message.error(status[1])
         } else {
-          message.error('Не удалось изменить пароль')
+          message.error(locale.passwordChanged)
         }
       })
   }
@@ -37,7 +39,7 @@ export default function ActivateChangePassCode() {
         defaultChecked
         onChange={() => setLogout((l) => !l)}
       >
-        Выйти со всех устройств
+        {locale.logOutFromAllDevices}
       </Checkbox>
 
       <div>
@@ -48,13 +50,13 @@ export default function ActivateChangePassCode() {
           disabled={state != 'unknown'}
           onClick={onClick}
         >
-          Изменить пароль
+          {locale.changePass}
         </Button>
 
         <Divider type="vertical" />
 
         <Button type="link" onClick={() => nav('/')}>
-          На главную
+          {locale.toMain}
         </Button>
       </div>
     </div>

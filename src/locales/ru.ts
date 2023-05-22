@@ -1,3 +1,4 @@
+import { changePass } from '@/api'
 import { Locale } from './locale'
 
 const ru: Locale = {
@@ -257,6 +258,15 @@ const ru: Locale = {
         ]
       ]
     ]
+  },
+
+  activateChangePass: {
+    pageTitle: 'SpectruM - Подтверждение смены пароля',
+    passwordChanged: 'Пароль изменён',
+    error: 'Не удалось изменить пароль',
+    logOutFromAllDevices: 'Выйти со всех устройств',
+    changePass: 'Изменить пароль',
+    toMain: 'На главную'
   }
 }
 export default ru
