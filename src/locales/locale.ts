@@ -24,4 +24,11 @@ export interface Locale {
   forms: {
     register: string
   }
+
+  footer: {
+    text: string
+    conditionOfUse: string
+    contacts: string
+    rules: string
+  }
 }

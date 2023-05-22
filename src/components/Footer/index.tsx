@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import styles from './styles.module.css'
 import { useCallback } from 'react'
 import { Layout } from 'antd'
+import { useUserTheme } from '@/store/theme'
 
 export default function Footer() {
   const nav = useNavigate()
@@ -27,13 +28,13 @@ export function FooterComponent({
   onClickConditionOfUse,
   onClickContacts
 }: ComponentProps) {
+  const locale = useUserTheme(s => s.locale.footer)
+  
   return (
     <Layout.Footer>
       <div className={styles['block']}>
         <p>
-          Организация не имеет никакого отношения к Mojang AB, не нарушает
-          принципы EULA. Все права на игру принадлежат Mojang AB. Весь остальной
-          контент принадлежит команде {'"Спектрум"'}.
+          {locale.text}
           <a
             href="/condition-of-use"
             onClick={(e) => {
@@ -41,8 +42,7 @@ export function FooterComponent({
               onClickConditionOfUse()
             }}
           >
-            {' '}
-            Условия пользования.{' '}
+            {' '+locale.conditionOfUse+' '}
           </a>
           <a
             href="/contacts"
@@ -51,9 +51,9 @@ export function FooterComponent({
               onClickContacts()
             }}
           >
-            Наши контакты
+            {locale.contacts}
           </a> 
-          <Link to="/rules"> Правила</Link>
+          <Link to="/rules"> {locale.rules}</Link>
         </p>
       </div>
     </Layout.Footer>
