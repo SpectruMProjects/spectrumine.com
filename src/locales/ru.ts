@@ -313,6 +313,15 @@ const ru: Locale = {
     text(path) {
       return `Страница ${path} не найдена`
     }
+  },
+
+  profile: {
+    pageTitle: 'SpectruM - Профиль',
+    needAuth: 'Вы не авторизованы',
+    auth: 'Войти',
+    changePass: 'Изменить пароль',
+    logOut: 'Выйти',
+    logOutFromAllDevices: 'Выйти со всех устройств'
   }
 }
 export default ru

@@ -12,10 +12,12 @@ import {
 import { useLayoutEffect, useState } from 'react'
 import Forms from '@/components/forms'
 import { useSetPageTitle } from '@/hooks'
+import { useUserTheme } from '@/store/theme'
 // import ProductsList from '@/components/ProductsList'
 
 export default function Profile() {
-  useSetPageTitle('SpectruM - Профиль')
+  const locale = useUserTheme(s => s.locale.profile)
+  useSetPageTitle(locale.pageTitle)
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -48,9 +50,9 @@ export default function Profile() {
     return (
       <div className={styles['centered-page']} style={{ padding: '2em' }}>
         <Card style={{ height: 'fit-content' }}>
-          <Typography.Title>Вы не авторизованы</Typography.Title>
+          <Typography.Title>{locale.needAuth}</Typography.Title>
           <Button shape='round' type="primary" onClick={() => nav('/auth')}>
-            Войти
+            {locale.auth}
           </Button>
         </Card>
       </div>
@@ -76,7 +78,7 @@ export default function Profile() {
             icon={isChangePassOpened ? <DownOutlined /> : <EditOutlined />}
             onClick={() => setIsChangePassOpened((i) => !i)}
           >
-            Изменить пароль
+            {locale.changePass}
           </Button>
 
           <Button
@@ -87,7 +89,7 @@ export default function Profile() {
             icon={<UserDeleteOutlined />}
             onClick={logout}
           >
-            Выйти
+            {locale.logOut}
           </Button>
 
           <Button
@@ -98,7 +100,7 @@ export default function Profile() {
             icon={<UsergroupDeleteOutlined />}
             onClick={logout}
           >
-            Выйти со всех устройств
+            {locale.logOutFromAllDevices}
           </Button>
 
           {isChangePassOpened && <Divider type="horizontal" />}

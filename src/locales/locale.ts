@@ -94,4 +94,13 @@ export interface Locale {
     pageTitle: string
     text(path: string): string
   }
+
+  profile: {
+    pageTitle: string
+    needAuth: string
+    auth: string
+    changePass: string
+    logOut: string
+    logOutFromAllDevices: string
+  }
 }
