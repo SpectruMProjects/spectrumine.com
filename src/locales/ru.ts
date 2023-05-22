@@ -8,6 +8,20 @@ const ru: Locale = {
     unknownError: 'Неизвестная ошибка'
   },
 
+  messages: {
+    unknownErrorOccurred: 'Произошла неизвестная ошибка',
+    userNotFound: 'Пользователь не найден',
+    accountNotActivated: 'Аккакунт не активирован',
+    incorrectPassword: 'Неверный пароль',
+    accountWithSameNicknameAlreadyExists:
+      'Аккаунт с таким ником уже существует',
+    invalidForm: 'Неправильно заполнена форма',
+    accountWithSameEmailAlreadyExists: 'Аккаунт с такой почтой уже существует',
+    accountWithSameNicknameNotExistsInMojang:
+      'Аккаунта не существует со стороны Mojang',
+    codeExpired: 'Срок действия кода истёк'
+  },
+
   mainPagePreview: {
     greeting: 'Платформа лицензионных серверов Minecraft',
     toServers: 'К серверам'

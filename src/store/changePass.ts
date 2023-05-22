@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { activateChangePass } from '@/api'
 import * as api from '@/api'
+import { useUserTheme } from './theme'
 
 interface ChangePassState {
   state: 'unknown' | 'process' | 'ok' | 'error'
@@ -21,6 +22,7 @@ export const useChangePassState = create<ChangePassState>((set, get) => ({
     if (logoutAnywhere) await api.logoutAnywhere()
 
     const res = await activateChangePass(code)
+    const locale = useUserTheme.getState().locale.messages
 
     switch (res.code) {
       case 'ok':
@@ -29,15 +31,15 @@ export const useChangePassState = create<ChangePassState>((set, get) => ({
 
       case 'CodeExpire':
         set({ state: 'error' })
-        return ['error', 'Срок действия кода истёк']
+        return ['error', locale.codeExpired]
 
       case 'UserNotFound':
         set({ state: 'error' })
-        return ['error', 'Пользователь не найден']
+        return ['error', locale.userNotFound]
 
       case 'error':
         set({ state: 'error' })
-        return ['error', 'Произошла неизвестная ошибка при изменении пароля']
+        return ['error', locale.unknownErrorOccurred]
 
       default:
         set({ state: 'unknown' })

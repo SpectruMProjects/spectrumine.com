@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { User } from '../models'
 import * as api from '../api'
+import { useUserTheme } from './theme'
 
 interface Register {
   username: string
@@ -41,12 +42,6 @@ interface AuthPageState {
   changePass(newPassword: string, email?: string): Promise<ResStatus>
 }
 
-const messages = {
-  error: 'Произошла неизвестная ошибка',
-  codeExpire: 'Срок действия кода истёк',
-  userNotFound: 'Пользователь не найден'
-}
-
 export const useAuthPageState = create<AuthPageState>((set, get) => ({
   user: null,
 
@@ -71,6 +66,8 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     set({ registerStatus: 'process' })
 
     const res = await api.register(data)
+    const locale = useUserTheme.getState().locale.messages
+
     switch (res.code) {
       case 'ok': {
         set({ registerStatus: 'ok' })
@@ -78,23 +75,23 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
       }
       case 'Conflict': {
         set({ registerStatus: 'error' })
-        return ['error', 'Аккаунт с таким ником уже существует']
+        return ['error', locale.accountWithSameNicknameAlreadyExists]
       }
       case 'RegexNotMatch': {
         set({ registerStatus: 'error' })
-        return ['error', 'Неправильно заполнена форма']
+        return ['error', locale.invalidForm]
       }
       case 'MailRegistered': {
         set({ registerStatus: 'error' })
-        return ['error', 'Аккаунт с такой почтой уже существует']
+        return ['error', locale.accountWithSameEmailAlreadyExists]
       }
       case 'UUIDFailed': {
         set({ registerStatus: 'error' })
-        return ['error', 'Аккаунта не существует со стороны Mojang']
+        return ['error', locale.accountWithSameNicknameNotExistsInMojang]
       }
       default: {
         set({ registerStatus: 'error' })
-        return ['error', 'Произошла неизвестная ошибка ' + res.code]
+        return ['error', locale.unknownErrorOccurred + ' ' + res.code]
       }
     }
   },
@@ -104,6 +101,8 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     set({ loginStatus: 'process' })
 
     const res = await api.login(data)
+    const locale = useUserTheme.getState().locale.messages
+
     switch (res.code) {
       case 'ok': {
         set({ loginStatus: 'ok' })
@@ -113,27 +112,27 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
 
       case 'AccountDisabled': {
         set({ loginStatus: 'error' })
-        return ['error', 'Аккакунт не активирован']
+        return ['error', locale.accountNotActivated]
       }
 
       case 'InvalidPassword': {
         set({ loginStatus: 'error' })
-        return ['error', 'Неверный пароль']
+        return ['error', locale.incorrectPassword]
       }
 
       case 'UserNotFound': {
         set({ loginStatus: 'error' })
-        return ['error', 'Пользователь не найден']
+        return ['error', locale.userNotFound]
       }
 
       case 'error': {
         set({ loginStatus: 'error' })
-        return ['error', 'Произошла неизвестная ошибка']
+        return ['error', locale.unknownErrorOccurred]
       }
 
       default: {
         set({ loginStatus: 'unknown' })
-        return ['error', 'Произошла неизвестная ошибка']
+        return ['error', locale.unknownErrorOccurred]
       }
     }
   },
@@ -143,6 +142,8 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     set({ activateRegisterCodeStatus: 'process' })
 
     const res = await api.activateRegister({ code })
+    const locale = useUserTheme.getState().locale.messages
+
     switch (res.code) {
       case 'ok':
         get().auth()
@@ -151,19 +152,19 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
 
       case 'CodeExpire':
         set({ activateRegisterCodeStatus: 'error' })
-        return ['error', messages.codeExpire]
+        return ['error', locale.codeExpired]
 
       case 'UserNotFound':
         set({ activateRegisterCodeStatus: 'error' })
-        return ['error', messages.userNotFound]
+        return ['error', locale.userNotFound]
 
       case 'error':
         set({ activateRegisterCodeStatus: 'error' })
-        return ['error', messages.error]
+        return ['error', locale.unknownErrorOccurred]
 
       default:
         set({ activateRegisterCodeStatus: 'unknown' })
-        return ['error', messages.error]
+        return ['error', locale.unknownErrorOccurred]
     }
   },
 
@@ -219,6 +220,7 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
     set({ changePassStatus: 'process' })
 
     const res = await api.changePass({ newPassword, email })
+    const locale = useUserTheme.getState().locale.messages
 
     switch (res.code) {
       case 'ok':
@@ -227,15 +229,15 @@ export const useAuthPageState = create<AuthPageState>((set, get) => ({
 
       case 'UserNotFound':
         set({ changePassStatus: 'error' })
-        return ['error', messages.userNotFound]
+        return ['error', locale.userNotFound]
 
       case 'error':
         set({ changePassStatus: 'error' })
-        return ['error', messages.error]
+        return ['error', locale.unknownErrorOccurred]
 
       default:
         set({ changePassStatus: 'unknown' })
-        return ['error', messages.error]
+        return ['error', locale.unknownErrorOccurred]
     }
   }
 }))

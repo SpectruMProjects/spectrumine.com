@@ -1,6 +1,7 @@
 import { getHardcoreProducts } from '@/api'
 import { HatProduct } from '@/models'
 import { create } from 'zustand'
+import { useUserTheme } from './theme'
 
 type MethodRes = ['unknown' | 'process' | 'ok'] | ['error', string | undefined]
 
@@ -22,6 +23,8 @@ export const useHatProductsState = create<HatProductsState>((set, get) => ({
     set({ loadState: 'process' })
 
     const res = await getHardcoreProducts()
+    const locale = useUserTheme.getState().locale.messages
+
     switch (res.code) {
       case 'ok':
         set({
@@ -42,7 +45,7 @@ export const useHatProductsState = create<HatProductsState>((set, get) => ({
 
       default:
         set({ loadState: 'error' })
-        return ['error', 'Произошла неизвестная ошибка']
+        return ['error', locale.unknownErrorOccurred]
     }
   },
 

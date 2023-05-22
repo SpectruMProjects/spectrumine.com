@@ -14,6 +14,18 @@ export interface Locale {
     unknownError: string
   }
 
+  messages: {
+    unknownErrorOccurred: string
+    userNotFound: string
+    incorrectPassword: string
+    accountNotActivated: string
+    accountWithSameNicknameAlreadyExists: string
+    accountWithSameEmailAlreadyExists: string
+    accountWithSameNicknameNotExistsInMojang: string
+    invalidForm: string
+    codeExpired: string
+  }
+
   mainPagePreview: {
     greeting: string
     toServers: string
