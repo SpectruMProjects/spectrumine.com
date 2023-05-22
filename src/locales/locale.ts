@@ -79,4 +79,14 @@ export interface Locale {
     pageTitle: string
     loadTip: string
   }
+
+  hardcoreServer: {
+    pageTitle: string
+    ipAddress: string
+    points: {
+      icon: string
+      title: string
+      description: string
+    }[]
+  }
 }

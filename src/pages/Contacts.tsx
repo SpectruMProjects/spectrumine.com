@@ -43,7 +43,7 @@ export default function Contacts() {
         className={styles['contacts-page__emails']}
         header={
           <p className={styles['contacts-page__emails__title']}>
-            <MailOutlined /> Почта
+            <MailOutlined /> {locale.emailsTitle}
           </p>
         }
         dataSource={locale.emails}
