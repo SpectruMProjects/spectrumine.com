@@ -5,10 +5,12 @@ import { useUserTheme } from '@/store/theme'
 export const inventoryCmsPlugin: Plugin = {
   name: 'inventory-cms',
   menuOptions() {
+    const locale = useUserTheme((s) => s.locale.inventoryCms.inventory)
+
     return [
       {
         key: '/',
-        label: useUserTheme((s) => s.locale.inventoryCms.inventory),
+        label: locale,
         icon: (
           <img
             width="28"
