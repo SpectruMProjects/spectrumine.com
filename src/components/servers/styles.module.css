@@ -36,6 +36,12 @@
   backdrop-filter: blur(80px);
 }
 
+@media (width <= 400px) {
+  .container {
+    width: 240px;
+  }
+}
+
 .icon {
   height: 80px;
   width: 80px;
