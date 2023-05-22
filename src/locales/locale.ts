@@ -89,4 +89,9 @@ export interface Locale {
       description: string
     }[]
   }
+
+  notFound: {
+    pageTitle: string
+    text(path: string): string
+  }
 }

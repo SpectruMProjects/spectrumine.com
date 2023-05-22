@@ -273,6 +273,7 @@ const ru: Locale = {
     pageTitle: 'SpectruM - Подтверждение регистрации',
     loadTip: 'Подтверждение регистрации'
   },
+
   hardcoreServer: {
     pageTitle: 'SpectruM - Hardcore сервер',
     ipAddress: 'IP Адрес',
@@ -305,6 +306,13 @@ const ru: Locale = {
           'Дружелюбное комьюнити. Discord сервер и другие плюшки. Регистрируйтесь и заходите на сервер!'
       }
     ]
+  },
+
+  notFound: {
+    pageTitle: 'SpectruM - 404',
+    text(path) {
+      return `Страница ${path} не найдена`
+    }
   }
 }
 export default ru
