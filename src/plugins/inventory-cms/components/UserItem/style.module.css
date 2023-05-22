@@ -1,0 +1,44 @@
+.block {
+  position: relative;
+  image-rendering: pixelated;
+  box-shadow: #FFFFFF30 0 0 20px 0;
+  transition: all 0.3s ease-out;
+}
+
+.block:hover {
+  box-shadow: #FFFFFF60 0 0 16px 0;
+}
+
+.container {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(80px) ;
+}
+
+.count {
+  width: 100%;
+  font-size: 2em;
+  text-align: start;
+  margin-left: 20px;
+}
+
+.icon {
+  width: 70px;
+  height: 70px;
+}
+
+.container > span {
+  flex: 1;
+}
+
+.name {
+  width: 100%;
+  text-align: end;
+  padding-right: 8px;
+  font-size: large;
+  background: linear-gradient(to right, #30CFD0, #c43ad6);
+}

@@ -1,0 +1,4 @@
+.page {
+  margin-top: 64px;
+  padding: 32px max(32px, 12vw);
+}

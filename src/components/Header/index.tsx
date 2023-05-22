@@ -2,7 +2,7 @@ import { Menu } from 'antd'
 import { useLocation, useNavigate } from 'react-router'
 import { useAuthPageState } from '@/store'
 import Link from 'antd/es/typography/Link'
-// import { usePluginsMenuOptions } from '@/core'
+import { usePluginsMenuOptions } from '@/core'
 import styles from './styles.module.css'
 import './global.css'
 import { colors, useUserTheme } from '@/store/theme'
@@ -16,7 +16,7 @@ export default function Header() {
   const path = useLocation().pathname
   const nav = useNavigate()
   const [user, authStatus] = useAuthPageState((s) => [s.user, s.authStatus])
-  // const pluginsOptions = usePluginsMenuOptions()
+  const pluginsOptions = usePluginsMenuOptions()
   const [setLang, setColorTheme, locale] = useUserTheme((s) => [
     s.setLang,
     s.setColor,
@@ -93,6 +93,8 @@ export default function Header() {
                 )
               }
             ]),
+        ...pluginsOptions,
+
         {
           key: '@locale',
           label: locale.lang,
@@ -140,7 +142,6 @@ export default function Header() {
             }
           }))
         }
-        // ...pluginsOptions
         // {
         //   key: '/store',
         //   label: (

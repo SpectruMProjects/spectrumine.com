@@ -3,6 +3,8 @@ import { Button, Card, Typography } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { useUserItems } from '../store'
 import { useEffect } from 'react'
+import UserItem from '../components/UserItem'
+import styles from './Main.module.css'
 
 export default function Main() {
   const userId = useAuthPageState((s) => s.user?.id)
@@ -42,15 +44,9 @@ function Component({ userId }: ComponentProps) {
   }, [userId])
 
   return (
-    <div>
+    <div className={styles['page']}>
       {items?.map((i) => (
-        <Card key={i.item.id}>
-          <Typography.Title>
-            {i.item.name}: {i.count}
-          </Typography.Title>
-          {i.item.imgUrl && <img src={i.item.imgUrl} />}
-          <Typography.Text>{i.item.description}</Typography.Text>
-        </Card>
+        <UserItem item={i} key={i.item.id} />
       ))}
     </div>
   )
