@@ -4,17 +4,17 @@ import ru from './ru'
 export * from './locale'
 
 export default {
-  locales: ['ru', 'en'] as const,
+  locales: ['ru'] as const,
   localesNames: {
-    ru: 'Русский',
-    en: 'English'
+    ru: 'Русский'
+    // en: 'English'
   },
 
-  ru,
+  ru
 
-  get en(): Promise<Locale> {
-    return import('./en').then((e) => e.default)
-  }
+  // get en(): Promise<Locale> {
+  //   return import('./en').then((e) => e.default)
+  // }
 
   // get be() {
   //   return import('./be')

@@ -1,6 +1,6 @@
 import { Locale } from './locale'
 
-const en: Locale = {
+const en = {
   name: 'English',
   code: 'en',
 
