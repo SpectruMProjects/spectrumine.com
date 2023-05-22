@@ -123,6 +123,31 @@ const ru: Locale = {
         ]
       ]
     ]
+  },
+
+  contacts: {
+    messengersTitle: 'Мессенджеры',
+    messengers: [
+      {
+        name: 'Telegram - ',
+        link: ' Наша группа',
+        linkSrc: 'https://t.me/spectrumine',
+        iconSrc: '/icons/telegram.svg'
+      },
+      {
+        name: 'Discord - ',
+        link: 'Наш канал',
+        linkSrc: 'https://discord.gg/w2Ks8HFPDJ',
+        iconSrc: '/icons/discord.svg'
+      }
+    ],
+    emailsTitle: 'Почта',
+    emails: [
+      {
+        email: 'spectruminesup@gmail.com ',
+        description: ' - Поддержка'
+      }
+    ]
   }
 }
 export default ru

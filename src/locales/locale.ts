@@ -44,4 +44,19 @@ export interface Locale {
     definitions: string
     conditions: [string, string[]][]
   }
+
+  contacts: {
+    messengersTitle: string
+    messengers: {
+      name: string
+      link: string
+      linkSrc: string
+      iconSrc: string
+    }[]
+    emailsTitle: string
+    emails: {
+      email: string
+      description: string
+    }[]
+  }
 }
