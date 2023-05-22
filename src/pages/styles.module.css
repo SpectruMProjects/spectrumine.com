@@ -124,7 +124,17 @@
 
 .condition-of-use {
   width: 100%;
-  padding: 10vh 16vw;
+  padding: 10vh max(calc(16vw - 60px), 2em);
+}
+
+.condition-of-use__header {
+  font-size: 1.3em;
+}
+
+@media (width <= 400px) {
+  .condition-of-use__header {
+    font-size: 1em;
+  }
 }
 
 .condition-of-use p {

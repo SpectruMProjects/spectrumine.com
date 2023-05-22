@@ -12,7 +12,7 @@ export default function ConditionOfUse() {
 
   return (
     <div className={styles['condition-of-use']}>
-      <Typography.Text style={{ fontSize: '1.5em' }}>
+      <Typography.Text className={styles['condition-of-use__header']}>
         Пользователь, игрок – Физическое лицо использующее проект.
         <br />
         Проект – Вся платформа, включая сайт, игровые сервера, лаунчер и т.п.
