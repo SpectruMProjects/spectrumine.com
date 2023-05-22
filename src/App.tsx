@@ -52,7 +52,8 @@ function App() {
         algorithm: theme.darkAlgorithm,
         token: {
           colorPrimary: colorsMap[color],
-          colorBgBase: '141414'
+          // colorBgBase: '141414',
+          borderRadius: 0
         }
       }}
     >

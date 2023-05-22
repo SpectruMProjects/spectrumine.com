@@ -7,7 +7,7 @@ import { useSetPageTitle } from '@/hooks'
 import { useUserTheme } from '@/store/theme'
 
 export default function ActivateChangePassCode() {
-  const locale = useUserTheme(s => s.locale.activateChangePass)
+  const locale = useUserTheme((s) => s.locale.activateChangePass)
   useSetPageTitle(locale.pageTitle)
 
   const { code } = useParams()
@@ -44,7 +44,6 @@ export default function ActivateChangePassCode() {
 
       <div>
         <Button
-          shape='round'
           loading={state == 'process'}
           type="primary"
           disabled={state != 'unknown'}
