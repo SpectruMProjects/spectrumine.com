@@ -1,4 +1,4 @@
-import { ConfigProvider, Layout } from 'antd'
+import { ConfigProvider, Layout, theme } from 'antd'
 import Header from './components/Header'
 import { Route, Routes } from 'react-router'
 import Pages from './pages'
@@ -6,35 +6,67 @@ import { useAuthPageState } from './store'
 import { Suspense, useEffect } from 'react'
 import Footer from '@/components/Footer'
 import { startUpdateTokenCycle } from '@/api'
-import ru from 'antd/locale/ru_RU'
+import { usePlugins } from './store/plugins'
+import { useUserTheme } from './store/theme'
+
+export const colorsMap = {
+  'Blue': '#1677ff',
+  'Purple': '#722ed1',
+  'Cyan': '#13c2c2',
+  'Pink': '#eb2f96',
+  'Red': '#f5222d',
+  'Yellow': '#fadb14',
+  'Orange': '#fa541c',
+  'LightGreen': '#a0d911'
+}
 
 function App() {
   const auth = useAuthPageState((s) => s.auth)
+  const pluginsRoutes: {
+    path: string
+    element: JSX.Element
+  }[] = usePlugins((s) =>
+    s.plugins.reduce(
+      (acc: any, plugin) => [
+        ...acc,
+        ...(plugin
+          ?.routes?.()
+          ?.map((route) => ({ ...route, path: plugin.name + route.path })) ??
+          [])
+      ],
+      []
+    )
+  )
+  const [loadLang, color] = useUserTheme(s => [s.preloadLang, s.color])
 
   useEffect(() => {
     startUpdateTokenCycle().then(() => {
       auth()
     })
+    loadLang()
   }, [])
 
   return (
     <ConfigProvider
-      locale={ru}
       theme={
         {
-          // token: {
-          //   colorPrimary: '#5A4545'
-          // }
+          algorithm: theme.darkAlgorithm,
+          token: {
+            colorPrimary: colorsMap[color],
+            colorBgBase: '141414'
+          }
         }
       }
     >
       <Layout style={{ minHeight: '100%' }}>
         <Layout.Header
           style={{
-            position: 'sticky',
+            position: 'fixed',
             top: 0,
             zIndex: 1,
-            width: '100%'
+            width: '100%',
+            backgroundColor: 'transparent',
+            backdropFilter: 'blur(16px)',
           }}
         >
           <Header />
@@ -137,6 +169,13 @@ function App() {
                 </Suspense>
               }
             />
+            {pluginsRoutes.map((route) => (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={route.element}
+              />
+            ))}
             <Route
               path="*"
               element={

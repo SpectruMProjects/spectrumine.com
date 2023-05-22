@@ -1,9 +1,13 @@
 import { Menu } from 'antd'
 import { useLocation, useNavigate } from 'react-router'
-import { HomeOutlined, ShopOutlined, UserOutlined } from '@ant-design/icons'
 import { useAuthPageState } from '@/store'
 import Link from 'antd/es/typography/Link'
-
+// import { usePluginsMenuOptions } from '@/core'
+import styles from './styles.module.css'
+import './global.css'
+import { colors, useUserTheme } from '@/store/theme'
+import locales from '@/locales'
+import { colorsMap } from '@/App'
 function onLinkClick(e: { preventDefault: () => void }) {
   e.preventDefault()
 }
@@ -12,22 +16,36 @@ export default function Header() {
   const path = useLocation().pathname
   const nav = useNavigate()
   const [user, authStatus] = useAuthPageState((s) => [s.user, s.authStatus])
+  // const pluginsOptions = usePluginsMenuOptions()
+  const [setLang, setColorTheme, locale] = useUserTheme(s => [s.setLang, s.setColor, s.locale.header])
 
   return (
     <Menu
+      style={{ backgroundColor: 'transparent' }}
       theme="dark"
       mode="horizontal"
       selectedKeys={[path]}
-      onSelect={(i) => nav(i.key)}
+      className={styles['menu']}
+      onSelect={(i) => i.key.startsWith('@') || nav(i.key)}
+      overflowedIndicator={
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center', 
+          height: 64 
+        }}>
+          <img width='28' height='28' src='/icons/list.svg' alt='more'/>
+        </div>
+      }
       items={[
         {
           key: '/',
           label: (
             <Link onClick={onLinkClick} href="/">
-              Главная
+              {locale.main}
             </Link>
           ),
-          icon: <HomeOutlined />
+          icon: <img width='28' height='28' src='/icons/home.svg' alt='home'/>
         },
         { type: 'divider', style: { flex: 1, margin: 0, border: 0 } },
         ...(['process', 'unknown'].includes(authStatus)
@@ -38,10 +56,10 @@ export default function Header() {
                 key: '/profile',
                 label: (
                   <Link onClick={onLinkClick} href="/profile">
-                    Профиль
+                    {locale.profile}
                   </Link>
                 ),
-                icon: <UserOutlined />
+                icon: <img width='28' height='28' src='/icons/user-profile.svg' alt='profile'/>
               }
             ]
           : [
@@ -49,12 +67,39 @@ export default function Header() {
                 key: '/auth',
                 label: (
                   <Link onClick={onLinkClick} href="/auth">
-                    Авторизация
+                    {locale.auth}
                   </Link>
                 ),
-                icon: <UserOutlined />
+                icon: <img width='28' height='28' src='/icons/user-profile.svg' alt='profile'/>
               }
             ]),
+        { 
+          key: '@locale',
+          label: locale.lang, 
+          children: locales.locales.map(key => ({
+            key: `@locale-${key}`,
+            label: locales.localesNames[key],
+            onClick() {
+              setLang(key)
+            }
+          }))
+        },
+        {
+          key: '@color',
+          label: locale.theme,
+          children: colors.map(color => ({
+            key: `@color-${color}`,
+            label: color,
+            icon: <span style={{ 
+              width: 28, 
+              height: 28, 
+              borderRadius: 8,
+              backgroundColor: colorsMap[color] 
+            }}/>,
+            onClick(){ setColorTheme(color) }
+          }))
+        },
+        // ...pluginsOptions
         // {
         //   key: '/store',
         //   label: (

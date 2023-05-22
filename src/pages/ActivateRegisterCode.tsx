@@ -3,9 +3,11 @@ import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAuthPageState } from '../store'
 import { useSetPageTitle } from '@/hooks'
+import { useUserTheme } from '@/store/theme'
 
 export default function ActivateRegisterCode() {
-  useSetPageTitle('SpectruM - Подтверждение регистрации')
+  const locale = useUserTheme(s => s.locale.activateRegisterCode)
+  useSetPageTitle(locale.pageTitle)
 
   const [activate, status] = useAuthPageState((s) => [
     s.activateRegisterCode,
@@ -30,7 +32,7 @@ export default function ActivateRegisterCode() {
     <Spin
       spinning={status === 'process'}
       style={{ margin: 'auto' }}
-      tip="Подтверждение регистрации"
+      tip={locale.loadTip}
     />
   )
 }

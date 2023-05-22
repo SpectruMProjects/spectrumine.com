@@ -1,9 +1,11 @@
 import { Typography } from 'antd'
 import styles from './styles.module.css'
 import { useSetPageTitle } from '@/hooks'
+import { useUserTheme } from '@/store/theme'
 
 export default function NotFound() {
-  useSetPageTitle('SpectruM - 404')
+  const locale = useUserTheme(s => s.locale.notFound)
+  useSetPageTitle(locale.pageTitle)
 
   return (
     <div
@@ -11,7 +13,7 @@ export default function NotFound() {
       className={styles['centered-page']}
     >
       <Typography.Title>
-        Страница {window.location.pathname} не найдена
+        {locale.text(window.location.pathname)}
       </Typography.Title>
     </div>
   )

@@ -1,22 +1,8 @@
 import { useAuthPageState } from '@/store'
+import { useUserTheme } from '@/store/theme'
 import { Button, Card, Form, Input, message } from 'antd'
-import { Rule } from 'antd/es/form'
 import { createContext, useContext } from 'react'
-
-const rules: Record<'email' | 'password', Rule[]> = {
-  email: [
-    { required: true, message: 'Почта обязательна' },
-    { type: 'email', message: 'Введите валидную почту' }
-  ],
-  password: [
-    { required: true, message: 'Пароль обязателен' },
-    { min: 8, max: 32, message: 'Пароль должен быть длинее 8 и короче 32' },
-    {
-      pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/,
-      message: 'Пароль должен содержать цифры, прописные и заглавные буквы'
-    }
-  ]
-}
+import Inputs from './inputs'
 
 interface Form {
   email?: string
@@ -24,6 +10,7 @@ interface Form {
 }
 
 export default function ChangePass() {
+  const locale = useUserTheme((s) => s.locale.forms)
   const [change, status, user, switchTo] = useAuthPageState((s) => [
     s.changePass,
     s.changePassStatus,
@@ -37,7 +24,7 @@ export default function ChangePass() {
     change(data.newPassword, data.email).then((res) => {
       const code = res[0]
       if (code == 'ok') {
-        message.success('Проверьте почту')
+        message.success(locale.email.checkMailbox)
       } else if (code == 'error') message.error(res[1])
     })
   }
@@ -45,30 +32,24 @@ export default function ChangePass() {
   return (
     <Card style={{ padding: 28 }}>
       <Form form={form} onFinish={onFinish}>
-        {!user && (
-          <Form.Item name="email" rules={rules.email} required>
-            <Input type="email" placeholder="Почта" autoComplete="email" />
-          </Form.Item>
-        )}
-
-        <Form.Item name="newPassword" rules={rules.password} required>
-          <Input type="password" placeholder="Новый пароль" />
-        </Form.Item>
+        {!user && <Inputs.Email />}
+        <Inputs.NewPassword />
 
         <Form.Item>
           <div>
             <Button
+              shape="round"
               type="primary"
               htmlType="submit"
               style={{ marginRight: 30 }}
               loading={status == 'process'}
             >
-              Изменить
+              {locale.change}
             </Button>
 
             {ctx.backToLogin && (
               <Button type="link" onClick={() => switchTo('login')}>
-                Войти
+                {locale.login}
               </Button>
             )}
           </div>

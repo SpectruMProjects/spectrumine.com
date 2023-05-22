@@ -1,0 +1,75 @@
+/* .page {
+  background-image: url(/images/bg-hardcore.jpg);
+  background-size: cover;
+} */
+
+.points {
+  margin-top: 120px;
+  display: flex;
+  flex-wrap: wrap;
+  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+  flex-direction: row;
+  justify-content: space-between;
+  row-gap: 4em;
+  gap: 1em;
+}
+
+@media (width <= 840px) {
+  .points {
+    justify-content: center;
+  }
+}
+
+.point {
+  max-width: 300px;
+  /* min-height: 420px; */
+  padding: 1.5em;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.point:nth-child(2) {
+  background: rgb(17,153,142);
+  background: linear-gradient(120deg, rgba(17,153,142,1) 0%, rgba(56,239,125,1) 100%);
+}
+
+.point:nth-child(4) {
+  background: rgb(255,251,213);
+  background: linear-gradient(120deg, rgba(255,251,213,1) 0%, rgba(178,10,44,1) 100%);
+}
+
+.point:nth-child(3) {
+  background: rgb(55,59,68);
+  background: linear-gradient(27deg, rgb(78, 85, 102) 0%, rgba(66,134,244,1) 100%);
+}
+
+.point:nth-child(1) {
+  background: rgb(142,45,226);
+  background: linear-gradient(120deg, rgba(142,45,226,1) 0%, rgba(74,0,224,1) 100%);
+}
+
+
+.icon, .title {
+  text-align: start;
+  width: 100%;
+}
+
+.icon {
+  width: 160px;
+  height: 160px;
+}
+
+.title {
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.description {
+  display: block;
+  font-size: 1.2em;
+  font-weight: bolder;
+}

@@ -4,7 +4,7 @@ import styles from './styles.module.css'
 interface Props {
   name: string
   description: string
-  icon: JSX.Element
+  icon: string
   info: string[]
   url?: string
 }
@@ -17,15 +17,21 @@ export default function Server({ name, description, icon, info, url }: Props) {
   }
 
   return (
-    <div id={name} className={styles['server']} onClick={onClick}>
-      <h2 className={styles['name']}>{name}</h2>
-      <p className={styles['description']}>{description}</p>
-      {icon}
+    <div
+      id={name}
+      className={styles['server']}
+      onClick={onClick} 
+      style={{ backgroundImage: `url(${icon})` }}>
+      <div className={styles['container']}>
+        <h2 className={styles['name']}>{name}</h2>
+        <p className={styles['description']}>{description}</p>
+        <img src={icon} className={styles['icon']} />
 
-      <div className={styles['info']}>
-        {info.map((i) => (
-          <p key={i}>{i}</p>
-        ))}
+        <div className={styles['info']}>
+          {info.map((i) => (
+            <p key={i}>{i}</p>
+          ))}
+        </div>
       </div>
     </div>
   )

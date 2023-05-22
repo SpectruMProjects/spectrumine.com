@@ -1,6 +1,6 @@
 import { Button, Card, Divider, Spin, Typography } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { useAuthPageState, useInventoryState } from '@/store'
+import { useAuthPageState } from '@/store'
 import styles from './styles.module.css'
 import HardcoreStatistics from '@/components/HardcoreStatistics'
 import {
@@ -9,13 +9,15 @@ import {
   UserDeleteOutlined,
   UsergroupDeleteOutlined
 } from '@ant-design/icons'
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import Forms from '@/components/forms'
 import { useSetPageTitle } from '@/hooks'
-import ProductsList from '@/components/ProductsList'
+import { useUserTheme } from '@/store/theme'
+// import ProductsList from '@/components/ProductsList'
 
 export default function Profile() {
-  useSetPageTitle('SpectruM - Профиль')
+  const locale = useUserTheme(s => s.locale.profile)
+  useSetPageTitle(locale.pageTitle)
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -27,15 +29,15 @@ export default function Profile() {
   ])
   const nav = useNavigate()
   const [isChangePassOpened, setIsChangePassOpened] = useState(false)
-  const [hats, loadHats, loadHatsState] = useInventoryState((s) => [
-    s.hats,
-    s.load,
-    s.loadingState
-  ])
+  // const [hats, loadHats, loadHatsState] = useInventoryState((s) => [
+  //   s.hats,
+  //   s.load,
+  //   s.loadingState
+  // ])
 
-  useEffect(() => {
-    loadHats()
-  }, [])
+  // useEffect(() => {
+  //   loadHats()
+  // }, [])
 
   if (authStatus == 'process' || authStatus == 'unknown')
     return (
@@ -48,9 +50,9 @@ export default function Profile() {
     return (
       <div className={styles['centered-page']} style={{ padding: '2em' }}>
         <Card style={{ height: 'fit-content' }}>
-          <Typography.Title>Вы не авторизованы</Typography.Title>
-          <Button type="primary" onClick={() => nav('/auth')}>
-            Войти
+          <Typography.Title>{locale.needAuth}</Typography.Title>
+          <Button shape='round' type="primary" onClick={() => nav('/auth')}>
+            {locale.auth}
           </Button>
         </Card>
       </div>
@@ -70,32 +72,35 @@ export default function Profile() {
 
         <div className={styles['profile-page__user__buttons']}>
           <Button
+            shape='round'
             type={isChangePassOpened ? 'default' : 'primary'}
             size="large"
             icon={isChangePassOpened ? <DownOutlined /> : <EditOutlined />}
             onClick={() => setIsChangePassOpened((i) => !i)}
           >
-            Изменить пароль
+            {locale.changePass}
           </Button>
 
           <Button
+            shape='round'
             type="primary"
             size="large"
             style={{ backgroundColor: '#f5222d' }}
             icon={<UserDeleteOutlined />}
             onClick={logout}
           >
-            Выйти
+            {locale.logOut}
           </Button>
 
           <Button
+            shape='round'
             type="primary"
             size="large"
             style={{ backgroundColor: '#f5222d' }}
             icon={<UsergroupDeleteOutlined />}
             onClick={logout}
           >
-            Выйти со всех устройств
+            {locale.logOutFromAllDevices}
           </Button>
 
           {isChangePassOpened && <Divider type="horizontal" />}
@@ -105,7 +110,7 @@ export default function Profile() {
         <Divider />
         <HardcoreStatistics username={user.username} />
 
-        <Divider />
+        {/* <Divider />
         <h2 style={{ textAlign: 'center' }}>Инвентарь</h2>
         {loadHatsState == 'process' ? (
           <Spin />
@@ -124,7 +129,7 @@ export default function Profile() {
               магазин
             </a>
           </div>
-        )}
+        )} */}
       </Card>
     </div>
   )

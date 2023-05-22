@@ -1,43 +1,34 @@
 import { Typography, message } from 'antd'
 import styles from './styles.module.css'
+import sls from './HardcoreServer.module.css'
 import HardcoreMonitor from '@/components/HardcoreMonitor'
 import { CopyOutlined } from '@ant-design/icons'
 import { useSetPageTitle } from '@/hooks'
 import { useLayoutEffect } from 'react'
-
-const points = [
-  [
-    'Vanilla',
-    'Ванильный геймплей, минимальное количество плагинов для комфортной игры'
-  ],
-  [
-    '<span>Hardcore</span>',
-    'Только <span>хардкор</span>! Платите за свою смерть временем потраченным на сервере'
-  ],
-  ['SMP', 'Ванильное выживание']
-]
+import { useUserTheme } from '@/store/theme'
 
 const hardcoreUrl = '185.250.36.214:10100'
 
 export default function HardcoreServer() {
-  useSetPageTitle('SpectruM - Hardcore сервер')
+  const locale = useUserTheme(s => s.locale.hardcoreServer)
+  useSetPageTitle(locale.pageTitle)
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
   return (
-    <div className={styles['hardcore-page']}>
+    <div className={styles['hardcore-page'] + ' ' + sls['page']}>
       <div className={styles['points__dup']}>
-        <Typography.Title>
+        <Typography.Title style={{ display: 'inline' }}>
           <p className={styles['points__title']}>
             Vanilla <span>Hardcore</span> SMP
           </p>
         </Typography.Title>
-      </div>
-      <h1 className={styles['hardcore-page__ip']}>
+        <br/>
+        <br/>
         <a
-          style={{ textAlign: 'center' }}
           href={hardcoreUrl}
+          className={styles['hardcore-page__ip']}
           onClick={(e) => {
             e.preventDefault()
             navigator.clipboard
@@ -50,81 +41,18 @@ export default function HardcoreServer() {
               })
           }}
         >
-          Скопировать IP <CopyOutlined />
+          {locale.ipAddress} <CopyOutlined />
         </a>
-      </h1>
+      </div>
 
       <HardcoreMonitor />
 
-      <div className={styles['points']}>
-        <Typography.Title>
-          <p className={styles['points__title']}>О сервере</p>
-        </Typography.Title>
-        <table className={styles['points__table']}>
-          <tbody>
-            {points.map((point) => (
-              <tr key={point[0]}>
-                <td>
-                  <p
-                    className={styles['point__prefix']}
-                    dangerouslySetInnerHTML={{ __html: point[0] }}
-                  />
-                </td>
-                <td>
-                  <p
-                    className={styles['point']}
-                    dangerouslySetInnerHTML={{ __html: point[1] }}
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <div className={styles['description']}>
-        <Typography.Title>
-          <p style={{ color: 'white', textAlign: 'center' }}>
-            Как работает Hardcore режим?
-          </p>
-        </Typography.Title>
-        <p className={styles['description_point']}>
-          Если вы прошаренный игрок в Minecraft, то вы знаете, что режим
-          Hardcore работает по принципу одной смерти. Однако на сервере эта
-          механика очень расточительна, т.к. по неосторожности можно потерять не
-          только прогресс, но и возможность играть с друзьями.
-        </p>
-        <p className={styles['description_point']}>
-          Поэтому мы сделали плагин, который даёт возможность возродиться спустя
-          время, которое вы провели на сервере.
-        </p>
-        {/* <p className={styles['description_dop']}>
-          *Для того чтобы точно расчитать время возрождения, мы пользуемся{' '}
-          <a href="/formula">формулой</a>
-        </p> */}
-      </div>
-      <div className={styles['description']}>
-        <Typography.Title>
-          <p style={{ color: 'white', textAlign: 'center' }}>Голосовой чат</p>
-        </Typography.Title>
-        <p className={styles['description_point']}>
-          На сервере присутствует плагин PlasmoVoice для голосового общения
-          внутри игры. Установите его на свой клиент и играйте вместе с другими
-          используя голосовой чат!
-        </p>
-      </div>
-      <div className={styles['about']}>
-        <Typography.Title>
-          <p style={{ color: 'white', textAlign: 'center' }}>
-            Ивенты, лёгкая сборка и прочее...
-          </p>
-        </Typography.Title>
-
-        <p className={styles['point']}>
-          Сервер на Paper, дружелюбное комьюнити, полностью бесплатное
-          пользование, Discord сервер и другие плюшки. Регистрируйтесь и
-          заходите на сервер!
-        </p>
+      <div className={sls['points']}>
+        {locale.points.map(point => <div key={point.title} className={sls['point']}>
+          <img className={sls['icon']} src={point.icon} alt={point.title + ' icon'} />
+          <span className={sls['title']}>{point.title}</span>
+          <span className={sls['description']}>{point.description}</span>
+        </div>)}
       </div>
     </div>
   )

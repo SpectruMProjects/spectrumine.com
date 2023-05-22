@@ -9,12 +9,15 @@
 .hardcore-page {
   min-height: calc(100vh - 64px);
   width: 100%;
-  background-color: #001529;
   color: white;
 }
 
 .hardcore-page > * {
-  margin: 8vh 16vw;
+  margin: 1em 16vw;
+}
+
+.hardcore-page > *:nth-child(1) {
+  margin-top: calc(64px + 1em);
 }
 
 @media (width <= 700px) {
@@ -57,6 +60,14 @@
 
 .points__dup .points__title {
   color: white;
+  display: inline;
+  margin-right: 2em;
+}
+
+@media (width <= 1050px) {
+  .points__dup .points__title {
+    margin-right: 0;
+  } 
 }
 
 .points__dup .points__title span {
@@ -113,7 +124,17 @@
 
 .condition-of-use {
   width: 100%;
-  padding: 10vh 16vw;
+  padding: 10vh max(calc(16vw - 60px), 2em);
+}
+
+.condition-of-use__header {
+  font-size: 1.3em;
+}
+
+@media (width <= 400px) {
+  .condition-of-use__header {
+    font-size: 1em;
+  }
 }
 
 .condition-of-use p {
@@ -127,6 +148,7 @@
 }
 
 .profile-page {
+  margin-top: 64px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -144,8 +166,16 @@
 }
 
 .hardcore-page__ip {
+  display: inline;
   font-size: 2em;
   font-weight: bold;
+}
+
+@media (width <= 1050px) {
+  .hardcore-page__ip {
+    display: block;
+    text-align: left;
+  } 
 }
 
 @media (width <= 700px) {
@@ -169,6 +199,7 @@
 }
 
 .contacts-page {
+  margin-top: 80px;
   width: 100%;
   height: fit-content;
   padding: 16px;

@@ -2,31 +2,11 @@ import { List, Typography } from 'antd'
 import styles from './styles.module.css'
 import { useSetPageTitle } from '@/hooks'
 import { MailOutlined } from '@ant-design/icons'
-
-const messengers = [
-  { 
-    name: 'Telegram - ',
-    link: ' Наша группа',
-    linkSrc: 'https://t.me/spectrumine',
-    icon: <img src="/icons/telegram.svg" alt="telegram logo" />
-  },
-  {
-    name: 'Discord - ',
-    link: 'Наш канал',
-    linkSrc: 'https://discord.gg/w2Ks8HFPDJ',
-    icon: <img src="/icons/discord.svg" alt="discord logo" />
-  }
-]
-
-const emails = [
-  {
-    email: 'spectruminesup@gmail.com ',
-    description: ' - Поддержка'
-  }
-]
+import { useUserTheme } from '@/store/theme'
 
 export default function Contacts() {
-  useSetPageTitle('SpectruM - Контакты')
+  const locale = useUserTheme(s => s.locale.contacts)
+  useSetPageTitle(locale.pageTitle)
 
   return (
     <div className={styles['contacts-page']}>
@@ -34,16 +14,16 @@ export default function Contacts() {
         className={styles['contacts-page__messengers']}
         header={
           <p className={styles['contacts-page__messengers__title']}>
-            Мессенджеры
+            {locale.messengersTitle}
           </p>
         }
-        dataSource={messengers}
+        dataSource={locale.messengers}
         renderItem={(messenger) => (
           <div
             key={messenger.name}
             className={styles['contacts-page__messengers__contact']}
           >
-            <Typography.Text>{messenger.icon}</Typography.Text>
+            <img src={messenger.iconSrc}/>
             <Typography.Text
               className={styles['contacts-page__messengers__contact__text']}
             >
@@ -63,10 +43,10 @@ export default function Contacts() {
         className={styles['contacts-page__emails']}
         header={
           <p className={styles['contacts-page__emails__title']}>
-            <MailOutlined /> Почта
+            <MailOutlined /> {locale.emailsTitle}
           </p>
         }
-        dataSource={emails}
+        dataSource={locale.emails}
         renderItem={(messenger) => (
           <div
             key={messenger.email}
