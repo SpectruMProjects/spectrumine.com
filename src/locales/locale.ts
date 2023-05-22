@@ -59,4 +59,9 @@ export interface Locale {
       description: string
     }[]
   }
+
+  rules: {
+    pageTitle: string
+    rules: [string, string[]][]
+  }
 }
