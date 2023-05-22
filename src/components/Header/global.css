@@ -1,4 +1,4 @@
-li.ant-menu-item {
+li.ant-menu-item, .ant-menu-submenu-title {
   display: flex !important;
   flex-direction: row;
   align-items: center;

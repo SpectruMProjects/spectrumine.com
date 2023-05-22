@@ -96,6 +96,14 @@ export default function Header() {
         {
           key: '@locale',
           label: locale.lang,
+          icon: (
+            <img
+              width="28"
+              height="28"
+              src="/icons/translate-language.svg"
+              alt="language"
+            />
+          ),
           children: locales.locales.map((key) => ({
             key: `@locale-${key}`,
             label: locales.localesNames[key],
@@ -107,6 +115,14 @@ export default function Header() {
         {
           key: '@color',
           label: locale.theme,
+          icon: (
+            <img
+              width="24"
+              height="24"
+              src="/icons/palette.svg"
+              alt="language"
+            />
+          ),
           children: colors.map((color) => ({
             key: `@color-${color}`,
             label: color,
