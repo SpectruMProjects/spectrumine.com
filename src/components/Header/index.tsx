@@ -1,12 +1,13 @@
-import { Menu } from 'antd'
+import { Avatar, Menu } from 'antd'
 import { useLocation, useNavigate } from 'react-router'
 import { useAuthPageState } from '@/store'
 import Link from 'antd/es/typography/Link'
-import { usePluginsMenuOptions } from '@/core'
+// import { usePluginsMenuOptions } from '@/core'
 import styles from './styles.module.css'
 import './global.css'
-import { useUserTheme } from '@/store/theme'
+import { colors, useUserTheme } from '@/store/theme'
 import locales from '@/locales'
+import { colorsMap } from '@/App'
 function onLinkClick(e: { preventDefault: () => void }) {
   e.preventDefault()
 }
@@ -15,8 +16,8 @@ export default function Header() {
   const path = useLocation().pathname
   const nav = useNavigate()
   const [user, authStatus] = useAuthPageState((s) => [s.user, s.authStatus])
-  const pluginsOptions = usePluginsMenuOptions()
-  const [locale, setLang] = useUserTheme(s => [s.locale, s.setLang])
+  // const pluginsOptions = usePluginsMenuOptions()
+  const [setLang, setColorTheme] = useUserTheme(s => [s.setLang, s.setColor])
 
   return (
     <Menu
@@ -83,7 +84,22 @@ export default function Header() {
             }
           }))
         },
-        ...pluginsOptions
+        {
+          key: '@color',
+          label: 'Тема',
+          children: colors.map(color => ({
+            key: `@color-${color}`,
+            label: color,
+            icon: <span style={{ 
+              width: 28, 
+              height: 28, 
+              borderRadius: 8,
+              backgroundColor: colorsMap[color] 
+            }}/>,
+            onClick(){ setColorTheme(color) }
+          }))
+        },
+        // ...pluginsOptions
         // {
         //   key: '/store',
         //   label: (

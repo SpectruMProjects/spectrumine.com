@@ -9,6 +9,17 @@ import { startUpdateTokenCycle } from '@/api'
 import { usePlugins } from './store/plugins'
 import { useUserTheme } from './store/theme'
 
+export const colorsMap = {
+  'Blue': '#1677ff',
+  'Purple': '#722ed1',
+  'Cyan': '#13c2c2',
+  'Pink': '#eb2f96',
+  'Red': '#f5222d',
+  'Yellow': '#fadb14',
+  'Orange': '#fa541c',
+  'LightGreen': '#a0d911'
+}
+
 function App() {
   const auth = useAuthPageState((s) => s.auth)
   const pluginsRoutes: {
@@ -26,7 +37,7 @@ function App() {
       []
     )
   )
-  const loadLang = useUserTheme(s => s.preloadLang)
+  const [loadLang, color] = useUserTheme(s => [s.preloadLang, s.color])
 
   useEffect(() => {
     startUpdateTokenCycle().then(() => {
@@ -41,7 +52,7 @@ function App() {
         {
           algorithm: theme.darkAlgorithm,
           token: {
-            colorPrimary: '13c2c2',
+            colorPrimary: colorsMap[color],
             colorBgBase: '141414'
           }
         }

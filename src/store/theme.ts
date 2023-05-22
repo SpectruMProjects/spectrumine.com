@@ -1,9 +1,30 @@
 import { create } from 'zustand'
 import locales, { Locale } from '@/locales'
 
-function safeColor(color: string | null) {
-  if (color != 'light' && color != 'dark') return 'dark'
-  return color
+type Color =
+  | 'Blue'
+  | 'Purple'
+  | 'Cyan'
+  | 'Pink'
+  | 'Red'
+  | 'Yellow'
+  | 'Orange'
+  | 'Blue'
+  | 'LightGreen'
+export const colors = [
+  'Blue',
+  'Purple',
+  'Cyan',
+  'Pink',
+  'Red',
+  'Yellow',
+  'Orange',
+  'LightGreen'
+] as const
+
+function safeColor(color: string | null): Color {
+  if (!colors.includes(color as any)) return 'Cyan'
+  return color as any
 }
 
 function safeLang(lang: string | null): (typeof locales)['locales'][number] {
@@ -12,7 +33,7 @@ function safeLang(lang: string | null): (typeof locales)['locales'][number] {
 }
 
 interface UserThemeState {
-  color: 'light' | 'dark'
+  color: Color
   lang: (typeof locales)['locales'][number]
   locale: Locale
 
