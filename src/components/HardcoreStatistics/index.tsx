@@ -130,10 +130,10 @@ export function HardcoreStatisticsComponent({
       }"`
     }
     else deathString = statistics.lastDeath.issue.includes("entity")
-      ? `Был убит ${
+      ? `Убил ${
         mcConstants[statistics.lastDeath.issue] ??
         statistics.lastDeath.issue
-      }ом`
+      }`
       : `${
           mcConstants[statistics.lastDeath.issue] ??
           statistics.lastDeath.issue
