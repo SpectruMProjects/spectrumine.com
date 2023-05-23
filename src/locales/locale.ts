@@ -176,4 +176,8 @@ export interface Locale {
   main: {
     pageTitle: string
   }
+
+  inventoryCms: {
+    inventory: string
+  }
 }

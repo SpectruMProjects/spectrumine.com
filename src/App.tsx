@@ -10,14 +10,14 @@ import { usePlugins } from './store/plugins'
 import { useUserTheme } from './store/theme'
 
 export const colorsMap = {
-  Blue: '#1677ff',
-  Purple: '#722ed1',
-  Cyan: '#13c2c2',
-  Pink: '#eb2f96',
-  Red: '#f5222d',
-  Yellow: '#fadb14',
-  Orange: '#fa541c',
-  LightGreen: '#a0d911'
+  Blue: '#083556',
+  //Purple: '#722ed1',
+  //Cyan: '#13c2c2',
+  //Pink: '#eb2f96',
+  //Red: '#f5222d',
+  Yellow: '#c78c2c',
+  Orange: '#d27a27',
+  Green: '#9aaf6a'
 }
 
 function App() {

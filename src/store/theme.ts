@@ -3,27 +3,27 @@ import locales, { Locale } from '@/locales'
 
 type Color =
   | 'Blue'
-  | 'Purple'
-  | 'Cyan'
-  | 'Pink'
-  | 'Red'
+  //| 'Purple'
+  //| 'Cyan'
+  //| 'Pink'
+  //| 'Red'
   | 'Yellow'
   | 'Orange'
   | 'Blue'
-  | 'LightGreen'
+  | 'Green'
 export const colors = [
   'Blue',
-  'Purple',
-  'Cyan',
-  'Pink',
-  'Red',
+  //'Purple',
+  //'Cyan',
+  //'Pink',
+  //'Red',
   'Yellow',
   'Orange',
-  'LightGreen'
+  'Green'
 ] as const
 
 function safeColor(color: string | null): Color {
-  if (!colors.includes(color as any)) return 'Cyan'
+  if (!colors.includes(color as any)) return 'Blue'
   return color as any
 }
 

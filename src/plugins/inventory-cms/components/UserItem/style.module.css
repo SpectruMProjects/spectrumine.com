@@ -1,0 +1,75 @@
+.block {
+  width: fit-content;
+  position: relative;
+  image-rendering: pixelated;
+  backdrop-filter: blur(0);
+}
+
+.container {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  background-color: black;
+}
+
+.count {
+  width: 100%;
+  font-size: 2em;
+  text-align: start;
+  margin-left: 20px;
+}
+
+.icon {
+  width: 70px;
+  height: 70px;
+}
+
+.container > span {
+  flex: 1;
+}
+
+.name {
+  width: 100%;
+  text-align: end;
+  padding-right: 8px;
+  font-size: large;
+  background: linear-gradient(to right, #30CFD0, #c43ad6);
+}
+
+.block::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  transform: scale(0.9) translateZ(0);
+  filter: blur(15px);
+  background: linear-gradient(to left, #ff5770, #e4428d, #c42da8, #9e16c3, #6501de, #9e16c3, #c42da8, #e4428d, #ff5770);
+  background-size: 200% 200%;
+  -webkit-animation: animate-glow 5s linear infinite;
+  animation: animate-glow 5s linear infinite;
+}
+
+.block::after:nth-child(2n) {
+  animation-delay: 5s;
+}
+
+.block:hover {
+  
+}
+
+@keyframes animate-glow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 200% 50%;
+  }
+}

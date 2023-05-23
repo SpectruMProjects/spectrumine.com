@@ -1,0 +1,14 @@
+.page {
+  width: 100%;
+  padding: 32px max(32px, 12vw);
+  padding-top: 96px;
+}
+
+.items {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 64px;
+  row-gap: 64px;
+}

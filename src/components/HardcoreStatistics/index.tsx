@@ -91,6 +91,7 @@ export default function HardcoreStatistics({ username }: Props) {
     <HardcoreStatisticsComponent
       statistics={map(statistics)}
       onHardcoreClick={() => nav('/servers/hardcore')}
+      username={username}
     />
   )
 }
@@ -107,13 +108,38 @@ interface ComponentProps {
     lastServerTime: number
     timeOnServer: number
   }
+  username: string
   onHardcoreClick: () => void
 }
 
 export function HardcoreStatisticsComponent({
   onHardcoreClick,
-  statistics
+  statistics,
+  username
 }: ComponentProps) {
+  //TODO Translate
+  let deathString = "";
+  if(statistics.lastDeath){
+    if(statistics.lastDeath.issuer != username && statistics.lastDeath.issuer){
+      deathString = `Был убит "${
+        mcConstants[statistics.lastDeath.issuer] ??
+        statistics.lastDeath.issuer
+      }" при помощи "${
+        mcConstants[statistics.lastDeath.issue] ??
+        statistics.lastDeath.issue
+      }"`
+    }
+    else deathString = statistics.lastDeath.issue.includes("entity")
+      ? `Был убит ${
+        mcConstants[statistics.lastDeath.issue] ??
+        statistics.lastDeath.issue
+      }ом`
+      : `${
+          mcConstants[statistics.lastDeath.issue] ??
+          statistics.lastDeath.issue
+        }`
+  }
+  deathString = deathString.replaceAll("%1$s", " ");
   return (
     <Card style={{ width: 'fit-content' }}>
       <div className={styles['block']}>
@@ -158,18 +184,7 @@ export function HardcoreStatisticsComponent({
                     {formatDate(new Date(statistics.lastDeath.time))}
                   </p>
                   <p>
-                    {statistics.lastDeath.issuer
-                      ? `Был убит "${
-                          mcConstants[statistics.lastDeath.issuer] ??
-                          statistics.lastDeath.issuer
-                        }" при помощи "${
-                          mcConstants[statistics.lastDeath.issue] ??
-                          statistics.lastDeath.issue
-                        }"`
-                      : `Умер из-за "${
-                          mcConstants[statistics.lastDeath.issue] ??
-                          statistics.lastDeath.issue
-                        }"`}
+                    {deathString}
                   </p>
                 </div>
               )}
@@ -181,15 +196,15 @@ export function HardcoreStatisticsComponent({
           <p>
             {statistics.lastServerTime != 0
               ? `Последний раз на сервере ${formatDate(
-                  new Date(statistics.lastServerTime)
-                )}`
+                new Date(statistics.lastServerTime)
+              )}`
               : 'Не заходил'}
           </p>
           <p>
             {statistics.timeOnServer != 0
               ? `Проведено времени на сервере ${dateFormat(
-                  statistics.timeOnServer
-                )}`
+                statistics.timeOnServer
+              )}`
               : 'Не играл'}
           </p>
         </div>
@@ -227,3 +242,4 @@ function Respawn({ rT }: { rT: number }) {
     </div>
   )
 }
+//TODO Translate (TRANSLATE ALL)
