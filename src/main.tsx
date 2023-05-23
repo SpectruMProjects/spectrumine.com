@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import Preloader from './components/Preloader'
-import { inventoryCmsPlugin } from './plugins'
+//import { inventoryCmsPlugin } from './plugins'
 import { usePlugins } from './store/plugins'
 
 const pluginsState = usePlugins.getState()
-pluginsState.addPlugin(inventoryCmsPlugin)
+//pluginsState.addPlugin(inventoryCmsPlugin)
 
 const App = lazy(() => import('./App'))
 
