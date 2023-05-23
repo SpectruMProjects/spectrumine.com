@@ -31,7 +31,6 @@ function safeLang(lang: string | null): (typeof locales)['locales'][number] {
   if (!locales.locales.includes(lang as any)) return 'ru'
   return lang as any
 }
-
 interface UserThemeState {
   color: Color
   lang: (typeof locales)['locales'][number]
