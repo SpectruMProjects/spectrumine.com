@@ -413,50 +413,16 @@ export type GetHardcoreTopResponse =
     }
 export async function getHardcoreTop(): Promise<GetHardcoreTopResponse> {
   try {
-    // await wait()
+    const res = await axios.get('/hardcore/top')
     return {
       code: 'ok',
-      data: [
-        {
-          username: 'Gl3b4ty',
-          deaths: 1,
-          lastDeathTime: 1685029014688,
-          timeOnServer: 100000,
-          lastTimeOnServer: 1685028914688,
-          status: 'up'
-        },
-        {
-          username: 'Lisoveliy',
-          deaths: 100,
-          lastDeathTime: 1685029014688,
-          timeOnServer: 1000000000,
-          lastTimeOnServer: 1685028914688,
-          status: 'down'
-        },
-        {
-          username: '3 player',
-          deaths: 23,
-          lastDeathTime: 1685029014688,
-          timeOnServer: 100000,
-          lastTimeOnServer: 1685028914688,
-          status: 'up'
-        },
-        {
-          username: '4 player',
-          deaths: 55,
-          lastDeathTime: 1685029014688,
-          timeOnServer: 100000,
-          lastTimeOnServer: 1685028914688
-        },
-        {
-          username: '5 player',
-          deaths: 55,
-          lastDeathTime: 1685029014688,
-          timeOnServer: 100000,
-          lastTimeOnServer: 1685028914688,
-          status: 'down'
-        }
-      ]
+      data: res.data.map((j: any) => ({
+        username: j.username,
+        deaths: j.deaths,
+        lastDeathTime: j.lastDeathTime,
+        timeOnServer: j.timeOnServer,
+        lastTimeOnServer: j.lastTimeOnServer
+      }))
     }
   } catch (error) {
     return { code: 'error' }
