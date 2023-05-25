@@ -118,8 +118,8 @@ export default function Header() {
           label: locale.theme,
           icon: (
             <img
-              width="24"
-              height="24"
+              width="28"
+              height="28"
               src="/icons/palette.svg"
               alt="language"
             />
