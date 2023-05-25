@@ -6,7 +6,8 @@ const ru: Locale = {
 
   words: {
     unknownError: 'Неизвестная ошибка',
-    top: 'Топ'
+    top: 'Рейтинг',
+    mainAddress: 'https://spectrumine.com'
   },
 
   messages: {
@@ -406,7 +407,8 @@ const ru: Locale = {
   },
 
   hardcoreTop: {
-    cantLoad: 'Не удалось загрузить топ'
+    cantLoad: 'Не удалось загрузить рейтинг',
+    lastTime: 'Был'
   }
 }
 export default ru

@@ -47,8 +47,9 @@ export default function HardcoreServer() {
       </div>
 
       <HardcoreMonitor />
-
-      <HardcoreTop style={{ marginTop: 64 }} />
+      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+      <HardcoreTop  style={{ marginTop: 64}} />
+      </div>
       <div className={sls['points']}>
         {locale.points.map((point) => (
           <div key={point.title} className={sls['point']}>

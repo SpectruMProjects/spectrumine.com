@@ -3,6 +3,7 @@ import styles from './styles.module.css'
 import { useHardcoreTop } from '@/hooks'
 import { Spin, Typography } from 'antd'
 import { useUserTheme } from '@/store/theme'
+import { getHardcoreTop } from '@/api'
 
 interface Props {
   className?: string
@@ -10,7 +11,7 @@ interface Props {
 }
 
 export default function HardcoreTop({ className, style }: Props) {
-  const top = useHardcoreTop()
+  let top = useHardcoreTop()
   const locale = useUserTheme((s) => s.locale)
 
   if (top === 'loading')
@@ -20,16 +21,18 @@ export default function HardcoreTop({ className, style }: Props) {
         <Spin />
       </div>
     )
-
-  if (top === null)
-    return (
-      <div className={styles['block'] + ' ' + (className ?? '')} style={style}>
-        <Typography.Title type="danger">
-          {locale.hardcoreTop.cantLoad}
-        </Typography.Title>
-      </div>
-    )
-
+  else
+    if (top === null)
+      return (
+        <div className={styles['block'] + ' ' + (className ?? '')} style={style}>
+          <Typography.Title type="danger">
+            {locale.hardcoreTop.cantLoad}
+          </Typography.Title>
+        </div>
+      )
+    else {
+      top = top.slice(0, 10)
+    }
   return (
     <div className={styles['block'] + ' ' + (className ?? '')} style={style}>
       <Typography.Title>{locale.words.top}</Typography.Title>
@@ -46,10 +49,11 @@ export default function HardcoreTop({ className, style }: Props) {
                 />
               </th>
               <th>
-                {stats.username} <br />
+                <a href={locale.words.mainAddress + "/hardcore/statistics/" + stats.username }>{stats.username} <br />
                 <Typography.Text type="secondary">
-                  {formatLastTimeOnServer(stats.lastTimeOnServer)}
+                  {locale.hardcoreTop.lastTime + " " + formatLastTimeOnServer(stats.lastTimeOnServer)}
                 </Typography.Text>
+                </a>
               </th>
               <th className={styles[stats.status ?? 'none']}>
                 <div />
@@ -93,14 +97,23 @@ function formatLastTimeOnServer(
 ): string | null {
   if (!time) return null
 
-  const formatter = Intl.DateTimeFormat('ru', {
-    hour: '2-digit',
-    minute: '2-digit'
-  })
+  // const formatter = Intl.DateTimeFormat('ru', {
+  //   hour: '2-digit',
+  //   minute: '2-digit'
+  // })
   const date = new Date(time)
-  return formatter.format(date)
+  return getZeros(date.getDay().toString()) + "." + 
+  getZeros(date.getMonth().toString()) + "." + 
+  date.getFullYear() + " " + 
+  getZeros(date.getHours().toString()) + ":" + 
+  getZeros(date.getMinutes().toString()) + ":" + 
+  getZeros(date.getSeconds().toString());
 }
-
+function getZeros(time: string): string{
+  if(time.length < 2){
+    return "0" + time;
+  }else return time;
+}
 function formatLastDeathTime(time: number | null | undefined): string | null {
   if (!time) return null
 

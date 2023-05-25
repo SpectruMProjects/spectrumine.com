@@ -13,6 +13,7 @@ export interface Locale {
   words: {
     unknownError: string
     top: string
+    mainAddress: string
   }
 
   messages: {
@@ -184,5 +185,6 @@ export interface Locale {
 
   hardcoreTop: {
     cantLoad: string
+    lastTime: string
   }
 }
