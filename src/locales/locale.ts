@@ -12,6 +12,7 @@ export interface Locale {
 
   words: {
     unknownError: string
+    top: string
   }
 
   messages: {
@@ -179,5 +180,9 @@ export interface Locale {
 
   inventoryCms: {
     inventory: string
+  }
+
+  hardcoreTop: {
+    cantLoad: string
   }
 }

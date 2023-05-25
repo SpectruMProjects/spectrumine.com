@@ -5,7 +5,8 @@ const ru: Locale = {
   code: 'ru',
 
   words: {
-    unknownError: 'Неизвестная ошибка'
+    unknownError: 'Неизвестная ошибка',
+    top: 'Топ'
   },
 
   messages: {
@@ -402,6 +403,10 @@ const ru: Locale = {
 
   inventoryCms: {
     inventory: 'Инветарь'
+  },
+
+  hardcoreTop: {
+    cantLoad: 'Не удалось загрузить топ'
   }
 }
 export default ru

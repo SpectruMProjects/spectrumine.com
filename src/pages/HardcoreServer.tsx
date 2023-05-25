@@ -6,6 +6,7 @@ import { CopyOutlined } from '@ant-design/icons'
 import { useSetPageTitle } from '@/hooks'
 import { useLayoutEffect } from 'react'
 import { useUserTheme } from '@/store/theme'
+import HardcoreTop from '@/components/HardcoreTop'
 
 const hardcoreUrl = import.meta.env.VITE_HARDCORE_IP
 
@@ -60,6 +61,8 @@ export default function HardcoreServer() {
           </div>
         ))}
       </div>
+
+      <HardcoreTop style={{ marginTop: 64 }} />
     </div>
   )
 }
