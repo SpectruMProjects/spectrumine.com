@@ -12,6 +12,17 @@ async function getPluginsNames() {
   return directory.filter((name) => name != 'index.ts')
 }
 
+/**
+ * @param {string} name
+ */
+function formatName(name) {
+  const arr = name.split('_')
+  return arr
+    .slice(1, arr.length)
+    .map((s) => s.toLowerCase())
+    .join(' ')
+}
+
 async function genEnv() {
   let { type } = await prompt({
     type: 'list',
@@ -27,24 +38,25 @@ async function genEnv() {
   )
   const resultArr = []
   for (const key in example) {
+    const name = formatName(key)
     if (key === 'VITE_PLUGINS') {
       const names = await getPluginsNames()
       const result = await prompt({
         type: 'checkbox',
-        name: key,
+        name,
         choices: names
       })
 
-      resultArr.push(`${key}=${result[key].join(',')}`)
+      resultArr.push(`${key}=${result[name].join(',')}`)
       return
     }
 
     const result = await prompt({
       type: 'input',
-      name: key,
+      name,
       default: example[key]
     })
-    resultArr.push(`${key}=${result[key]}`)
+    resultArr.push(`${key}=${result[name]}`)
   }
 
   await fs.cp(
