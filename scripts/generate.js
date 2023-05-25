@@ -44,11 +44,12 @@ async function genEnv() {
       const result = await prompt({
         type: 'checkbox',
         name,
+        default: names,
         choices: names
       })
 
       resultArr.push(`${key}=${result[name].join(',')}`)
-      return
+      continue
     }
 
     const result = await prompt({

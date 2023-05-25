@@ -8,7 +8,7 @@ function percent(max: number, current: number) {
 }
 export default function HardcoreMonitor() {
   //here enter IP for stats
-  const stats = useHardcoreMonitor(10000, '185.250.36.214:10100')
+  const stats = useHardcoreMonitor(10000, import.meta.env.VITE_HARDCORE_IP)
 
   return <HardcoreMonitorComponent stats={stats} />
 }
