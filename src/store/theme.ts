@@ -3,24 +3,34 @@ import locales, { Locale } from '@/locales'
 
 type Color =
   | 'Blue'
-  //| 'Purple'
-  //| 'Cyan'
-  //| 'Pink'
-  //| 'Red'
+  | 'Purple'
+  | 'Cyan'
+  | 'Pink'
+  | 'Red'
   | 'Yellow'
   | 'Orange'
   | 'Blue'
   | 'Green'
 export const colors = [
   'Blue',
-  //'Purple',
-  //'Cyan',
-  //'Pink',
-  //'Red',
+  'Purple',
+  'Cyan',
+  'Pink',
+  'Red',
   'Yellow',
   'Orange',
   'Green'
 ] as const
+export const colorsMap = {
+  Blue: '#083556',
+  Purple: '#722ed1',
+  Cyan: '#13c2c2',
+  Pink: '#eb2f96',
+  Red: '#f5222d',
+  Yellow: '#c78c2c',
+  Orange: '#d27a27',
+  Green: '#9aaf6a'
+}
 
 function safeColor(color: string | null): Color {
   if (!colors.includes(color as any)) return 'Blue'

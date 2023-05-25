@@ -5,9 +5,8 @@ import Link from 'antd/es/typography/Link'
 import { usePluginsMenuOptions } from '@/core'
 import styles from './styles.module.css'
 import './global.css'
-import { colors, useUserTheme } from '@/store/theme'
+import { colors, colorsMap, useUserTheme } from '@/store/theme'
 import locales from '@/locales'
-import { colorsMap } from '@/App'
 function onLinkClick(e: { preventDefault: () => void }) {
   e.preventDefault()
 }
