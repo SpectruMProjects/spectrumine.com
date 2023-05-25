@@ -21,6 +21,7 @@ export function useHardcoreMonitor(delay: number, address: string): State {
       } else setState(stat)
     })
     const interval = setInterval(() => {
+      if (document.hidden) return
       getServerOnline(address).then((stat) => {
         if (!stat.online) {
           setState({ online: false })
