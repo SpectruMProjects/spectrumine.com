@@ -5,6 +5,13 @@ import path from 'path'
 import chalk from 'chalk'
 const prompt = inq.createPromptModule()
 
+async function getPluginsNames() {
+  const directory = await fs.readdir(
+    path.resolve(process.cwd(), 'src', 'plugins')
+  )
+  return directory.filter((name) => name != 'index.ts')
+}
+
 async function genEnv() {
   let { type } = await prompt({
     type: 'list',
@@ -20,6 +27,18 @@ async function genEnv() {
   )
   const resultArr = []
   for (const key in example) {
+    if (key === 'VITE_PLUGINS') {
+      const names = await getPluginsNames()
+      const result = await prompt({
+        type: 'checkbox',
+        name: key,
+        choices: names
+      })
+
+      resultArr.push(`${key}=${result[key].join(',')}`)
+      return
+    }
+
     const result = await prompt({
       type: 'input',
       name: key,

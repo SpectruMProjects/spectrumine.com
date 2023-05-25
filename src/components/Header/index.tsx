@@ -141,15 +141,6 @@ export default function Header() {
             }
           }))
         }
-        // {
-        //   key: '/store',
-        //   label: (
-        //     <Link onClick={onLinkClick} href="/auth">
-        //       Магазин
-        //     </Link>
-        //   ),
-        //   icon: <ShopOutlined />
-        // }
       ]}
     />
   )
