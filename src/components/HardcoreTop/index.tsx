@@ -92,7 +92,6 @@ function dateFormat(time: number) {
   if (days) result.push(days)
   if (hours) result.push(hours < 10 ? `0${hours}` : hours)
    result.push(minutes < 10 ? `0${minutes}` : minutes)
-  console.log(minutes)
   result.push(seconds < 10 ? `0${seconds}` : seconds)
 
   return result.join(':')
