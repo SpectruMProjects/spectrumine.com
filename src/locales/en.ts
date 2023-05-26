@@ -12,10 +12,9 @@ const en: Locale = {
   messages: {
     unknownErrorOccurred: 'Unknown error',
     userNotFound: 'User not found',
-    accountNotActivated: 'Account doesn\'t activated',
+    accountNotActivated: "Account doesn't activated",
     incorrectPassword: 'Incorrect password',
-    accountWithSameNicknameAlreadyExists:
-      'User already registered',
+    accountWithSameNicknameAlreadyExists: 'User already registered',
     invalidForm: 'Invalid data',
     accountWithSameEmailAlreadyExists: 'Mail already registered',
     accountWithSameNicknameNotExistsInMojang:
@@ -61,7 +60,7 @@ const en: Locale = {
     successRegister: 'Check your mail for confirm account!',
     change: 'Change',
     login: 'Login',
-    'noAccount?': 'Didn\'t have account?',
+    'noAccount?': "Didn't have account?",
     'hasAccount?': 'Have account?',
     'forgotPassword?': 'Forgot password?',
     email: {
@@ -97,10 +96,11 @@ const en: Locale = {
         between(min, max) {
           return `The usernamе must be longer than ${min} and shorter than ${max}`
         },
-        latinAndNumbers: 'The username must contain only Latin letters and numbers'
+        latinAndNumbers:
+          'The username must contain only Latin letters and numbers'
       },
       warnings: {
-        noMojangAccount: 'Account doesn\'t licensed'
+        noMojangAccount: "Account doesn't licensed"
       }
     }
   },
@@ -134,7 +134,7 @@ const en: Locale = {
           'By registering on the project, you agree to all the rules of this list, the rights described below and responsibilities.',
           'By registering on the project, you agree to the processing of your personal data by the Administration, that is, performing, among other things, the following actions: processing (including collection, systematization, accumulation, storage, clarification (updating, modification), use, depersonalization, blocking, destruction of personal data).',
           'The right to use all the services of the project is provided by the Administration on a free basis, with the exception of additional functions (purchased on a paid basis and activated by activating additional features in the server version (plugins) of the game), as well as paid passes to paid servers. The use of the free functionality is provided in the current form, without guaranteeing 100% correct operation. Game items, abilities, etc., lost due to improper operation of unpaid services, are not returned.',
-          'Payment for additional parts of the software product is made only on the official website of the project, located at spectrumine.com in the currency – the Russian ruble. Funds are credited using the payment aggregator in any currency at the user\'s location, converted by the aggregator itself into Russian rubles.',
+          "Payment for additional parts of the software product is made only on the official website of the project, located at spectrumine.com in the currency – the Russian ruble. Funds are credited using the payment aggregator in any currency at the user's location, converted by the aggregator itself into Russian rubles.",
           'When entering a wrong nickname on the site, the administration is not responsible for the consequences of buying something for this nickname.',
           'Since it is not always possible to determine a violation of the rules by the user, the final decision remains with the project Administrators.',
           'The copyright holders of the additional parts of the product are their authors. The use of these parts by the Administration is carried out on the basis of an agreement on free distribution and use.',
@@ -151,7 +151,7 @@ const en: Locale = {
           ' The player is entitled to a voluntary donation.',
           ' The player agrees that the funds spent by him will not be refunded.',
           'Players with various privileges on the server are no different from ordinary players, except for additional cosmetic features and are fully subject to the Rules of the project as well as the Mojang AB EULA.',
-          'The player is obliged to report identified bugs and flaws to the Server Administration, in case of intentional concealment of identified bugs and flaws, the Administration has the right to block or completely delete the player\'s account.',
+          "The player is obliged to report identified bugs and flaws to the Server Administration, in case of intentional concealment of identified bugs and flaws, the Administration has the right to block or completely delete the player's account.",
           'Any player can complain about other players.',
           'The player has the right to file a complaint against the player/moderator'
         ]
@@ -166,7 +166,7 @@ const en: Locale = {
           'When issuing a punishment, the Moderator is obliged to indicate the reason and the rule number.',
           'Moderation is forbidden to issue a penalty if it is not in the rules.',
           'The moderator is forbidden to impersonate the creator, and incite discord towards the Administration.',
-          'Moderator\'s actions aimed at inciting hatred or enmity, as well as at humiliating the dignity of a person or group of persons on the grounds of gender, race, nationality, language, origin, orientation, attitude to religion, as well as belonging to any social group, committed in public, are punishable by removal from office.'
+          "Moderator's actions aimed at inciting hatred or enmity, as well as at humiliating the dignity of a person or group of persons on the grounds of gender, race, nationality, language, origin, orientation, attitude to religion, as well as belonging to any social group, committed in public, are punishable by removal from office."
         ]
       ],
       [
@@ -175,7 +175,7 @@ const en: Locale = {
           'The project administration may, in exceptional cases, deviate from these Rules and act at its discretion.',
           'The administration does not store user passwords in plain text.',
           'The Administration is not responsible for player accounts, including social engineering, viruses, password selection, etc.',
-          'The Administration\'s decisions are not subject to appeal.',
+          "The Administration's decisions are not subject to appeal.",
           'The administration has the right to issue any punishment.',
           'Complaints against the Administration are not accepted.',
           'All funds received by the Administration are a voluntary donation and are non-refundable (clause 2.4).',
@@ -224,7 +224,7 @@ const en: Locale = {
       [
         'General',
         [
-          'By playing on the SpectruMine server, you hereby agree to all the rules listed below. In case of disagreement, the player undertakes to stop using the project\'s services.',
+          "By playing on the SpectruMine server, you hereby agree to all the rules listed below. In case of disagreement, the player undertakes to stop using the project's services.",
           'Ignorance of the rules does not exempt you from responsibility. Hacking your account is not an excuse if you are accused of violating the rules.',
           'The administrator manages the project strictly at his discretion and has the right to punish the player for a reason not specified in the rules and without explanation.',
           'The server is paid, but it is in beta testing, which does not guarantee its correct operation. ',
@@ -232,31 +232,31 @@ const en: Locale = {
           'All changes to the rules are agreed with the Administrator and supplemented if they are incomplete or unclear. The rules can be changed at any time without notifying the players.',
           'The moderator, at his discretion, can mitigate or increase the punishment for the player.',
           'Moderator – authorized persons of the administration responsible for maintaining order in all SpectruMine services entrusted to them, observing these Rules and the Rules for the Administration of Servers.' +
-          'Moderators do not interpret the rules literally or formally, in controversial issues they are guided only by the purpose of the created rules and common sense considerations. Each controversial situation that has arisen in the Discord server or in the game is resolved strictly individually.'
+            'Moderators do not interpret the rules literally or formally, in controversial issues they are guided only by the purpose of the created rules and common sense considerations. Each controversial situation that has arisen in the Discord server or in the game is resolved strictly individually.'
         ]
       ],
       [
         'Buildings',
         [
           'It is forbidden to build buildings in the form of obscene inscriptions, having the form of something obscene, indecent pictures, and symbols aimed at humiliating and insulting someone.' +
-          'Punishment: demolition of the building.'
+            'Punishment: demolition of the building.'
         ]
       ],
       [
         'Game World',
         [
           'Obscene language, lies, insults, threats in the game world, provocations (on signs, on information boards, etc.) are prohibited.' +
-          'Punishment: demolition of the building and ban for 1 day.'
+            'Punishment: demolition of the building and ban for 1 day.'
         ]
       ],
       [
         'Grifering',
         [
-          'Grifering in its usual sense is PROHIBITED. You can destroy other people\'s buildings and loot only in the following situations: ',
+          "Grifering in its usual sense is PROHIBITED. You can destroy other people's buildings and loot only in the following situations: ",
           'An open and explicit conflict of players operating within the framework of the RP.',
           'Open and explicit clan conflict leading to clan war, other armed conflicts operating within the framework of the RP. ',
-          'It is forbidden to fill other people\'s houses / warps with oil / water, to fill them with sand / gravel.and it\'s also just messy and pointless to spill water or lava. ',
-          'It is forbidden to kill other people\'s animals(peaceful) if they are in pens and do not belong to the RP conflict. ',
+          "It is forbidden to fill other people's houses / warps with oil / water, to fill them with sand / gravel.and it's also just messy and pointless to spill water or lava. ",
+          "It is forbidden to kill other people's animals(peaceful) if they are in pens and do not belong to the RP conflict. ",
           'It is forbidden to siphon/extract resources from chests (and any other blocks storing resources) belonging to another player.',
           'Grifering is punishable: the first time is 7 days of ban, with relapse - eternal.'
         ]
@@ -275,7 +275,7 @@ const en: Locale = {
           'Caps are prohibited in messages (with the exception of abbreviations and names of devices in the game (such as ECHO, MFE, etc.)). Caps — a message consisting entirely (or one of the words of the message) of CAPITAL letters or a large number of them. Punishment: mutation from 15 minutes to 6 hours.',
           'Discrimination of inexperienced players, misinformation, ridicule, sending provocative messages to the chat, interfering with the communication of other players is prohibited. Punishment: mutation for 3 hours, in case of relapse is punished by 5.6.',
           'It is allowed to post links only to well-known resources, such as vk.com , google.com , wikipedia, etc. All other URLs should be sent only in private messages to a certain player. Punishment: mutation for 3 hours, if malware, viruses, phishing sites are detected after clicking on your link, you will be punished according to 6.1.',
-          'Attempts to take over someone else\'s account, to lure out a login / password are punishable. Punishment: eternal ban.',
+          "Attempts to take over someone else's account, to lure out a login / password are punishable. Punishment: eternal ban.",
           'It is prohibited to incite third parties to violate the rules, to substitute players, to tell false information from any player in the third person. Punishment: mut from 15 minutes.',
           'Public criticism/discussion of the actions of the Administrator or the Server Administration is prohibited. In the game, the Administration may first give you a warning that you are violating rule 5.14 and inform you that you will receive mutation if you continue the discussion in the game, and not on the forum. If the player continues, he will receive a mutation. Punishment: warning, then mutation for 1 day.',
           'Public criticism of the project/servers is prohibited. Punishment: mutation from the 1st hour to the eternal ban on all servers, depending on the severity of the statement.',
@@ -291,7 +291,7 @@ const en: Locale = {
           'It is forbidden to use cheats that give an advantage over other players. Punishment: ban from 4 days.',
           'Destabilizing work, creating lags/lag zones, causing server crashes is prohibited and punishable. It is also not desirable to install too many devices, Create mechanisms, residents of huge sizes, etc. (at the discretion of the administration). Punishment: ban from the 1st day to the eternal. Demolition of mechanisms that create lags.',
           'It is forbidden to create accounts for downloading chunks / used for negative purposes (violating the rules of the project). Punishment: if for loading chunks, then ban the twin that was used. If for negative purposes, then ban on the basis of a violated clause from the rules.',
-          'It is prohibited to use someone else\'s account to log into the game, even with the permission of the account owner, as well as providing your account data to another player.Punishment: Warning / ban 1-3 days.',
+          "It is prohibited to use someone else's account to log into the game, even with the permission of the account owner, as well as providing your account data to another player.Punishment: Warning / ban 1-3 days.",
           'It is forbidden to deceive players and the administration, to mislead. Punishment: ban 5-10 days / eternal.',
           'The player has no right to interfere with the work of the Administration on the server. Punishment: ban for 3 hours.',
           'The player has no right to impersonate the administration or make nicknames similar to the nicknames of Administrators, Moderators, Helpers. Punishment: eternal ban.',
@@ -320,7 +320,7 @@ const en: Locale = {
           'The moderator must be competent, sociable and active.',
           'The moderator is obliged to observe censorship and speech norms when communicating with players.',
           'The moderator can be removed from office at any time, without warning.',
-          'The moderator must always respond to the Administrators\' messages and follow all instructions assigned to them that do not violate the server\'s norms.',
+          "The moderator must always respond to the Administrators' messages and follow all instructions assigned to them that do not violate the server's norms.",
           'The moderator is obliged to report the malice or conspiracy of any of the staff or players to the chief Administrator of the server.'
         ]
       ]
@@ -413,6 +413,11 @@ const en: Locale = {
     nickname: 'Username',
     deaths: 'Deaths',
     played: 'Time played'
+  },
+
+  hardcoreChat: {
+    chat: 'Chat',
+    cantLoad: 'Failed to load'
   }
 }
 export default en
