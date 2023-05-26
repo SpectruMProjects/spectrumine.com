@@ -13,7 +13,6 @@ export interface Locale {
   words: {
     unknownError: string
     top: string
-    mainAddress: string
   }
 
   messages: {

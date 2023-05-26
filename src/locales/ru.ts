@@ -6,8 +6,7 @@ const ru: Locale = {
 
   words: {
     unknownError: 'Неизвестная ошибка',
-    top: 'Рейтинг',
-    mainAddress: 'https://spectrumine.com'
+    top: 'Рейтинг'
   },
 
   messages: {

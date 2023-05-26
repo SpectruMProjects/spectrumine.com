@@ -118,33 +118,34 @@ export function HardcoreStatisticsComponent({
   username
 }: ComponentProps) {
   //TODO Translate
-  let deathString = "";
-  if(statistics.lastDeath){
-    if(statistics.lastDeath.issuer != username && statistics.lastDeath.issuer){
+  let deathString = ''
+  if (statistics.lastDeath) {
+    if (
+      statistics.lastDeath.issuer != username &&
+      statistics.lastDeath.issuer
+    ) {
       deathString = `Был убит "${
-        mcConstants[statistics.lastDeath.issuer] ??
-        statistics.lastDeath.issuer
+        mcConstants[statistics.lastDeath.issuer] ?? statistics.lastDeath.issuer
       }" при помощи "${
-        mcConstants[statistics.lastDeath.issue] ??
-        statistics.lastDeath.issue
+        mcConstants[statistics.lastDeath.issue] ?? statistics.lastDeath.issue
       }"`
-    }
-    else deathString = statistics.lastDeath.issue.includes("entity")
-      ? `Убил ${
-        mcConstants[statistics.lastDeath.issue] ??
-        statistics.lastDeath.issue
-      }`
-      : `${
-          mcConstants[statistics.lastDeath.issue] ??
-          statistics.lastDeath.issue
-        }`
+    } else
+      deathString = statistics.lastDeath.issue.includes('entity')
+        ? `Убил ${
+            mcConstants[statistics.lastDeath.issue] ??
+            statistics.lastDeath.issue
+          }`
+        : `${
+            mcConstants[statistics.lastDeath.issue] ??
+            statistics.lastDeath.issue
+          }`
   }
-  deathString = deathString.replaceAll("%1$s", " ");
+  deathString = deathString.replaceAll('%1$s', ' ')
   return (
     <Card style={{ width: 'fit-content' }}>
       <div className={styles['block']}>
         <p className={styles['title']}>
-          Статистика{' '}
+          {username} статистика{` `}
           <a
             href="/servers/hardcore"
             onClick={(e) => {
@@ -183,9 +184,7 @@ export function HardcoreStatisticsComponent({
                     Дата последней смерти{' '}
                     {formatDate(new Date(statistics.lastDeath.time))}
                   </p>
-                  <p>
-                    {deathString}
-                  </p>
+                  <p>{deathString}</p>
                 </div>
               )}
             </div>
@@ -196,15 +195,15 @@ export function HardcoreStatisticsComponent({
           <p>
             {statistics.lastServerTime != 0
               ? `Последний раз на сервере ${formatDate(
-                new Date(statistics.lastServerTime)
-              )}`
+                  new Date(statistics.lastServerTime)
+                )}`
               : 'Не заходил'}
           </p>
           <p>
             {statistics.timeOnServer != 0
               ? `Проведено времени на сервере ${dateFormat(
-                statistics.timeOnServer
-              )}`
+                  statistics.timeOnServer
+                )}`
               : 'Не играл'}
           </p>
         </div>

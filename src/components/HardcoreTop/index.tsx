@@ -3,7 +3,7 @@ import styles from './styles.module.css'
 import { useHardcoreTop } from '@/hooks'
 import { Spin, Typography } from 'antd'
 import { useUserTheme } from '@/store/theme'
-import { getHardcoreTop } from '@/api'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   className?: string
@@ -13,6 +13,7 @@ interface Props {
 export default function HardcoreTop({ className, style }: Props) {
   let top = useHardcoreTop()
   const locale = useUserTheme((s) => s.locale)
+  const nav = useNavigate()
 
   if (top === 'loading')
     return (
@@ -21,25 +22,27 @@ export default function HardcoreTop({ className, style }: Props) {
         <Spin />
       </div>
     )
-  else
-    if (top === null)
-      return (
-        <div className={styles['block'] + ' ' + (className ?? '')} style={style}>
-          <Typography.Title type="danger">
-            {locale.hardcoreTop.cantLoad}
-          </Typography.Title>
-        </div>
-      )
-    else {
-      top = top.slice(0, 10)
-    }
+  else if (top === null)
+    return (
+      <div className={styles['block'] + ' ' + (className ?? '')} style={style}>
+        <Typography.Title type="danger">
+          {locale.hardcoreTop.cantLoad}
+        </Typography.Title>
+      </div>
+    )
+  else {
+    top = top.slice(0, 10)
+  }
   return (
     <div className={styles['block'] + ' ' + (className ?? '')} style={style}>
       <Typography.Title>{locale.words.top}</Typography.Title>
       <table className={styles['table']}>
         <tbody>
           {top.map((stats) => (
-            <tr key={stats.username}>
+            <tr
+              key={stats.username}
+              onClick={() => nav(`/hardcore/statistics/${stats.username}`)}
+            >
               <th>
                 <img
                   width="32"
@@ -49,11 +52,13 @@ export default function HardcoreTop({ className, style }: Props) {
                 />
               </th>
               <th>
-                <a href={locale.words.mainAddress + "/hardcore/statistics/" + stats.username }>{stats.username} <br />
+                {stats.username}
+                <br />
                 <Typography.Text type="secondary">
-                  {locale.hardcoreTop.lastTime + " " + formatLastTimeOnServer(stats.lastTimeOnServer)}
+                  {locale.hardcoreTop.lastTime +
+                    ' ' +
+                    formatLastTimeOnServer(stats.lastTimeOnServer)}
                 </Typography.Text>
-                </a>
               </th>
               <th className={styles[stats.status ?? 'none']}>
                 <div />
@@ -84,7 +89,7 @@ function dateFormat(time: number) {
   const seconds = Math.floor(delta % 60)
 
   const result = []
-  if (days) result.push(days < 10 ? `0${days}` : days)
+  if (days) result.push(days)
   if (hours) result.push(hours < 10 ? `0${hours}` : hours)
   if (minutes) result.push(minutes < 10 ? `0${minutes}` : minutes)
   if (seconds) result.push(seconds < 10 ? `0${seconds}` : seconds)
@@ -95,25 +100,20 @@ function dateFormat(time: number) {
 function formatLastTimeOnServer(
   time: number | null | undefined
 ): string | null {
+  console.log(time)
   if (!time) return null
 
-  // const formatter = Intl.DateTimeFormat('ru', {
-  //   hour: '2-digit',
-  //   minute: '2-digit'
-  // })
+  const formatter = Intl.DateTimeFormat('ru', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit'
+  })
   const date = new Date(time)
-  return getZeros(date.getDay().toString()) + "." + 
-  getZeros(date.getMonth().toString()) + "." + 
-  date.getFullYear() + " " + 
-  getZeros(date.getHours().toString()) + ":" + 
-  getZeros(date.getMinutes().toString()) + ":" + 
-  getZeros(date.getSeconds().toString());
+  return formatter.format(date)
 }
-function getZeros(time: string): string{
-  if(time.length < 2){
-    return "0" + time;
-  }else return time;
-}
+
 function formatLastDeathTime(time: number | null | undefined): string | null {
   if (!time) return null
 

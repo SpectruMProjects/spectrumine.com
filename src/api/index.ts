@@ -382,7 +382,7 @@ export type GetServerOnlineResponse =
       online: false
     }
 export async function getServerOnline(
-  ip = ''
+  ip: string
 ): Promise<GetServerOnlineResponse> {
   const res = await axios.get(`https://api.mcsrvstat.us/2/${ip}`)
 
@@ -416,13 +416,7 @@ export async function getHardcoreTop(): Promise<GetHardcoreTopResponse> {
     const res = await axios.get('/hardcore/top')
     return {
       code: 'ok',
-      data: res.data.map((j: any) => ({
-        username: j.username,
-        deaths: j.deaths,
-        lastDeathTime: j.lastDeathTime,
-        timeOnServer: j.timeOnServer,
-        lastTimeOnServer: j.lastTimeOnServer
-      }))
+      data: res.data
     }
   } catch (error) {
     return { code: 'error' }
