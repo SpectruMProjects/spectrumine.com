@@ -20,7 +20,9 @@ const ru: Locale = {
     accountWithSameEmailAlreadyExists: 'Аккаунт с такой почтой уже существует',
     accountWithSameNicknameNotExistsInMojang:
       'Аккаунта не существует со стороны Mojang',
-    codeExpired: 'Срок действия кода истёк'
+    codeExpired: 'Срок действия кода истёк',
+    copied: 'Скопировано',
+    copyFault: 'Не удалось скопировать'
   },
 
   mainPagePreview: {

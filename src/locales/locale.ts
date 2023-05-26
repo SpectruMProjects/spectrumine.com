@@ -25,6 +25,8 @@ export interface Locale {
     accountWithSameNicknameNotExistsInMojang: string
     invalidForm: string
     codeExpired: string
+    copied: string
+    copyFault: string
   }
 
   mainPagePreview: {

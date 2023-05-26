@@ -3,12 +3,12 @@
 }
 
 .block .title {
-  font-size: 4em;
+  font-size: 3em;
   font-weight: 500;
   text-align: center;
 }
 
-@media (max-width: 700px) {
+@media (width <= 700px) {
   .block .title {
     font-size: 6vw;
   }
@@ -17,7 +17,6 @@
 .heart {
   width: 10vw;
   height: 10vw;
-
   image-rendering: pixelated;
 }
 
@@ -37,6 +36,7 @@
   font-size: 2em;
   text-align: center;
 }
+
 .content {
   display: flex;
   width: 100%;
@@ -47,9 +47,7 @@
 
 .inner {
   padding: 0 32px;
-
   flex: 1;
-
   display: flex;
   flex-direction: column;
 }
@@ -67,7 +65,7 @@
   font-size: 1.5em;
 }
 
-@media (max-width: 700px) {
+@media (width <= 700px) {
   .content {
     flex-direction: column;
   }

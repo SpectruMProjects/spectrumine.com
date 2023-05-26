@@ -1,10 +1,12 @@
 import { useUserHardcoreStatistics } from '@/hooks'
 import styles from './styles.module.css'
-import { Card, Spin } from 'antd'
+import { Button, Card, Spin, message } from 'antd'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { HardcoreStatistics as Model } from '@/models'
 import { mcConstants } from '@/constans'
+import { CopyOutlined, ShareAltOutlined } from '@ant-design/icons'
+import { useUserTheme } from '@/store/theme'
 
 function formatDeaths(count: number) {
   if ([11, 12, 13, 14, 15, 17, 18, 19].includes(count)) return 'смертей'
@@ -117,6 +119,7 @@ export function HardcoreStatisticsComponent({
   statistics,
   username
 }: ComponentProps) {
+  const locale = useUserTheme((s) => s.locale)
   //TODO Translate
   let deathString = ''
   if (statistics.lastDeath) {
@@ -141,9 +144,33 @@ export function HardcoreStatisticsComponent({
           }`
   }
   deathString = deathString.replaceAll('%1$s', ' ')
+
+  function onShare() {
+    navigator.clipboard
+      .writeText(`${import.meta.env.VITE_HOST}/hardcore/statistics/${username}`)
+      .then(() => {
+        message.info(
+          <>
+            {locale.messages.copied} <CopyOutlined />
+          </>,
+          2
+        )
+      })
+      .catch(() => {
+        message.error(locale.messages.copyFault, 2)
+      })
+  }
+
   return (
     <Card style={{ width: 'fit-content' }}>
       <div className={styles['block']}>
+        <Button
+          type="primary"
+          icon={<ShareAltOutlined />}
+          size="large"
+          onClick={onShare}
+        />
+
         <p className={styles['title']}>
           {username} статистика{` `}
           <a
@@ -156,7 +183,6 @@ export function HardcoreStatisticsComponent({
             HARDCORE
           </a>{' '}
           сервера
-          <br />
         </p>
 
         <div className={styles['content']}>
