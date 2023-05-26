@@ -65,7 +65,7 @@ export default function HardcoreTop({ className, style }: Props) {
               </th>
               <th>{dateFormat(stats.timeOnServer ?? 0)}</th>
               <th>{stats.deaths}</th>
-              <th>{formatLastDeathTime(stats.lastDeathTime)}</th>
+              {/* <th>{formatLastDeathTime(stats.lastDeathTime)}</th> */}
             </tr>
           ))}
         </tbody>
