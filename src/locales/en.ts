@@ -354,14 +354,14 @@ const en: Locale = {
 
       {
         icon: '/icons/headphones.svg',
-        title: 'How is working',
+        title: 'Voice chat',
         description:
           'There is a PlasmoVoice plugin on the server for voice communication inside the game. Once installed on your client, you will be able to communicate seamlessly using a microphone.'
       },
 
       {
         icon: '/icons/gears.svg',
-        title: 'Как работает?',
+        title: 'How is working?',
         description:
           'We have made a plugin that makes it possible to be reborn after the time you spent on the server, because it would be too difficult to die forever.'
       },
