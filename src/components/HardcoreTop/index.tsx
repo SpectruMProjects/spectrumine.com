@@ -37,6 +37,15 @@ export default function HardcoreTop({ className, style }: Props) {
     <div className={styles['block'] + ' ' + (className ?? '')} style={style}>
       <Typography.Title>{locale.words.top}</Typography.Title>
       <table className={styles['table']}>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Никнейм</th>
+            <th></th>
+            <th>Наиграно</th>
+            <th>Смерти</th>
+          </tr>
+        </thead>
         <tbody>
           {top.map((stats) => (
             <tr
@@ -47,7 +56,8 @@ export default function HardcoreTop({ className, style }: Props) {
                 <img
                   width="32"
                   height="32"
-                  src="/images/hcheart.png"
+                  loading="lazy"
+                  src={`${import.meta.env.VITE_HEAD_URL}/${stats.username}`}
                   style={{ imageRendering: 'pixelated' }}
                 />
               </th>
@@ -65,7 +75,6 @@ export default function HardcoreTop({ className, style }: Props) {
               </th>
               <th>{dateFormat(stats.timeOnServer ?? 0)}</th>
               <th>{stats.deaths}</th>
-              {/* <th>{formatLastDeathTime(stats.lastDeathTime)}</th> */}
             </tr>
           ))}
         </tbody>
@@ -91,7 +100,7 @@ function dateFormat(time: number) {
   const result = []
   if (days) result.push(days)
   if (hours) result.push(hours < 10 ? `0${hours}` : hours)
-   result.push(minutes < 10 ? `0${minutes}` : minutes)
+  result.push(minutes < 10 ? `0${minutes}` : minutes)
   result.push(seconds < 10 ? `0${seconds}` : seconds)
 
   return result.join(':')
@@ -100,20 +109,6 @@ function dateFormat(time: number) {
 function formatLastTimeOnServer(
   time: number | null | undefined
 ): string | null {
-  if (!time) return null
-
-  const formatter = Intl.DateTimeFormat('ru', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit'
-  })
-  const date = new Date(time)
-  return formatter.format(date)
-}
-
-function formatLastDeathTime(time: number | null | undefined): string | null {
   if (!time) return null
 
   const formatter = Intl.DateTimeFormat('ru', {
