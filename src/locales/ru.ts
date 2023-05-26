@@ -413,6 +413,11 @@ const ru: Locale = {
     nickname: 'Никнейм',
     deaths: 'Смерти',
     played: 'Наиграно'
+  },
+
+  hardcoreChat: {
+    chat: 'Чат',
+    cantLoad: 'Не удалось загрузить'
   }
 }
 export default ru

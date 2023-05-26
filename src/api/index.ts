@@ -426,6 +426,43 @@ export async function getHardcoreTop(): Promise<GetHardcoreTopResponse> {
   }
 }
 
+export type GetChatOkData = {
+  username: string
+  time: number
+  text: string
+}[]
+export type GetChatResponse =
+  | {
+      code: 'ok'
+      data: GetChatOkData
+    }
+  | {
+      code: 'error'
+    }
+export async function getChat(server: string): Promise<GetChatResponse> {
+  await wait()
+  return {
+    code: 'ok',
+    data: [
+      { username: 'Gl3b4ty', time: 1685114279066, text: 'first message' },
+      { username: 'Gl3b4ty', time: 1685114289066, text: 'second message' },
+      { username: 'Blebik', time: 1685114299066, text: 'message3' },
+      { username: 'Gl3b4ty', time: 1685114309066, text: 'message4 f sdf' },
+      { username: 'Gl3b4ty', time: 1685114319066, text: '45534rrfg' },
+      { username: 'Blebik', time: 1685114329066, text: 'gdfg dgdgdfg' },
+      { username: 'Blebik', time: 1685114339066, text: 'fddfdf fdfd' },
+      { username: 'Gl3b4ty', time: 1685114349066, text: 'sfkgdkgdkgdm' },
+      {
+        username: 'Cheburek',
+        time: 1685114359066,
+        text: 'message message message message message message'
+      },
+      { username: 'Gl3b4ty', time: 1685114369066, text: 'f' },
+      { username: 'Cheburek', time: 1685114379066, text: 'messssage' }
+    ]
+  }
+}
+
 function wait(time = 1000) {
   return new Promise((r) => setTimeout(r, time))
 }

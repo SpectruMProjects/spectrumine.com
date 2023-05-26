@@ -191,4 +191,9 @@ export interface Locale {
     played: string
     deaths: string
   }
+
+  hardcoreChat: {
+    chat: string
+    cantLoad: string
+  }
 }

@@ -1,0 +1,23 @@
+.table tbody img {
+  width: 20px;
+  height: 20px;
+  image-rendering: pixelated;
+}
+
+.table tbody td:nth-child(2) {
+  width: 64px;
+  text-align: center;
+}
+
+@media (width <= 400px) {
+  .table tbody td:nth-child(2) {
+    display: none;
+  }
+}
+
+.username {
+  width: max-content;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #84DC7D;
+}

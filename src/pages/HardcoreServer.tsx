@@ -7,6 +7,7 @@ import { useSetPageTitle } from '@/hooks'
 import { useLayoutEffect } from 'react'
 import { useUserTheme } from '@/store/theme'
 import HardcoreTop from '@/components/HardcoreTop'
+import Chat from '@/components/Chat'
 
 const hardcoreUrl = import.meta.env.VITE_HARDCORE_IP
 
@@ -47,7 +48,6 @@ export default function HardcoreServer() {
       </div>
 
       <HardcoreMonitor />
-      <HardcoreTop style={{ marginTop: 64 }} />
       <div className={sls['points']}>
         {locale.points.map((point) => (
           <div key={point.title} className={sls['point']}>
@@ -61,6 +61,9 @@ export default function HardcoreServer() {
           </div>
         ))}
       </div>
+
+      <HardcoreTop style={{ marginTop: 64 }} />
+      {/* <Chat server="hardcore" /> */}
     </div>
   )
 }
