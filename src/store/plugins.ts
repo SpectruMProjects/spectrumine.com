@@ -13,7 +13,7 @@ export const usePlugins = create<PluginsState>((set, get) => ({
   async loadPlugins() {
     const plugins: Plugin[] = (
       (await Promise.all(
-        (import.meta.env.VITE_PLUGINS as string)
+        ((import.meta.env.VITE_PLUGINS ?? '') as string)
           .split(',')
           .filter((name) => name !== '')
           .map(loadPlugin)
