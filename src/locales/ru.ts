@@ -34,13 +34,13 @@ const ru: Locale = {
     SpectruMSteam: {
       name: 'SpectruMSteam',
       description: 'Сервер с модами. Create и SMP! В разработке...',
-      info: ['Без лицензии', 'Моды', 'SMP'],
+      info: ['Без лицензии', 'Моды', 'SMP', 'В разработке...'],
       icon: '/images/wrench.png'
     },
     'Hardcore SMP': {
       name: 'Hardcore SMP',
       description:
-        'Мечтали поиграть в хардкор с друьзьями? ' +
+        'Мечтали поиграть в хардкор с друзьями? ' +
         'Теперь ваша мечта сбылась! ' +
         'Минимальное количество плагинов, вы платите за свою смерть временем',
 
@@ -50,9 +50,9 @@ const ru: Locale = {
     },
     'Talent of the Telepath': {
       name: 'Талант телепата',
-      description: 'Сервер с заклинаниями. В разработке',
+      description: 'Сервер с заклинаниями. В разработке...',
       icon: '/images/wrench.png',
-      info: ['Лицензия', 'No SMP']
+      info: ['Лицензия', 'No SMP', 'В разработке...']
     }
   },
 

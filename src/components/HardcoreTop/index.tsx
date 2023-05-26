@@ -40,7 +40,7 @@ export default function HardcoreTop({ className, style }: Props) {
         <thead>
           <tr>
             <th></th>
-            <th>{locale.hardcoreTop.nickname}</th>
+            <th>{}</th>
             <th></th>
             <th>{locale.hardcoreTop.played}</th>
             <th>{locale.hardcoreTop.deaths}</th>
@@ -74,7 +74,7 @@ export default function HardcoreTop({ className, style }: Props) {
                 <div />
               </th>
               <th>{dateFormat(stats.timeOnServer ?? 0)}</th>
-              <th style={{color: "red", fontSize: "20pt"}}>{stats.deaths}</th>
+              <th style={stats.deaths ? {color: "red", fontSize: "20pt"} : {color: "green", fontSize: "20pt"}}>{stats.deaths}</th>
             </tr>
           ))}
         </tbody>
