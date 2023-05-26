@@ -193,18 +193,18 @@ const ru: Locale = {
   },
 
   contacts: {
-    pageTitle: 'SpectruM - Контакты',
+    pageTitle: 'SpectruMine - Контакты',
     messengersTitle: 'Мессенджеры',
     messengers: [
       {
         name: 'Telegram - ',
-        link: ' Наша группа',
+        link: ' Наш канал',
         linkSrc: 'https://t.me/spectrumine',
         iconSrc: '/icons/telegram.svg'
       },
       {
         name: 'Discord - ',
-        link: 'Наш канал',
+        link: 'Наш сервер',
         linkSrc: 'https://discord.gg/w2Ks8HFPDJ',
         iconSrc: '/icons/discord.svg'
       }
@@ -219,7 +219,7 @@ const ru: Locale = {
   },
 
   rules: {
-    pageTitle: 'SpectruM - Правила',
+    pageTitle: 'SpectruMine - Правила',
     rules: [
       [
         'Общее',
@@ -328,7 +328,7 @@ const ru: Locale = {
   },
 
   activateChangePass: {
-    pageTitle: 'SpectruM - Подтверждение смены пароля',
+    pageTitle: 'SpectruMIne - Подтверждение смены пароля',
     passwordChanged: 'Пароль изменён',
     error: 'Не удалось изменить пароль',
     logOutFromAllDevices: 'Выйти со всех устройств',
@@ -337,12 +337,12 @@ const ru: Locale = {
   },
 
   activateRegisterCode: {
-    pageTitle: 'SpectruM - Подтверждение регистрации',
+    pageTitle: 'SpectruMine - Подтверждение регистрации',
     loadTip: 'Подтверждение регистрации'
   },
 
   hardcoreServer: {
-    pageTitle: 'SpectruM - Hardcore сервер',
+    pageTitle: 'SpectruMine - Hardcore сервер',
     ipAddress: 'IP Адрес',
     points: [
       {
@@ -376,14 +376,14 @@ const ru: Locale = {
   },
 
   notFound: {
-    pageTitle: 'SpectruM - 404',
+    pageTitle: 'SpectruMine - 404',
     text(path) {
       return `Страница ${path} не найдена`
     }
   },
 
   profile: {
-    pageTitle: 'SpectruM - Профиль',
+    pageTitle: 'SpectruMine - Профиль',
     needAuth: 'Вы не авторизованы',
     auth: 'Войти',
     changePass: 'Изменить пароль',
@@ -392,15 +392,15 @@ const ru: Locale = {
   },
 
   userHardcoreStatistics: {
-    pageTitle: 'SpectrumM - Статистика'
+    pageTitle: 'SpectrumMine - Статистика'
   },
 
   auth: {
-    pageTitle: 'SpectruM - Авторизация'
+    pageTitle: 'SpectruMine - Авторизация'
   },
 
   main: {
-    pageTitle: 'SpectruM - Сервера Minecraft'
+    pageTitle: 'SpectruMine - Сервера Minecraft'
   },
 
   inventoryCms: {
