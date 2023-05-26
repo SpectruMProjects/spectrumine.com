@@ -1,7 +1,7 @@
 import { GetHardcoreTopOkData, getHardcoreTop } from '@/api'
 import { useEffect, useState } from 'react'
 
-export function useHardcoreTop(delay = 10000) {
+export function useHardcoreTop(delay = 60000) {
   const [state, setState] = useState<GetHardcoreTopOkData | null | 'loading'>(
     null
   )

@@ -416,7 +416,10 @@ export async function getHardcoreTop(): Promise<GetHardcoreTopResponse> {
     const res = await axios.get('/hardcore/top')
     return {
       code: 'ok',
-      data: res.data
+      data: res.data.map((json: any) => ({
+        ...json,
+        lastDeathTime: json.lastDeathtime
+      }))
     }
   } catch (error) {
     return { code: 'error' }

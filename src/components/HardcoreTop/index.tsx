@@ -100,7 +100,6 @@ function dateFormat(time: number) {
 function formatLastTimeOnServer(
   time: number | null | undefined
 ): string | null {
-  console.log(time)
   if (!time) return null
 
   const formatter = Intl.DateTimeFormat('ru', {
