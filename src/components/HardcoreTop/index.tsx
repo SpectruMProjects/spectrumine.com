@@ -40,10 +40,10 @@ export default function HardcoreTop({ className, style }: Props) {
         <thead>
           <tr>
             <th></th>
-            <th>Никнейм</th>
+            <th>{locale.hardcoreTop.nickname}</th>
             <th></th>
-            <th>Наиграно</th>
-            <th>Смерти</th>
+            <th>{locale.hardcoreTop.played}</th>
+            <th>{locale.hardcoreTop.deaths}</th>
           </tr>
         </thead>
         <tbody>

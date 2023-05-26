@@ -409,7 +409,10 @@ const ru: Locale = {
 
   hardcoreTop: {
     cantLoad: 'Не удалось загрузить рейтинг',
-    lastTime: 'Был'
+    lastTime: 'Был',
+    nickname: 'Никнейм',
+    deaths: 'Смерти',
+    played: 'Наиграно'
   }
 }
 export default ru

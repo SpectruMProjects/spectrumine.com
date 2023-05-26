@@ -187,5 +187,8 @@ export interface Locale {
   hardcoreTop: {
     cantLoad: string
     lastTime: string
+    nickname: string
+    played: string
+    deaths: string
   }
 }
