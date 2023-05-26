@@ -74,7 +74,7 @@ export default function HardcoreTop({ className, style }: Props) {
                 <div />
               </th>
               <th>{dateFormat(stats.timeOnServer ?? 0)}</th>
-              <th>{stats.deaths}</th>
+              <th style={{color: "red", fontSize: "20pt"}}>{stats.deaths}</th>
             </tr>
           ))}
         </tbody>
