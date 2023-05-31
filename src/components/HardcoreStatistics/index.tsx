@@ -4,13 +4,12 @@ import { Button, Card, Spin, message } from 'antd'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { HardcoreStatistics as Model } from '@/models'
-import { mcConstants } from '@/constans'
+import { mcConstants } from '@/constants'
 import { CopyOutlined, ShareAltOutlined } from '@ant-design/icons'
 import { useUserTheme } from '@/store/theme'
 
 function formatDeaths(count: number) {
   if ([11, 12, 13, 14, 15, 17, 18, 19].includes(count)) return 'смертей'
-
   const last = count % 10
   if (last == 1) return 'смерть'
   if ([5, 6, 7, 8, 9, 0].includes(last)) return 'смертей'
